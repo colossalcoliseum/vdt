@@ -1,0 +1,14 @@
+import {useState} from "react";
+
+export default function ApplicationLogo(props, viewbox) {
+    viewbox = useState("0 0 130 130")//TODO: Нужна е възможност логото да се променя по размер чрез state
+    return (
+        <svg
+            {...props}
+            viewBox="0 0 62.939 27.979"//{viewbox}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M 13.086 0 L 18.018 0 L 12.988 27.979 L 4.98 27.979 L 0 0 L 4.688 0 L 8.203 23.975 L 9.619 23.975 L 13.086 0 Z M 57.178 3.564 L 57.178 27.979 L 53.467 27.979 L 53.467 3.564 L 47.412 3.564 L 47.412 0 L 62.939 0 L 62.939 3.564 L 57.178 3.564 Z M 34.473 27.979 L 23.975 27.979 L 23.975 0 L 34.961 0 L 39.453 6.494 L 39.453 21.973 L 34.473 27.979 Z M 27.686 3.516 L 27.686 24.17 L 34.082 24.17 L 35.059 22.998 L 35.059 4.98 L 34.082 3.516 L 27.686 3.516 Z" vector-effect="non-scaling-stroke"/>
+        </svg>
+    );
+}
