@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80efe4b3b82c9c7acdd39b013483f9ae",
+    "content-hash": "c2ec026cda5e536e4877ab7a401e78f9",
     "packages": [
         {
             "name": "brick/math",
@@ -6174,6 +6174,69 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.1.1"
             },
             "time": "2025-04-30T06:54:44+00:00"
+        },
+        {
+            "name": "kylekatarnls/carbonite",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kylekatarnls/carbonite.git",
+                "reference": "46c85a583861ca4af43aef86665a9728964866a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kylekatarnls/carbonite/zipball/46c85a583861ca4af43aef86665a9728964866a0",
+                "reference": "46c85a583861ca4af43aef86665a9728964866a0",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^3.0.2",
+                "php": "^8.2",
+                "psr/clock": "^1.0"
+            },
+            "require-dev": {
+                "phan/phan": "^5.4.3",
+                "phpmd/phpmd": "^2.15.0",
+                "phpstan/phpstan": "^1.10.58",
+                "phpunit/phpunit": "^11.0.3",
+                "squizlabs/php_codesniffer": "^3.8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KyleKatarn",
+                    "email": "carbon@selfbuild.fr"
+                }
+            ],
+            "description": "Freeze, accelerate, slow down time and many more with Carbon.",
+            "support": {
+                "issues": "https://github.com/kylekatarnls/carbonite/issues",
+                "source": "https://github.com/kylekatarnls/carbonite/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kylekatarnls",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/Carbon",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-02-21T10:39:11+00:00"
         },
         {
             "name": "laravel/breeze",
