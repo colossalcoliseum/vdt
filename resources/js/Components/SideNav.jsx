@@ -40,19 +40,57 @@ export default function SideNav() {
 
 
                 </ul>
-                <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
-                    <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">Kanban</span>
+                <ul className="pt-4 mt-4 p-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
 
-                        </ResponsiveNavLink>
-                    </li>
                     <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">Kanban</span>
+                        <div className="hidden sm:ms-6 sm:flex sm:items-center ">
+                            <div className="relative ms-3 ">
+                                <Dropdown className="">
+                                    <Dropdown.Trigger>
+                                        <span className="inline-flex">
+                                            <button
+                                                type="button"
+                                                className="inline-flex bg-gray-700 px-5 py-2  font-medium leading-4 text-white/50 transition duration-150 ease-in-out hover:text-gray-200 focus:outline-none"
+                                            >
+                                                Create new
 
-                        </ResponsiveNavLink>
+                                                <svg
+                                                    className="-me-0.5 ms-2 h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fillRule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        clipRule="evenodd"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </span>
+                                    </Dropdown.Trigger>
+
+                                    <Dropdown.Content >
+                                        <Dropdown.Link
+                                            className="bg-gray-700 "
+                                            href="#"
+                                        >
+                                            Video
+                                        </Dropdown.Link>
+                                        <Dropdown.Link
+                                            href="#"
+                                            method="post"
+                                            as="button"
+                                        >
+                                            Blog
+                                        </Dropdown.Link>
+                                    </Dropdown.Content>
+                                </Dropdown>
+                            </div>
+                        </div>
                     </li>
+                    <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700"/>
+
                     <li>
                         <ResponsiveNavLink
                             className="hover:bg-gray-500 "
@@ -62,7 +100,7 @@ export default function SideNav() {
 
                         </ResponsiveNavLink>
                     </li>
-                    
+
 
                 </ul>
 
