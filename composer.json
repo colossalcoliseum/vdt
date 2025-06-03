@@ -17,6 +17,7 @@
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.15",
         "fakerphp/faker": "^1.23",
         "kylekatarnls/carbonite": "^2.0",
         "laravel/breeze": "^2.3",

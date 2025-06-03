@@ -8,6 +8,8 @@ import SecondaryButton from "@/Components/SecondaryButton.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import { Sidenav, Nav, Toggle } from 'rsuite';
 import SideNav from "@/Components/SideNav.jsx";
+import InputLabel from "@/Components/InputLabel.jsx";
+import TextInput from "@/Components/TextInput.jsx";
 
 
 export default function AuthenticatedLayout({header, children}) {
@@ -22,24 +24,27 @@ export default function AuthenticatedLayout({header, children}) {
             <div className="min-h-screen  col-span-10 ">
 
                     <nav className="border-b  bg-[#283148] text-white/50">
-                    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
-                        <div className="flex h-16 justify-between">
-                            <div className="flex">
 
-                                <div className="flex shrink-0 items-center">
-                                    <Link href="/">
-                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-90"/>
-                                    </Link>
-                                </div>
+                        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 hover:bg-gray-800">
+                            <div className="flex h-20 hover:bg-gray-500">
+                                <ApplicationLogo className="block mt-auto mb-auto h-9 w-auto fill-current text-gray-90"/>
 
-                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-white">
-                                    <NavLink
-                                        href={route('dashboard')}
-                                        active={route().current('dashboard')}
+                                <div className="flex ml-auto mr-auto space-x-2">
+
+
+
+
+                                    <TextInput
+                                    className="mt-auto mb-auto"
+                                    placeholder="Search..."
+
                                     >
-                                        Dashboard
-                                    </NavLink>
-                                </div>
+                                    </TextInput>
+                                    <PrimaryButton
+                                    className="mb-auto mt-auto">
+                                        Search
+                                    </PrimaryButton>
+
                             </div>
 
 
