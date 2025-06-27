@@ -73,7 +73,7 @@ export default function SideNav() {
                                     <Dropdown.Content >
                                         <Dropdown.Link
                                             className="bg-gray-700 "
-                                            href="#"
+                                            href={route('video.create')}
                                         >
                                             Video
                                         </Dropdown.Link>

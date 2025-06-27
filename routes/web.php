@@ -21,7 +21,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('video', VideoController::class)->names('video')->except('show');
+    Route::resource('video', VideoController::class)->names('video');
     Route::resource('post', PostController::class)->names('post')->except('show');
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
