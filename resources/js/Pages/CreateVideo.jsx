@@ -2,14 +2,16 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
+import {useTranslation} from 'react-i18next';
 
 export default function CreateVideo() {
+    const {t, i18n} = useTranslation();
     return (
         <AuthenticatedLayout>
             <div className="relative w-full">
                 <div className="grid grid-cols-6 text-xl my-5 font-mono leading-auto text-white/50">
                     <p className="col-span-4 col-start-3 inline-flex items-center"><ApplicationLogo
-                        className="h-7 fill-current"/>'s video creation studio</p>
+                        className="h-7 fill-current"/>'s {t("video creation studio")}</p>
                 </div>
                 <div className="max-w-4xl mx-auto my-auto">
                     <div className="relative grid mx-5 gap-6  grid-cols-3 grid-rows-3 lg:gap-5">
@@ -19,7 +21,7 @@ export default function CreateVideo() {
                                    placeholder=""/>
                         <label htmlFor="floating_filled"
                                className="absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            Video Title</label>
+                            {t("video title")}</label>
 
 
                         <a
@@ -30,7 +32,7 @@ export default function CreateVideo() {
 
                             <div className="pt-3 sm:pt-5">
                                 <h2 className="text-md mx-5 font-semibold text-black dark:text-white">
-                                    Choose thumbnail
+                                    {t("thumbnail")}
                                 </h2>
                             </div>
 
@@ -40,28 +42,28 @@ export default function CreateVideo() {
                         <div className="row-span-3 col-span-9">
                             <label htmlFor="message"
                                    className="block py-2 text-lg font-medium text-gray-900 dark:text-white">
-                                Description</label>
+                                {t("description")}</label>
                             <textarea id="message" rows="4"
                                       className="block p-2.5 w-full h-40 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      placeholder="Write your thoughts here..."></textarea></div>
+                                      placeholder=""></textarea></div>
                         <div>
-                            <p className="block py-2  text-gray-900 dark:text-white">Visibility</p>
+                            <p className="block py-2  text-gray-900 dark:text-white">{t("visibility")}</p>
                             <div className="flex items-center mb-4">
                                 <input id="default-radio-1" type="radio" value="" name="default-radio"
                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                                 <label htmlFor="default-radio-1"
-                                       className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Private</label>
+                                       className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t("private")}</label>
                             </div>
                             <div className="flex items-center">
                                 <input checked id="default-radio-2" type="radio" value="" name="default-radio"
                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                                 <label htmlFor="default-radio-2"
-                                       className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Public</label>
+                                       className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t("public")}</label>
                             </div>
                         </div>
                         <PrimaryButton
                             className="dark:bg-gray-300 dark:text-gray-600 hover:bg-gray-400 hover:text-gray-50 ">
-                            Post
+                            {t("post")}
                         </PrimaryButton>
 
                     </div>

@@ -1,0 +1,31 @@
+{
+    "search": "Search",
+    "create new": "Create New",
+    "settings": "Settings",
+    "your activity": "Your Activity",
+    "subscriptions": "Subscriptions",
+    "home": "Home",
+    "welcome text": "Welcome to VDT!",
+    "video views": "{{views, number}} views",
+    "formatDate": "Today's date: {{today, date}}",
+    "video": "Video",
+    "blog": "Blog",
+    "video title": "Video Title",
+    "description": "Description",
+    "thumbnail": "Thumbnail",
+    "video creation studio": "video creation studio",
+    "visibility": "Visibility",
+    "private": "Private",
+    "public": "Public",
+    "post": "Post",
+    "click": "Click here",
+    "app_title": "VDT: video, blog and fun!",
+    "languages": "Languages"
+
+
+
+
+
+
+
+}

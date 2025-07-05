@@ -1,0 +1,25 @@
+{
+    "search": "Търси",
+    "create new": "Създай Нов",
+    "settings": "Настройки",
+    "your activity": "Твоята Активност",
+    "subscriptions": "Абонаменти",
+    "home": "Начална страница",
+    "welcome text": "Добре дошли във VDT!",
+    "video views": "{{views, number}} гледания",
+    "formatDate": "Днес: {{today, date}}",
+    "video": "Видео",
+    "blog": "Блог",
+    "video title": "Заглавие",
+    "description": "Описание",
+    "thumbnail": "Избери Корица",
+    "video creation studio": "video creation студио",
+    "visibility": "Видимост",
+    "private": "Частно",
+    "public": "Публично",
+    "post": "Публикувай",
+    "click": "Натисни тук",
+    "app_title": "VDT: видео, блог и забава!",
+    "languages": "Languages"
+
+}

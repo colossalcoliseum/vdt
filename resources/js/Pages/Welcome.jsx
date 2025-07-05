@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Footer from "@/Components/Footer.jsx";
+import { useTranslation } from 'react-i18next';
+
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -99,7 +101,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             out, see for yourself, and massively
                                             level up your development skills in
                                             the process.
+
                                         </p>
+
                                     </div>
 
                                     <svg

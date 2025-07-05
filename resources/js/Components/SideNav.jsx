@@ -4,9 +4,11 @@ import NavLink from "@/Components/NavLink.jsx";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.jsx";
 import Dropdown from "@/Components/Dropdown.jsx";
 import {usePage} from "@inertiajs/react";
+import {useTranslation} from "react-i18next";
 
 export default function SideNav() {
     const user = usePage().props.auth.user;
+    const { t, i18n } = useTranslation();
 
     return (
         <div id="separator-sidebar"
@@ -21,19 +23,20 @@ export default function SideNav() {
 
                     <li>
                         <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">Home</span>
+                            <span className="">{t("home")}</span>
+
+                        </ResponsiveNavLink>
+
+                    </li>
+                    <li>
+                        <ResponsiveNavLink className="hover:bg-gray-500 ">
+                            <span className="">{t("settings")}</span>
 
                         </ResponsiveNavLink>
                     </li>
                     <li>
                         <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">Subscriptions</span>
-
-                        </ResponsiveNavLink>
-                    </li>
-                    <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">Your Activity</span>
+                            <span className="">{t("your activity")}</span>
 
                         </ResponsiveNavLink>
                     </li>
@@ -52,7 +55,7 @@ export default function SideNav() {
                                                 type="button"
                                                 className="inline-flex bg-gray-700 px-5 py-2  font-medium leading-4 text-white/50 transition duration-150 ease-in-out hover:text-gray-200 focus:outline-none"
                                             >
-                                                Create new
+                                                {t("create new")}
 
                                                 <svg
                                                     className="-me-0.5 ms-2 h-4 w-4"
@@ -75,14 +78,14 @@ export default function SideNav() {
                                             className="bg-gray-700 "
                                             href={route('video.create')}
                                         >
-                                            Video
+                                            {t("video")}
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href="#"
                                             method="post"
                                             as="button"
                                         >
-                                            Blog
+                                            {t("blog")}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -96,7 +99,7 @@ export default function SideNav() {
                             className="hover:bg-gray-500 "
                             href={route('profile.edit')}
                         >
-                            <span className="">Settings</span>
+                            <span className="">{t("settings")}</span>
 
                         </ResponsiveNavLink>
                     </li>

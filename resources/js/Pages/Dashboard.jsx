@@ -1,14 +1,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, usePage} from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 export default function Dashboard() {
     const user = usePage().props.auth.user;
+    const { t, i18n } = useTranslation();
+    const CurrentDate = new Date();
 
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-white/50">
-                    Welcome, {user.name}
+                    {t("welcome text")}<br/>
+                    {t("formatDate",{ today: CurrentDate })}
                 </h2>
             }
         >
