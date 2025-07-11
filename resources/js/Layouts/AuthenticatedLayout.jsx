@@ -12,7 +12,6 @@ import Cookies from "js-cookie";
 //export default function AuthenticatedLayout({header, children}) {
 const AutenticatedLayout = ({header, children}) => {
 
-
     const {t, i18n} = useTranslation();
     const languages = [
         {name: "English", code: "en"},
