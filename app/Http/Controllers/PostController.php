@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadPostRequest;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -21,15 +25,29 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('CreatePost');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UploadPostRequest $request)
     {
-        //
+        $validated = $request->validated();
+        //dd($request->validated());
+
+        $mainImage = $request->file('main_image')->store( 'postImages', 'public' );
+        $thumbnailPath = $request->file('thumbnail')->store( 'postThumbnails', 'public' );
+        //dd($path);
+        $post = Post::create([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'main_image' => $mainImage,
+            'visibility' => $validated['visibility'],
+            'thumbnail' => $thumbnailPath
+        ]);
+        $post->save();
+        return Redirect::route('dashboard');
     }
 
     /**

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UploadBlogRequest extends FormRequest
+class UploadPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UploadBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|max:255|string|min:3',
+            'description' => 'required|max:255|string|min:3',
+            'visibility' => 'required',
+            'thumbnail' => 'file',//|mimetypes:image/jpeg,image/png|max:1024
+            'main_image' => 'file'//mimetypes:image/jpeg,image/png|max:5120
         ];
     }
 }

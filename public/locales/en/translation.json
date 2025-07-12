@@ -11,9 +11,12 @@
     "video": "Video",
     "blog": "Blog",
     "video title": "Video Title",
+    "title": "Title",
     "description": "Description",
     "thumbnail": "Thumbnail",
-    "video creation studio": "video creation studio",
+    "post_thumbnail": "Post Thumbnail",
+    "main_post_image": "Post Main Image",
+    "video creation studio": "content creation studio",
     "visibility": "Visibility",
     "private": "Private",
     "public": "Public",
@@ -21,7 +24,8 @@
     "click": "Click here",
     "app_title": "VDT: video, blog and fun!",
     "languages": "Languages",
-    "upload video": "Video File"
+    "upload video": "Video File",
+    "important": "Important"
 
 
 

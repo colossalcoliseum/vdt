@@ -8,13 +8,22 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                <h2 className="text-xl font-semibold leading-tight text-gray-50">
                     Profile
                 </h2>
             }
         >
             <Head title="Profile" />
-
+            <div className="grid grid-cols-12 grid-rows-12">
+                <div className="col-span-6 bg-red-600">
+                <div className="grid grid-cols-12 grid-rows-12">
+                    {/*TODO: карта на профила*/}
+                </div>
+                </div>
+                <div className="col-span-6">
+<h1>there</h1>
+                </div>
+            </div>
             <div className="py-12">
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
                     <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">

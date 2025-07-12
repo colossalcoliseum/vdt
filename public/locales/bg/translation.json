@@ -10,10 +10,13 @@
     "formatDate": "Днес: {{today, date}}",
     "video": "Видео",
     "blog": "Блог",
-    "video title": "Заглавие",
+    "video title": "Видео Заглавие",
+    "title": "Заглавие",
     "description": "Описание",
     "thumbnail": "Избери Корица",
-    "video creation studio": "video creation студио",
+    "post_thumbnail": "Избери Корица за Публикацията",
+    "main_post_image": "Избери Снимка за Публикацията",
+    "video creation studio": "content creation студио",
     "visibility": "Видимост",
     "private": "Частно",
     "public": "Публично",
@@ -21,7 +24,9 @@
     "click": "Натисни тук",
     "app_title": "VDT: видео, блог и забава!",
     "languages": "Languages",
-    "upload video": "Видео Файл"
+    "upload video": "Видео Файл",
+    "important": "Важно"
+
 
 
 }

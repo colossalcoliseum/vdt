@@ -5,11 +5,10 @@ import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import {useTranslation} from 'react-i18next';
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";
-import Checkbox from "@/Components/Checkbox.jsx";
 import VDTCreationStudioDiv from "@/Components/VDTCreationStudioDiv.jsx";
 
 //export default function CreateVideo() {
-const CreateVideo = ({user}) => {
+const CreatePost = ({user}) => {
     const {t, i18n} = useTranslation();
 
     const { errors } = usePage().props;
@@ -31,27 +30,24 @@ const CreateVideo = ({user}) => {
         description: '',
         visibility: 'public',
         thumbnail: null,
-        video: null,
+        main_image: null,
     })
 
     user = usePage().props.auth.user;
 
     const submit = (e) => {
         e.preventDefault()
-        post(route('video.store'),{
+        post(route('post.store'),{
             _token: props.csrf_token,
         })
     }
 
     return (
-        //  <AuthenticatedLayout>
-
         <div className="relative w-full">
-           <VDTCreationStudioDiv/>
-            <Head title="Create Video" />
+            <VDTCreationStudioDiv/>
+            <Head title="Create Blog" />
 
             <form onSubmit={submit}>
-
                 <div className="max-w-4xl mx-auto my-auto">
 
                     <div className="relative grid mx-5  grid-cols-5 grid-rows-2 lg:gap-5">
@@ -63,12 +59,12 @@ const CreateVideo = ({user}) => {
                         />
                         <label htmlFor="title"
                                className="absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
-                            {t('video title')}
+                            {t('title')}
                             {errors.title && <div className="text-red-500">{t("important")}: {errors.title}</div>}
 
                         </label>
                         <div className="pt-3 sm:pt-5 text-white col-span-5">
-                            <p className="text-white">{t("thumbnail")}
+                            <p className="text-white">{t("post_thumbnail")}
                                 {errors.thumbnail && <div className="text-red-500">{t("important")}: {errors.thumbnail}</div>}
                             </p>
 
@@ -103,11 +99,11 @@ const CreateVideo = ({user}) => {
                             </select>
                         </div>
                         <div className='col-span-5'>
-                            <label className="text-white text-justify">{t("upload video")}
-                                {errors.video && <div className="text-red-500">{t("important")}: {errors.video}</div>}
+                            <label className="text-white text-justify">{t("main_post_image")}
+                                {errors.main_image && <div className="text-red-500">{t("important")}: {errors.main_image}</div>}
                             </label>
 
-                            <input type="file" onChange={e => setData('video', e.target.files[0])}
+                            <input type="file" onChange={e => setData('main_image', e.target.files[0])}
                                    className="col-start-3 col-end-5 flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                             />
                         </div>
@@ -128,5 +124,5 @@ const CreateVideo = ({user}) => {
 
     )
 }
-CreateVideo.layout = page => <AuthenticatedLayout children={page} title="hohoho"/>
-export default CreateVideo
+CreatePost.layout = page => <AuthenticatedLayout children={page} title="hohoho"/>
+export default CreatePost

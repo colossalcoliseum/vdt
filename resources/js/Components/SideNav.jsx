@@ -3,8 +3,9 @@ import SecondaryButton from "@/Components/SecondaryButton.jsx";
 import NavLink from "@/Components/NavLink.jsx";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.jsx";
 import Dropdown from "@/Components/Dropdown.jsx";
-import {usePage} from "@inertiajs/react";
+import {router, usePage} from "@inertiajs/react";
 import {useTranslation} from "react-i18next";
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
 export default function SideNav() {
     const user = usePage().props.auth.user;
@@ -20,6 +21,8 @@ export default function SideNav() {
                 className="h-full px-5 py-7 overflow-y-auto dark:bg-white/50 dark:text-[#283148] bg-[#283148] text-white/50 ">
                 {/*<ApplicationLogo/>*/}
                 <ul className="space-y-6 font-medium ">
+                    <ApplicationLogo className="block mt-auto mb-auto h-12 w-auto fill-current text-gray-90"/>
+                    <ul className="space-y-2 font-medium border-t border-gray-700"/>
 
                     <li>
                         <ResponsiveNavLink className="hover:bg-gray-500 ">
@@ -30,13 +33,21 @@ export default function SideNav() {
                     </li>
                     <li>
                         <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">{t("settings")}</span>
+                            <span className="">Videos</span>
 
                         </ResponsiveNavLink>
                     </li>
                     <li>
                         <ResponsiveNavLink className="hover:bg-gray-500 ">
-                            <span className="">{t("your activity")}</span>
+                            <span className="">Posts</span>
+
+                        </ResponsiveNavLink>
+                    </li>
+                    <li>
+                        <ResponsiveNavLink className="hover:bg-gray-500 "
+                        href={route("profile.edit")}
+                        >
+                            <span className="">Your Profile</span>
 
                         </ResponsiveNavLink>
                     </li>
@@ -81,9 +92,8 @@ export default function SideNav() {
                                             {t("video")}
                                         </Dropdown.Link>
                                         <Dropdown.Link
-                                            href="#"
-                                            method="post"
-                                            as="button"
+                                            href={route('post.create')}
+
                                         >
                                             {t("blog")}
                                         </Dropdown.Link>
