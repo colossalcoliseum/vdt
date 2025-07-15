@@ -1,49 +1,66 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import {Head, usePage} from '@inertiajs/react';
 import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
+import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
 
-export default function Edit({ mustVerifyEmail, status }) {
+export default function Edit({mustVerifyEmail, status, user}) {
+
+
+    const props = usePage().props
+    user = usePage().props.auth.user
+
+    const asset = () => {
+        if (user.avatar && user.avatar.trim() !== '') {
+            return `/storage/${user.avatar}`;
+        } else {
+            return `/storage/defaultAvatar`;
+        }
+
+    }
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-50">
-                    Profile
-                </h2>
+                <div className="grid">
+                    <h1 className="text-xl col-span-full mx-auto font-mono leading-tight text-gray-50">
+                        Your Profile
+                    </h1>
+                </div>
             }
         >
-            <Head title="Profile" />
-            <div className="grid grid-cols-12 grid-rows-12">
-                <div className="col-span-6 bg-red-600">
-                <div className="grid grid-cols-12 grid-rows-12">
-                    {/*TODO: карта на профила*/}
+            <Head title="Profile"/>
+
+            <div className="grid grid-cols-12 my-12">
+                <div className="col-span-6 row-span-12">
+                    <div className="grid grid-cols-12 grid-rows-12">
+                        <div className="col-span-12 row-span-12 mx-auto">
+                            <UpdateProfileInformationForm
+                                mustVerifyEmail={mustVerifyEmail}
+                                status={status}
+                                className="max-w-xl pb-5"
+                            />
+                            <UpdatePasswordForm className="max-w-xl pb-5"/>
+                            <DeleteUserForm className="max-w-xl "/>
+
+
+                        </div>
+                    </div>
                 </div>
-                </div>
-                <div className="col-span-6">
-<h1>there</h1>
+                <div className="col-span-6 mx-auto">
+                    <figure className="max-w-lg">
+                        <img className="h-auto max-w-full rounded-lg" src={asset()}
+                             alt=" :( we couldnt find it . try uploading it again"/>
+                        <figcaption className="mt-2 text-sm text-center text-gray-300 dark:text-gray-400">Profile
+                            Picture
+                        </figcaption>
+                    </figure>
+                    <UpdateAvatar
+                    />
                 </div>
             </div>
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
 
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                            className="max-w-xl"
-                        />
-                    </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </div>
-
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <DeleteUserForm className="max-w-xl" />
-                    </div>
-                </div>
-            </div>
         </AuthenticatedLayout>
     );
 }

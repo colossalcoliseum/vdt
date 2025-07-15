@@ -17,6 +17,7 @@ const AutenticatedLayout = ({header, children}) => {
         {name: "English", code: "en"},
         {name: "Български", code: "bg"}
     ];
+
     const currentLocale = Cookies.get("i18next") || "en";
     const [language, setLanguage] = useState(currentLocale);
     const handleChangeLocale = (e) => {
