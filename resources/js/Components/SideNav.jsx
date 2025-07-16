@@ -25,7 +25,8 @@ export default function SideNav() {
                     <ul className="space-y-2 font-medium border-t border-gray-700"/>
 
                     <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 ">
+                        <ResponsiveNavLink className="hover:bg-gray-500 "
+                        href={route('dashboard')}>
                             <span className="">{t("home")}</span>
 
                         </ResponsiveNavLink>

@@ -12,12 +12,8 @@ export default function Edit({mustVerifyEmail, status, user}) {
     user = usePage().props.auth.user
 
     const asset = () => {
-        if (user.avatar && user.avatar.trim() !== '') {
-            return `/storage/${user.avatar}`;
-        } else {
-            return `/storage/defaultAvatar`;
-        }
-
+        //TODO: добави валидиране
+        return `${user.avatar}`;
     }
     return (
         <AuthenticatedLayout

@@ -25,6 +25,7 @@ const AutenticatedLayout = ({header, children}) => {
         setLanguage(lang);
         i18n.changeLanguage(lang);
     };
+    const { flash } = usePage().props
 
     return (
         <div className="grid grid-cols-12  bg-[#283148] ">
@@ -88,7 +89,12 @@ const AutenticatedLayout = ({header, children}) => {
                     </header>
                 )}
 
-                <main>{children}</main>
+                <main>
+                    {flash.message && (
+                        <div className="alert">{flash.message}</div>
+                    )}
+                    {children}
+                </main>
             </div>
         </div>
     );

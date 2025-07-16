@@ -16,8 +16,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            //
+        return [//TODO: довърши
+            'title' => $this->faker->sentence(),
+            'body' => $this->faker->paragraph(),
+            'thumbnail' => $this->faker->imageUrl(),
+            'main_image' => $this->faker->imageUrl(),
+            'visibility' => $this->faker->randomElement(['public', 'private']),
         ];
     }
 }

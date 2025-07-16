@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,8 @@ class UsersSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('123123123'),
-            'avatar' => 'example',
+            'avatar' => 'avatars/defaultAvatar.jpg',
         ]);
+        User::factory()->count(10)->create();
     }
 }

@@ -4,24 +4,23 @@ import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import { router } from '@inertiajs/react'
 import DangerButton from "@/Components/DangerButton.jsx";
 import { useState } from 'react'
+import InputError from "@/Components/InputError.jsx";
 const UpdateAvatar = ({user}) => {
 
     const props = usePage().props
     user = usePage().props.auth.user;
 
-    const {data, setData, post,reset, progress} = useForm(
+    const {data, setData, post,reset, errors,progress} = useForm(
 
     )
 
     const submit = (e) => {
         e.preventDefault()
-        reset()
-        e.target.value = null;
         document.getElementById('avatar').value= null;
         router.post(route('profile.avatar.update'),{
             _method: 'put',
             _token: props.csrf_token,
-            data,
+            avatar: data.avatar,
         })
     }
     const [hidden, setHidden] = useState(false);
@@ -56,6 +55,8 @@ const UpdateAvatar = ({user}) => {
                                     setData('avatar', e.target.files[0])
                                 }/>
                             </div>
+                            <InputError message={errors.avatar} className="mt-2" />
+
                             <PrimaryButton
                                 type="submit"
                                 className="my-6"

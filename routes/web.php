@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/update', [ProfileController::class, 'update'])->name('update');
         Route::delete('/destroy', [ProfileController::class, 'destroy'])->name('destroy');
-        Route::singleton( '/avatar',UpdateUserAvatarController::class);
+        Route::singleton( '/avatar',UpdateUserAvatarController::class)->except(['edit']);
     });
 });
 

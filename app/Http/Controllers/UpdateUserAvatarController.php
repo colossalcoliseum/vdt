@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateAvatarRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,21 +12,17 @@ class UpdateUserAvatarController extends Controller
     /**
      * Show the form for creating the resource.
      */
-    public function create(Request $request)
+    public function create(Request $request):never
     {
-        dd($request->all());
-
+        abort(404);
     }
 
     /**
      * Store the newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):never
     {
-        $avatarPath = $request->file('avatar')->store( 'avatars', 'public' );
-        $request->user()->update(['avatar' => $avatarPath]);
-        dd($request->user());
-
+        abort(404);
     }
 
     /**
@@ -39,24 +36,20 @@ class UpdateUserAvatarController extends Controller
     /**
      * Show the form for editing the resource.
      */
-    public function edit()
+    public function edit():never
     {
-        //
+        abort(404);
     }
 
     /**
      * Update the resource in storage.
      */
-    public function update(Request $request)
+    public function update(UpdateAvatarRequest $request)
     {
-        //$avatarPath = $request->data['avatar'];//->store( 'avatars', 'public' );
-        if (isset($request->data['avatar'])){
-            $avatarPath = $request->data['avatar']->store( 'avatars', 'public' );
-            $request->user()->update(['avatar' => $avatarPath]);
-        }else{
-            $request->user()->update(['avatar' => null]);
-        }
-      //  $request->user()->update(['avatar' => $avatarPath]);
+        $validated = $request->validated();
+        $avatarPath = $validated['avatar']->store('avatars', 'public');
+        $request->user()->update(['avatar' => $avatarPath]);
+
     }
 
     /**
