@@ -4,6 +4,7 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
+import AdminLayout from "@/Layouts/AdminLayout.jsx";
 
 export default function Edit({mustVerifyEmail, status, user}) {
 
@@ -16,7 +17,7 @@ export default function Edit({mustVerifyEmail, status, user}) {
         return `${user.avatar}`;
     }
     return (
-        <AuthenticatedLayout
+        <AdminLayout
             header={
                 <div className="grid">
                     <h1 className="text-xl col-span-full mx-auto font-mono leading-tight text-gray-50">
@@ -57,6 +58,6 @@ export default function Edit({mustVerifyEmail, status, user}) {
             </div>
 
 
-        </AuthenticatedLayout>
+        </AdminLayout>
     );
 }

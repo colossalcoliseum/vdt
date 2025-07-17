@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('main_image');
             $table->string('visibility');
+            $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

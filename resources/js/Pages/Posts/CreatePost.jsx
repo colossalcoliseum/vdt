@@ -25,6 +25,7 @@ const CreatePost = ({user}) => {
 
     }
 
+
     const {data, setData, post, progress} = useForm({
         title: null,
         description: '',
@@ -80,7 +81,7 @@ const CreatePost = ({user}) => {
                                 {t("description")}
                                 {errors.description && <div className="text-red-500">{t("important")}: {errors.description}</div>}
                             </label>
-                            <textarea id="description" rows="4" value={data.description}
+                            <textarea id="editor" rows="4" value={data.description}
                                       onChange={e => setData('description', e.target.value)}
                                       className="block p-2.5 w-full h-40 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                       placeholder="">

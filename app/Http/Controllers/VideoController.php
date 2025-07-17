@@ -25,7 +25,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return Inertia::render('CreateVideo');
+        return Inertia::render('Videos/CreateVideo');
     }
 
     /**

@@ -17,7 +17,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('creator')->get();
+        return Inertia::render('Posts/PostsDashboard', [
+            'posts' => $posts
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return Inertia::render('CreatePost');
+        return Inertia::render('Posts/CreatePost');
     }
 
     /**
