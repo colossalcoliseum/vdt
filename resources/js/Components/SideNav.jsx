@@ -39,7 +39,7 @@ export default function SideNav() {
                         </ResponsiveNavLink>
                     </li>
                     <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 ">
+                        <ResponsiveNavLink className="hover:bg-gray-500 " href={route('post.index')}>
                             <span className="">Posts</span>
 
                         </ResponsiveNavLink>

@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('video', VideoController::class)->names('video');
-    Route::resource('post', PostController::class)->names('post')->except('show');
+    Route::resource('post', PostController::class)->names('post');
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/update', [ProfileController::class, 'update'])->name('update');
