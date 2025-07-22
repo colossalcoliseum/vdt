@@ -39,7 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
+        ],//TODO: добави guard и ключ за администратори
     ],
 
     /*

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostPublished;
 use App\Http\Requests\UploadPostRequest;
+use App\Listeners\SendPostNotification;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Models\Video;
@@ -46,10 +48,12 @@ class PostController extends Controller
             'title' => $validated['title'],
             'description' => $validated['description'],
             'main_image' => $mainImage,
+            'creator_id' => auth()->user()->id,
             'visibility' => $validated['visibility'],
             'thumbnail' => $thumbnailPath
         ]);
         $post->save();
+        PostPublished::dispatch($post);//<--- event
         return Redirect::route('dashboard');
     }
 
