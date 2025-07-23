@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'accepted' => 'The :attribute field must be accepted.',
-    'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
-    'active_url' => 'The :attribute field must be a valid URL.',
-    'after' => 'The :attribute field must be a date after :date.',
+    'accepted' => 'Полето :attribute трябва да бъде прието.',
+    'accepted_if' => 'Полето :attribute трябва да се приеме, когато :other е :value.',
+    'active_url' => 'Полето :attribute трябва да бъде валиден URL адрес.',
+    'after' => 'Полето :attribute трябва да е дата след :date.',//TODO: довърши
     'after_or_equal' => 'The :attribute field must be a date after or equal to :date.',
     'alpha' => 'The :attribute field must only contain letters.',
     'alpha_dash' => 'The :attribute field must only contain letters, numbers, dashes, and underscores.',

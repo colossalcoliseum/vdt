@@ -25,8 +25,8 @@ class UploadVideoRequest extends FormRequest
             'title' => 'required|max:255|string|min:3',
             'description' => 'required|max:255|string|min:3',
             'visibility' => 'required',
-            'thumbnail' => 'file',//|mimetypes:image/jpeg,image/png|max:10240
-            'video' => 'file'//mimetypes:video/mp4,video/x-matroska|size:20000000
+            'thumbnail' => 'file|mimetypes:image/jpeg,image/png|max:10240',
+            'video' => 'file|mimetypes:video/mp4,video/x-matroska|size:20000000'
         ];
     }
 }
