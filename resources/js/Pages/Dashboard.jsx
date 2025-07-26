@@ -4,8 +4,6 @@ import {useTranslation} from 'react-i18next';
 
 export default function Dashboard() {
     const user = usePage().props.auth.user;
-    const {t, i18n} = useTranslation();
-    const CurrentDate = new Date();
 
     return (
         <AuthenticatedLayout

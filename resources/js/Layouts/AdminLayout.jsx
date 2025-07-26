@@ -19,9 +19,9 @@ const AdminLayout = ({header, children}) => {
         {name: "Български", code: "bg"}
     ];
     const actions = [
-        {name: "Manage Users", route: ""},
-        {name: "Manage Posts", route: ""},
-        {name: "Manage Videos", route: ""},
+        {name: "Manage Users", route: "r"},
+        {name: "Manage Posts", route: "e"},
+        {name: "Manage Videos", route: "w"},
 
     ];
 

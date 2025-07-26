@@ -25,8 +25,8 @@ class UploadPostRequest extends FormRequest
             'title' => 'required|max:255|string|min:3',
             'description' => 'required|max:255|string|min:3',
             'visibility' => 'required',
-            'thumbnail' => 'file|mimetypes:image/jpeg,image/png|max:1024',
-            'main_image' => 'file mimetypes:image/jpeg,image/png|max:5120'
+            'thumbnail' => 'file|mimes:jpeg,image,png,jpg|max:1024',
+            'main_image' => 'file|mimes:jpeg,image,png,jpg|max:5120'
         ];
     }
 }

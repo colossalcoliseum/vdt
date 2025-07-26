@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('thumbnail');
-            $table->string('video');
+            $table->string('video_path');
+            $table->string('thumbnail_path');
+            $table->string('original_filename');
+            $table->bigInteger('file_size');
+            $table->string('video_mime_type');
             $table->string('visibility');
             $table->timestamps();
         });

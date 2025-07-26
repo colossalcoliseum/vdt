@@ -19,9 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('creator')->get();
+        //$posts = Post::with('creator')->get();
         return Inertia::render('Posts/PostsDashboard', [
-            'posts' => $posts
+            'posts' => fn()=>Post::with('creator')->get()
         ]);
     }
 
@@ -50,7 +50,7 @@ class PostController extends Controller
             'main_image' => $mainImage,
             'creator_id' => auth()->user()->id,
             'visibility' => $validated['visibility'],
-            'thumbnail' => $thumbnailPath
+            'thumbnail' => $thumbnailPath,
         ]);
         $post->save();
         PostPublished::dispatch($post);//<--- event

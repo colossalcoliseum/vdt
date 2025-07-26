@@ -21,7 +21,7 @@ class SendPostNotification
      */
     public function handle(PostPublished $event): void
     {
-        info("Post (id:{$event->post->id}) published." );
+        info("Post [{$event->post->id}] published." );
         //notify()->success('Post Published');
     }
 }

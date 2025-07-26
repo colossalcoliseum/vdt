@@ -25,52 +25,85 @@ const AutenticatedLayout = ({header, children}) => {
         setLanguage(lang);
         i18n.changeLanguage(lang);
     };
-    const { flash } = usePage().props
+    const {flash} = usePage().props
 
     return (
-        <div className="grid grid-cols-12  bg-[#283148] ">
+        <div className="grid grid-cols-12 ">
             <SideNav/>
-            <div className="min-h-screen  col-span-10 ">
+            <div className="min-h-screen col-span-10">
 
-                <nav className="border-b  bg-[#283148] text-white/50">
+                <nav className="border-b pt-6 bg-indigo-100">
 
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
                         <div className="flex h-24 ">
 
-                            <div className="flex ml-auto mr-auto space-x-2">
+                            <div className="flex ml-auto mr-auto ">
 
                                 <TextInput
-                                    className="mt-auto mb-auto"
-                                    placeholder=""
+                                    className="mt-auto mb-auto rounded-none bg-indigo-100 border border-gray-900  shadow-none"
+                                    placeholder="Search"
 
                                 >
                                 </TextInput>
                                 <PrimaryButton
-                                    className="mb-auto mt-auto"
+                                    className="mb-auto rounded-none mt-auto bg-opacity-0 hover:bg-opacity-0"
                                 >
-                                    {t("search")}
+                                    <svg width="1.5rem" height="auto" viewBox="0 0 15 15" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg" stroke="#000000">
+                                        <g id="SVGRepo_bgCarrier"></g>
+                                        <g id="SVGRepo_tracerCarrier"
+                                        ></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+                                                  fill="#000000"></path>
+                                        </g>
+                                    </svg>
                                 </PrimaryButton>
 
                             </div>
+                            <div className="inline-flex shadow-xs grid grid-cols-1 my-auto mx-auto" role="group">
+                                <div className="cols-span-full mx-auto">
+                                    <button type="button"
+                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-900  hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-indigo-100  dark:text-black  dark:hover:bg-indigo-50 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        Profile
+                                    </button>
+                                    <button type="button"
+                                            className="px-4 py-2 text-sm font-medium text-blue-700  bg-white border-t border-b border-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-indigo-100 dark:text-black  dark:hover:bg-indigo-50 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        Settings
+                                    </button>
+                                    <button type="button"
+                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-900  hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-indigo-100 dark:text-black  dark:hover:bg-indigo-50 dark:focus:ring-blue-500 dark:focus:text-white">
+                                        Messages
+                                    </button>
+                                </div>
+                            </div>
                             <div className="switcher grid grid-cols-12  text-[#283148] mt-auto mb-auto">
                                 <div className="col-span-3">
-                                <svg width="20" height="auto" viewBox="0 0 73.768 73.768"
-                                     xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier"
-                                                                                         ></g><g
-                                    id="SVGRepo_tracerCarrier"
-                                    stroke="#CCCCCC" ></g><g
-                                    id="SVGRepo_iconCarrier"> <path id="Path_10" data-name="Path 10"
-                                                                    d="M117.606,385.2a36.884,36.884,0,1,0,36.884,36.884A36.926,36.926,0,0,0,117.606,385.2Zm33.846,35.383H136.366a48.681,48.681,0,0,0-3.047-16.068,36.786,36.786,0,0,0,8.781-5.808A33.752,33.752,0,0,1,151.452,420.586Zm-32.346-31.072a36.534,36.534,0,0,1,6.069,6.387,39.467,39.467,0,0,1,4.176,7.028,33.843,33.843,0,0,1-10.245,2.061Zm3.534-.935a33.762,33.762,0,0,1,17.292,8.051,33.809,33.809,0,0,1-7.772,5.116A41.252,41.252,0,0,0,122.64,388.579ZM110.19,395.9a36.615,36.615,0,0,1,5.916-6.261v15.35a33.789,33.789,0,0,1-10.116-2.013A39.5,39.5,0,0,1,110.19,395.9Zm-7.013,5.906a33.8,33.8,0,0,1-7.9-5.177,33.757,33.757,0,0,1,17.469-8.074A41.244,41.244,0,0,0,103.177,401.807Zm12.929,6.183v12.6H102a45.607,45.607,0,0,1,2.835-14.838A36.83,36.83,0,0,0,116.106,407.99Zm0,15.6v12.386a36.8,36.8,0,0,0-11.018,2.146A42.373,42.373,0,0,1,102,423.587Zm0,15.386v15.252a47.106,47.106,0,0,1-9.792-13.361A33.819,33.819,0,0,1,116.106,438.973Zm-2.86,16.708a33.755,33.755,0,0,1-18.084-8.24,33.786,33.786,0,0,1,8.306-5.426A48.955,48.955,0,0,0,113.246,455.681Zm5.86-1.313v-15.4a33.8,33.8,0,0,1,9.922,1.94A47.081,47.081,0,0,1,119.106,454.368Zm12.762-12.294a33.846,33.846,0,0,1,8.182,5.367,33.759,33.759,0,0,1-17.909,8.217A48.888,48.888,0,0,0,131.868,442.074Zm-12.762-6.1V423.587h14.257a42.352,42.352,0,0,1-3.106,14.582A36.818,36.818,0,0,0,119.106,435.973Zm0-15.386v-12.6a36.806,36.806,0,0,0,11.4-2.291,45.562,45.562,0,0,1,2.854,14.888ZM93.112,398.711a36.8,36.8,0,0,0,8.91,5.871A48.7,48.7,0,0,0,99,420.587H83.76A33.757,33.757,0,0,1,93.112,398.711ZM83.76,423.587H99a45.675,45.675,0,0,0,3.256,15.683A36.807,36.807,0,0,0,93,445.35,33.755,33.755,0,0,1,83.76,423.587Zm58.447,21.764a36.8,36.8,0,0,0-9.122-6.022,45.69,45.69,0,0,0,3.279-15.742h15.088A33.759,33.759,0,0,1,142.207,445.351Z"
-                                                                    transform="translate(-80.722 -385.203)"
-                                                                    fill="#ffffff"></path> </g></svg></div>
-                                <div className="col-span-9">
-                                    {/* Language switch dropdown here */}
-                                    <span className="text-white/50 ">
+                                    <svg width="20" height="auto" viewBox="0 0 73.768 73.768"
+                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier"
+                                        ></g>
+                                        <g
+                                            id="SVGRepo_tracerCarrier"
+                                            stroke="#CCCCCC"></g>
+                                        <g
+                                            id="SVGRepo_iconCarrier">
+                                            <path id="Path_10" data-name="Path 10"
+                                                  d="M117.606,385.2a36.884,36.884,0,1,0,36.884,36.884A36.926,36.926,0,0,0,117.606,385.2Zm33.846,35.383H136.366a48.681,48.681,0,0,0-3.047-16.068,36.786,36.786,0,0,0,8.781-5.808A33.752,33.752,0,0,1,151.452,420.586Zm-32.346-31.072a36.534,36.534,0,0,1,6.069,6.387,39.467,39.467,0,0,1,4.176,7.028,33.843,33.843,0,0,1-10.245,2.061Zm3.534-.935a33.762,33.762,0,0,1,17.292,8.051,33.809,33.809,0,0,1-7.772,5.116A41.252,41.252,0,0,0,122.64,388.579ZM110.19,395.9a36.615,36.615,0,0,1,5.916-6.261v15.35a33.789,33.789,0,0,1-10.116-2.013A39.5,39.5,0,0,1,110.19,395.9Zm-7.013,5.906a33.8,33.8,0,0,1-7.9-5.177,33.757,33.757,0,0,1,17.469-8.074A41.244,41.244,0,0,0,103.177,401.807Zm12.929,6.183v12.6H102a45.607,45.607,0,0,1,2.835-14.838A36.83,36.83,0,0,0,116.106,407.99Zm0,15.6v12.386a36.8,36.8,0,0,0-11.018,2.146A42.373,42.373,0,0,1,102,423.587Zm0,15.386v15.252a47.106,47.106,0,0,1-9.792-13.361A33.819,33.819,0,0,1,116.106,438.973Zm-2.86,16.708a33.755,33.755,0,0,1-18.084-8.24,33.786,33.786,0,0,1,8.306-5.426A48.955,48.955,0,0,0,113.246,455.681Zm5.86-1.313v-15.4a33.8,33.8,0,0,1,9.922,1.94A47.081,47.081,0,0,1,119.106,454.368Zm12.762-12.294a33.846,33.846,0,0,1,8.182,5.367,33.759,33.759,0,0,1-17.909,8.217A48.888,48.888,0,0,0,131.868,442.074Zm-12.762-6.1V423.587h14.257a42.352,42.352,0,0,1-3.106,14.582A36.818,36.818,0,0,0,119.106,435.973Zm0-15.386v-12.6a36.806,36.806,0,0,0,11.4-2.291,45.562,45.562,0,0,1,2.854,14.888ZM93.112,398.711a36.8,36.8,0,0,0,8.91,5.871A48.7,48.7,0,0,0,99,420.587H83.76A33.757,33.757,0,0,1,93.112,398.711ZM83.76,423.587H99a45.675,45.675,0,0,0,3.256,15.683A36.807,36.807,0,0,0,93,445.35,33.755,33.755,0,0,1,83.76,423.587Zm58.447,21.764a36.8,36.8,0,0,0-9.122-6.022,45.69,45.69,0,0,0,3.279-15.742h15.088A33.759,33.759,0,0,1,142.207,445.351Z"
+                                                  transform="translate(-80.722 -385.203)"
+                                                  fill="#000000"></path>
+                                        </g>
+                                    </svg>
+                                </div>
 
-                                </span>
-                                    <select onChange={handleChangeLocale} value={language} className="rounded-md bg-white/50">
+                                <div className="col-span-8">
+
+                                    <select onChange={handleChangeLocale} value={language}
+                                            className="bg-indigo-100 border border-gray-900 ">
                                         {languages.map(({name, code}) => (
-                                            <option key={code} value={code} className="bg-gray-500/75 text-white rounded-md">
+                                            <option key={code} value={code}
+                                                    className="bg-indigo-100 text-blue-900 rounded-md">
                                                 {name}
                                             </option>
                                         ))}
@@ -78,7 +111,11 @@ const AutenticatedLayout = ({header, children}) => {
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
+
                 </nav>
 
                 {header && (
@@ -89,7 +126,7 @@ const AutenticatedLayout = ({header, children}) => {
                     </header>
                 )}
 
-                <main>
+                <main className="bg-indigo-100">
                     {flash.message && (
                         <div className="alert">{flash.message}</div>
                     )}

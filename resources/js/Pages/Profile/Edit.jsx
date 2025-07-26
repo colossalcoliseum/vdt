@@ -17,7 +17,7 @@ export default function Edit({mustVerifyEmail, status, user}) {
         return `${user.avatar}`;
     }
     return (
-        <AdminLayout
+        <AuthenticatedLayout
             header={
                 <div className="grid">
                     <h1 className="text-xl col-span-full mx-auto font-mono leading-tight text-gray-50">
@@ -58,6 +58,6 @@ export default function Edit({mustVerifyEmail, status, user}) {
             </div>
 
 
-        </AdminLayout>
+        </AuthenticatedLayout>
     );
 }

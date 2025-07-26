@@ -13,15 +13,16 @@ export default function SideNav() {
 
     return (
         <div id="separator-sidebar"
-             className="col-span-2"
+             className="col-span-2 py-6 px-10 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100"
              aria-label="Sidebar">
-
-
+            <div className="my-10">
+            <ApplicationLogo className=" w-auto fill-current text-blue-900"/>
+            </div>
             <div
                 className="h-full px-5 py-7 overflow-y-auto dark:bg-white/50 dark:text-[#283148] bg-[#283148] text-white/50 ">
                 {/*<ApplicationLogo/>*/}
-                <ul className="space-y-6 font-medium ">
-                    <ApplicationLogo className="block mt-auto mb-auto h-12 w-auto fill-current text-gray-90"/>
+                <ul className="space-y-6 font-medium  ">
+
                     <ul className="space-y-2 font-medium border-t border-gray-700"/>
 
                     <li>

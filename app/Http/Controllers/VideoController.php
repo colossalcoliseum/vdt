@@ -31,23 +31,33 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UploadVideoRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        //dd($request->validated());
+        //dd($request->file('video'));
 
-        $videoPath = $request->file('video')->store( 'videos', 'public' );
-        $thumbnailPath = $request->file('thumbnail')->store( 'videoThumbnails', 'public' );
+        $validated = $request;
+       // dd($request->validated());
+
+        //dd($request['video']);
+        $videoFile = $request->file('video');
+        $fileName = $videoFile->getClientOriginalExtension();
+        $videoPath = $videoFile->store('videos', 'public');
+        //$videoPath = $videoFile->store('videos', $fileName);
+        $thumbnailPath?? $request->file('thumbnail')->store( 'videoThumbnails', 'public' );
         //dd($path);
+        dd($thumbnailPath);
         $video = Video::create([
         'title' => $validated['title'],
         'description' => $validated['description'],
-        'video' => $videoPath,
+        'video_path' => $videoPath,
+        'thumbnail_path' => $thumbnailPath,
+        'original_file_name' => $videoFile->getClientOriginalName(),
+        'file_size' => $videoFile->getSize(),
+        'mime_type' => $videoFile->getMimeType(),
         'visibility' => $validated['visibility'],
-        'thumbnail' => $thumbnailPath
     ]);
-        $video->save();
-        return Redirect::route('dashboard');
+
+        return Redirect::route('dashboard')->with('success', 'Видеото беше качено успешно!');
     }
 
     /**
