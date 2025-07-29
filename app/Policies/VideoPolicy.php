@@ -13,7 +13,7 @@ class VideoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class VideoPolicy
      */
     public function view(User $user, Video $video): bool
     {
-        return false;
+        return true;
     }
 
     /**

@@ -33,7 +33,7 @@ export default function Dashboard() {
                     </div>
                 </div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
-                    <div className="overflow-hidden bg-[#283148] shadow-sm sm:rounded-lg">
+                    <div className="overflow-hidden bg-[#283148] shadow-sm sm:rounded-sm">
                         <div className="p-6 text-white/50">
 
                             <div className="grid gap-6 lg:grid-cols-3 lg:grid-rows-3 lg:gap-5">

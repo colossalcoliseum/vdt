@@ -17,7 +17,6 @@ const AutenticatedLayout = ({header, children}) => {
         {name: "English", code: "en"},
         {name: "Български", code: "bg"}
     ];
-
     const currentLocale = Cookies.get("i18next") || "en";
     const [language, setLanguage] = useState(currentLocale);
     const handleChangeLocale = (e) => {
@@ -29,10 +28,10 @@ const AutenticatedLayout = ({header, children}) => {
 
     return (
         <div className="grid grid-cols-12 ">
-            <SideNav/>
+            <SideNav />
             <div className="min-h-screen col-span-10">
 
-                <nav className="border-b pt-6 bg-indigo-100">
+                <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
 
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
                         <div className="flex h-24 ">
@@ -40,13 +39,13 @@ const AutenticatedLayout = ({header, children}) => {
                             <div className="flex ml-auto mr-auto ">
 
                                 <TextInput
-                                    className="mt-auto mb-auto rounded-none bg-indigo-100 border border-gray-900  shadow-none"
+                                    className="mt-auto mb-auto rounded-none bg-indigo-100 border   shadow-none"
                                     placeholder="Search"
 
                                 >
                                 </TextInput>
                                 <PrimaryButton
-                                    className="mb-auto rounded-none mt-auto bg-opacity-0 hover:bg-opacity-0"
+                                    className="mb-auto rounded-none mt-auto border-none bg-opacity-0 hover:bg-opacity-0"
                                 >
                                     <svg width="1.5rem" height="auto" viewBox="0 0 15 15" fill="none"
                                          xmlns="http://www.w3.org/2000/svg" stroke="#000000">
@@ -64,16 +63,24 @@ const AutenticatedLayout = ({header, children}) => {
                             </div>
                             <div className="inline-flex shadow-xs grid grid-cols-1 my-auto mx-auto" role="group">
                                 <div className="cols-span-full mx-auto">
+                                    <a
+                                        href={route("profile.edit")}
+                                    >
                                     <button type="button"
-                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-900  hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-indigo-100  dark:text-black  dark:hover:bg-indigo-50 dark:focus:ring-blue-500 dark:focus:text-white">
+
+                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
                                         Profile
                                     </button>
+                                    </a>
+                                    <a
+                                        href={route('profile.edit')}
+                                    >
                                     <button type="button"
-                                            className="px-4 py-2 text-sm font-medium text-blue-700  bg-white border-t border-b border-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-indigo-100 dark:text-black  dark:hover:bg-indigo-50 dark:focus:ring-blue-500 dark:focus:text-white">
+                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
                                         Settings
-                                    </button>
+                                    </button></a>
                                     <button type="button"
-                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-900  hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-indigo-100 dark:text-black  dark:hover:bg-indigo-50 dark:focus:ring-blue-500 dark:focus:text-white">
+                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
                                         Messages
                                     </button>
                                 </div>
@@ -100,10 +107,10 @@ const AutenticatedLayout = ({header, children}) => {
                                 <div className="col-span-8">
 
                                     <select onChange={handleChangeLocale} value={language}
-                                            className="bg-indigo-100 border border-gray-900 ">
+                                            className="bg-indigo-100 ">
                                         {languages.map(({name, code}) => (
                                             <option key={code} value={code}
-                                                    className="bg-indigo-100 text-blue-900 rounded-md">
+                                                    className="bg-indigo-100 text-blue-900 ">
                                                 {name}
                                             </option>
                                         ))}
@@ -126,7 +133,7 @@ const AutenticatedLayout = ({header, children}) => {
                     </header>
                 )}
 
-                <main className="bg-indigo-100">
+                <main className=" bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
                     {flash.message && (
                         <div className="alert">{flash.message}</div>
                     )}

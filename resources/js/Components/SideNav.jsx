@@ -6,53 +6,55 @@ import Dropdown from "@/Components/Dropdown.jsx";
 import {router, usePage} from "@inertiajs/react";
 import {useTranslation} from "react-i18next";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
+import {useState} from "react";
 
 export default function SideNav() {
     const user = usePage().props.auth.user;
     const { t, i18n } = useTranslation();
+    const props = usePage().props;
+  ;
+
 
     return (
         <div id="separator-sidebar"
              className="col-span-2 py-6 px-10 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100"
              aria-label="Sidebar">
-            <div className="my-10">
+            <div className="my-10 bg-">
             <ApplicationLogo className=" w-auto fill-current text-blue-900"/>
             </div>
             <div
-                className="h-full px-5 py-7 overflow-y-auto dark:bg-white/50 dark:text-[#283148] bg-[#283148] text-white/50 ">
+                className="h-full px-5 py-7 overflow-y-auto dark:bg-opacity-0 dark:text-[#283148] bg-[#283148] text-white/50 ">
                 {/*<ApplicationLogo/>*/}
                 <ul className="space-y-6 font-medium  ">
 
                     <ul className="space-y-2 font-medium border-t border-gray-700"/>
 
                     <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 "
-                        href={route('dashboard')}>
+                        <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0"
+                        href={route('dashboard')}
+
+                        >
                             <span className="">{t("home")}</span>
 
                         </ResponsiveNavLink>
 
                     </li>
                     <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 ">
+                        <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0"
+
+                        >
                             <span className="">Videos</span>
 
                         </ResponsiveNavLink>
                     </li>
                     <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 " href={route('post.index')}>
+                        <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0" href={route('post.index')}
+                                          >
                             <span className="">Posts</span>
 
                         </ResponsiveNavLink>
                     </li>
-                    <li>
-                        <ResponsiveNavLink className="hover:bg-gray-500 "
-                        href={route("profile.edit")}
-                        >
-                            <span className="">Your Profile</span>
 
-                        </ResponsiveNavLink>
-                    </li>
 
 
                 </ul>
@@ -66,7 +68,7 @@ export default function SideNav() {
                                         <span className="inline-flex">
                                             <button
                                                 type="button"
-                                                className="inline-flex bg-gray-700 px-5 py-2  font-medium leading-4 text-white/50 transition duration-150 ease-in-out hover:text-gray-200 focus:outline-none"
+                                                className="inline-flex bg-blue-900 px-5 py-2  font-medium leading-4 text-gray-300 transition duration-150 ease-in-out hover:text-gray-100 focus:outline-none"
                                             >
                                                 {t("create new")}
 
@@ -106,15 +108,7 @@ export default function SideNav() {
                     </li>
                     <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700"/>
 
-                    <li>
-                        <ResponsiveNavLink
-                            className="hover:bg-gray-500 "
-                            href={route('profile.edit')}
-                        >
-                            <span className="">{t("settings")}</span>
 
-                        </ResponsiveNavLink>
-                    </li>
 
 
                 </ul>

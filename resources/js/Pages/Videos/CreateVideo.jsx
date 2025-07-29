@@ -37,6 +37,8 @@ const CreateVideo = ({user}) => {
             // Създаваме preview URL за видеото
             const videoUrl = URL.createObjectURL(file);
             setVideoPreview(videoUrl);
+        }else{
+            console.log("No Video Provided!")
         }
     };
     const handleThumbnailChange = (e) => {
@@ -47,6 +49,8 @@ const CreateVideo = ({user}) => {
             // Създаваме preview URL за thumbnail-а
             const imageUrl = URL.createObjectURL(file);
             setThumbnailPreview(imageUrl);
+        }else{
+            console.log("No Thumbnail Provided!")
         }
     };
 
@@ -215,5 +219,5 @@ const CreateVideo = ({user}) => {
 
     )
 }
-CreateVideo.layout = page => <AuthenticatedLayout children={page} title="hohoho"/>
+CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true} title="hohoho"/>
 export default CreateVideo

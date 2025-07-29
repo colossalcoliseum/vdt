@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use _PHPStan_781aefaf6\Nette\Neon\Exception;
 use App\Http\Requests\UploadVideoRequest;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class VideoController extends Controller
 {
@@ -31,33 +34,40 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UploadVideoRequest $request)
     {
-        //dd($request->file('video'));
+        $validated = $request->validated();
+        if ($request->hasFile('video')&& $request->hasFile('video')) {
+            try {
+                $videoPath = $request->file('video')->store('videos', 'public');
+                $thumbnailPath = $request->file('thumbnail')->store('videoThumbnails', 'public');
+                $videoFile = $request->file('video');
+                $video = Video::create([
+                    'title' => $validated['title'],
+                    'description' => $validated['description'],
+                    'video_path' => "/storage/".$videoPath,
+                    'thumbnail_path' => $thumbnailPath,
+                    'creator_id' => auth()->user()->id,
+                    'original_filename' => $videoFile->getClientOriginalName(),
+                    'file_size' => $videoFile->getSize(),
+                    'video_mime_type' => $videoFile->getMimeType(),
+                    'visibility' => $validated['visibility'],
+                ]);
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        } else {
 
-        $validated = $request;
-       // dd($request->validated());
+            dd([
+                $request->file('video')->getErrorMessage(),
+                $request->file('thumbnail')->getErrorMessage(),
 
-        //dd($request['video']);
-        $videoFile = $request->file('video');
-        $fileName = $videoFile->getClientOriginalExtension();
-        $videoPath = $videoFile->store('videos', 'public');
-        //$videoPath = $videoFile->store('videos', $fileName);
-        $thumbnailPath?? $request->file('thumbnail')->store( 'videoThumbnails', 'public' );
-        //dd($path);
-        dd($thumbnailPath);
-        $video = Video::create([
-        'title' => $validated['title'],
-        'description' => $validated['description'],
-        'video_path' => $videoPath,
-        'thumbnail_path' => $thumbnailPath,
-        'original_file_name' => $videoFile->getClientOriginalName(),
-        'file_size' => $videoFile->getSize(),
-        'mime_type' => $videoFile->getMimeType(),
-        'visibility' => $validated['visibility'],
-    ]);
+            ]);
 
-        return Redirect::route('dashboard')->with('success', 'Видеото беше качено успешно!');
+        }
+
+
+        return Redirect::route('dashboard')->with('success', 'Видеото беше качено успешно!');//TODO локализирай го
     }
 
     /**
@@ -65,7 +75,10 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        //
+
+        $video = Video::with('creator')->find($video->id);
+        return Inertia::render('Videos/Video', ['video'=>$video]);
+
     }
 
     /**

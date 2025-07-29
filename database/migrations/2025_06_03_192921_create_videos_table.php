@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->string('thumbnail');
             $table->string('video_path');
             $table->string('thumbnail_path');
             $table->string('original_filename');
             $table->bigInteger('file_size');
             $table->string('video_mime_type');
+            $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->string('visibility');
             $table->timestamps();
         });

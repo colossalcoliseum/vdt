@@ -14,18 +14,18 @@ export default function PostsDashboard({posts}) {
 
             <div className="py-12 ">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-full mb-12 mx-auto border">
+                    <div className="col-span-full  mb-12 mx-auto ">
                         <div className="inline-flex shadow-xs" role="group">
                             <button type="button"
-                                    className="mx-12 px-12 py-2  text-sm font-medium text-gray-900 border-gray-900  bg-indigo-100 border  dark:text-black ">
+                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900  border bg-gradient-to-l from-pink-100 via-purple-100 to-pink-100 border-blue-900 rounded-sm dark:text-black ">
                                 Your Posts
                             </button>
                             <button type="button"
-                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900 border-gray-900  bg-indigo-100 border  dark:text-black ">
+                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900  border bg-gradient-to-l from-pink-100 via-purple-100 to-pink-100 border-blue-900 rounded-sm dark:text-black ">
                                 Trending Posts
                             </button>
                             <button type="button"
-                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900 border-gray-900  bg-indigo-100 border  dark:text-black ">
+                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900  border bg-gradient-to-l from-pink-100 via-purple-100 to-pink-100 border-blue-900 rounded-sm dark:text-black ">
                                 Saved
                             </button>
                         </div>
@@ -43,7 +43,7 @@ export default function PostsDashboard({posts}) {
                                     href={route('post.show', post.id)}
                                     /*TODO: refresh при отваряне на линк? */
 
-                                    className="flex p-6 lg:pb-10 dark:bg-white border border-gray-900  "
+                                    className="flex p-6 lg:pb-10 dark:bg-white    "
                                 >
 
 
