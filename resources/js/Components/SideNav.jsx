@@ -41,7 +41,7 @@ export default function SideNav() {
                     </li>
                     <li>
                         <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0"
-
+                                           href={route('video.index')}
                         >
                             <span className="">Videos</span>
 

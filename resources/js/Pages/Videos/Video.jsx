@@ -23,6 +23,8 @@ export default function Video({video}) {
                         </div>
                         <div className="col-span-6 px-auto row-span-full row-start-1 p-5 border ml-12 border-black">
                             <p>
+                                {window.location.origin + video.video_path}<br/>
+                                {video.video_mime_type}
                                 <p>By {video.creator.name}</p>
                                 <img className="w-full" src={video.creator.avatar} alt={video.title}/>
                             </p>

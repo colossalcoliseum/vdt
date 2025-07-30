@@ -20,7 +20,9 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $videos = Video::with('creator')->get();
+        //dd($videos);
+        return Inertia::render('Videos/VideosDashboard', ['videos' => $videos]);
     }
 
     /**
