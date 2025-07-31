@@ -48,7 +48,7 @@ class UpdateUserAvatarController extends Controller
     {
         $validated = $request->validated();
         $avatarPath = $validated['avatar']->store('avatars', 'public');
-        $request->user()->update(['avatar' => $avatarPath]);
+        $request->user()->update(['avatar' => "/storage/".$avatarPath]);
 
     }
 

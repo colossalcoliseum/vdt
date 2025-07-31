@@ -4,6 +4,7 @@ import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
+import Dropdown from "@/Components/Dropdown.jsx";
 
 export default function Edit({mustVerifyEmail, status, user}) {
 
@@ -21,10 +22,11 @@ export default function Edit({mustVerifyEmail, status, user}) {
         >
             <Head title="Profile"/>
             <div className="grid">
-            <h1 className="text-2xl col-span-full mx-auto mt-10 font-sans leading-tight text-gray-700">
-                Your Profile
-            </h1>
+                <h1 className="text-2xl col-span-full mx-auto mt-10 font-sans leading-tight text-gray-700">
+                    Your Profile
+                </h1>
             </div>
+
             <div className="grid grid-cols-12 my-12">
                 <div className="col-span-6 row-span-12">
                     <div className="grid grid-cols-12 grid-rows-12">
@@ -42,15 +44,14 @@ export default function Edit({mustVerifyEmail, status, user}) {
                     </div>
                 </div>
                 <div className="col-span-6 mx-auto">
-                    <figure className="max-w-lg">
-                        <img className="h-auto max-w-full rounded-sm" src={asset()}
-                             alt="Avatar not found"/>
-                        <figcaption className="mt-2 text-sm text-center text-black dark:text-black">Your Avatar
-                        </figcaption>
-                    </figure>
-                    <UpdateAvatar
-                    />
+
+
+                    <UpdateAvatar/>
+
+
+
                 </div>
+
             </div>
 
 

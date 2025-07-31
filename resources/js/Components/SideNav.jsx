@@ -17,7 +17,7 @@ export default function SideNav() {
 
     return (
         <div id="separator-sidebar"
-             className="col-span-2 py-6 px-10 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100"
+             className="col-span-2 row-span-full py-6 px-10 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100"
              aria-label="Sidebar">
             <div className="my-10 bg-">
             <ApplicationLogo className=" w-auto fill-current text-blue-900"/>
@@ -88,7 +88,7 @@ export default function SideNav() {
                                         </span>
                                     </Dropdown.Trigger>
 
-                                    <Dropdown.Content >
+                                    <Dropdown.Content align = 'right' >
                                         <Dropdown.Link
                                             className="bg-gray-700 "
                                             href={route('video.create')}

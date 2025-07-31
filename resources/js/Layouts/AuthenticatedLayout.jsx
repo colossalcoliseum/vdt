@@ -7,6 +7,7 @@ import SideNav from "@/Components/SideNav.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import {useTranslation} from 'react-i18next';
 import Cookies from "js-cookie";
+import Footer from "@/Components/Footer.jsx";
 
 
 //export default function AuthenticatedLayout({header, children}) {
@@ -27,9 +28,9 @@ const AutenticatedLayout = ({header, children}) => {
     const {flash} = usePage().props
 
     return (
-        <div className="grid grid-cols-12 ">
+        <div className="grid grid-cols-12 grid-rows-12 ">
             <SideNav />
-            <div className="min-h-screen col-span-10">
+            <div className="min-h-screen col-span-10 row-span-full">
 
                 <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
 
@@ -110,7 +111,7 @@ const AutenticatedLayout = ({header, children}) => {
                                             className="bg-indigo-100 ">
                                         {languages.map(({name, code}) => (
                                             <option key={code} value={code}
-                                                    className="bg-indigo-100 text-blue-900 ">
+                                                    className="text-gray-900 ">
                                                 {name}
                                             </option>
                                         ))}
@@ -138,9 +139,11 @@ const AutenticatedLayout = ({header, children}) => {
                         <div className="alert">{flash.message}</div>
                     )}
                     {children}
-                </main>
+                       </main>
+
+
             </div>
         </div>
-    );
+);
 }
 export default AutenticatedLayout

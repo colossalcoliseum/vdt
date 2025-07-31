@@ -6,6 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { useRef, useState } from 'react';
+import PrimaryButton from "@/Components/PrimaryButton.jsx";
 
 export default function DeleteUserForm({ className = '' }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -60,9 +61,11 @@ export default function DeleteUserForm({ className = '' }) {
                 </p>
             </header>
 
-            <DangerButton onClick={confirmUserDeletion}>
+            <PrimaryButton
+                className="border-none text-gray-900 rounded-sm bg-red-400 hover:bg-red-600 "
+                onClick={confirmUserDeletion}>
                 Delete Account
-            </DangerButton>
+            </PrimaryButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
@@ -107,7 +110,9 @@ export default function DeleteUserForm({ className = '' }) {
                             Cancel
                         </SecondaryButton>
 
-                        <DangerButton className="ms-3" disabled={processing}>
+                        <DangerButton
+                            className="ms-3"
+                                      disabled={processing}>
                             Delete Account
                         </DangerButton>
                     </div>

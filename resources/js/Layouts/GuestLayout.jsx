@@ -1,6 +1,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 import SideNav from "@/Components/SideNav.jsx";
+import Footer from "@/Components/Footer.jsx";
 
 export default function GuestLayout({ children }) {
     return (
@@ -16,5 +17,6 @@ export default function GuestLayout({ children }) {
                 {children}
             </div>
         </div>
+
     );
 }
