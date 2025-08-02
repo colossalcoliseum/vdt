@@ -18,7 +18,7 @@ class VideoFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(1),
             'video_path' => "/storage/videos/video_".$this->faker->numberBetween(1,10).".mp4",
             'thumbnail_path' => "/storage/thumbnails/thumbnail_".$this->faker->numberBetween(1, 10).".jpg",
             'original_filename' => $this->faker->uuid(),

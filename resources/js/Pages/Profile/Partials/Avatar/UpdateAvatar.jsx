@@ -13,7 +13,6 @@ import SecondaryButton from "@/Components/SecondaryButton.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
 const UpdateAvatar = ({user}) => {
-    const [confirmingModalActivasion, setConfirmingModalActivasion] = useState(false);
 
     const props = usePage().props
     user = usePage().props.auth.user;
@@ -21,16 +20,6 @@ const UpdateAvatar = ({user}) => {
     const {data, setData, post, reset, errors, progress, onSuccess, processing, clearErrors} = useForm(
 
     )
-    const confirmModalClick = () => {
-        setConfirmingModalActivasion(true);
-
-    };
-    const closeModal = () => {
-        setConfirmingModalActivasion(false);
-
-        clearErrors();
-        reset();
-    };
     const submit = (e) => {
         e.preventDefault();
         document.getElementById('avatar').value = null;
@@ -64,10 +53,23 @@ const UpdateAvatar = ({user}) => {
     }
     return (
         <div className="relative w-full">
-            <a
+            <div className="relative inline-block">
+                <a
 
-            ><img className="h-auto max-w-full rounded-sm" src={asset()}
-                 alt="Click here to change your profile avatar"/></a>
+                ><img className="h-auto max-w-full rounded-sm" src={asset()}
+                      alt="Click here to change your profile avatar"/>
+                    <input
+                        type="file"
+                        id='avatar'
+
+                    className="opacity-0 "
+                        onChange={e =>
+                            setData('avatar', e.target.files[0])
+                        }>
+
+                    </input>
+                </a>
+            </div>
 
 
             <div className="my-12">
@@ -80,7 +82,7 @@ const UpdateAvatar = ({user}) => {
                         <input
                             type="file"
                             id='avatar'
-                            hidden={confirmingModalActivasion}
+
                             className=" flex items-start gap-4 rounded-sm text-gray-900 p-6 ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-gray-900 lg:pb-10 dark:bg-opacity-0 dark:ring-zinc-800 dark:hover:text-gray-900 dark:hover:ring-zinc-700 dark"
 
                             onChange={e =>

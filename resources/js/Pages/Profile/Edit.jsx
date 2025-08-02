@@ -6,11 +6,12 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
 import Dropdown from "@/Components/Dropdown.jsx";
 
-export default function Edit({mustVerifyEmail, status, user}) {
+export default function Edit({mustVerifyEmail, status, user, permissions}) {
 
 
     const props = usePage().props
     user = usePage().props.auth.user
+    console.log(permissions)
 
     const asset = () => {
         //TODO: добави валидиране
@@ -49,7 +50,14 @@ export default function Edit({mustVerifyEmail, status, user}) {
                     <UpdateAvatar/>
 
 
+                    <p className="border border-black px-6 py-6"> <span className="text-xl tracking-wide">Your Permissions:</span> {permissions.map(({name, id}) => (
 
+                        <ul className="list-disc list-none   py-2">
+                            <li><p> - to {name.replace("_"," ")}</p> </li>
+
+                        </ul>
+                    ))
+                    }</p>
                 </div>
 
             </div>

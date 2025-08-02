@@ -17,12 +17,24 @@ class UsersSeeder extends Seeder
 
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('123123123'),
-            'avatar' => 'avatars/defaultAvatar.jpg',
-        ]);
-        User::factory()->count(10)->create();
+        User::factory()
+            ->count(1)
+            ->create([
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('123123123'),
+                'avatar' => 'avatars/defaultAvatar.jpg',
+            ]) ->each(function ($user) {
+                $user->assignRole('admin');
+            });
+
+        User::factory()
+            ->count(10)
+            ->create()
+            ->each(function ($user) {
+                $user->assignRole('member');
+            });
+
+
     }
 }

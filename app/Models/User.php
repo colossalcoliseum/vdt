@@ -20,13 +20,41 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    public static array $permissionsPerRole = [
+        'admin' => [
+            "edit_users",
+            "delete_users",
+            "ban_users",
+            "unban_users",
+            "restrict_users",
+            "unrestrict_users",
+            "archive_videos",
+            "archive_posts",
+            "unarchive_videos",
+            "unarchive_posts",
+            "delete_videos",
+            "delete_posts",
+        ],
+        'writer' => [
+            "publish_posts",
+        ],
+        'video_creator' => [
+            "publish_videos",
+        ],
+        'moderator' => [
+            "edit_videos",
+            "edit_posts",
+        ],
+        'member'=>[
+
+        ]
+    ];
     protected $fillable = [
         'name',
         'email',
         'password',
         'avatar',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -13,7 +13,7 @@ class VideoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return true;//TODO: добави проверка потребителят дали е ограничен
     }
 
     /**
@@ -21,7 +21,7 @@ class VideoPolicy
      */
     public function view(User $user, Video $video): bool
     {
-        return true;
+        return true;//TODO: същото като горе
     }
 
     /**
@@ -29,6 +29,9 @@ class VideoPolicy
      */
     public function create(User $user): bool
     {
+        if ($user->can('publish_videos')) {
+            return true;
+        }
         return false;
     }
 
@@ -37,6 +40,9 @@ class VideoPolicy
      */
     public function update(User $user, Video $video): bool
     {
+        if ($user->can('edit_videos')) {
+            return true;
+        }
         return false;
     }
 
@@ -45,6 +51,9 @@ class VideoPolicy
      */
     public function delete(User $user, Video $video): bool
     {
+        if ($user->can('delete_videos')) {
+            return true;
+        }
         return false;
     }
 
@@ -53,6 +62,9 @@ class VideoPolicy
      */
     public function restore(User $user, Video $video): bool
     {
+        if ($user->can('unarchive_videos')) {
+            return true;
+        }
         return false;
     }
 

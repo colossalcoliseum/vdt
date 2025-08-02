@@ -14,7 +14,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,17 +30,21 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
+        if ($user->can('publish_posts')) {
+            return true;
+        }
         return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Post $post): Response
+    public function update(User $user, Post $post): bool
     {
-        return $user->id === $post->creator->id?
-            Response::allow():
-            Response::denyAsNotFound();
+        if ($user->can('edit_posts')) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -48,6 +52,9 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
+        if ($user->can('delete_posts')) {
+            return true;
+        }
         return false;
     }
 
@@ -56,6 +63,9 @@ class PostPolicy
      */
     public function restore(User $user, Post $post): bool
     {
+        if ($user->can('unarchive_posts')) {
+            return true;
+        }
         return false;
     }
 
