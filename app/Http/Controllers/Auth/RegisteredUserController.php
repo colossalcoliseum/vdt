@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Stevebauman\Location\Facades\Location;
 
 class RegisteredUserController extends Controller
 {
@@ -40,6 +41,9 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'country' => Location::get()->countryName??null,
+            'city' => Location::get()->cityName??null,
+            'ip_address' => Location::get()->ipAddress??null,
         ]);
 
         event(new Registered($user));

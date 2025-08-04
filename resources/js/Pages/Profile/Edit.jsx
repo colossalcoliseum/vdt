@@ -48,16 +48,16 @@ export default function Edit({mustVerifyEmail, status, user, permissions}) {
 
 
                     <UpdateAvatar/>
+                    <span className="text-xl tracking-wide">Your Permissions:</span>
+                    <div className="h-52 border border-black overflow-auto">
+                        <p className=" px-6 py-6">  {permissions.map(({name, id}) => (
 
+                            <ul className="list-disc list-none   py-2">
+                                <li><p> - to {name.replace("_", " ")}</p></li>
 
-                    <p className="border border-black px-6 py-6"> <span className="text-xl tracking-wide">Your Permissions:</span> {permissions.map(({name, id}) => (
-
-                        <ul className="list-disc list-none   py-2">
-                            <li><p> - to {name.replace("_"," ")}</p> </li>
-
-                        </ul>
-                    ))
-                    }</p>
+                            </ul>
+                        ))
+                        }</p></div>
                 </div>
 
             </div>

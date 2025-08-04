@@ -15,13 +15,12 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-       /* $super_admin = Role::create(['name' => 'super_admin']);
-        $super_admin->givePermissionTo(Permission::all());*/
+        $SuperAdmin = Role::create(['name' => 'super_admin']);
+        $SuperAdmin->givePermissionTo(Permission::all());
 
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        $user = new User();
 
-        foreach (user::$permissionsPerRole as $role => $permissions) {
+        foreach (User::$permissionsPerRole as $role => $permissions) {
             $role = Role::create(['name' => $role]);
 
             foreach ($permissions as $permission) {

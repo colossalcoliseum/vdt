@@ -29,7 +29,7 @@ class UsersSeeder extends Seeder
             });
 
         User::factory()
-            ->count(10)
+            ->count(50)
             ->create()
             ->each(function ($user) {
                 $user->assignRole('member');

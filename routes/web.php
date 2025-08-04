@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UpdateUserAvatarController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('video', VideoController::class)->names('video');
-    Route::resource('post', PostController::class)->names('post');
+    Route::resource('videos', VideoController::class)->names('video');
+    Route::resource('posts', PostController::class)->names('post');
+    Route::resource('users', UserController::class)->names('user');
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/update', [ProfileController::class, 'update'])->name('update');

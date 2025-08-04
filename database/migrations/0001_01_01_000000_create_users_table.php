@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('avatar')->nullable();
+            $table->string('country')->nullable();//TODO: направи отделна таблица с градове, държави и тн. и ги посочвай от тук
+            $table->string('city')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('description')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
