@@ -7,7 +7,8 @@ export default function UsersDashboard({users, admins}) {
     return (
         <AutenticatedLayout>
             <div className="py-6">
-                <div className="grid grid-cols-6 mx-auto">
+                <div className="grid">
+                <div className="flex justify-center">
                     <TextInput
                         className="my-auto mx-7 col-span-5 rounded-none bg-indigo-100 border   shadow-none"
                         placeholder="Search users"
@@ -29,6 +30,7 @@ export default function UsersDashboard({users, admins}) {
                             </g>
                         </svg>
                     </PrimaryButton>
+                </div>
                 </div>
 
                 <p className="tracking-wide text-center my-6 text-2xl">Suggested Profiles:</p>

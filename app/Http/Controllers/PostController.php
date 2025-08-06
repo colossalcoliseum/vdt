@@ -7,10 +7,15 @@ use App\Http\Requests\UploadPostRequest;
 use App\Listeners\SendPostNotification;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Inertia\Response;
+use function Symfony\Component\String\u;
 
 class PostController extends Controller
 {
@@ -30,7 +35,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Posts/CreatePost');
+        $response = Gate::inspect('create',Post::class);
+        if($response->allowed()){
+            return Inertia::render('Posts/CreatePost');
+        }
+        return back()->with('message','You are not allowed to create posts.');
     }
 
     /**

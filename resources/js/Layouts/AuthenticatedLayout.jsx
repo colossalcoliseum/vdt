@@ -67,19 +67,19 @@ const AutenticatedLayout = ({header, children}) => {
                                     <a
                                         href={route("profile.edit")}
                                     >
-                                    <button type="button"
+                                        <button type="button"
 
-                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
-                                        Profile
-                                    </button>
+                                                className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
+                                            Profile
+                                        </button>
                                     </a>
                                     <a
                                         href={route('profile.edit')}
                                     >
-                                    <button type="button"
-                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
-                                        Settings
-                                    </button></a>
+                                        <button type="button"
+                                                className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
+                                            Settings
+                                        </button></a>
                                     <button type="button"
                                             className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
                                         Messages
@@ -134,16 +134,18 @@ const AutenticatedLayout = ({header, children}) => {
                     </header>
                 )}
 
-                <main className=" bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
-                    {flash.message && (
-                        <div className="alert">{flash.message}</div>
+                <main className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
+                    {flash && (
+                        <div className="alert text-center">
+                            <h1>{flash.message}</h1>
+                        </div>
                     )}
                     {children}
-                       </main>
+                </main>
 
 
             </div>
         </div>
-);
+    );
 }
 export default AutenticatedLayout

@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->can('publish_posts')) {
+        if($user->hasPermissionTo('publish_posts')) {
             return true;
         }
         return false;
@@ -63,9 +63,6 @@ class PostPolicy
      */
     public function restore(User $user, Post $post): bool
     {
-        if ($user->can('unarchive_posts')) {
-            return true;
-        }
         return false;
     }
 

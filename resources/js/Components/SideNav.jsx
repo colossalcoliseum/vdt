@@ -7,12 +7,13 @@ import {router, usePage} from "@inertiajs/react";
 import {useTranslation} from "react-i18next";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import {useState} from "react";
+import Footer from "@/Components/Footer.jsx";
 
 export default function SideNav() {
     const user = usePage().props.auth.user;
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
     const props = usePage().props;
-  ;
+    ;
 
 
     return (
@@ -20,7 +21,7 @@ export default function SideNav() {
              className="col-span-2 row-span-full py-6 px-10 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100"
              aria-label="Sidebar">
             <div className="my-10 bg-">
-            <ApplicationLogo className=" w-auto fill-current text-blue-900"/>
+                <ApplicationLogo className=" w-auto fill-current text-blue-900"/>
             </div>
             <div
                 className="h-full px-5 py-7 overflow-y-auto dark:bg-opacity-0 dark:text-[#283148] bg-[#283148] text-white/50 ">
@@ -31,7 +32,7 @@ export default function SideNav() {
 
                     <li>
                         <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0"
-                        href={route('dashboard')}
+                                           href={route('dashboard')}
 
                         >
                             <span className="">{t("home")}</span>
@@ -48,13 +49,13 @@ export default function SideNav() {
                         </ResponsiveNavLink>
                     </li>
                     <li>
-                        <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0" href={route('post.index')}
-                                          >
+                        <ResponsiveNavLink className="hover:bg-opacity-0 hover:border-opacity-0"
+                                           href={route('post.index')}
+                        >
                             <span className="">Posts</span>
 
                         </ResponsiveNavLink>
                     </li>
-
 
 
                 </ul>
@@ -88,7 +89,7 @@ export default function SideNav() {
                                         </span>
                                     </Dropdown.Trigger>
 
-                                    <Dropdown.Content align = 'right' >
+                                    <Dropdown.Content align='right'>
                                         <Dropdown.Link
                                             className="bg-gray-700 "
                                             href={route('video.create')}
@@ -107,10 +108,7 @@ export default function SideNav() {
                         </div>
                     </li>
                     <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700"/>
-
-
-
-
+                    <Footer/>
                 </ul>
 
             </div>
