@@ -1,17 +1,18 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Link, usePage} from '@inertiajs/react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import SideNav from "@/Components/SideNav.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import {useTranslation} from 'react-i18next';
 import Cookies from "js-cookie";
 import Footer from "@/Components/Footer.jsx";
+import flasher from "@flasher/flasher";
 
 
 //export default function AuthenticatedLayout({header, children}) {
-const AutenticatedLayout = ({header, children}) => {
+export default function AutenticatedLayout  ({header, children}) {
 
     const {t, i18n} = useTranslation();
     const languages = [
@@ -26,13 +27,23 @@ const AutenticatedLayout = ({header, children}) => {
         i18n.changeLanguage(lang);
     };
     const {flash} = usePage().props
+    const { messages } = usePage().props
+
+    // Render flash messages whenever they change
+    useEffect(() => {
+        if (messages) {
+            flasher.render(messages)
+        }
+    }, [messages])
+
+
 
     return (
         <div className="grid grid-cols-12 grid-rows-12 ">
             <SideNav />
-            <div className="min-h-screen col-span-10 row-span-full">
+            <div className="min-h-screen col-span-8 row-span-full">
 
-                <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
+                <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
 
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
                         <div className="flex h-24 ">
@@ -134,18 +145,17 @@ const AutenticatedLayout = ({header, children}) => {
                     </header>
                 )}
 
-                <main className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-70% to-pink-100">
-                    {flash && (
-                        <div className="alert text-center">
-                            <h1>{flash.message}</h1>
-                        </div>
-                    )}
+                <main className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
                     {children}
                 </main>
 
 
             </div>
+            <div className="col-span-2 row-span-full bg-pink-100"/>
+
         </div>
     );
 }
+/*
 export default AutenticatedLayout
+*/

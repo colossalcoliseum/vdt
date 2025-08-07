@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         //$posts = Post::with('creator')->get();
         return Inertia::render('Posts/PostsDashboard', [
-            'posts' => fn()=>Post::with('creator')->get()
+            'posts' => fn() => Post::with('creator')->get()
         ]);
     }
 
@@ -35,11 +35,16 @@ class PostController extends Controller
      */
     public function create()
     {
-        $response = Gate::inspect('create',Post::class);
-        if($response->allowed()){
+        $response = Gate::inspect('create', Post::class);
+        if ($response->allowed()) {
             return Inertia::render('Posts/CreatePost');
         }
-        return back()->with('message','You are not allowed to create posts.');
+        flash()
+            ->option('position', 'top-right')
+            ->option('duration', 10000)
+            ->option('direction', 'top')
+            ->warning("You don't have permission to create posts", [], 'Missing permission');
+        return back();
     }
 
     /**
@@ -47,23 +52,31 @@ class PostController extends Controller
      */
     public function store(UploadPostRequest $request)
     {
-        $validated = $request->validated();
-        //dd($request->validated());
+        $response = Gate::inspect('create', Post::class);
+        if ($response->allowed()) {
 
-        $mainImage = $request->file('main_image')->store( 'postImages', 'public' );
-        $thumbnailPath = $request->file('thumbnail')->store( 'postThumbnails', 'public' );
-        //dd($path);
-        $post = Post::create([
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'main_image' => $mainImage,
-            'creator_id' => auth()->user()->id,
-            'visibility' => $validated['visibility'],
-            'thumbnail' => $thumbnailPath,
-        ]);
-        $post->save();
-        PostPublished::dispatch($post);//<--- event
-        return Redirect::route('dashboard');
+            $validated = $request->validated();
+            $mainImage = $request->file('main_image')->store('postImages', 'public');
+            $thumbnailPath = $request->file('thumbnail')->store('postThumbnails', 'public');
+            //dd($path);
+            $post = Post::create([
+                'title' => $validated['title'],
+                'description' => $validated['description'],
+                'main_image' => $mainImage,
+                'creator_id' => auth()->user()->id,
+                'visibility' => $validated['visibility'],
+                'thumbnail' => $thumbnailPath,
+            ]);
+            $post->save();
+            PostPublished::dispatch($post);//<--- event
+            return Redirect::route('dashboard');
+        }
+        flash()
+            ->option('position', 'top-right')
+            ->option('duration', 10000)
+            ->option('direction', 'top')
+            ->warning("You don't have permission to publish posts", [], 'Missing permission');
+        return back();
     }
 
     /**

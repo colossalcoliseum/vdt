@@ -7,6 +7,7 @@ use App\Http\Requests\UploadVideoRequest;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,17 @@ class VideoController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Videos/CreateVideo');
+        $response = Gate::inspect('create', Video::class);
+        if ($response->allowed()) {
+            return Inertia::render('Videos/CreateVideo');
+        }
+        flash()
+            ->option('position', 'top-right')
+            ->option('duration', 10000)
+            ->option('direction', 'top')
+            ->warning("You don't have permission to create videos", [], 'Missing permission');
+        return back();
+
     }
 
     /**
@@ -38,38 +49,49 @@ class VideoController extends Controller
      */
     public function store(UploadVideoRequest $request)
     {
-        $validated = $request->validated();
-        if ($request->hasFile('video')&& $request->hasFile('video')) {
-            try {
-                $videoPath = $request->file('video')->store('videos', 'public');
-                $thumbnailPath = $request->file('thumbnail')->store('videoThumbnails', 'public');
-                $videoFile = $request->file('video');
-                $video = Video::create([
-                    'title' => $validated['title'],
-                    'description' => $validated['description'],
-                    'video_path' => "/storage/".$videoPath,
-                    'thumbnail_path' => $thumbnailPath,
-                    'creator_id' => auth()->user()->id,
-                    'original_filename' => $videoFile->getClientOriginalName(),
-                    'file_size' => $videoFile->getSize(),
-                    'video_mime_type' => $videoFile->getMimeType(),
-                    'visibility' => $validated['visibility'],
+        $response = Gate::inspect('create', Video::class);
+        if ($response->allowed()) {
+
+
+            $validated = $request->validated();
+            if ($request->hasFile('video') && $request->hasFile('video')) {
+                try {
+                    $videoPath = $request->file('video')->store('videos', 'public');
+                    $thumbnailPath = $request->file('thumbnail')->store('videoThumbnails', 'public');
+                    $videoFile = $request->file('video');
+                    $video = Video::create([
+                        'title' => $validated['title'],
+                        'description' => $validated['description'],
+                        'video_path' => "/storage/" . $videoPath,
+                        'thumbnail_path' => $thumbnailPath,
+                        'creator_id' => auth()->user()->id,
+                        'original_filename' => $videoFile->getClientOriginalName(),
+                        'file_size' => $videoFile->getSize(),
+                        'video_mime_type' => $videoFile->getMimeType(),
+                        'visibility' => $validated['visibility'],
+                    ]);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+
+                dd([
+                    $request->file('video')->getErrorMessage(),
+                    $request->file('thumbnail')->getErrorMessage(),
+
                 ]);
-            } catch (Exception $e) {
-                die($e->getMessage());
+
             }
-        } else {
 
-            dd([
-                $request->file('video')->getErrorMessage(),
-                $request->file('thumbnail')->getErrorMessage(),
 
-            ]);
-
+            return Redirect::route('video.show',$video->id);
         }
-
-
-        return Redirect::route('dashboard')->with('success', 'Видеото беше качено успешно!');//TODO локализирай го
+        flash()
+            ->option('position', 'top-right')
+            ->option('duration', 10000)
+            ->option('direction', 'top')
+            ->warning("You don't have permission to publish videos", [], 'Missing permission');
+        return back();
     }
 
     /**
@@ -79,7 +101,7 @@ class VideoController extends Controller
     {
 
         $video = Video::with('creator')->find($video->id);
-        return Inertia::render('Videos/Video', ['video'=>$video]);
+        return Inertia::render('Videos/Video', ['video' => $video]);
 
     }
 
