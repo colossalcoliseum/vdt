@@ -24,6 +24,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "@flasher/flasher": "file:vendor/php-flasher/flasher/Resources",
         "draft-js": "^0.11.7",
         "i18next": "^25.3.0",
         "i18next-browser-languagedetector": "^8.2.0",
@@ -31,8 +32,8 @@
         "jodit": "^4.6.2",
         "js-cookie": "^3.0.5",
         "laravel-react-i18n": "^2.0.5",
+        "preline": "^3.2.3",
         "react-i18next": "^15.6.0",
-        "rsuite": "^5.81.0",
-        "@flasher/flasher": "file:vendor/php-flasher/flasher/Resources"
+        "rsuite": "^5.81.0"
     }
 }

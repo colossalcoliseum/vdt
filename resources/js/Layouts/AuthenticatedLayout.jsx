@@ -1,161 +1,277 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import {Link, usePage} from '@inertiajs/react';
-import {useEffect, useState} from 'react';
-import PrimaryButton from "@/Components/PrimaryButton.jsx";
-import SideNav from "@/Components/SideNav.jsx";
-import TextInput from "@/Components/TextInput.jsx";
-import {useTranslation} from 'react-i18next';
-import Cookies from "js-cookie";
+import { useState } from 'react';
 import Footer from "@/Components/Footer.jsx";
-import flasher from "@flasher/flasher";
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
+export default function AuthenticatedLayout({ header, children }) {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [openAccordions, setOpenAccordions] = useState({
+        users: false,
+        account: false,
+        projects: false
+    });
 
-//export default function AuthenticatedLayout({header, children}) {
-export default function AutenticatedLayout  ({header, children}) {
-
-    const {t, i18n} = useTranslation();
+    const [language, setLanguage] = useState('en');
     const languages = [
         {name: "English", code: "en"},
         {name: "Български", code: "bg"}
     ];
-    const currentLocale = Cookies.get("i18next") || "en";
-    const [language, setLanguage] = useState(currentLocale);
-    const handleChangeLocale = (e) => {
-        const lang = e.target.value;
-        setLanguage(lang);
-        i18n.changeLanguage(lang);
+
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+    const toggleSidebarCollapse = () => setIsSidebarCollapsed(!isSidebarCollapsed);
+    const toggleAccordion = (accordion) => {
+        setOpenAccordions(prev => ({
+            ...prev,
+            [accordion]: !prev[accordion]
+        }));
     };
-    const {flash} = usePage().props
-    const { messages } = usePage().props
-
-    // Render flash messages whenever they change
-    useEffect(() => {
-        if (messages) {
-            flasher.render(messages)
-        }
-    }, [messages])
-
-
+    const handleChangeLocale = (e) => setLanguage(e.target.value);
 
     return (
-        <div className="grid grid-cols-12 grid-rows-12 ">
-            <SideNav />
-            <div className="min-h-screen col-span-8 row-span-full">
+        <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
+            {/* Sidebar Navigation */}
+            <div className={`${isSidebarCollapsed ? 'col-span-2' : 'col-span-2'} row-span-full py-6 px-4 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100 transition-all duration-300 relative`}>
 
-                <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
+                <div className={`fixed top-0 left-0 bottom-0 z-60 h-full bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100 border-r border-white/20 transform transition-all duration-300 ${
+                    isSidebarCollapsed ? 'w-20' : 'w-64'
+                } ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
+                    <div className="relative flex flex-col h-full">
+                        {/* Header */}
+                        <ApplicationLogo className="fill-current text-blue-900 h-20 m-6 relative"/>
 
-                    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
-                        <div className="flex h-24 ">
+                        <header className="p-4 flex justify-between items-center">
+                            {!isSidebarCollapsed && (
+                                <a className="font-semibold text-xl text-gray-800" href="#">Brand</a>
+                            )}
 
-                            <div className="flex ml-auto mr-auto ">
-
-                                <TextInput
-                                    className="mt-auto mb-auto rounded-none bg-indigo-100 border   shadow-none"
-                                    placeholder="Search"
-
-                                >
-                                </TextInput>
-                                <PrimaryButton
-                                    className="mb-auto rounded-none mt-auto border-none bg-opacity-0 hover:bg-opacity-0"
-                                >
-                                    <svg width="1.5rem" height="auto" viewBox="0 0 15 15" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg" stroke="#000000">
-                                        <g id="SVGRepo_bgCarrier"></g>
-                                        <g id="SVGRepo_tracerCarrier"
-                                        ></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
-                                                  fill="#000000"></path>
-                                        </g>
+                            <div className="flex items-center gap-2 my-6">
+                                <button onClick={toggleSidebarCollapse} className="hidden lg:flex justify-center items-center w-6 h-6 bg-white/80 border border-white/30 text-gray-700 hover:bg-white/90 rounded-full backdrop-blur-sm">
+                                    <svg className={`w-4 h-4 transition-transform ${isSidebarCollapsed ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <rect width="18" height="18" x="3" y="3" rx="2"/>
+                                        <path d="m10 15-3-3 3-3"/>
                                     </svg>
-                                </PrimaryButton>
+                                </button>
 
+                                <button onClick={toggleSidebar} className="lg:hidden flex justify-center items-center w-6 h-6 bg-white/80 border border-white/30 text-gray-700 hover:bg-white/90 rounded-full backdrop-blur-sm">
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18 6 6 18"/>
+                                        <path d="m6 6 12 12"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <div className="inline-flex shadow-xs grid grid-cols-1 my-auto mx-auto" role="group">
-                                <div className="cols-span-full mx-auto">
-                                    <a
-                                        href={route("profile.edit")}
-                                    >
-                                        <button type="button"
+                        </header>
 
-                                                className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
-                                            Profile
-                                        </button>
+                        {/* Navigation */}
+                        <nav className="h-full overflow-y-auto px-2">
+                            <ul className="space-y-6">
+                                <li>
+                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 bg-white/20 text-sm text-gray-800 rounded-lg hover:bg-white/30 backdrop-blur-sm transition-all" href="#" title="Dashboard">
+                                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                            <polyline points="9 22 9 12 15 12 15 22"/>
+                                        </svg>
+                                        {!isSidebarCollapsed && <span>Dashboard</span>}
                                     </a>
-                                    <a
-                                        href={route('profile.edit')}
-                                    >
-                                        <button type="button"
-                                                className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
-                                            Settings
-                                        </button></a>
-                                    <button type="button"
-                                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border bg-opacity-0">
-                                        Messages
+                                </li>
+
+                                <li>
+                                    <button onClick={() => !isSidebarCollapsed && toggleAccordion('users')} className="w-full text-left flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" title="Users">
+                                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="9" cy="7" r="4"/>
+                                        </svg>
+                                        {!isSidebarCollapsed && (
+                                            <>
+                                                <span>Users</span>
+                                                <svg className={`ml-auto w-4 h-4 transition-transform ${openAccordions.users ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path d="m6 9 6 6 6-6"/>
+                                                </svg>
+                                            </>
+                                        )}
                                     </button>
-                                </div>
+                                    {!isSidebarCollapsed && (
+                                        <div className={`overflow-hidden transition-all duration-300 ${openAccordions.users ? 'max-h-96' : 'max-h-0'}`}>
+                                            <ul className="pl-7 space-y-1">
+                                                <li><a className="block py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" href="#">Sub Menu 1</a></li>
+                                                <li><a className="block py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" href="#">Sub Menu 2</a></li>
+                                            </ul>
+                                        </div>
+                                    )}
+                                </li>
+
+                                <li>
+                                    <button onClick={() => !isSidebarCollapsed && toggleAccordion('account')} className="w-full text-left flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" title="Account">
+                                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <circle cx="18" cy="15" r="3"/>
+                                            <circle cx="9" cy="7" r="4"/>
+                                            <path d="M10 15H6a4 4 0 0 0-4 4v2"/>
+                                        </svg>
+                                        {!isSidebarCollapsed && (
+                                            <>
+                                                <span>Account</span>
+                                                <svg className={`ml-auto w-4 h-4 transition-transform ${openAccordions.account ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path d="m6 9 6 6 6-6"/>
+                                                </svg>
+                                            </>
+                                        )}
+                                    </button>
+                                    {!isSidebarCollapsed && (
+                                        <div className={`overflow-hidden transition-all duration-300 ${openAccordions.account ? 'max-h-96' : 'max-h-0'}`}>
+                                            <ul className="pl-7 space-y-1">
+                                                <li><a className="block py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" href="#">Link 1</a></li>
+                                                <li><a className="block py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" href="#">Link 2</a></li>
+                                            </ul>
+                                        </div>
+                                    )}
+                                </li>
+
+                                <li>
+                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" href="#" title="Calendar">
+                                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                                            <line x1="16" x2="16" y1="2" y2="6"/>
+                                            <line x1="8" x2="8" y1="2" y2="6"/>
+                                        </svg>
+                                        {!isSidebarCollapsed && (
+                                            <>
+                                                <span>Calendar</span>
+                                                <span className="ml-auto py-0.5 px-1.5 text-xs bg-white/30 text-gray-800 rounded-full">New</span>
+                                            </>
+                                        )}
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-white/20 backdrop-blur-sm transition-all" href="#" title="Documentation">
+                                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                        </svg>
+                                        {!isSidebarCollapsed && <span>Documentation</span>}
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            {/* Main Content */}
+            <div className={`${isSidebarCollapsed ? 'col-span-8' : 'col-span-8'} row-span-full transition-all duration-300`}>
+                <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
+                    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <div className="flex h-24 items-center">
+                            <button onClick={toggleSidebar} className="lg:hidden flex justify-center items-center w-8 h-8 text-gray-600 hover:bg-white/20 rounded-full mr-4 backdrop-blur-sm transition-all">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <line x1="3" x2="21" y1="6" y2="6"/>
+                                    <line x1="3" x2="21" y1="12" y2="12"/>
+                                    <line x1="3" x2="21" y1="18" y2="18"/>
+                                </svg>
+                            </button>
+
+                            <div className="flex ml-auto mr-auto">
+                                <input className="mt-auto mb-auto rounded-none bg-indigo-100 border shadow-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="Search" type="text" />
+                                <button className="mb-auto rounded-none mt-auto border-none bg-indigo-200 hover:bg-indigo-300 px-3 py-2 transition-all">
+                                    <svg width="1.5rem" height="auto" viewBox="0 0 15 15" fill="none" stroke="#000000">
+                                        <path fillRule="evenodd" clipRule="evenodd" d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z" fill="#000000"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <div className="switcher grid grid-cols-12  text-[#283148] mt-auto mb-auto">
-                                <div className="col-span-3">
-                                    <svg width="20" height="auto" viewBox="0 0 73.768 73.768"
-                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                                        <g id="SVGRepo_bgCarrier"
-                                        ></g>
-                                        <g
-                                            id="SVGRepo_tracerCarrier"
-                                            stroke="#CCCCCC"></g>
-                                        <g
-                                            id="SVGRepo_iconCarrier">
-                                            <path id="Path_10" data-name="Path 10"
-                                                  d="M117.606,385.2a36.884,36.884,0,1,0,36.884,36.884A36.926,36.926,0,0,0,117.606,385.2Zm33.846,35.383H136.366a48.681,48.681,0,0,0-3.047-16.068,36.786,36.786,0,0,0,8.781-5.808A33.752,33.752,0,0,1,151.452,420.586Zm-32.346-31.072a36.534,36.534,0,0,1,6.069,6.387,39.467,39.467,0,0,1,4.176,7.028,33.843,33.843,0,0,1-10.245,2.061Zm3.534-.935a33.762,33.762,0,0,1,17.292,8.051,33.809,33.809,0,0,1-7.772,5.116A41.252,41.252,0,0,0,122.64,388.579ZM110.19,395.9a36.615,36.615,0,0,1,5.916-6.261v15.35a33.789,33.789,0,0,1-10.116-2.013A39.5,39.5,0,0,1,110.19,395.9Zm-7.013,5.906a33.8,33.8,0,0,1-7.9-5.177,33.757,33.757,0,0,1,17.469-8.074A41.244,41.244,0,0,0,103.177,401.807Zm12.929,6.183v12.6H102a45.607,45.607,0,0,1,2.835-14.838A36.83,36.83,0,0,0,116.106,407.99Zm0,15.6v12.386a36.8,36.8,0,0,0-11.018,2.146A42.373,42.373,0,0,1,102,423.587Zm0,15.386v15.252a47.106,47.106,0,0,1-9.792-13.361A33.819,33.819,0,0,1,116.106,438.973Zm-2.86,16.708a33.755,33.755,0,0,1-18.084-8.24,33.786,33.786,0,0,1,8.306-5.426A48.955,48.955,0,0,0,113.246,455.681Zm5.86-1.313v-15.4a33.8,33.8,0,0,1,9.922,1.94A47.081,47.081,0,0,1,119.106,454.368Zm12.762-12.294a33.846,33.846,0,0,1,8.182,5.367,33.759,33.759,0,0,1-17.909,8.217A48.888,48.888,0,0,0,131.868,442.074Zm-12.762-6.1V423.587h14.257a42.352,42.352,0,0,1-3.106,14.582A36.818,36.818,0,0,0,119.106,435.973Zm0-15.386v-12.6a36.806,36.806,0,0,0,11.4-2.291,45.562,45.562,0,0,1,2.854,14.888ZM93.112,398.711a36.8,36.8,0,0,0,8.91,5.871A48.7,48.7,0,0,0,99,420.587H83.76A33.757,33.757,0,0,1,93.112,398.711ZM83.76,423.587H99a45.675,45.675,0,0,0,3.256,15.683A36.807,36.807,0,0,0,93,445.35,33.755,33.755,0,0,1,83.76,423.587Zm58.447,21.764a36.8,36.8,0,0,0-9.122-6.022,45.69,45.69,0,0,0,3.279-15.742h15.088A33.759,33.759,0,0,1,142.207,445.351Z"
-                                                  transform="translate(-80.722 -385.203)"
-                                                  fill="#000000"></path>
-                                        </g>
+
+                            <div className="inline-flex my-auto mx-auto">
+                                <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-opacity-0 hover:bg-white/20 transition-all backdrop-blur-sm rounded-l">Profile</button>
+                                <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-opacity-0 hover:bg-white/20 transition-all backdrop-blur-sm">Settings</button>
+                                <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-opacity-0 hover:bg-white/20 transition-all backdrop-blur-sm rounded-r">Messages</button>
+                            </div>
+
+                            <div className="switcher grid grid-cols-12 text-gray-800 mt-auto mb-auto ml-4">
+                                <div className="col-span-3 flex items-center">
+                                    <svg width="20" height="auto" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                                     </svg>
                                 </div>
-
                                 <div className="col-span-8">
-
-                                    <select onChange={handleChangeLocale} value={language}
-                                            className="bg-indigo-100 ">
+                                    <select onChange={handleChangeLocale} value={language} className="bg-indigo-100 border-none rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300 text-gray-900">
                                         {languages.map(({name, code}) => (
-                                            <option key={code} value={code}
-                                                    className="text-gray-900 ">
-                                                {name}
-                                            </option>
+                                            <option key={code} value={code}>{name}</option>
                                         ))}
                                     </select>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-
-
                 </nav>
 
                 {header && (
-                    <header className="">
-                        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 ">
-                            {header}
-                        </div>
+                    <header className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
+                        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
                     </header>
                 )}
 
-                <main className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
-                    {children}
+                <main className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100 min-h-[calc(100vh-6rem)]">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        {children || (
+                            <div className="space-y-6">
+                                <div className="flex space-x-1 bg-white/30 backdrop-blur-sm p-1 rounded-lg">
+                                    <button className="flex-1 py-2 px-4 bg-white/60 text-gray-800 rounded-md font-medium text-sm">Your Posts</button>
+                                    <button className="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white/30 transition-all">Trending Posts</button>
+                                    <button className="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white/30 transition-all">Saved</button>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <div className="bg-white/60 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all">
+                                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400" alt="Workspace" className="w-full h-48 object-cover"/>
+                                        <div className="p-6">
+                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Esse non cum autem qui.</h3>
+                                            <p className="text-gray-600 text-sm mb-4">By admin</p>
+                                            <p className="text-gray-700">Lorem ipsum dolor sit amet...</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white/60 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all">
+                                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400" alt="Railway" className="w-full h-48 object-cover"/>
+                                        <div className="p-6">
+                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Debitis voluptate et aliquid.</h3>
+                                            <p className="text-gray-600 text-sm mb-4">By Prof. Reta Rohan</p>
+                                            <p className="text-gray-700">Sed ut perspiciatis unde omnis...</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white/60 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all">
+                                        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=400" alt="City" className="w-full h-48 object-cover"/>
+                                        <div className="p-6">
+                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Recusandae sapiente est vitae.</h3>
+                                            <p className="text-gray-600 text-sm mb-4">By Mafalda Farrell</p>
+                                            <p className="text-gray-700">At vero eos et accusamus...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </main>
-
-
+<Footer/>
             </div>
-            <div className="col-span-2 row-span-full bg-pink-100"/>
 
+            {/* Right Sidebar */}
+            <div className={`${isSidebarCollapsed ? 'col-span-3' : 'col-span-2'} row-span-full bg-pink-100 transition-all duration-300`}>
+                <div className="p-6">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                    <div className="space-y-3">
+                        <button className="w-full text-left px-4 py-3 bg-white/60 backdrop-blur-sm rounded-lg hover:bg-white/80 transition-all">
+                            <div className="font-medium text-gray-800">Create New Post</div>
+                            <div className="text-sm text-gray-600">Share your thoughts</div>
+                        </button>
+                        <button className="w-full text-left px-4 py-3 bg-white/60 backdrop-blur-sm rounded-lg hover:bg-white/80 transition-all">
+                            <div className="font-medium text-gray-800">View Analytics</div>
+                            <div className="text-sm text-gray-600">Check your stats</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Backdrop */}
+            {isSidebarOpen && (
+                <div className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden" onClick={toggleSidebar}></div>
+            )}
         </div>
     );
 }
-/*
-export default AutenticatedLayout
-*/
