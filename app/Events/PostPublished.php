@@ -30,7 +30,7 @@ class PostPublished
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
+            new PrivateChannel('posts.'.$this->post->id),
         ];
     }
 }

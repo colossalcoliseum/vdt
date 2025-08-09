@@ -1,10 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, usePage} from '@inertiajs/react';
 import {usePoll} from '@inertiajs/react'
+import { useEcho } from "@laravel/echo-react";
 
 export default function PostsDashboard({posts}) {
-    usePoll(12000)
 
+    useEcho(
+        `posts`,
+        "PostPublished",
+        (e) => {
+            console.log(e.post);
+        },
+    );
 
     return (
         <AuthenticatedLayout

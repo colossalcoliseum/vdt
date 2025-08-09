@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Footer from "@/Components/Footer.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
-
 export default function AuthenticatedLayout({ header, children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -27,12 +26,13 @@ export default function AuthenticatedLayout({ header, children }) {
     };
     const handleChangeLocale = (e) => setLanguage(e.target.value);
 
+
     return (
         <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
             {/* Sidebar Navigation */}
             <div className={`${isSidebarCollapsed ? 'col-span-2' : 'col-span-2'} row-span-full py-6 px-4 bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100 transition-all duration-300 relative`}>
 
-                <div className={`fixed top-0 left-0 bottom-0 z-60 h-full bg-gradient-to-l from-indigo-100 via-red-100 to-pink-100 border-r border-white/20 transform transition-all duration-300 ${
+                <div className={`fixed top-0 left-0 bottom-0 z-60 h-full border-r border-white/20 transform transition-all duration-300 ${
                     isSidebarCollapsed ? 'w-20' : 'w-64'
                 } ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
                     <div className="relative flex flex-col h-full">
