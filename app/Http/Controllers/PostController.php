@@ -68,7 +68,7 @@ class PostController extends Controller
                 'thumbnail' => $thumbnailPath,
             ]);
             $post->save();
-            PostPublished::dispatch($post);//<--- event
+           // PostPublished::dispatch($post);//<--- event
             return Redirect::route('dashboard');
         }
         flash()
