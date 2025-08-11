@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Musonza\Chat\Traits\Messageable;
 
@@ -23,6 +24,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
     public static array $permissionsPerRole = [
         'admin' => [
             "edit_users",
@@ -81,10 +83,15 @@ class User extends Authenticatable
         ];
     }
 
+    public function role()
+    {
+    return;//TODO: довърши
+    }
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
+
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);

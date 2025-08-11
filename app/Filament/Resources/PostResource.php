@@ -10,11 +10,14 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
 
 
 class PostResource extends Resource
@@ -22,6 +25,7 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'User-Generated Content';
 
     public static function form(Form $form): Form
     {
@@ -33,7 +37,8 @@ class PostResource extends Resource
                 ,
                 TextInput::make('description')
                     ->minLength(3)
-                    ->required(),
+                    ->required()
+                    ->columnSpan('full'),
                 Select::make('visibility')
                     ->options([
                         'public' => 'Public',
@@ -103,10 +108,22 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id'),
+                TextColumn::make('title')->searchable(),
+                TextColumn::make('creator.name')->searchable(),
+                TextColumn::make('visibility'),
+                ImageColumn::make('thumbnail'),
+                ImageColumn::make('main_image'),
+                TextColumn::make('created_at')
+                    ->sortable()
+                    ->datetime(),
             ])
             ->filters([
-                //
+                SelectFilter::make('visibility')
+                ->options([
+                    'public' => 'Public',
+                    'private' => 'Private',
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -121,7 +138,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CreatorRelationManager::class,
         ];
     }
 

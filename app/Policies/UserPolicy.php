@@ -12,10 +12,9 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        if ($user->hasRole('admin')||$user->hasRole('super_admin')) {
-            return true;
-        }
-        return false;
+        return
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
     }
 
     /**
@@ -23,10 +22,8 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        if ($user->hasRole('admin')||$user->hasRole('super_admin')) {
-            return true;
-        }
-        return false;
+        return
+            true;
     }
 
     /**
@@ -34,10 +31,10 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->hasRole('admin')||$user->hasRole('super_admin')) {
-            return true;
-        }
-        return false;
+        return
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
+
     }
 
     /**
@@ -45,10 +42,11 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        if ($user->can('edit_users')) {
-            return true;
-        }
-        return false;
+        return
+            $user->can('edit_users') ||
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
+
     }
 
     /**
@@ -56,10 +54,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        if ($user->can('delete_users')) {
-            return true;
-        }
-        return false;
+        return
+            $user->can('delete_users') ||
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
     }
 
     /**
@@ -67,10 +65,11 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        if ($user->can('unban_users')) {
-            return true;
-        }
-        return false;
+        return
+            $user->can('unban_users') ||
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
+
     }
 
     /**
@@ -78,6 +77,7 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return false;
+        return
+            false;
     }
 }

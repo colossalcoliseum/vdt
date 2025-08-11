@@ -3,11 +3,10 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-use App\Models\Post;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 
-
-class PostPolicy
+class RolePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -15,16 +14,18 @@ class PostPolicy
     public function viewAny(User $user): bool
     {
         return
-            true;
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $post): bool
+    public function view(User $user, Role $role): bool
     {
         return
-            true;
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
     }
 
     /**
@@ -33,18 +34,15 @@ class PostPolicy
     public function create(User $user): bool
     {
         return
-            $user->hasPermissionTo('publish_posts') ||
-            $user->hasRole('admin') ||
             $user->hasRole('super_admin');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Post $post): bool
+    public function update(User $user, Role $role): bool
     {
         return
-            $user->can('edit_posts') ||
             $user->hasRole('admin') ||
             $user->hasRole('super_admin');
     }
@@ -52,28 +50,28 @@ class PostPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Post $post): bool
+    public function delete(User $user, Role $role): bool
     {
         return
-            $user->can('delete_posts') ||
-            $user->hasRole('admin') ||
             $user->hasRole('super_admin');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Post $post): bool
+    public function restore(User $user, Role $role): bool
     {
         return
-            false;
+            $user->hasRole('admin') ||
+            $user->hasRole('super_admin');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Post $post): bool
+    public function forceDelete(User $user, Role $role): bool
     {
-        return false;
+        return
+            $user->hasRole('super_admin');
     }
 }
