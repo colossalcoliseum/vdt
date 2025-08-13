@@ -14,10 +14,12 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\GlobalSearch\Actions\Action;
 
 
 class PostResource extends Resource
@@ -26,6 +28,10 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'User-Generated Content';
+    protected static ?string $recordTitleAttribute = 'name';
+    protected static int $globalSearchResultsLimit = 20;
+
+
 
     public static function form(Form $form): Form
     {
@@ -39,12 +45,10 @@ class PostResource extends Resource
                     ->minLength(3)
                     ->required()
                     ->columnSpan('full'),
-                Select::make('visibility')
-                    ->options([
-                        'public' => 'Public',
-                        'private' => 'Private',
-                    ])
-                    ->required(),
+                Select::make('visibility_id')
+                    ->relationship('visibility', 'name')
+                    ->required()
+                    ->label('Visibility'),
                 FileUpload::make('thumbnail')
                     ->disk('public')
                     ->directory('postThumbnails')
@@ -52,19 +56,19 @@ class PostResource extends Resource
                     ->visibility('public')
                     ->image()
                     ->circleCropper()
-                /*    ->panelLayout('grid')
-                    ->multiple()
-                    ->reorderable()
-                    ->appendFiles()
-                    ->openable()*/
+                    /*    ->panelLayout('grid')
+                        ->multiple()
+                        ->reorderable()
+                        ->appendFiles()
+                        ->openable()*/
                     ->imageEditor()
-                ->imageEditorAspectRatios([
-                    null,
-                    '16:9',
-                    '1:1',
-                    '4:3',
-                ])
-                ->imageEditorEmptyFillColor('#000000')
+                    ->imageEditorAspectRatios([
+                        null,
+                        '16:9',
+                        '1:1',
+                        '4:3',
+                    ])
+                    ->imageEditorEmptyFillColor('#000000')
                 ,
 
                 Select::make('creator_id')
@@ -119,11 +123,7 @@ class PostResource extends Resource
                     ->datetime(),
             ])
             ->filters([
-                SelectFilter::make('visibility')
-                ->options([
-                    'public' => 'Public',
-                    'private' => 'Private',
-                ])
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -135,19 +135,55 @@ class PostResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getGloballySearchableAttributes(): array
     {
         return [
-            RelationManagers\CreatorRelationManager::class,
+            'title', 'creator.name', 'visibility.name'
         ];
     }
 
-    public static function getPages(): array
+    public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+        'Title'=>$record->title,
+        'Author'=>$record->creator->name,
+        'Visibility'=>$record->visibility->name,
         ];
     }
+    public static function getWidgets(): array
+    {
+        return [
+            PostResource\Widgets\PostsWidget::class,
+        ];
+    }
+
+    public static function getGlobalSearchResultUrl(Model $record): string
+    {
+        return UserResource::getUrl('edit', ['record' => $record]);
+    }
+
+    public static function getGlobalSearchEloquentQuery(): Builder
+    {
+        return parent::getGlobalSearchEloquentQuery()->with(['creator', 'visibility']);
+    }
+
+
+
+public
+static function getRelations(): array
+{
+    return [
+        RelationManagers\CreatorRelationManager::class,
+    ];
+}
+
+public
+static function getPages(): array
+{
+    return [
+        'index' => Pages\ListPosts::route('/'),
+        'create' => Pages\CreatePost::route('/create'),
+        'edit' => Pages\EditPost::route('/{record}/edit'),
+    ];
+}
 }

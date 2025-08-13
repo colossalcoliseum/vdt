@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('file_size');
             $table->string('video_mime_type');
             $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
-            $table->string('visibility');
+            $table->foreignId('visibility_id')->constrained('visibilities')->onDelete('cascade');
             $table->timestamps();
         });
     }

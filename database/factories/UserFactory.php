@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -41,12 +42,17 @@ class UserFactory extends Factory
     public static function getAvatarUrl(): string{
         $client = new Client();
         $avatarUri = '';
-        $response = $client->get('https://picsum.photos/200', [
-            'on_stats' => function (TransferStats $stats) use (&$url, &$avatarUri) {
-                $avatarUri = $stats->getEffectiveUri();
-            }
-        ]);
-        return $avatarUri;
+       try {
+            $response = $client->get('https://picsum.photos/200', [
+                'on_stats' => function (TransferStats $stats) use (&$url, &$avatarUri) {
+                    $avatarUri = $stats->getEffectiveUri();
+                }
+            ]);
+            return $avatarUri;
+        } catch (GuzzleException $e) {
+        dump($e->getMessage());
+        }
+        return '';
     }
     /**
      * Indicate that the model's email address should be unverified.

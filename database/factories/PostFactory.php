@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\TransferStats;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,17 +25,22 @@ class PostFactory extends Factory
             'thumbnail' => self::getPictureUrl(300,200),
             'creator_id' =>$this->faker->numberBetween(1,10),
             'main_image' => self::getPictureUrl(400,300),
-            'visibility' => $this->faker->randomElement(['public', 'private']),
+            'visibility_id' => $this->faker->numberBetween(1,2),
         ];
     }
     public static function getPictureUrl($length, $width): string{
         $client = new Client();
         $pictureUri = '';
-        $response = $client->get('https://picsum.photos/300/200', [
-            'on_stats' => function (TransferStats $stats) use (&$pictureUri) {
-                $pictureUri = $stats->getEffectiveUri();
-            }
-        ]);
-        return $pictureUri;
+      try {
+            $response = $client->get('https://picsum.photos/300/200', [
+                'on_stats' => function (TransferStats $stats) use (&$pictureUri) {
+                    $pictureUri = $stats->getEffectiveUri();
+                }
+            ]);
+            return $pictureUri;
+        } catch (GuzzleException $e) {
+            dump($e->getMessage());
+        }
+        return '';
     }
 }

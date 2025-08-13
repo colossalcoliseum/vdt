@@ -27,6 +27,7 @@ class RoleResource extends Resource
     protected static ?string $navigationGroup = 'Admin Tools';
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?string $modelLabel = 'Role';
+
     protected static SubNavigationPosition $subNavigationPosition = SubnavigationPosition::Top;
     public static function form(Form $form): Form
     {

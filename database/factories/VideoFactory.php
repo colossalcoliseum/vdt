@@ -25,6 +25,6 @@ class VideoFactory extends Factory
             'file_size' => $this->faker->numberBetween(1, 1000),
             'video_mime_type' => "video/mp4",
             'creator_id' => $this->faker->numberBetween(1, 10),
-            'visibility' => $this->faker->randomElement(['public', 'private'])];
+            'visibility_id' => $this->faker->numberBetween(1, 2),];
     }
 }
