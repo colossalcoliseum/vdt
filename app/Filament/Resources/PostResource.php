@@ -20,18 +20,31 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\GlobalSearch\Actions\Action;
+use Spatie\Permission\Models\Role;
 
 
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'grid-1x2';
+    protected static ?string $activeNavigationIcon = 'grid-1x2-fill';
+    protected static ?string $navigationBadgeTooltip = 'Total Posts';
+
     protected static ?string $navigationGroup = 'User-Generated Content';
     protected static ?string $recordTitleAttribute = 'name';
     protected static int $globalSearchResultsLimit = 20;
+    protected static ?int $navigationSort = 1;
 
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'info';
+    }
 
     public static function form(Form $form): Form
     {
@@ -113,20 +126,22 @@ class PostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('title')->searchable(),
+                TextColumn::make('title')->searchable()
+                ->wrap(),
                 TextColumn::make('creator.name')->searchable(),
-                TextColumn::make('visibility'),
-                ImageColumn::make('thumbnail'),
+                TextColumn::make('visibility.name')->label('Visibility')->searchable(),
                 ImageColumn::make('main_image'),
                 TextColumn::make('created_at')
                     ->sortable()
-                    ->datetime(),
+                    ->since(),
             ])
             ->filters([
 
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -141,7 +156,10 @@ class PostResource extends Resource
             'title', 'creator.name', 'visibility.name'
         ];
     }
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [

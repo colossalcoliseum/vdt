@@ -23,17 +23,21 @@ class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-person-square';
+    protected static ?string $activeNavigationIcon = 'icon-person-bounding-box';
+
     protected static ?string $navigationGroup = 'Admin Tools';
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?string $modelLabel = 'Role';
+
 
     protected static SubNavigationPosition $subNavigationPosition = SubnavigationPosition::Top;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name'),
+                TextInput::make('name')
+                ,
                 TextInput::make('guard_name'),
                 Select::make('permissions')
                 ->relationship('permissions', 'name')
@@ -47,6 +51,7 @@ class RoleResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
+
                 TextColumn::make('guard_name'),
 
 
@@ -72,7 +77,10 @@ class RoleResource extends Resource
             //
         ];
     }
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
         public static function getRecordSubNavigation(Page $page): array
     {
         return $page->generateNavigationItems([

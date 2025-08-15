@@ -15,12 +15,18 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Permission\Models\Role;
 
 class VisibilityResource extends Resource
 {
     protected static ?string $model = Visibility::class;
 
     protected static ?string $navigationIcon = 'icon-eye';
+    protected static ?string $activeNavigationIcon = 'icon-eye-fill';
+    protected static ?int $navigationSort = 2;
+
+
+
     protected static ?string $navigationGroup = 'Admin Tools';
 
 
@@ -71,7 +77,10 @@ class VisibilityResource extends Resource
             Pages\EditVisibility::class,
         ]);
     }
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
     public static function getPages(): array
     {
         return [

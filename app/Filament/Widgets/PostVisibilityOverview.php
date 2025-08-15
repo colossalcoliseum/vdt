@@ -11,8 +11,8 @@ class PostVisibilityOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Total Private Posts', Post::query()->where('visibility','private')->count()),
-            Stat::make('Total Public Posts', Post::query()->where('visibility','public')->count()),
+            Stat::make('Total Private Posts', Post::query()->where('visibility_id','1')->count()),
+            Stat::make('Total Public Posts', Post::query()->where('visibility_id','2')->count()),
         ];
     }
 }

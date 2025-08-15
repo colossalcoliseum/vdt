@@ -11,9 +11,11 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Musonza\Chat\Traits\Messageable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -84,13 +86,22 @@ class User extends Authenticatable
         ];
     }
 
-    public function role():BelongsTo
+    public function role(): BelongsTo
     {
-    return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class);
     }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+        return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
+        }
+        return auth()->user()->hasRole('admin');
     }
 
     public function videos(): HasMany

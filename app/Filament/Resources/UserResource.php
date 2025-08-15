@@ -15,6 +15,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
@@ -23,6 +24,9 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Users';
     protected static ?string $recordTitleAttribute = 'name';
+    protected static ?int $navigationSort = 1;
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -91,7 +95,10 @@ class UserResource extends Resource
             //RelationManagers\RoleRelationManager::class
         ];
     }
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return true;
+    }
     public static function getPages(): array
     {
         return [

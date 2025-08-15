@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('thumbnail');
             $table->string('main_image');
+            //$table->boolean('published')->default(false);
             $table->foreignId('visibility_id')->constrained('visibilities')->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();

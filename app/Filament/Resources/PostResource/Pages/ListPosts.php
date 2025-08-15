@@ -20,11 +20,11 @@ class ListPosts extends ListRecords
         return [
             'all' => Tab::make()->icon('icon-house')->badge(Post::all()->count()),
             'public' => Tab::make()
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('visibility', 'public'))
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('visibility_id', '2'))
                 ->icon('icon-collection')
                 ->badge(Post::query()->where('visibility_id', '2')->count()),
             'private' => Tab::make()
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('visibility', 'private'))
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('visibility_id', '1'))
                 ->icon('icon-lock')
                 ->badge(Post::query()->where('visibility_id', '1')->count()),
 

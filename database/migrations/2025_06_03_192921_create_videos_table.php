@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('original_filename');
             $table->bigInteger('file_size');
             $table->string('video_mime_type');
+            $table->foreignId( 'category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('visibility_id')->constrained('visibilities')->onDelete('cascade');
             $table->timestamps();

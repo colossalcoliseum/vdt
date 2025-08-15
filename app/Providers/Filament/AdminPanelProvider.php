@@ -1,7 +1,12 @@
 <?php
 
 namespace App\Providers\Filament;
-
+use App\Filament\AvatarProviders\BoringAvatarsProvider;
+use App\Filament\Resources\PostResource;
+use App\Filament\Resources\RoleResource;
+use App\Filament\Resources\UserResource;
+use App\Filament\Resources\VisibilityResource;
+use Filament\AvatarProviders\Contracts\AvatarProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -17,7 +22,15 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
+use Filament\Pages\Dashboard;
+use App\Filament\Pages\HomePageSettings;
+use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\PageResource;
+use Filament\Navigation\NavigationBuilder;
+use App\Filament\Pages\Settings;
+use Filament\Navigation\MenuItem;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -37,8 +50,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+
+
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -54,6 +67,44 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->globalSearchKeyBindings(['command+k', 'ctrl+k']);
+            ->sidebarCollapsibleOnDesktop()
+
+        ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+
+            ->sidebarWidth('16rem')
+
+            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
+                return $builder->groups([
+                    NavigationGroup::make('')
+                    ->items([
+                        ...Dashboard::getNavigationItems()
+                    ])->collapsed(false)
+                    ,
+
+                    NavigationGroup::make('Admin Tools')
+                        ->items([
+                            ...RoleResource::getNavigationItems(),
+                            ...VisibilityResource::getNavigationItems(),
+                        ]),
+                    NavigationGroup::make('User Tools')
+                        ->items([
+                            ...UserResource::getNavigationItems(),
+                            ...PostResource::getNavigationItems(),
+                        ]),
+                ]);
+            })
+            ->userMenuItems([
+
+                'profile' => MenuItem::make()->label('Edit profile'),
+                'logout' => MenuItem::make()->label('Log out'),
+
+            ])
+            ->login()
+            ->registration()
+            ->passwordReset()
+            ->emailVerification()
+            ->profile(isSimple: false);
+           //TODO BoringAvatarsProvider за defAvatar
+
     }
 }
