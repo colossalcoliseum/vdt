@@ -31,6 +31,8 @@ use App\Filament\Resources\PageResource;
 use Filament\Navigation\NavigationBuilder;
 use App\Filament\Pages\Settings;
 use Filament\Navigation\MenuItem;
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -103,7 +105,9 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->passwordReset()
             ->emailVerification()
-            ->profile(isSimple: false);
+            ->profile(isSimple: false)
+            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+            ;
            //TODO BoringAvatarsProvider за defAvatar
 
     }

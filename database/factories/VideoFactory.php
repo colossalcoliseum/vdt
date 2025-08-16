@@ -24,6 +24,8 @@ class VideoFactory extends Factory
             'original_filename' => $this->faker->uuid(),
             'file_size' => $this->faker->numberBetween(1, 1000),
             'video_mime_type' => "video/mp4",
+            'status_id' => $this->faker->numberBetween(1,3),
+            'category_id' => $this->faker->numberBetween(1,15),
             'creator_id' => $this->faker->numberBetween(1, 10),
             'visibility_id' => $this->faker->numberBetween(1, 2),];
     }

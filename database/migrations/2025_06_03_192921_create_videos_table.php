@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('video_path');
             $table->string('thumbnail_path');
             $table->string('original_filename');
             $table->bigInteger('file_size');
             $table->string('video_mime_type');
+            $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
             $table->foreignId( 'category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('visibility_id')->constrained('visibilities')->onDelete('cascade');

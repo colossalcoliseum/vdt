@@ -13,6 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Musonza\Chat\Traits\Messageable;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 
 
 class User extends Authenticatable implements FilamentUser
@@ -21,6 +22,7 @@ class User extends Authenticatable implements FilamentUser
     use HasFactory, Notifiable;
     use HasRoles;
     use Messageable;
+    use HasSuperAdmin;
 
     /**
      * The attributes that are mass assignable.

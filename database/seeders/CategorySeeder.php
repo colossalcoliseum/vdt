@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,29 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        foreach (Category::$categories as $category => $subCategory) {
+            Category::create([
+                'name' => $category,
+                'slug' => strtolower($category),
+                'status_id' => 1,
+                'created_by' => fake()->numberBetween(1, 20),
+                'require_subscription' => fake()->boolean,
+                'is_controversial' => fake()->boolean,
+                'is_active' => fake()->boolean,
+
+            ]);
+          //  dd($subCategory);
+            foreach ($subCategory as $subCat) {
+                SubCategory::create([
+                    'name' => $subCat,
+                    'slug' => strtolower($subCat),
+                    'status_id' => 1,
+                    'created_by' => fake()->numberBetween(1, 20),
+                    'require_subscription' => fake()->boolean,
+                    'is_controversial' => fake()->boolean,
+                    'is_active' => fake()->boolean,
+                ]);
+            }
+        }
     }
 }

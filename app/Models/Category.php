@@ -110,10 +110,10 @@ class Category extends Model
             'Sun',
 
         ],
-        'Sport',
-        'Breaking News',
-        'Travel',
-        'Ideas',
-        'Hobby',
+        'Sport'=>[],
+        'Breaking News'=>[],
+        'Travel'=>[],
+        'Ideas'=>[],
+        'Hobby'=>[],
     ];
 }

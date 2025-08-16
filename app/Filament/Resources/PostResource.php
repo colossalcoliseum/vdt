@@ -6,10 +6,12 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -54,10 +56,10 @@ class PostResource extends Resource
                     ->required()
                     ->minLength(3)
                 ,
-                TextInput::make('description')
+              /*  TextInput::make('description')
                     ->minLength(3)
                     ->required()
-                    ->columnSpan('full'),
+                    ->columnSpan('full'),*/
                 Select::make('visibility_id')
                     ->relationship('visibility', 'name')
                     ->required()
@@ -82,6 +84,32 @@ class PostResource extends Resource
                         '4:3',
                     ])
                     ->imageEditorEmptyFillColor('#000000')
+                ,
+                RichEditor::make('description')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->fileAttachmentsDisk('local')
+                    ->fileAttachmentsDirectory('postImages')
+                    ->fileAttachmentsVisibility('public'),
+
+                IconColumn::make('is_published')
+                    ->boolean()
+                    ->trueIcon('icon-check-circle')
+                    ->falseIcon('icon-x-circle')
                 ,
 
                 Select::make('creator_id')
@@ -129,11 +157,34 @@ class PostResource extends Resource
                 TextColumn::make('title')->searchable()
                 ->wrap(),
                 TextColumn::make('creator.name')->searchable(),
-                TextColumn::make('visibility.name')->label('Visibility')->searchable(),
+                IconColumn::make('visibility.name')->label('Visibility')
+                    ->searchable()
+                    ->icon(fn (string $state): string => match ($state) {
+                        'Private' => 'icon-lock',
+                        'Public' => 'icon-unlock2',
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'Public' => 'info',
+                        'Private' => 'danger',
+                        default => 'gray'
+                    ,})
+                    ,
                 ImageColumn::make('main_image'),
                 TextColumn::make('created_at')
                     ->sortable()
                     ->since(),
+                IconColumn::make('is_published')
+                    ->boolean()
+                    ->trueIcon('icon-check-circle')
+                    ->falseIcon('icon-x-circle')
+                    ->color(fn (string $state): string => match ($state) {
+                        '1' => 'info',
+                        '0' => 'danger',
+
+                        default => 'gray'
+                    ,})
+
+
             ])
             ->filters([
 

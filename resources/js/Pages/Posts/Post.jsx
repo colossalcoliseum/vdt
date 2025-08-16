@@ -1,46 +1,55 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, usePage} from '@inertiajs/react';
+import DOMPurify from 'dompurify';
 
 export default function Post({post}) {
     const user = usePage().props.auth.user;
+    console.log('post.description RAW:', post.description);
+    console.log('typeof:', typeof post.description);
+
+    const sanitizedHTML = DOMPurify.sanitize(post.description, {
+        WHOLE_DOCUMENT: false,
+        RETURN_DOM: false,
+        RETURN_DOM_FRAGMENT: false,
+        RETURN_DOM_IMPORT: false,
+        SANITIZE_DOM: false,
+        KEEP_CONTENT: true,
+        ADD_ATTR: ['*'],
+        ALLOW_DATA_ATTR: true,
+        ALLOW_UNKNOWN_PROTOCOLS: true
+    });
+    console.log('sanitizedHTML:', sanitizedHTML);
 
     return (
-        <AuthenticatedLayout
-
-        >
+        <AuthenticatedLayout>
             <Head title="Post"/>
 
-            <div className="">
-                <div className="mx-auto py-12  max-w-7xl sm:px-6 lg:px-8 ">
-                    <div className="grid grid-cols-12 grid-rows-12 ">
-                        <div className="col-span-12 mx-auto row-span-6">
-                            <h1 className="font-mono text-5xl tracking-tight select-all font-bold text-black ">{post.title}</h1>
-                            <ul className="space-y-2 font-medium border-t border-gray-900"/>
-                            <span
-                                className="font-mono overflow-y-auto font-bold text-gray-400">Written by {post.creator.name}</span>
+            <div className="mx-auto py-12 max-w-7xl sm:px-6 lg:px-8">
+                {/* Header Section */}
+                <div className="text-center mb-8">
+                    <h1 className="font-mono text-5xl tracking-tight select-all font-bold text-black mb-4">
+                        {post.title}
+                    </h1>
+                    <span className="font-mono font-bold text-gray-400">
+                        Written by {post.creator.name}
+                    </span>
+                </div>
 
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-12 grid-rows-12">
-                        <div className="col-span-full mx-auto row-span-10">
-                            <img src={post.thumbnail} alt={post.title} width={500}
-                                 className="rounded-sm border-x-4 border-y-4 border-indigo-200"/>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-12 grid-rows-12 ">
-                        <div className="col-span-6 mx-auto row-span-full">
-                            <p className="font-mono overflow-y-auto text-black">{post.description}</p>
-                        </div>
-                        <div className="col-span-6 mx-auto row-span-6">
-                            <img src={post.main_image} alt={post.title}
-                                 className="rounded-sm border-x-4 border-y-4 border-indigo-200"/>
+                <div className="text-center mb-8">
+                    <img
+                        src={post.thumbnail}
+                        alt={post.title}
+                        className="mx-auto rounded-sm border-x-4 border-y-4 border-indigo-200 max-w-lg"
+                    />
+                </div>
 
-                        </div>
-                    </div>
+                <div className="max-w-4xl mx-auto">
+                    <div
+                        className="prose prose-lg max-w-none"
+                        dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+                    />
                 </div>
             </div>
-
-
         </AuthenticatedLayout>
     );
 }

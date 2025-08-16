@@ -50,7 +50,7 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-
+                Select::make('roles')->multiple()->relationship('roles', 'name')
             ]);
     }
 
@@ -86,7 +86,8 @@ class UserResource extends Resource
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ;
     }
 
     public static function getRelations(): array

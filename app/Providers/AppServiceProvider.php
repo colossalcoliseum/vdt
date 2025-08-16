@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Events\PostPublished;
 use App\Listeners\SendPostNotification;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::before(function (User $user, string $ability) {
+            return $user->isSuperAdmin() ? true: null;
+        });
         Vite::prefetch(concurrency: 3);
         //Schema::defaultStringLength(125);
         Event::listen(
