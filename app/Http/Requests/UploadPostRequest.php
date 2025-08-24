@@ -25,6 +25,11 @@ class UploadPostRequest extends FormRequest
             'title' => 'required|max:255|string|min:3',
             'description' => 'required|max:255|string|min:3',
             'visibility' => 'required',
+            'is_published' => 'required',
+            'category_id' => 'required',
+            'status_id' => 'required',
+            'visibility_id' => 'required',
+            'creator_id' => 'required',
             'thumbnail' => 'file|mimes:jpeg,image,png,jpg|max:1024',
             'main_image' => 'file|mimes:jpeg,image,png,jpg|max:5120'
         ];

@@ -18,4 +18,11 @@ class EditUser extends EditRecord
             Actions\RestoreAction::make(),
         ];
     }
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        if (isset($data['avatar']) && !str_starts_with($data['avatar'], 'storage/')) {
+            $data['avatar'] = 'storage/' . $data['avatar'];
+        }
+        return $data;
+    }
 }

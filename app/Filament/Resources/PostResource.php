@@ -41,7 +41,9 @@ class PostResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return cache()->remember('posts_count_for_recource', now()->addDay(), function () {
+            return static::getModel()::count();
+        });
     }
     public static function getNavigationBadgeColor(): ?string
     {
@@ -64,13 +66,18 @@ class PostResource extends Resource
                     ->relationship('visibility', 'name')
                     ->required()
                     ->label('Visibility'),
+                Select::make('category_id')
+                    ->relationship('category', 'name')
+                    ->required()
+                    ->label('Category'),
                 FileUpload::make('thumbnail')
                     ->disk('public')
                     ->directory('postThumbnails')
+
                     ->required()
                     ->visibility('public')
                     ->image()
-                    ->circleCropper()
+
                     /*    ->panelLayout('grid')
                         ->multiple()
                         ->reorderable()
@@ -102,14 +109,27 @@ class PostResource extends Resource
                         'underline',
                         'undo',
                     ])
-                    ->fileAttachmentsDisk('local')
-                    ->fileAttachmentsDirectory('postImages')
-                    ->fileAttachmentsVisibility('public'),
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('/storage/postImages')
+                    ->fileAttachmentsVisibility('public')
 
-                IconColumn::make('is_published')
-                    ->boolean()
-                    ->trueIcon('icon-check-circle')
-                    ->falseIcon('icon-x-circle')
+                ,
+
+                Select::make('is_published')//TODO : разбери защо постовете не се качват от тази форма
+                    ->options([
+                        true => 'Yes',
+                        false => 'No',
+                    ])
+                ->label('Is Published ')
+                ,
+
+                Select::make('status_id')
+                    ->options([
+                        '1' => 'Active',
+                        '2' => 'Suspended',
+                        '3' => 'Disabled',
+                    ])
+                ->label('Status')
                 ,
 
                 Select::make('creator_id')
@@ -156,7 +176,10 @@ class PostResource extends Resource
                 TextColumn::make('id'),
                 TextColumn::make('title')->searchable()
                 ->wrap(),
-                TextColumn::make('creator.name')->searchable(),
+                TextColumn::make('creator.name')
+                    ->searchable()
+                    ->icon('icon-person')
+                ,
                 IconColumn::make('visibility.name')->label('Visibility')
                     ->searchable()
                     ->icon(fn (string $state): string => match ($state) {
@@ -233,7 +256,7 @@ class PostResource extends Resource
 
     public static function getGlobalSearchEloquentQuery(): Builder
     {
-        return parent::getGlobalSearchEloquentQuery()->with(['creator', 'visibility']);
+        return parent::getGlobalSearchEloquentQuery()->with(['creator', 'visibility', 'category']);
     }
 
 

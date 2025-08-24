@@ -16,4 +16,13 @@ class EditPost extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+
+        if (isset($data['thumbnail']) && !str_starts_with($data['thumbnail'], 'storage/')) {
+            $data['thumbnail'] = 'storage/' . $data['thumbnail'];
+        }
+        return $data;
+    }
 }

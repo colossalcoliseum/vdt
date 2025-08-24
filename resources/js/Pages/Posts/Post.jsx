@@ -1,6 +1,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, usePage} from '@inertiajs/react';
 import DOMPurify from 'dompurify';
+import TimeAgo from 'timeago-react';
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
 
 export default function Post({post}) {
     const user = usePage().props.auth.user;
@@ -25,14 +31,28 @@ export default function Post({post}) {
             <Head title="Post"/>
 
             <div className="mx-auto py-12 max-w-7xl sm:px-6 lg:px-8">
-                {/* Header Section */}
                 <div className="text-center mb-8">
                     <h1 className="font-mono text-5xl tracking-tight select-all font-bold text-black mb-4">
                         {post.title}
                     </h1>
                     <span className="font-mono font-bold text-gray-400">
-                        Written by {post.creator.name}
+                        Written by
                     </span>
+                    <HoverCard>
+                        <HoverCardTrigger>{post.creator.name}</HoverCardTrigger>
+                        <HoverCardContent className="bg-white ">
+                            <div className="grid grid-cols-2">
+                                <div className="col"> <img src={post.creator.avatar} alt={post.creator.name}
+                                          className="rounded-full h-20"/> <span className="text-center">Joined <TimeAgo
+                                    datetime={post.creator.created_at}
+                                    locale='en_EN'
+                                /></span></div>
+                                <div className="col h-32 w-32 pr-2 overflow-y-auto"><span className="text-xs">Description<br/></span>
+                                      {post.creator.description}</div>
+                            </div>
+                        </HoverCardContent>
+                    </HoverCard>
+
                 </div>
 
                 <div className="text-center mb-8">
@@ -46,7 +66,7 @@ export default function Post({post}) {
                 <div className="max-w-4xl mx-auto">
                     <div
                         className="prose prose-lg max-w-none"
-                        dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+                        dangerouslySetInnerHTML={{__html: sanitizedHTML}}
                     />
                 </div>
             </div>

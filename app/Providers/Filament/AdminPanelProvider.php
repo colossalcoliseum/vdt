@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers\Filament;
+
 use App\Filament\AvatarProviders\BoringAvatarsProvider;
 use App\Filament\Resources\PostResource;
 use App\Filament\Resources\RoleResource;
@@ -43,8 +44,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Slate,
             ])
+            ->spa()
+            ->unsavedChangesAlerts()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -55,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')//23.08.25 -> няма clusters
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -70,17 +74,14 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->sidebarCollapsibleOnDesktop()
-
-        ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->sidebarWidth('16rem')
-
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder->groups([
                     NavigationGroup::make('')
-                    ->items([
-                        ...Dashboard::getNavigationItems()
-                    ])->collapsed(false)
+                        ->items([
+                            ...Dashboard::getNavigationItems()
+                        ])->collapsed(false)
                     ,
 
                     NavigationGroup::make('Admin Tools')
@@ -106,9 +107,8 @@ class AdminPanelProvider extends PanelProvider
             ->passwordReset()
             ->emailVerification()
             ->profile(isSimple: false)
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
-            ;
-           //TODO BoringAvatarsProvider за defAvatar
+            ->plugin(FilamentSpatieRolesPermissionsPlugin::make());
+        //TODO BoringAvatarsProvider за defAvatar
 
     }
 }

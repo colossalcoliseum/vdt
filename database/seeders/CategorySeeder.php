@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
         foreach (Category::$categories as $category => $subCategory) {
             Category::create([
                 'name' => $category,
-                'slug' => strtolower($category),
+                'slug' => strtolower(str_replace(" ","_",$category)),
                 'status_id' => 1,
                 'created_by' => fake()->numberBetween(1, 20),
                 'require_subscription' => fake()->boolean,
@@ -29,7 +29,7 @@ class CategorySeeder extends Seeder
             foreach ($subCategory as $subCat) {
                 SubCategory::create([
                     'name' => $subCat,
-                    'slug' => strtolower($subCat),
+                    'slug' => strtolower(str_replace(" ","_",$subCat)),
                     'status_id' => 1,
                     'created_by' => fake()->numberBetween(1, 20),
                     'require_subscription' => fake()->boolean,

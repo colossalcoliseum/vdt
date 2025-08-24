@@ -28,7 +28,13 @@ class CreatePost extends CreateRecord
             ->title('Success')
             ->body('Post Created');
     }
-
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        if (isset($data['thumbnail']) && !str_starts_with($data['thumbnail'], 'storage/')) {
+            $data['thumbnail'] = 'storage/' . $data['thumbnail'];
+        }
+        return $data;
+    }
     protected function beforeCreate(): void
     {
         if (!auth()->user()->can('create', Post::class)) {

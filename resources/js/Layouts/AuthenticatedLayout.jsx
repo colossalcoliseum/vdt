@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Footer from "@/Components/Footer.jsx";
+import {TopNav} from "@/Components/TopNav.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 export default function AuthenticatedLayout({ header, children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -178,11 +179,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </button>
                             </div>
 
-                            <div className="inline-flex my-auto mx-auto">
-                                <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-opacity-0 hover:bg-white/20 transition-all backdrop-blur-sm rounded-l">Profile</button>
-                                <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-opacity-0 hover:bg-white/20 transition-all backdrop-blur-sm">Settings</button>
-                                <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-opacity-0 hover:bg-white/20 transition-all backdrop-blur-sm rounded-r">Messages</button>
-                            </div>
+                           <TopNav></TopNav>
 
                             <div className="switcher grid grid-cols-12 text-gray-800 mt-auto mb-auto ml-4">
                                 <div className="col-span-3 flex items-center">

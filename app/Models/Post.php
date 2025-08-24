@@ -19,9 +19,15 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
-public function visibility(): BelongsTo
+
+    public function visibility(): BelongsTo
     {
         return $this->belongsTo(Visibility::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function broadcastOn(string $event): array

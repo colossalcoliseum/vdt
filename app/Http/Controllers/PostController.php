@@ -57,15 +57,20 @@ class PostController extends Controller
 
             $validated = $request->validated();
             $mainImage = $request->file('main_image')->store('postImages', 'public');
-            $thumbnailPath = $request->file('thumbnail')->store('postThumbnails', 'public');
+            $thumbnailPath = $request->file('thumbnail')->store('storage/postThumbnails', 'public');
             //dd($path);
             $post = Post::create([
                 'title' => $validated['title'],
+                'is_published' => $validated['is_published'],
+                'category_id' => $validated['category_id'],
+                'status_id' => $validated['status_id'],
+                'visibility_id' => $validated['visibility_id'],
                 'description' => $validated['description'],
                 'main_image' => $mainImage,
                 'creator_id' => auth()->user()->id,
                 'visibility' => $validated['visibility'],
                 'thumbnail' => $thumbnailPath,
+                ''
             ]);
             $post->save();
            // PostPublished::dispatch($post);//<--- event
