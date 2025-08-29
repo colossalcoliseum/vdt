@@ -1,7 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head} from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
-import LocationIcon from "@/SVGs/LocationIcon.jsx";
 
 export default function User({user}) {
 
@@ -69,7 +68,7 @@ export default function User({user}) {
                         <div className="flex col-span-10 border border-blue-500 m-6 ">
                             <ul>
                                 <li className="inline-flex">
-                     <span className="mx-2 flex"> <LocationIcon width={21}/>
+                     <span className="mx-2 flex">
                      </span>
                                     <span>
                          {user.city}, {user.country}

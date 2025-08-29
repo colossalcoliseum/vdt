@@ -24,7 +24,18 @@ class ChatController extends Controller
     {
         //
     }
-
+    public function search(Request $request){
+        $query = User::query();
+        if (request('search')) {
+            $query
+                ->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('email', 'like', '%' . request('search') . '%')
+                ->orWhere('id', 'like', '%' . request('search') . '%');
+            return Inertia::render('Chats/ChatDashboard', [
+                'users' => fn() => $query->paginate(10)->withQueryString(),
+            ]);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      */

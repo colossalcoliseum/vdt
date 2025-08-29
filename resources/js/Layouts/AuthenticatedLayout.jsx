@@ -207,42 +207,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                 <main className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100 min-h-[calc(100vh-6rem)]">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {children || (
-                            <div className="space-y-6">
-                                <div className="flex space-x-1 bg-white/30 backdrop-blur-sm p-1 rounded-lg">
-                                    <button className="flex-1 py-2 px-4 bg-white/60 text-gray-800 rounded-md font-medium text-sm">Your Posts</button>
-                                    <button className="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white/30 transition-all">Trending Posts</button>
-                                    <button className="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white/30 transition-all">Saved</button>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div className="bg-white/60 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all">
-                                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400" alt="Workspace" className="w-full h-48 object-cover"/>
-                                        <div className="p-6">
-                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Esse non cum autem qui.</h3>
-                                            <p className="text-gray-600 text-sm mb-4">By admin</p>
-                                            <p className="text-gray-700">Lorem ipsum dolor sit amet...</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white/60 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all">
-                                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400" alt="Railway" className="w-full h-48 object-cover"/>
-                                        <div className="p-6">
-                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Debitis voluptate et aliquid.</h3>
-                                            <p className="text-gray-600 text-sm mb-4">By Prof. Reta Rohan</p>
-                                            <p className="text-gray-700">Sed ut perspiciatis unde omnis...</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white/60 backdrop-blur-sm rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all">
-                                        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=400" alt="City" className="w-full h-48 object-cover"/>
-                                        <div className="p-6">
-                                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Recusandae sapiente est vitae.</h3>
-                                            <p className="text-gray-600 text-sm mb-4">By Mafalda Farrell</p>
-                                            <p className="text-gray-700">At vero eos et accusamus...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        {children}
                     </div>
                 </main>
 <Footer/>

@@ -15,11 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $admins = User::role('admin')->get();
-        $users = User::withoutRole('admin')->get();
+
+        $users = User::all();
         return Inertia::render('Users/UsersDashboard'
-            , ['users' => $users,
-                'admins' => $admins]);//TODO: използвай кеш
+            , ['users' => $users]);//TODO: използвай кеш
     }
 
     /**

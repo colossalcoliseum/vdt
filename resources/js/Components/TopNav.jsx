@@ -80,7 +80,7 @@ export function TopNav() {
                                 </NavigationMenuLink>
                             </li>
                             <ListItem href="/docs" title="Chat">
-                                [number] new messages или explore new conversations
+                                Your Conversations
                             </ListItem>
                             <ListItem href="/docs/installation" title="Explore">
                                 See the Posts and Videos on VDT
