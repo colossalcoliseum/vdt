@@ -3,11 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Musonza\Chat\Traits\Messageable;
@@ -23,6 +26,8 @@ class User extends Authenticatable implements FilamentUser
     use HasRoles;
     use Messageable;
     use HasSuperAdmin;
+    use Searchable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -109,5 +114,25 @@ class User extends Authenticatable implements FilamentUser
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+    public function toSearchableArray()
+    {
+        return [
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'description' => (string) $this->description,
+            /*'role' => (string) $this->role->name,
+            'posts' =>  $this->posts,
+            'videos' => (string) $this->videos,*/
+        ];
+    }
+    protected function makeAllSearchableUsing(Builder $query): Builder
+    {
+        return $query
+            ->with(['role', 'posts', 'videos']);
+    }
+    public function makeSearchableUsing(Collection $models): Collection
+    {
+        return $models->load(['role', 'posts', 'videos']);
     }
 }

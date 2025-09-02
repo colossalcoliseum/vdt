@@ -28,7 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('videos', VideoController::class)->names('video');
     Route::resource('posts', PostController::class)->names('post');
     Route::resource('users', UserController::class)->names('user');
-    Route::get('/search', [SearchController::class, 'search']);
 
     Route::resource('chats', ChatController::class)->names('chat');
     Route::prefix('profile')->name('profile.')->group(function () {

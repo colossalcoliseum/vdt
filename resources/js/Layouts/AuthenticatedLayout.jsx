@@ -2,6 +2,10 @@ import { useState } from 'react';
 import Footer from "@/Components/Footer.jsx";
 import {TopNav} from "@/Components/TopNav.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import CircularProgress from '@mui/material/CircularProgress';
 export default function AuthenticatedLayout({ header, children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -27,6 +31,43 @@ export default function AuthenticatedLayout({ header, children }) {
     };
     const handleChangeLocale = (e) => setLanguage(e.target.value);
 
+
+    function sleep(duration) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, duration);
+        });
+    }
+
+    const topFilms = [
+        { title: 'The Shawshank Redemption', year: 1994 },
+        { title: 'The Godfather', year: 1972 },
+        { title: 'The Godfather: Part II', year: 1974 },
+        { title: 'The Dark Knight', year: 2008 },
+        { title: '12 Angry Men', year: 1957 },
+        { title: "Schindler's List", year: 1993 },
+        { title: 'Pulp Fiction', year: 1994 }]/*TODO: довърши с резултати за публикации , видеа и потребители*/
+
+        const [open, setOpen] = React.useState(false);
+        const [options, setOptions] = React.useState([]);
+        const [loading, setLoading] = React.useState(false);
+
+        const handleOpen = () => {
+            setOpen(true);
+            (async () => {
+                setLoading(true);
+                await sleep(1e3); // For demo purposes.
+                setLoading(false);
+
+                setOptions([...topFilms]);
+            })();
+
+        }
+        const handleClose = () => {
+            setOpen(false);
+            setOptions([]);
+        };
 
     return (
         <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
@@ -171,13 +212,40 @@ export default function AuthenticatedLayout({ header, children }) {
                             </button>
 
                             <div className="flex ml-auto mr-auto">
-                                <input className="mt-auto mb-auto rounded-none bg-indigo-100 border shadow-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300" placeholder="Search" type="text" />
-                                <button className="mb-auto rounded-none mt-auto border-none bg-indigo-200 hover:bg-indigo-300 px-3 py-2 transition-all">
-                                    <svg width="1.5rem" height="auto" viewBox="0 0 15 15" fill="none" stroke="#000000">
-                                        <path fillRule="evenodd" clipRule="evenodd" d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z" fill="#000000"/>
-                                    </svg>
-                                </button>
-                            </div>
+
+
+
+                                <Autocomplete
+                                sx={{ width: 300 }}
+                                open={open}
+                                onOpen={handleOpen}
+                                onClose={handleClose}
+                                isOptionEqualToValue={(option, value) => option.title === value.title}
+                                getOptionLabel={(option) => option.title}
+                                options={options}
+                                loading={loading}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Asynchronous"
+                                        slotProps={{
+                                            input: {
+                                                ...params.InputProps,
+                                                endAdornment: (
+                                                    <React.Fragment>
+                                                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                                        {params.InputProps.endAdornment}
+                                                    </React.Fragment>
+                                                ),
+                                            },
+                                        }}
+                                    />
+                                )}
+                            />
+
+
+
+                        </div>
 
                            <TopNav></TopNav>
 

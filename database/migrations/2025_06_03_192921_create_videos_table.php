@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('video_mime_type');
             $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
             $table->foreignId( 'category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('visibility_id')->constrained('visibilities')->onDelete('cascade');
             $table->timestamps();
         });

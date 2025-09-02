@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Scout\Searchable;
 
 class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
-    use HasFactory;
+    use HasFactory;    use Searchable;
+
     public static array $categories = [
         'nature'=>[
             'Waterfall',
@@ -116,4 +121,36 @@ class Category extends Model
         'Ideas'=>[],
         'Hobby'=>[],
     ];
+    public function toSearchableArray()
+    {
+        return [
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'is_active'=>(bool)$this->is_active,
+            'require_subscription'=>(bool)$this->require_subscription,
+            'status_id'=>(int)$this->status_id,
+        ];
+    }
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    protected function makeAllSearchableUsing(Builder $query): Builder
+    {
+        return $query
+            ->with(['creator','status']);
+    }
+    public function makeSearchableUsing(Collection $models): Collection
+    {
+        return $models->load(['creator','status']);
+    }
+    public function shouldBeSearchable(): bool
+    {
+        return $this->is_active;
+    }
 }

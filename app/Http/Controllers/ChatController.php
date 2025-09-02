@@ -6,15 +6,16 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): never
     {
-        return Inertia::render('Chats/ChatDashboard');
+         abort(404);
     }
 
     /**
@@ -23,18 +24,6 @@ class ChatController extends Controller
     public function create()
     {
         //
-    }
-    public function search(Request $request){
-        $query = User::query();
-        if (request('search')) {
-            $query
-                ->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('email', 'like', '%' . request('search') . '%')
-                ->orWhere('id', 'like', '%' . request('search') . '%');
-            return Inertia::render('Chats/ChatDashboard', [
-                'users' => fn() => $query->paginate(10)->withQueryString(),
-            ]);
-        }
     }
     /**
      * Store a newly created resource in storage.

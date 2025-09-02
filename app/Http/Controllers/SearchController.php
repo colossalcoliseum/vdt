@@ -2,14 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class SearchController extends Controller
 {
-    // app/Http/Controllers/Api/SearchController.php
-    public function search(Request $request)
+    public function __invoke(Request $request): \Illuminate\Http\JsonResponse
     {
+     $categories = Category::search(
+         $request->input('query')
+     )
+     ->take(10)
+     ->get();
+     $users = Category::search(
+         $request->input('query')
+     )
+     ->take(10)
+     ->get();
+     return response()->json([
+         'categories' => $categories,
+         'users' => $users,
+     ]);
     }
 }
