@@ -3,7 +3,7 @@
 import * as React from "react"
 import {Link, usePage} from '@inertiajs/react'
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
-
+import RightDrawer from "@/Components/RightDrawer.jsx";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -91,25 +91,11 @@ export function TopNav() {
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
+
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <ul className="grid bg-white w-[400px] p-3 gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                            {components.map((component) => (
-                                <ListItem
-                                    key={component.title}
-                                    title={component.title}
-                                    href={component.href}
-                                >
-                                    {component.description}
-                                </ListItem>
-                            ))}
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                        <Link href="/docs">Docs</Link>
+
+                    <NavigationMenuLink>
+                        <RightDrawer></RightDrawer>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
 

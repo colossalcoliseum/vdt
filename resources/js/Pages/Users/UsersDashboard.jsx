@@ -4,41 +4,81 @@ import PrimaryButton from "@/Components/PrimaryButton.jsx";
 //import SearchBox from "@/Pages/Users/SearchBox.jsx";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Meilisearch } from "meilisearch";
-import { InstantSearch, SearchBox, InfiniteHits } from 'react-instantsearch';
-import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
+import {Meilisearch} from "meilisearch";
+import {InstantSearch, SearchBox, InfiniteHits} from 'react-instantsearch';
+import {instantMeiliSearch} from '@meilisearch/instant-meilisearch';
 import 'instantsearch.css/themes/satellite.css';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
 export default function UsersDashboard({users}) {
 
 
-    const { searchClient } = instantMeiliSearch(
+    const {searchClient} = instantMeiliSearch(
         'http://127.0.0.1:7700',
-        'masterKey'
+        'masterKey',
+        {
+            placeholderSearch: false
+        }
     );
-    const Hit = ({ hit }) => (
+    const Item = styled(Paper)(({theme}) => ({
+        backgroundColor: '#fff',
+        ...theme.typography.body1,
+        padding: theme.spacing(5),
+        textAlign: 'center',
+        color: (theme.vars ?? theme).palette.text.secondary,
+        ...theme.applyStyles('dark', {
+            backgroundColor: '#FFF9EC',
+        }),
+    }));
+console.log(users);
+    const Hit = ({hit}) => (
 
 
-            <div
-                className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <a href={route('user.show',hit.id)}>
+        <div className="result-card">
 
-                    <img className="w-full" src={hit.avatar} alt={hit.name}/>
+            <a href={route('user.show', hit.id)}>
 
-                    <div className="p-5">
-                        <a href="#">
-                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{hit.name}
-                            </h5>
-                        </a>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
-                            {hit.description}</p>
+                <img className="w-full" src={hit.avatar} alt={hit.name}/>
 
-                    </div> </a>
-            </div>
+                <div className="p-5">
+                    <a href="#">
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{hit.name}
+                        </h5>
+                    </a>
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
+                        {hit.description}</p>
+
+                </div>
+            </a>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    <Grid size={{ xs: 6, md: 8 }}>
+                        <Item>
+                        <span className="font-mono font-bold ml-2 flex-1 block overflow-y overflow-x-hidden break-words">About</span>
+                            {hit.description}
+                        </Item>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 4 }}>
+                        <Item>{hit.id}</Item>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 4 }}>
+                        <Item>xs=6 md=4</Item>
+                    </Grid>
+                    <Grid size={{ xs: 6, md: 8 }}>
+                        <Item>xs=6 md=8</Item>
+                    </Grid>
+                </Grid>
+            </Box>
+        </div>
     );
     return (
         <AutenticatedLayout>
 
-            <div className="py-6">
+            <div className="grid">
 
 
                 <InstantSearch
@@ -46,17 +86,17 @@ export default function UsersDashboard({users}) {
                     searchClient={searchClient}
 
                 >
-                    <SearchBox />
+                    <SearchBox/>
 
 
-                        <InfiniteHits hitComponent={Hit} />
-                    
+                    <InfiniteHits className=" card my-auto mx-auto "
+                                  hitComponent={Hit}/>
+
                 </InstantSearch>
 
 
-
-        </div>
-</AutenticatedLayout>
-)
-    ;
+            </div>
+        </AutenticatedLayout>
+    )
+        ;
 }

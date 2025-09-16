@@ -10,66 +10,38 @@ export default function VideosDashboard({videos}) {
         <AuthenticatedLayout
 
         >
-            <Head title="Dashboard"/>
+            <Head title="Videos"/>
 
             <div className="py-12 ">
-                <div className="grid grid-cols-12">
-                    <div className="col-span-full  mb-12 mx-auto ">
-                        <div className="inline-flex shadow-xs" role="group">
-                            <button type="button"
-                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900  border bg-gradient-to-l from-pink-100 via-purple-100 to-pink-100 border-blue-900 rounded-sm dark:text-black ">
-                                Your videos
-                            </button>
-                            <button type="button"
-                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900  border bg-gradient-to-l from-pink-100 via-purple-100 to-pink-100 border-blue-900 rounded-sm dark:text-black ">
-                                Trending videos
-                            </button>
-                            <button type="button"
-                                    className="mx-12 px-12 py-2 text-sm font-medium text-gray-900  border bg-gradient-to-l from-pink-100 via-purple-100 to-pink-100 border-blue-900 rounded-sm dark:text-black ">
-                                Saved
-                            </button>
-                        </div>
 
-
-                    </div>
-                </div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
 
-                    <div className="grid gap-6 lg:grid-cols-3 lg:grid-rows-3 lg:gap-5">
+                    <div className="grid gap-6 lg:grid-cols-3 lg:grid-rows-3 lg:gap-6">
                         {videos.map((video) => (
 
+<a href={route('video.show', video.id)}>
+                            <div
+                                className="h-auto bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 rounded-xl">
 
-                                <a
-                                    href={route('video.show', video.id)}
-                                    /*TODO: refresh при отваряне на линк? */
+                                <div className="p-6">
+                                    <a href="#">
+                                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{video.title}</h5>
+                                    </a>
 
-                                    className="flex p-6 lg:pb-10 dark:bg-white    "
-                                >
+                                </div>
+                                <a  href={route('video.show', video.id)}>
+                                <img className="w-9/10 rounded-xl" src={video.thumbnail_path} alt={video.title}/>
+                                    <p className="p-3 text-center">{video.creator.name}</p>
+                            </a>
+                            </div>
+</a>
 
-
-                                    <div className={`mx-auto my-auto px-3 bg-[url(${video.thumbnail_path})]`}>{/*bg-[url("+video.thumbnail+")]*/}
-                                        <h2 className="text-xl font-sans text-black dark:text-black">
-                                            {video.title}
-                                        </h2>
-                                        <ul className="mt-6 font-medium border-t border-gray-700"/>
-                                        <p>By {video.creator.name}</p>
-                                        <img className="w-full" src={video.thumbnail_path} alt={video.title}/>
-
-
-
-                                    </div>
-
-
-
-                                </a>
-
-
-                            )
-                        )}
-
-                    </div>
+                    )
+                    )}
 
                 </div>
+
+            </div>
             </div>
         </AuthenticatedLayout>
     );

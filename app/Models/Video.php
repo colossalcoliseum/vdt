@@ -24,11 +24,11 @@ class Video extends Model
     }
     public function creator(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id','id');
     }
     public function status(): BelongsTo
     {
@@ -53,6 +53,6 @@ class Video extends Model
     }
     public function shouldBeSearchable(): bool
     {
-        return $this->is_active;
+        return $this->is_active?? false;
     }
 }

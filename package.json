@@ -38,6 +38,7 @@
         "@flasher/flasher": "file:vendor/php-flasher/flasher/Resources",
         "@floating-ui/react": "^0.27.15",
         "@fontsource/roboto": "^5.2.6",
+        "@heroicons/react": "^2.2.0",
         "@mantine/core": "^8.2.7",
         "@mantine/hooks": "^8.2.7",
         "@mantine/spotlight": "^8.2.7",

@@ -23,7 +23,12 @@ class VideoController extends Controller
     {
         $videos = Video::with('creator')->get();
         //dd($videos);
-        return Inertia::render('Videos/VideosDashboard', ['videos' => $videos]);
+        return Inertia::render('Videos/VideosDashboard',
+            [
+                'videos' => $videos,
+
+            ]
+        );
     }
 
     /**

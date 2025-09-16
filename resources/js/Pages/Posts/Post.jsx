@@ -10,8 +10,6 @@ import {
 
 export default function Post({post}) {
     const user = usePage().props.auth.user;
-    console.log('post.description RAW:', post.description);
-    console.log('typeof:', typeof post.description);
 
     const sanitizedHTML = DOMPurify.sanitize(post.description, {
         WHOLE_DOCUMENT: false,
@@ -24,7 +22,6 @@ export default function Post({post}) {
         ALLOW_DATA_ATTR: true,
         ALLOW_UNKNOWN_PROTOCOLS: true
     });
-    console.log('sanitizedHTML:', sanitizedHTML);
 
     return (
         <AuthenticatedLayout>
@@ -39,16 +36,16 @@ export default function Post({post}) {
                         Written by
                     </span>
                     <HoverCard>
-                        <HoverCardTrigger>{post.creator.name}</HoverCardTrigger>
+                        <HoverCardTrigger>{post.creator}</HoverCardTrigger>
                         <HoverCardContent className="bg-white ">
                             <div className="grid grid-cols-2">
-                                <div className="col"> <img src={post.creator.avatar} alt={post.creator.name}
+                                <div className="col"> <img src={post.creator} alt={post.creator}
                                           className="rounded-full h-20"/> <span className="text-center">Joined <TimeAgo
-                                    datetime={post.creator.created_at}
+                                    datetime={post.creator}
                                     locale='en_EN'
                                 /></span></div>
                                 <div className="col h-32 w-32 pr-2 overflow-y-auto"><span className="text-xs">Description<br/></span>
-                                      {post.creator.description}</div>
+                                      {<post className="creator"></post>}</div>
                             </div>
                         </HoverCardContent>
                     </HoverCard>
