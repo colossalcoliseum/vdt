@@ -29,24 +29,23 @@ export default function Post({post}) {
 
             <div className="mx-auto py-12 max-w-7xl sm:px-6 lg:px-8">
                 <div className="text-center mb-8">
-                    <h1 className="font-mono text-5xl tracking-tight select-all font-bold text-black mb-4">
+                    <h1 className="text-4xl tracking font-thin text-black mb-4">
                         {post.title}
                     </h1>
-                    <span className="font-mono font-bold text-gray-400">
-                        Written by
-                    </span>
-                    <HoverCard>
-                        <HoverCardTrigger>{post.creator}</HoverCardTrigger>
+                    <HoverCard
+                    >
+                        <HoverCardTrigger className="tracking-wide">{post.creator.name}</HoverCardTrigger>
                         <HoverCardContent className="bg-white ">
+                           <a href={route('user.show',post.creator.id)}>
                             <div className="grid grid-cols-2">
-                                <div className="col"> <img src={post.creator} alt={post.creator}
+                                <div className="col "> <img src={post.creator.avatar} alt={post.creator.name}
                                           className="rounded-full h-20"/> <span className="text-center">Joined <TimeAgo
-                                    datetime={post.creator}
+                                    datetime={post.creator.created_at}
                                     locale='en_EN'
                                 /></span></div>
-                                <div className="col h-32 w-32 pr-2 overflow-y-auto"><span className="text-xs">Description<br/></span>
-                                      {<post className="creator"></post>}</div>
-                            </div>
+                                <div className="col m-3 bg-gray-100 p-2 line-clamp-3"><span className="text-xs text-center">Description<br/></span>
+                                    {post.creator.description}</div>
+                            </div></a>
                         </HoverCardContent>
                     </HoverCard>
 
@@ -56,11 +55,11 @@ export default function Post({post}) {
                     <img
                         src={post.thumbnail}
                         alt={post.title}
-                        className="mx-auto rounded-sm border-x-4 border-y-4 border-indigo-200 max-w-lg"
+                        className="mx-auto rounded-sm max-w-lg"
                     />
                 </div>
 
-                <div className="max-w-4xl mx-auto">
+                <div className="max-w-4xl bg-white p-12 m-12 rounded-xl shadow-xl mx-auto">
                     <div
                         className="prose prose-lg max-w-none"
                         dangerouslySetInnerHTML={{__html: sanitizedHTML}}

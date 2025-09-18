@@ -5,6 +5,7 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
 import Dropdown from "@/Components/Dropdown.jsx";
+import SecondaryButton from "@/Components/SecondaryButton.jsx";
 
 export default function Edit({mustVerifyEmail, status, user, permissions}) {
 
@@ -25,6 +26,7 @@ export default function Edit({mustVerifyEmail, status, user, permissions}) {
             <div className="grid">
                 <h1 className="text-2xl col-span-full mx-auto mt-10 font-sans leading-tight text-gray-700">
                     Your Profile
+
                 </h1>
             </div>
 

@@ -10,6 +10,7 @@ export default function VideosDashboard({videos}) {
         <AuthenticatedLayout
 
         >
+
             <Head title="Videos"/>
 
             <div className="py-12 ">
@@ -19,29 +20,32 @@ export default function VideosDashboard({videos}) {
                     <div className="grid gap-6 lg:grid-cols-3 lg:grid-rows-3 lg:gap-6">
                         {videos.map((video) => (
 
-<a href={route('video.show', video.id)}>
-                            <div
-                                className="h-auto bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 rounded-xl">
+                                <a href={route('video.show', video.id)}>
+                                    <div
+                                        className="h-auto bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 rounded-xl">
 
-                                <div className="p-6">
-                                    <a href="#">
-                                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{video.title}</h5>
-                                    </a>
+                                        <div className="p-6 ">
+                                            <a href="#">
+                                                <h5 className="mb-2 text-2xl line-clamp-2  font-bold tracking-tight text-gray-700 dark:text-white hover:text-black">{video.title}</h5>
+                                            </a>
 
-                                </div>
-                                <a  href={route('video.show', video.id)}>
-                                <img className="w-9/10 rounded-xl" src={video.thumbnail_path} alt={video.title}/>
-                                    <p className="p-3 text-center">{video.creator.name}</p>
-                            </a>
-                            </div>
-</a>
+                                        </div>
+                                        <a href={route('video.show', video.id)}>
+                                            <div class="px-6 "><img
+                                                className=" object-contain h-48 w-full object-none rounded-xl"
+                                                src={video.thumbnail_path} alt={video.title}/></div>
+                                            <p className="p-3 text-center">{video.creator.name}</p>
 
-                    )
-                    )}
+                                        </a>
+                                    </div>
+                                </a>
+
+                            )
+                        )}
+
+                    </div>
 
                 </div>
-
-            </div>
             </div>
         </AuthenticatedLayout>
     );

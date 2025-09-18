@@ -12,48 +12,58 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
+import {usePage} from "@inertiajs/react";
 
-export default function LeftDrawer() {
+
+export default function LeftDrawer({user}) {
     const [open, setOpen] = React.useState(false);
+    const props = usePage().props
+    user = usePage().props.auth.user
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
     const DrawerList = (
-        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+        <Paper class="p-12 m-6 ">
+            <List class="hover:bg-none">
+
+                <ListItemButton component="a" href="/">
+                    <ListItemText primary="Home"/>
+                </ListItemButton>
+                <ListItemButton component="a" href={route('profile.edit')}>
+                    <ListItemText primary="Profile"/>
+                </ListItemButton>
+                <ListItemButton component="a" href={route('video.index')}>
+                    <ListItemText primary="Videos"/>
+                </ListItemButton>
+                <ListItemButton component="a" href={route('post.index')}>
+                    <ListItemText primary="Posts"/>
+                </ListItemButton>
+                <ListItemButton component="a" href={route('profile.edit')}>
+                    <ListItemText primary="Log Out"/>
+                </ListItemButton>
+                {}
+                <ListItemButton component="a" href={route('profile.edit')}>
+                    <ListItemText primary="Log Out"/>
+                </ListItemButton>
             </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-        </Box>
+        </Paper>
     );
 
     return (
         <div>
-            <PrimaryButton className="border-none hover:bg-opacity-0 " onClick={toggleDrawer(true)}>
-                <ApplicationLogo className="fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/></PrimaryButton>
+            <PrimaryButton className="border-none bg-opacity-0 shadow-none hover:bg-opacity-0 " onClick={toggleDrawer(true)}>
+
+                <ApplicationLogo
+                    className="fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/>
+
+
+            </PrimaryButton>
+
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>

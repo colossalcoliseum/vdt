@@ -13,7 +13,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-use Musonza\Chat\Traits\Messageable;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
@@ -24,7 +23,6 @@ class User extends Authenticatable implements FilamentUser
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
     use HasRoles;
-    use Messageable;
     use HasSuperAdmin;
     use Searchable;
 

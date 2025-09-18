@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head} from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
+import * as React from "react";
 
 export default function User({user}) {
 
@@ -60,47 +61,38 @@ export default function User({user}) {
 
             <div className="">
                 <div className="mx-auto py-12  max-w-7xl sm:px-6 lg:px-8 ">
+                    <div className="text-center">
+                    <h1 className=" text-3xl font-thin">{user.name}</h1>
+
+
+                </div>
                     <div className="relative grid grid-cols-12 ">
                         <div className="col-span-2">
+
+
                             <img src={user.avatar} alt={user.name}
                                  className="rounded-full col-span-2 object-fill border-x-4 border-y-4 border-indigo-200"/>
                         </div>
-                        <div className="flex col-span-10 border border-blue-500 m-6 ">
-                            <ul>
-                                <li className="inline-flex">
-                     <span className="mx-2 flex">
-                     </span>
-                                    <span>
-                         {user.city}, {user.country}
-                                 </span>
-                                </li>
-                                <li>
-                                    <span className="mx-2 ">Joined: {timeAgo(user.created_at)}</span>
-                                </li>
-                            </ul>
-                        </div>
+
+
+                            <div className=" col-span-10 bg-white rounded-3xl p-6 m-6 shadow-xl ">
+                                <span className=" font-bold flex-1 overflow-y overflow-x-hidden break-words">About</span>
+
+
+                                <p className="text-black leading-relaxed">{user.description}</p>
+                            </div>
                     </div>
 
                     <div className="grid grid-cols-12 grid-rows-12 ">
-                        <div className="col-span-10 mr-auto row-span-6">
-                            <h1 className="font-mono text-2xl tracking-tight select-all font-bold text-black ">{user.name}</h1>
-                            <ul className="space-y-2 font-medium border-t border-gray-900"/>
 
-
-                        </div>
-                        <div className="col-span-2 row-span-6">
-                            <PrimaryButton>
+                        <div className="col-span-2 col-start-11 row-span-6">
+                            <PrimaryButton >
                                 Send Messege
                             </PrimaryButton>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-12 grid-rows-12 ">
-                        <div className="col-span-6 mx-auto row-span-full">
-                            <p className="font-mono overflow-y-auto text-black">{user.description}</p>
-                        </div>
 
-                    </div>
                 </div>
             </div>
             <div className="grid grid-cols-12 mb-6 ">
