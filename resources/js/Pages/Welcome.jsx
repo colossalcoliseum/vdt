@@ -2,9 +2,11 @@ import { Head, Link } from '@inertiajs/react';
 import Footer from "@/Components/Footer.jsx";
 import { useTranslation } from 'react-i18next';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
+import {useInView} from "react-intersection-observer";
 
+export default function Welcome({ auth,posts, laravelVersion, phpVersion }) {
+    const { ref, inView, entry } = useInView({});
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
         document
             .getElementById('screenshot-container')
@@ -78,7 +80,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <span>Newest at </span><ApplicationLogo className="h-6"></ApplicationLogo>
                             </div>
                             <div className="grid gap-6 lg:grid-cols-3 lg:grid-rows-3 lg:gap-5">
+                                {posts.map((post, index) => (
+                                    <a></a>
 
+                                ))}
 
                                 <a
                                     href=""

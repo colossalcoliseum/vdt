@@ -16,6 +16,7 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import {usePage} from "@inertiajs/react";
+import SecondaryButton from "@/Components/SecondaryButton.jsx";
 
 
 export default function LeftDrawer({user}) {
@@ -56,13 +57,13 @@ export default function LeftDrawer({user}) {
 
     return (
         <div>
-            <PrimaryButton className="border-none bg-opacity-0 shadow-none hover:bg-opacity-0 " onClick={toggleDrawer(true)}>
+            <SecondaryButton className="bg-opacity-0 hover:bg-opacity-0 border-none " onClick={toggleDrawer(true)}>
 
                 <ApplicationLogo
-                    className="fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/>
+                    className=" fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/>
 
 
-            </PrimaryButton>
+            </SecondaryButton>
 
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}

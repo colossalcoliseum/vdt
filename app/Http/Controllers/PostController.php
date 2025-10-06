@@ -29,7 +29,6 @@ class PostController extends Controller
             'posts' => fn() => Post::with('creator')->get()
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
