@@ -2,31 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PostPublished;
 use App\Http\Requests\UploadPostRequest;
-use App\Listeners\SendPostNotification;
 use App\Models\Post;
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Video;
+use App\Services\ContentService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Inertia\Response;
-use function Symfony\Component\String\u;
+
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct(
+       public ContentService $contentService
+    ){}
     public function index()
     {
-        //$posts = Post::with('creator')->get();
         return Inertia::render('Posts/PostsDashboard', [
-            'posts' => fn() => Post::with('creator')->get()
+            'posts' =>  $this->contentService->getPosts()
         ]);
     }
     /**
@@ -68,8 +64,7 @@ class PostController extends Controller
                 'main_image' => $mainImage,
                 'creator_id' => auth()->user()->id,
                 'visibility' => $validated['visibility'],
-                'thumbnail' => $thumbnailPath,
-                ''
+                'thumbnail' => $thumbnailPath
             ]);
             $post->save();
            // PostPublished::dispatch($post);//<--- event

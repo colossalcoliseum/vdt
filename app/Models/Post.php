@@ -28,7 +28,10 @@ class Post extends Model
     {
         return $this->belongsTo(Visibility::class);
     }
-
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -40,10 +43,7 @@ class Post extends Model
             default => [$this, $this->creator]
         };
     }
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(Status::class);
-    }
+
     public function toSearchableArray()
     {
         return [
@@ -65,4 +65,5 @@ class Post extends Model
     {
         return $this->is_published;
     }
+
 }
