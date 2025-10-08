@@ -13,13 +13,13 @@ const Pagination = ({links,
         router.get(url,{preserveState:true});
     }
     return (
-        <div className={"flex justify-center items-center gap-12 "+className}>
+        <div className={"flex justify-center items-center gap-3 bg-blue-200 rounded-full py-4 max-w-4xl mx-auto "+className}>
 
 
             {links.map((link) => (
-                <li className=" list-none" key={link.id}>
+                <li className="list-none" key={link.id}>
                     <PrimaryButton
-                        className={link.active ? "bg-blue-200 " : ""}
+                        className={link.active ? "bg-amber-200 hover:bg-amber-300 shadow-none" : "hover:bg-amber-300 shadow-none"}
                         href={link.url}
 
                         onClick={(e) => {

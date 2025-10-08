@@ -69,9 +69,9 @@ export default function AuthenticatedLayout({header, children}) {
         <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
             {/* Main Content */}
             <div
-                className={`${isSidebarCollapsed ? 'col-span-12' : 'col-span-12'} row-span-full transition-all duration-300`}>
+                className={`col-span-12 row-span-full transition-all duration-300`}>
                 <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
-                    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="flex mx-12 sm:px-6 lg:px-8">
                         <div className="flex h-24 items-center">
                             <button onClick={toggleSidebar}
                                     className="lg:hidden flex justify-center items-center w-8 h-8 text-gray-600 hover:bg-white/20 rounded-full mr-4 backdrop-blur-sm transition-all">
@@ -81,10 +81,13 @@ export default function AuthenticatedLayout({header, children}) {
                                     <line x1="3" x2="21" y1="18" y2="18"/>
                                 </svg>
                             </button>
-                            <LeftDrawer></LeftDrawer>
+                        </div>
+                            <LeftDrawer
+                                className="m-3 p-12 "
+                            />
 
-                            <div className="flex ml-auto mr-auto">
 
+                            <div className={"flex justify-between m-auto"}>
 
                                 <Autocomplete
                                     sx={{width: 300}}
@@ -119,10 +122,9 @@ export default function AuthenticatedLayout({header, children}) {
                             </div>
 
                             <TopNav/>
-{/*TODO: добави списък с езици*/}
 
                         </div>
-                    </div>
+
                 </nav>
 
                 {header && (
@@ -137,13 +139,10 @@ export default function AuthenticatedLayout({header, children}) {
                         {children}
                     </div>
                 </main>
-               {/*TODO: footer ?*/}
+                {/*TODO: footer ?*/}
             </div>
 
             {/* Right Sidebar */}
-
-
-
 
 
             {/* Mobile Backdrop */}

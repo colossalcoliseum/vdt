@@ -19,7 +19,8 @@ import {usePage} from "@inertiajs/react";
 import SecondaryButton from "@/Components/SecondaryButton.jsx";
 
 
-export default function LeftDrawer({user}) {
+export default function LeftDrawer({user,
+                                   className}) {
     const [open, setOpen] = React.useState(false);
     const props = usePage().props
     user = usePage().props.auth.user
@@ -29,9 +30,10 @@ export default function LeftDrawer({user}) {
     };
 
     const DrawerList = (
-        <Paper class="p-12 m-6 ">
+        <Paper class="p-3 ">
             <List class="hover:bg-none">
-
+                <ApplicationLogo
+                    className=" fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/>
                 <ListItemButton component="a" href="/">
                     <ListItemText primary="Home"/>
                 </ListItemButton>
@@ -47,7 +49,7 @@ export default function LeftDrawer({user}) {
                 <ListItemButton component="a" href={route('profile.edit')}>
                     <ListItemText primary="Log Out"/>
                 </ListItemButton>
-                {}
+
                 <ListItemButton component="a" href={route('profile.edit')}>
                     <ListItemText primary="Log Out"/>
                 </ListItemButton>
@@ -57,15 +59,24 @@ export default function LeftDrawer({user}) {
 
     return (
         <div>
-            <SecondaryButton className="bg-opacity-0 hover:bg-opacity-0 border-none " onClick={toggleDrawer(true)}>
+            <SecondaryButton className={"bg-opacity-0 hover:bg-opacity-0 border-none "+className} onClick={toggleDrawer(true)}>
 
-                <ApplicationLogo
-                    className=" fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/>
+                <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
+                        <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
+                    </g>
+                </svg>
 
 
             </SecondaryButton>
 
-            <Drawer open={open} onClose={toggleDrawer(false)}>
+            <Drawer open={open} onClose={toggleDrawer(false)}
+            className="backdrop-blur-xs "
+            >
                 {DrawerList}
             </Drawer>
         </div>

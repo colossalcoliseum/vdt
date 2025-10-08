@@ -13,17 +13,14 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
-use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 
 
-class User extends Authenticatable implements FilamentUser
+
+class User extends Authenticatable/* implements FilamentUser*/
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
     use HasRoles;
-    use HasSuperAdmin;
     use Searchable;
 
 
@@ -101,12 +98,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Post::class);
     }
 
-    public function canAccessPanel(Panel $panel): bool
+ /*   public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
         return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
         }
         return auth()->user()->hasRole('admin');
+    }*/
+    public static function canAccessAdminPanel(): bool
+    {
+        return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
     }
 
     public function videos(): HasMany
@@ -124,7 +125,7 @@ class User extends Authenticatable implements FilamentUser
             'videos' => (string) $this->videos,*/
         ];
     }
-    protected function makeAllSearchableUsing(Builder $query): Builder
+    /*protected function makeAllSearchableUsing(Builder $query): Builder
     {
         return $query
             ->with(['role', 'posts', 'videos']);
@@ -132,5 +133,5 @@ class User extends Authenticatable implements FilamentUser
     public function makeSearchableUsing(Collection $models): Collection
     {
         return $models->load(['role', 'posts', 'videos']);
-    }
+    }*/
 }

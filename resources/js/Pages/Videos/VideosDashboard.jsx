@@ -32,7 +32,7 @@ export default function VideosDashboard({videos}) {
                                         </div>
                                         <a href={route('video.show', video.id)}>
                                             <div class="px-6 "><img
-                                                className=" object-contain h-48 w-full object-none rounded-xl"
+                                                className=" object-contain h-48 w-full rounded-xl"
                                                 src={video.thumbnail_path} alt={video.title}/></div>
                                             <p className="p-3 text-center">{video.creator.name}</p>
 

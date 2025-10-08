@@ -1,5 +1,5 @@
 <?php
-namespace App\Services;
+namespace App\Services\Admin;
 
 use App\Models\Post;
 use App\Models\Video;
@@ -33,7 +33,7 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->paginate(5);
+                ->with('creator')->paginate(15);
 
             return $posts;
 

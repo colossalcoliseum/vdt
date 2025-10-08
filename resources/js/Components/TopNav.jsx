@@ -64,7 +64,6 @@ export function TopNav() {
 
                 <NavigationMenuItem>
 
-                    <SecondaryButton>Home</SecondaryButton>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <RightDrawer/>

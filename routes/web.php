@@ -19,8 +19,8 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'posts'=>Post::with('creator')->get(),
-        'videos'=>Video::with('creator')->get(),
+        'posts' => Post::with('creator')->get(),
+        'videos' => Video::with('creator')->get(),
     ]);
 });
 
@@ -29,7 +29,13 @@ Route::get('/dashboard', function () {
         'permissions' => auth()->user()->getAllPermissions()->toArray()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+/*  Admin Layout, Panel, etc.   */
+/*Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('admin')->group(function () {
 
+    });
+});*/
+/*  Users Layout    */
 Route::middleware('auth')->group(function () {
     Route::resource('videos', VideoController::class)->names('video');
     Route::resource('posts', PostController::class)->names('post');
@@ -40,8 +46,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/update', [ProfileController::class, 'update'])->name('update');
         Route::delete('/destroy', [ProfileController::class, 'destroy'])->name('destroy');
-        Route::singleton( '/avatar',UpdateUserAvatarController::class)->except(['edit']);
+        Route::singleton('/avatar', UpdateUserAvatarController::class)->except(['edit']);
     });
 });
+
 
 require __DIR__ . '/auth.php';
