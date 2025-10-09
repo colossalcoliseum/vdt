@@ -16,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 
 
-class User extends Authenticatable/* implements FilamentUser*/
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -98,13 +98,6 @@ class User extends Authenticatable/* implements FilamentUser*/
         return $this->hasMany(Post::class);
     }
 
- /*   public function canAccessPanel(Panel $panel): bool
-    {
-        if ($panel->getId() === 'admin') {
-        return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
-        }
-        return auth()->user()->hasRole('admin');
-    }*/
     public static function canAccessAdminPanel(): bool
     {
         return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
@@ -114,24 +107,6 @@ class User extends Authenticatable/* implements FilamentUser*/
     {
         return $this->hasMany(Video::class);
     }
-    public function toSearchableArray()
-    {
-        return [
-            'id' => (int) $this->id,
-            'name' => $this->name,
-            'description' => (string) $this->description,
-            /*'role' => (string) $this->role->name,
-            'posts' =>  $this->posts,
-            'videos' => (string) $this->videos,*/
-        ];
-    }
-    /*protected function makeAllSearchableUsing(Builder $query): Builder
-    {
-        return $query
-            ->with(['role', 'posts', 'videos']);
-    }
-    public function makeSearchableUsing(Collection $models): Collection
-    {
-        return $models->load(['role', 'posts', 'videos']);
-    }*/
+
+
 }

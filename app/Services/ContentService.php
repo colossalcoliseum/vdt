@@ -24,7 +24,7 @@ class ContentService
 
     }
 
-    public function getPosts($status = "active", $visibility = "public")
+    public function getPaginatedPosts($status = "active", $visibility = "public")
     {
         try {
             $posts = Post::whereHas('visibility', function ($query) use ($visibility) {
@@ -36,6 +36,22 @@ class ContentService
                 ->with('creator')->paginate(5);
 
             return $posts;
+
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+    public function getAllPosts($status = "active", $visibility = "public")
+    {
+        try {
+           /* $posts = Post::whereHas('visibility', function ($query) use ($visibility) {
+                $query->where('slug', $visibility);
+            })
+                ->orWhereHas('status', function ($query) use ($status) {
+                    $query->where('slug', $status);
+                })
+                ->with('creator')->get('title');*/
+            return Post::all()->with('creator');
 
         } catch (\Exception $exception) {
             return $exception->getMessage();

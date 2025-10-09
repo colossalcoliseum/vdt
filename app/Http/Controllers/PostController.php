@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UploadPostRequest;
 use App\Models\Post;
 use App\Services\ContentService;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
@@ -22,7 +23,7 @@ class PostController extends Controller
     public function index()
     {
         return Inertia::render('Posts/PostsDashboard', [
-            'posts' =>  $this->contentService->getPosts()
+            'posts' =>  $this->contentService->getPaginatedPosts()
         ]);
     }
     /**

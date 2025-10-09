@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
 import {usePoll} from '@inertiajs/react'
 import {useEcho} from "@laravel/echo-react";
-import Pagination from "@/Components/Paginations/Pagination.jsx";
+import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
@@ -13,14 +13,8 @@ import {instantMeiliSearch} from "@meilisearch/instant-meilisearch";
 import {InstantSearch, SearchBox, InfiniteHits} from 'react-instantsearch';
 
 export default function PostsDashboard({posts}) {
-    const topFilms = [
-        {title: 'The Shawshank Redemption', year: 1994},
-        {title: 'The Godfather', year: 1972},
-        {title: 'The Godfather: Part II', year: 1974},
-        {title: 'The Dark Knight', year: 2008},
-        {title: '12 Angry Men', year: 1957},
-        {title: "Schindler's List", year: 1993},
-        {title: 'Pulp Fiction', year: 1994}]/*TODO: довърши с резултати за публикации , видеа и потребители*/
+
+
     const handleOpen = () => {
         setOpen(true);
         (async () => {
@@ -28,20 +22,14 @@ export default function PostsDashboard({posts}) {
             await sleep(1e3); // For demo purposes.
             setLoading(false);
 
-            setOptions([...topFilms]);
+            setOptions([...postsArray]);
         })();
 
     }
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
-    const {searchClient} = instantMeiliSearch(
-        'http://127.0.0.1:7700',
-        'masterKey',
-        {
-            placeholderSearch: false
-        }
-    );
+
     const handleClose = () => {
         setOpen(false);
         setOptions([]);
@@ -57,23 +45,7 @@ export default function PostsDashboard({posts}) {
         page: posts.currentPage,
     });
 
-    const Hit = ({hit}) => (/*TODO: трябва да се довърши и имплементира*/
 
-        <li className="list-none">
-
-                <a className="p-6" href={hit.path}>
-
-
-                    <p className="mb-2 text-xl text-center font-bold tracking-tight text-gray-800 dark:text-white line-clamp-2">{hit.title}</p>
-
-
-                </a>
-                <a href={route('post.show', hit.id)}>
-
-                </a>
-
-        </li>
-    );
 
     return (
         <AuthenticatedLayout
@@ -81,12 +53,16 @@ export default function PostsDashboard({posts}) {
         >
             <Head title="Posts"/>
 
-            <Pagination
+            <PostsPagination
                 links={posts.links}
                 currentPage={posts.currentPage}
-                setCurrentPage={(page) => setData('page', page)}/>
+                setCurrentPage={(page) => setData('page', page)}
+                posts={posts}
+            >
 
-            <div className="py-12">
+            </PostsPagination>
+
+            <div className="py-12 grid ">
 
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
 
@@ -124,27 +100,14 @@ export default function PostsDashboard({posts}) {
 
 
                     </div>
-                    <div className="col-span-1">
-                        <div className="">
-                           {/* <InstantSearch
-                                indexName="posts"
-                                searchClient={searchClient}
-
-                            >
-                                <SearchBox/>
 
 
-                                <InfiniteHits className=" card my-auto mx-auto "
-                                              hitComponent={Hit}/>
-
-                            </InstantSearch>*/}
-                        </div>
                 </div>
 
-                </div>
+
 
             </div>
-            <Pagination
+            <PostsPagination
                 links={posts.links}
                 currentPage={posts.currentPage}
                 setCurrentPage={(page) => setData('page', page)}

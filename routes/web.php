@@ -35,6 +35,11 @@ Route::get('/dashboard', function () {
 
     });
 });*/
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('search')->group(function () {
+        Route::get('/', [SearchController::class, 'index'])->name('search');
+    });
+});
 /*  Users Layout    */
 Route::middleware('auth')->group(function () {
     Route::resource('videos', VideoController::class)->names('video');
