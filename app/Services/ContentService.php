@@ -44,14 +44,15 @@ class ContentService
     public function getAllPosts($status = "active", $visibility = "public")
     {
         try {
-           /* $posts = Post::whereHas('visibility', function ($query) use ($visibility) {
+            $posts = Post::whereHas('visibility', function ($query) use ($visibility) {
                 $query->where('slug', $visibility);
             })
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->get('title');*/
-            return Post::all()->with('creator');
+                ->get();
+
+            return $posts;
 
         } catch (\Exception $exception) {
             return $exception->getMessage();

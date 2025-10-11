@@ -10,13 +10,19 @@ class SearchService
 {
     public function searchPosts($query)
     {
+
         try {
-            return Post::where('title', "like", "%{$query}%")
+            $result = Post::where('title', "like", "%{$query}%")
                 ->orWhere('description', "like", "%{$query}%")
-                ->WhereHas('creator', function ($qu) use ($query) {
-                    $qu->where('name', "like", "%{$query}%");
-                })
-                ->get(['title', 'description','thumbnail']);
+                ->get();
+            $creator =Post::whereHas('creator', function ($qu) use ($query) {
+                $qu->where('email', "like", "%$query%")
+                    ->orWhere('name', "like", "%$query%")
+                    ->orWhere('description', "like", "%$query%");
+            })
+                ->get();
+            $mergedResult = $result->merge($creator);
+            return $mergedResult;
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
@@ -25,18 +31,23 @@ class SearchService
     public function searchVideos($query)
     {
         try {
-            return Video::where('title', "like", "%{$query}%")
+            $result = Video::where('title', "like", "%{$query}%")
                 ->orWhere('description', "like", "%{$query}%")
-                ->WhereHas('creator', function ($qu) use ($query) {//TODO: (инфо) възможно място за грешка;
-                    $qu->where('name', "like", "%{$query}%");
-                })
-                ->get(['title', 'description','thumbnail']);
+                ->get();
+            $creator =Video::whereHas('creator', function ($qu) use ($query) {
+                $qu->where('email', "like", "%$query%")
+                    ->orWhere('name', "like", "%$query%")
+                    ->orWhere('description', "like", "%$query%");
+            })
+                ->get();
+            $mergedResult = $result->merge($creator);
+            return $mergedResult;
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
 
-    public function searchUsers($query)
+    public function searchUsers($query)//TODO: използвай отделни заявки
     {
         try {
             return User::where('name', "like", "%{$query}%")

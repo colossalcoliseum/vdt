@@ -37,7 +37,9 @@ Route::get('/dashboard', function () {
 });*/
 Route::middleware(['auth'])->group(function () {
     Route::prefix('search')->group(function () {
-        Route::get('/', [SearchController::class, 'index'])->name('search');
+        Route::get('/videos/{video}', [SearchController::class, 'searchVideos'])->name('search');
+        Route::get('/posts/{post}', [SearchController::class, 'searchPosts'])->name('search');
+        Route::get('/users/{user}', [SearchController::class, 'searchUsers'])->name('search');
     });
 });
 /*  Users Layout    */

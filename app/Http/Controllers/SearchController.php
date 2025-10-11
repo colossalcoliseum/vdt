@@ -11,12 +11,12 @@ class SearchController extends Controller
         public SearchService $searchService
     ){}
     public function searchPosts($query){
-        return $this->searchService->searchPosts($query);
+        dd( $this->searchService->searchPosts($query));
     }
     public function searchVideos($query){
-        return $this->searchService->searchVideos($query);
+        dd( $this->searchService->searchVideos($query));
     }
     public function searchUsers($query){
-        return $this->searchService->searchUsers($query);
+        dd( $this->searchService->searchUsers($query));
     }
 }

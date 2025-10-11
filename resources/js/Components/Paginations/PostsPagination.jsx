@@ -9,14 +9,13 @@ const PostsPagination = ({links,
                         currentPage,
                         setCurrentPage,
                         posts,
-                             allPosts,
                     className}) => {
     const handlePageChange = (url) => {
         const pageParam = new URL(url).searchParams.get("page");
         router.get(url,{preserveState:true});
     }
 
-
+console.log("all posts:"+ {posts});
 
 
     function sleep(duration) {
@@ -33,7 +32,7 @@ const PostsPagination = ({links,
     const handleOpen = () => {
         setOpen(true);
         (async () => {
-            const postsArray = allPosts.map(post => ({
+            const postsArray = posts.map(post => ({
                 id: post.id,
                 title: post.title,
 
