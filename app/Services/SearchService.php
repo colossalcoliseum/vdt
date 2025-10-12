@@ -12,17 +12,16 @@ class SearchService
     {
 
         try {
-            $result = Post::where('title', "like", "%{$query}%")
-                ->orWhere('description', "like", "%{$query}%")
-                ->get();
-            $creator =Post::whereHas('creator', function ($qu) use ($query) {
+            return Post::where(function ($qu) use ($query) {
+                $qu->where('title', "like", "%$query%")
+                    ->orWhere('description', "like", "%$query%");
+            })
+                ->orWhereHas('creator', function ($qu) use ($query) {
                 $qu->where('email', "like", "%$query%")
                     ->orWhere('name', "like", "%$query%")
                     ->orWhere('description', "like", "%$query%");
             })
                 ->get();
-            $mergedResult = $result->merge($creator);
-            return $mergedResult;
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

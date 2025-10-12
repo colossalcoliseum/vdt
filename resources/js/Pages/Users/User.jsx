@@ -2,6 +2,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head} from '@inertiajs/react';
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import * as React from "react";
+import ImageGrid from "@/Pages/Profile/ImageGrid.jsx"
+import Typography from '@mui/material/Typography';
 
 export default function User({user}) {
 
@@ -62,10 +64,10 @@ export default function User({user}) {
             <div className="">
                 <div className="mx-auto py-12  max-w-7xl sm:px-6 lg:px-8 ">
                     <div className="text-center">
-                    <h1 className=" text-3xl font-thin">{user.name}</h1>
+                        <h1 className=" text-3xl font-thin">{user.name}</h1>
 
 
-                </div>
+                    </div>
                     <div className="relative grid grid-cols-12 ">
                         <div className="col-span-2">
 
@@ -75,18 +77,18 @@ export default function User({user}) {
                         </div>
 
 
-                            <div className=" col-span-10 bg-white rounded-3xl p-6 m-6 shadow-xl ">
-                                <span className=" font-bold flex-1 overflow-y overflow-x-hidden break-words">About</span>
+                        <div className=" col-span-10 bg-white rounded-3xl p-6 m-6 shadow-xl ">
+                            <span className=" font-bold flex-1 overflow-y overflow-x-hidden break-words">About</span>
 
 
-                                <p className="text-black leading-relaxed">{user.description}</p>
-                            </div>
+                            <p className="text-black leading-relaxed">{user.description}</p>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-12 grid-rows-12 ">
 
                         <div className="col-span-2 col-start-11 row-span-6">
-                            <PrimaryButton >
+                            <PrimaryButton>
                                 Send Messege
                             </PrimaryButton>
                         </div>
@@ -97,8 +99,10 @@ export default function User({user}) {
             </div>
             <div className="grid grid-cols-12 mb-6 ">
                 <div className="col-span-full ml-auto mr-auto">
-
-
+                    <Typography variant="h4" gutterBottom>
+                        {user.name}'s Posts
+                    </Typography>
+                    <ImageGrid></ImageGrid>
                 </div>
             </div>
 

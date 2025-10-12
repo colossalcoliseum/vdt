@@ -89,33 +89,12 @@ export default function AuthenticatedLayout({header, children}) {
 
                             <div className={"flex justify-between m-auto"}>
 
-                                <Autocomplete
-                                    sx={{width: 300}}
-                                    open={open}
-                                    onOpen={handleOpen}
-                                    onClose={handleClose}
-                                    isOptionEqualToValue={(option, value) => option.title === value.title}
-                                    getOptionLabel={(option) => option.title}
-                                    options={options}
-                                    loading={loading}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Asynchronous"
-                                            slotProps={{
-                                                input: {
-                                                    ...params.InputProps,
-                                                    endAdornment: (
-                                                        <React.Fragment>
-                                                            {loading ?
-                                                                <CircularProgress color="inherit" size={20}/> : null}
-                                                            {params.InputProps.endAdornment}
-                                                        </React.Fragment>
-                                                    ),
-                                                },
-                                            }}
-                                        />
-                                    )}
+                                {/*TODO: добави форма , както и страница за резултатие*/}
+                                <TextField
+                                    id="filled-search"
+                                    label="Search for everything !"
+                                    type="search"
+                                    variant="filled"
                                 />
 
 

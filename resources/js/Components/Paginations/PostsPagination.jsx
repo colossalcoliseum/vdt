@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {router} from "@inertiajs/react";
+import {router, useForm, usePage} from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -42,7 +42,19 @@ console.log("all posts:"+ {posts});
         })();
 
     }
+    const props = usePage().props
 
+    const {data, setData, post, progress, processing} = useForm({
+
+       query:''
+    })
+    const findMatches = (query) => {
+        query.preventDefault()
+        post(route('search.posts'),{
+            _token: props.csrf_token
+
+        })
+    }
     const handleClose = () => {
         setOpen(false);
         setOptions([]);
@@ -66,34 +78,12 @@ console.log("all posts:"+ {posts});
 
                 </li>
             ))}
-
-            <Autocomplete
-                sx={{width: 300}}
-                open={open}
-                onOpen={handleOpen}
-                onClose={handleClose}
-                isOptionEqualToValue={(option, value) => option.id === value.id}
-                getOptionLabel={(option) => option.title}
-                options={options}
-                loading={loading}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        label="Search..."
-                        slotProps={{
-                            input: {
-                                ...params.InputProps,
-                                endAdornment: (
-                                    <React.Fragment>
-                                        {loading ?
-                                            <CircularProgress color="inherit" size={20}/> : null}
-                                        {params.InputProps.endAdornment}
-                                    </React.Fragment>
-                                ),
-                            },
-                        }}
-                    />
-                )}
+            {/*TODO: добави форма , както и страница за резултатие*/}
+            <TextField
+                id="filled-search"
+                label="Search for posts..."
+                type="search"
+                variant="filled"
             />
         </div>
     )

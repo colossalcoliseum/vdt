@@ -25,7 +25,7 @@ class PostController extends Controller
         //die($this->contentService->getPaginatedPosts());
        //dd($this->contentService->getAllPosts());
         return Inertia::render('Posts/PostsDashboard', [
-            'posts' =>  $this->contentService->getAllPosts()
+            'posts' =>  $this->contentService->getPaginatedPosts()
 
         ]);
     }
