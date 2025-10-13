@@ -1,10 +1,15 @@
 import * as React from 'react';
 import {router, useForm, usePage} from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
-import Autocomplete from "@mui/material/Autocomplete";
+import Box from '@mui/material/Box';
 import TextField from "@mui/material/TextField";
-import CircularProgress from "@mui/material/CircularProgress";
-
+import Button from '@mui/material/Button';
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const PostsPagination = ({links,
                         currentPage,
                         setCurrentPage,
@@ -15,76 +20,45 @@ const PostsPagination = ({links,
         router.get(url,{preserveState:true});
     }
 
-console.log("all posts:"+ {posts});
-
-
-    function sleep(duration) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve();
-            }, duration);
-        });
-    }
-    const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-        (async () => {
-            const postsArray = posts.map(post => ({
-                id: post.id,
-                title: post.title,
-
-            }));
-
-            setOptions(postsArray);
-        })();
-
-    }
-    const props = usePage().props
-
-    const {data, setData, post, progress, processing} = useForm({
-
-       query:''
-    })
-    const findMatches = (query) => {
-        query.preventDefault()
-        post(route('search.posts'),{
-            _token: props.csrf_token
-
-        })
-    }
-    const handleClose = () => {
-        setOpen(false);
-        setOptions([]);
+    const [page, setPage] = React.useState(1);
+    const handleChange = (event, value) => {
+        setPage(value);
     };
+
+    const [loading, setLoading] = React.useState(false);
+    React.useEffect(() => {
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    });
+
     return (
-        <div className={"flex justify-center items-center gap-3 bg-blue-200 rounded-full py-4 max-w-7xl mx-auto "+className}>
+        <div className={"flex justify-center items-center gap-4 bg-blue-200 py-4  max-w-7xl mx-auto "+className}>
+            <Stack spacing={2}>
 
 
+                <Box sx={{ '& button': { m: 1 } }}>
             {links.map((link) => (
-                <li className="list-none" >
-                    <PrimaryButton key={link.id}
-                        className={link.active ? "bg-amber-200 hover:bg-amber-300 shadow-none" : "hover:bg-amber-300 shadow-none"}
-                        href={link.url}
-
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handlePageChange(link.url);
-                        }}>
-                        {link.label}
-                    </PrimaryButton>
-
-                </li>
+                <Button variant={link.active?"contained":"outlined"}  size="medium" href={link.url} key={link.url} >
+                    <span dangerouslySetInnerHTML={{__html:link.label}}></span>
+                </Button>
             ))}
+                </Box>
+            </Stack>
             {/*TODO: добави форма , както и страница за резултатие*/}
+
             <TextField
                 id="filled-search"
-                label="Search for posts..."
+                label="Search"
                 type="search"
                 variant="filled"
             />
+            <Tooltip title="Search for any post !">
+                <IconButton onClick={() => setLoading(true)} loading={loading}>
+                    <SearchSharpIcon />
+                </IconButton>
+            </Tooltip>
         </div>
     )
 

@@ -33,7 +33,7 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->paginate(5);
+                ->with('creator')->paginate(9)->onEachSide(0);
 
             return $posts;
 

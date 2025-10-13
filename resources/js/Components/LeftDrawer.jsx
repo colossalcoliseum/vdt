@@ -1,26 +1,20 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
-import PrimaryButton from "@/Components/PrimaryButton.jsx";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import {usePage} from "@inertiajs/react";
 import SecondaryButton from "@/Components/SecondaryButton.jsx";
+import {Avatar, Chip} from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 
-
-export default function LeftDrawer({user,
-                                   className}) {
+export default function LeftDrawer({
+                                       user,
+                                       className
+                                   }) {
     const [open, setOpen] = React.useState(false);
     const props = usePage().props
     user = usePage().props.auth.user
@@ -30,15 +24,12 @@ export default function LeftDrawer({user,
     };
 
     const DrawerList = (
-        <Paper class="p-3 ">
-            <List class="hover:bg-none">
+        <Paper class="p-5">
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 <ApplicationLogo
-                    className=" fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-20 m-6 relative"/>
+                    className=" fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 m-6 relative"/>
                 <ListItemButton component="a" href="/">
                     <ListItemText primary="Home"/>
-                </ListItemButton>
-                <ListItemButton component="a" href={route('profile.edit')}>
-                    <ListItemText primary="Profile"/>
                 </ListItemButton>
                 <ListItemButton component="a" href={route('video.index')}>
                     <ListItemText primary="Videos"/>
@@ -50,16 +41,26 @@ export default function LeftDrawer({user,
                     <ListItemText primary="Log Out"/>
                 </ListItemButton>
 
-                <ListItemButton component="a" href={route('profile.edit')}>
-                    <ListItemText primary="Log Out"/>
-                </ListItemButton>
+                <ListItem component="a" href={route('profile.edit')}>
+                    <Chip avatar={<Avatar alt={user.name} src={user.avatar}/>
+                    } label={user.name}/>
+
+                </ListItem>
+                <ListItem component="a" href={route('profile.edit')}>
+                    <Chip
+                        label="Log Out"
+                        icon={<LogoutIcon />}
+                        variant="outlined"
+                    />
+                </ListItem>
             </List>
         </Paper>
     );
 
     return (
         <div>
-            <SecondaryButton className={"bg-opacity-0 hover:bg-opacity-0 border-none "+className} onClick={toggleDrawer(true)}>
+            <SecondaryButton className={"bg-opacity-0 hover:bg-opacity-0 border-none " + className}
+                             onClick={toggleDrawer(true)}>
 
                 <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -75,7 +76,7 @@ export default function LeftDrawer({user,
             </SecondaryButton>
 
             <Drawer open={open} onClose={toggleDrawer(false)}
-            className="backdrop-blur-xs "
+                    className="backdrop-blur-xs "
             >
                 {DrawerList}
             </Drawer>

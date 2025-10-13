@@ -3,14 +3,13 @@ import {Head, router, useForm, usePage} from '@inertiajs/react';
 import {usePoll} from '@inertiajs/react'
 import {useEcho} from "@laravel/echo-react";
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
+
 import * as React from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import {instantMeiliSearch} from "@meilisearch/instant-meilisearch";
-import {InstantSearch, SearchBox, InfiniteHits} from 'react-instantsearch';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import CardActionArea from '@mui/material/CardActionArea';
 
 export default function PostsDashboard({posts}) {
 
@@ -71,31 +70,31 @@ export default function PostsDashboard({posts}) {
 
 
                         {posts.data.map((post, id) => (
-                            <a href={route('post.show', post.id)}>
-                                <div
-
-                                    className={(id) % 3 === 0 ?
-                                        "h-full bg-amber-50 shadow-xl hover:shadow-2xl hover:bg-amber-100 hover:transition delay-75 duration-100 ease-in-out  m-2 p-3 dark:bg-gray-800 dark:border-gray-700 rounded-bl-3xl rounded-tr-3xl" :
-                                        (id) % 3 === 2 ?
-                                            "h-full bg-amber-50 shadow-xl hover:shadow-2xl hover:bg-amber-100 hover:transition delay-75 duration-100 ease-in-out  m-2 p-3 dark:bg-gray-800 dark:border-gray-700 rounded-tl-3xl rounded-br-3xl" :
-                                            "h-full bg-amber-50 shadow-xl hover:shadow-2xl hover:bg-amber-100 hover:transition delay-75 duration-100 ease-in-out  m-2 p-3 dark:bg-gray-800 dark:border-gray-700 rounded-3xl"}
-
-                                >
-                                    <div className="p-6">
-
-
-                                            <p className="mb-2 text-xl text-center font-bold tracking-tight text-gray-800 dark:text-white line-clamp-2">{post.title}</p>
-
-
-                                    </div>
-                                    <a href={route('post.show', post.id)}>
-                                        <img className="w-9/10 mx-auto rounded-xl" src={post.main_image}
-                                             alt={post.title}/>
-                                    </a>                                        <p
-                                    className="mt-6 text-center">{post.creator.name}</p>
-
-                                </div>
-                            </a>
+                            <Card sx={{ maxWidth: 345 }}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        height="140"
+                                        image={post.main_image}
+                                        alt="green iguana"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="div"
+                                                    sx={{
+                                                        overflow: "hidden",
+                                                        textOverflow: "ellipsis",
+                                                        display: "-webkit-box",
+                                                        WebkitLineClamp: "2",
+                                                        WebkitBoxOrient: "vertical",
+                                                    }}>
+                                            {post.title}
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                            {post.creator.name}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
                         ))}
 
 

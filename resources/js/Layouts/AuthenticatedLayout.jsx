@@ -7,7 +7,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import LeftDrawer from "@/Components/LeftDrawer.jsx";
-
+import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function AuthenticatedLayout({header, children}) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -36,35 +38,14 @@ export default function AuthenticatedLayout({header, children}) {
         });
     }
 
-    const topFilms = [
-        {title: 'The Shawshank Redemption', year: 1994},
-        {title: 'The Godfather', year: 1972},
-        {title: 'The Godfather: Part II', year: 1974},
-        {title: 'The Dark Knight', year: 2008},
-        {title: '12 Angry Men', year: 1957},
-        {title: "Schindler's List", year: 1993},
-        {title: 'Pulp Fiction', year: 1994}]/*TODO: довърши с резултати за публикации , видеа и потребители*/
 
-    const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-        (async () => {
-            setLoading(true);
-            await sleep(1e3); // For demo purposes.
+    React.useEffect(() => {
+        const timeout = setTimeout(() => {
             setLoading(false);
-
-            setOptions([...topFilms]);
-        })();
-
-    }
-    const handleClose = () => {
-        setOpen(false);
-        setOptions([]);
-    };
-
+        }, 2000);
+        return () => clearTimeout(timeout);
+    });
     return (
         <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
             {/* Main Content */}
@@ -92,10 +73,16 @@ export default function AuthenticatedLayout({header, children}) {
                                 {/*TODO: добави форма , както и страница за резултатие*/}
                                 <TextField
                                     id="filled-search"
-                                    label="Search for everything !"
+                                    label="Search"
                                     type="search"
                                     variant="filled"
                                 />
+
+                                <Tooltip title="Search for everything !">
+                                    <IconButton onClick={() => setLoading(true)} loading={loading}>
+                                    <SearchSharpIcon />
+                                    </IconButton>
+                                </Tooltip>
 
 
                             </div>
