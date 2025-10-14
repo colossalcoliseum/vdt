@@ -1,12 +1,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, usePage} from '@inertiajs/react';
 import DOMPurify from 'dompurify';
-import TimeAgo from 'timeago-react';
-import {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger,
-} from "@/components/ui/hover-card"
+
+import Paper from "@mui/material/Paper";
+import CardMedia from '@mui/material/CardMedia';
+import Card from "@mui/material/Card";
+import Link from '@mui/material/Link';
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import NormalSpeedDial from "@/Components/SpeedDial/SpeedDial.jsx";
 
 export default function Post({post}) {
     const user = usePage().props.auth.user;
@@ -27,45 +29,46 @@ export default function Post({post}) {
         <AuthenticatedLayout>
             <Head title="Post"/>
 
-            <div className="mx-auto py-12 max-w-7xl sm:px-6 lg:px-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-4xl tracking font-thin text-black mb-4">
-                        {post.title}
-                    </h1>
-                    <HoverCard
-                    >
-                        <HoverCardTrigger className="tracking-wide">{post.creator.name}</HoverCardTrigger>
-                        <HoverCardContent className="bg-white ">
-                           <a href={route('user.show',post.creator.id)}>
-                            <div className="grid grid-cols-2">
-                                <div className="col "> <img src={post.creator.avatar} alt={post.creator.name}
-                                          className="rounded-full h-20"/> <span className="text-center">Joined <TimeAgo
-                                    datetime={post.creator.created_at}
-                                    locale='en_EN'
-                                /></span></div>
-                                <div className="col m-3 bg-gray-100 p-2 line-clamp-3"><span className="text-xs text-center">Description<br/></span>
-                                    {post.creator.description}</div>
-                            </div></a>
-                        </HoverCardContent>
-                    </HoverCard>
+            <Grid
+                container
+                direction="column"
+                alignItems="center"
+                justify="center"
+            >
 
-                </div>
+                <Card sx={{maxWidth: '90%'}} alignItems="center">
+                    <Paper elevation={3} centered sx={{p: 10}}>
+                        <h1 className="text-4xl tracking font-thin text-black mb-4">
+                            {post.title}
+                        </h1>
+                        <NormalSpeedDial pointed={"left"}/>
+                        <Link href={route('user.show',post.creator.id)} underline="none"
+                              sx={{ color: 'text.primary' }}
+                        >
+                            {post.creator.name}
 
-                <div className="text-center mb-8">
-                    <img
-                        src={post.thumbnail}
-                        alt={post.title}
-                        className="mx-auto rounded-sm max-w-lg"
-                    />
-                </div>
+                        </Link>
 
-                <div className="max-w-4xl bg-white p-12 m-12 rounded-xl shadow-xl mx-auto">
-                    <div
-                        className="prose prose-lg max-w-none"
-                        dangerouslySetInnerHTML={{__html: sanitizedHTML}}
-                    />
-                </div>
-            </div>
+
+                        <CardMedia
+                            component="img"
+                            alt={post.title}
+                            image={post.main_image}
+                        />
+
+                        <div className="p-12 m-12 ">
+                            <Typography variant="body1" gutterBottom
+                                        className="prose prose-lg max-w-none"
+
+                            >
+                                <span dangerouslySetInnerHTML={{__html: sanitizedHTML}}></span>
+
+                            </Typography>
+                        </div>
+                    </Paper>
+                </Card>
+
+            </Grid>
         </AuthenticatedLayout>
     );
 }

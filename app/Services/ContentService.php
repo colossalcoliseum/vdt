@@ -9,14 +9,13 @@ class ContentService
     public function getVideos($status = "active", $visibility = "public")
     {
         try {
-            $videos = Video::whereHas('visibility', function ($query) use ($visibility) {
+            return Video::whereHas('visibility', function ($query) use ($visibility) {
                 $query->where('slug', $visibility);
             })
                 ->WhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
                 ->with('creator')->get();
-            return $videos;
 
         } catch (\Exception $exception) {
             return $exception->getMessage();

@@ -15,15 +15,7 @@ const PostsPagination = ({links,
                         setCurrentPage,
                         posts,
                     className}) => {
-    const handlePageChange = (url) => {
-        const pageParam = new URL(url).searchParams.get("page");
-        router.get(url,{preserveState:true});
-    }
 
-    const [page, setPage] = React.useState(1);
-    const handleChange = (event, value) => {
-        setPage(value);
-    };
 
     const [loading, setLoading] = React.useState(false);
     React.useEffect(() => {
@@ -34,18 +26,19 @@ const PostsPagination = ({links,
     });
 
     return (
-        <div className={"flex justify-center items-center gap-4 bg-blue-200 py-4  max-w-7xl mx-auto "+className}>
-            <Stack spacing={2}>
+        <div className={"flex justify-center items-center gap-5  py-4  max-w-7xl mx-auto "+className}>
 
-
-                <Box sx={{ '& button': { m: 1 } }}>
             {links.map((link) => (
-                <Button variant={link.active?"contained":"outlined"}  size="medium" href={link.url} key={link.url} >
+
+                <Button variant={link.active?"contained": "outlined"}
+                        sx={{ color: link.active?'text.secondary ':'text.primary',
+                             borderRadius:2
+                }}
+                        size="large" href={link.url} key={link.url} >
                     <span dangerouslySetInnerHTML={{__html:link.label}}></span>
                 </Button>
             ))}
-                </Box>
-            </Stack>
+
             {/*TODO: добави форма , както и страница за резултатие*/}
 
             <TextField

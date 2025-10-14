@@ -25,9 +25,9 @@ export default function LeftDrawer({
 
     const DrawerList = (
         <Paper class="p-5">
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', maxWidth: 280,minWidth: 230, bgcolor: 'background.paper' }}>
                 <ApplicationLogo
-                    className=" fill-current hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 m-6 relative"/>
+                    className=" fill-current mx-auto hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 mb-6"/>
                 <ListItemButton component="a" href="/">
                     <ListItemText primary="Home"/>
                 </ListItemButton>
@@ -40,19 +40,6 @@ export default function LeftDrawer({
                 <ListItemButton component="a" href={route('profile.edit')}>
                     <ListItemText primary="Log Out"/>
                 </ListItemButton>
-
-                <ListItem component="a" href={route('profile.edit')}>
-                    <Chip avatar={<Avatar alt={user.name} src={user.avatar}/>
-                    } label={user.name}/>
-
-                </ListItem>
-                <ListItem component="a" href={route('profile.edit')}>
-                    <Chip
-                        label="Log Out"
-                        icon={<LogoutIcon />}
-                        variant="outlined"
-                    />
-                </ListItem>
             </List>
         </Paper>
     );

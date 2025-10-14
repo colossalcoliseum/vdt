@@ -4,6 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import * as React from "react";
 import ImageGrid from "@/Pages/Profile/ImageGrid.jsx"
 import Typography from '@mui/material/Typography';
+import NormalSpeedDial from "@/Components/SpeedDial/SpeedDial.jsx"
 
 export default function User({user}) {
 
@@ -77,20 +78,26 @@ export default function User({user}) {
                         </div>
 
 
-                        <div className=" col-span-10 bg-white rounded-3xl p-6 m-6 shadow-xl ">
+                        <div className=" col-span-9 bg-white rounded-3xl p-6 m-6 shadow-xl ">
                             <span className=" font-bold flex-1 overflow-y overflow-x-hidden break-words">About</span>
 
 
-                            <p className="text-black leading-relaxed">{user.description}</p>
+                            <Typography variant="body1" gutterBottom noWrap={true}
+                            >
+                                {user.description}
+                            </Typography>                        </div>
+                        <div className=" col-span-1  ">
+                            <NormalSpeedDial ariaLabel={"a"}/>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-12 grid-rows-12 ">
 
-                        <div className="col-span-2 col-start-11 row-span-6">
+                        <div className="col-span-2 col-start-10 row-span-6">
                             <PrimaryButton>
                                 Send Messege
                             </PrimaryButton>
+
                         </div>
                     </div>
 

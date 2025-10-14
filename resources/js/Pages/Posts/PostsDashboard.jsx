@@ -1,8 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
-import {usePoll} from '@inertiajs/react'
+import Paper from '@mui/material/Paper';
 import {useEcho} from "@laravel/echo-react";
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
+import Link from '@mui/material/Link';
 
 import * as React from "react";
 import Card from '@mui/material/Card';
@@ -13,37 +14,9 @@ import CardActionArea from '@mui/material/CardActionArea';
 
 export default function PostsDashboard({posts}) {
 
-
-    const handleOpen = () => {
-        setOpen(true);
-        (async () => {
-            setLoading(true);
-            await sleep(1e3); // For demo purposes.
-            setLoading(false);
-
-            setOptions([...postsArray]);
-        })();
-
-    }
-    const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
-
-    const handleClose = () => {
-        setOpen(false);
-        setOptions([]);
-    };
-    useEcho(
-        `posts`,
-        "PostPublished",
-        (e) => {
-            console.log(e.post);
-        },
-    );
     const {data, setData} = useForm({
         page: posts.currentPage,
     });
-
 
 
     return (
@@ -52,26 +25,30 @@ export default function PostsDashboard({posts}) {
         >
             <Head title="Posts"/>
 
-            <PostsPagination
-                links={posts.links}
-                currentPage={posts.currentPage}
-                setCurrentPage={(page) => setData('page', page)}
-                posts={posts}
+            <Typography variant="h4" gutterBottom
+                        sx={{ color: 'text.secondary',
+                            }}
             >
+                Latest Posts
+            </Typography>
 
-            </PostsPagination>
+            <div className="py-6 my-6">
 
-            <div className="py-12 grid ">
+                <div className="sm:px-6 ">
 
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
 
-                    <div className="grid gap-6 lg:grid-cols-3 lg:grid-rows-3 lg:gap-12">
+
+                    <div className="grid lg:grid-cols-4 lg:grid-rows-3 lg:gap-10 sm:my-6">
 
 
 
                         {posts.data.map((post, id) => (
-                            <Card sx={{ maxWidth: 345 }}>
+                            <Paper elevation={4}
+                                   sx={{ maxWidth: 445
+                            }}>
                                 <CardActionArea>
+                                    <Link href={route('post.show',post.id)} underline="none"
+                                          sx={{ color: 'text.primary' }}>
                                     <CardMedia
                                         component="img"
                                         height="140"
@@ -93,8 +70,9 @@ export default function PostsDashboard({posts}) {
                                             {post.creator.name}
                                         </Typography>
                                     </CardContent>
+                                    </Link>
                                 </CardActionArea>
-                            </Card>
+                            </Paper>
                         ))}
 
 

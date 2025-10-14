@@ -6,6 +6,7 @@ use _PHPStan_781aefaf6\Nette\Neon\Exception;
 use App\Http\Requests\UploadVideoRequest;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
+use App\Services\ContentService;
 use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -21,12 +22,12 @@ class VideoController extends Controller
      * Display a listing of the resource.
      */
     public function __construct(
-        public SearchService $contentService
+        public ContentService $contentService
     ){}
-    public function index(SearchService $contentService)
+    public function index()
     {
         return Inertia::render('Videos/VideosDashboard',
-            ['videos' => $this->$contentService->getVideos()]
+            ['videos' => $this->contentService->getVideos()]
         );
     }
 

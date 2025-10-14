@@ -3,7 +3,6 @@ import {Head, router, usePage} from '@inertiajs/react';
 import {usePoll} from '@inertiajs/react'
 
 export default function VideosDashboard({videos}) {
-    usePoll(12000)
 
 
     return (
@@ -22,7 +21,7 @@ export default function VideosDashboard({videos}) {
 
                                 <a href={route('video.show', video.id)}>
                                     <div
-                                        className="h-auto bg-white rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 rounded-xl">
+                                        className="h-auto bg-white shadow-xl dark:bg-gray-800 dark:border-gray-700 rounded-xl">
 
                                         <div className="p-6 ">
                                             <a href="#">
@@ -31,9 +30,7 @@ export default function VideosDashboard({videos}) {
 
                                         </div>
                                         <a href={route('video.show', video.id)}>
-                                            <div class="px-6 "><img
-                                                className=" object-contain h-48 w-full rounded-xl"
-                                                src={video.thumbnail_path} alt={video.title}/></div>
+                                            <div class="px-6 "></div>
                                             <p className="p-3 text-center">{video.creator.name}</p>
 
                                         </a>
