@@ -8,7 +8,10 @@ import {useState} from "react";
 import Checkbox from "@/Components/Checkbox.jsx";
 import VDTCreationStudioDiv from "@/Components/VDTCreationStudioDiv.jsx";
 import {ChangeEvent} from "react";
-
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 //export default function CreateVideo() {
 const CreateVideo = ({user}) => {
     const {t, i18n} = useTranslation();
@@ -21,8 +24,8 @@ const CreateVideo = ({user}) => {
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
     const visibilities = [
-        {name: t('public'), code: "public"},
-        {name: t('private'), code: "private"}
+        {name: t('public'), code: "2"},
+        {name: t('private'), code: "1"}
     ];
     const handleChangeVisibility = (e) => {
         e.visibility = e.target.value();
@@ -34,7 +37,6 @@ const CreateVideo = ({user}) => {
         if (file) {
             setData('video', file);
 
-            // Създаваме preview URL за видеото
             const videoUrl = URL.createObjectURL(file);
             setVideoPreview(videoUrl);
         }else{
@@ -71,7 +73,7 @@ const CreateVideo = ({user}) => {
             return;
         }
 
-        post(route('video.store'),{
+        post(route('moderate.videos.store'),{
             _token: props.csrf_token,
             onSuccess: () => {
                 if (videoPreview) URL.revokeObjectURL(videoPreview);
@@ -85,11 +87,16 @@ const CreateVideo = ({user}) => {
     }
 
     return (
-        //  <AuthenticatedLayout>
-
+        <Paper elevation={3} >
         <div className="relative w-full p-12">
-           <VDTCreationStudioDiv/>
             <Head title="Create Video" />
+
+            <Typography variant="h4" gutterBottom
+            sx={{ color: 'text.secondary',
+        }}
+            >
+            Create New Video
+        </Typography>
             {flash?.success && (
                 <div className="max-w-4xl mx-auto mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
                     {flash.success}
@@ -101,7 +108,7 @@ const CreateVideo = ({user}) => {
                     {errors.error}
                 </div>
             )}
-            <form onSubmit={submit}>
+            <Box component="form" onSubmit={submit}>
 
                 <div className="max-w-4xl mx-auto my-auto pt-12">
 
@@ -154,7 +161,7 @@ const CreateVideo = ({user}) => {
                         <div>
 
                             <p className="block py-2  text-gray-900 dark:text-gray-900">{t("visibility")}</p>
-                            <select onChange={e => setData('visibility', e.target.value)} value={data.visibility}>
+                            <select onChange={e => setData('visibility_id', e.target.value)} value={data.visibility}>
                                 {visibilities.map(({name, code}) =>
                                     (<option key={code} value={code} className="bg:bg-gray-700">
                                             {name}
@@ -200,20 +207,19 @@ const CreateVideo = ({user}) => {
                             )}
                         </div>
                         <div className="col-span-full">
-                            <PrimaryButton
-                                type="submit"
-                                disabled={processing}
-                                >
-                                {processing ? t("Качване...") : t("post")}
-                            </PrimaryButton>
 
-                        </div>
+                            <Button variant="contained" color="success"
+                                disabled={processing}
+                                    type={'submit'}
+                            >
+                                Post
+                            </Button>                        </div>
                     </div>
 
                 </div>
-            </form>
+            </Box>
         </div>
-
+        </Paper>
     )
 }
 CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true} title="hohoho"/>

@@ -24,7 +24,8 @@ class UploadVideoRequest extends FormRequest
         return [
             'title' => 'required|max:255|string|min:3',
             'description' => 'required|max:255|string|min:3',
-            'visibility' => 'required',
+            'user_id' => 'required',
+            'visibility_id' => 'required|integer|exists:visibilities,id',
             'thumbnail' => 'image|mimes:image,jpeg,png,jpg|max:10240',
             'video' => 'file',
         ];

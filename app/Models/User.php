@@ -102,6 +102,10 @@ class User extends Authenticatable
     {
         return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
     }
+    public static function isSuperAdmin(): bool
+    {
+        return auth()->user()->hasRole('super_admin');
+    }
 
     public function videos(): HasMany
     {

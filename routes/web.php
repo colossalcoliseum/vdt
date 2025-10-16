@@ -19,8 +19,8 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'posts' => Post::with('creator')->get(),
-        'videos' => Video::with('creator')->get(),
+       /* 'posts' => Post::with('creator')->get(),
+        'videos' => Video::with('creator')->get(),*/
     ]);
 });
 
@@ -35,6 +35,7 @@ Route::get('/dashboard', function () {
 
     });
 });*/
+/*  'search engine'  */
 Route::middleware(['auth'])->group(function () {
     Route::prefix('search')->group(function () {
         Route::get('/videos/{video}', [SearchController::class, 'searchVideos'])->name('search.videos');
@@ -42,13 +43,21 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users/{user}', [SearchController::class, 'searchUsers'])->name('search.users');
     });
 });
+/*  Create; Update; Delete  content*/
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('manage')->group(function () {
+        Route::resource('videos', VideoController::class)->names('moderate.videos')->except(['index', 'show']);
+        Route::resource('posts', PostController::class)->names('moderate.posts')->except(['index', 'show']);
+        Route::resource('users', UserController::class)->names('moderate.users')->except(['index', 'show']);
+    });
+});
 /*  Users Layout    */
 Route::middleware('auth')->group(function () {
-    Route::resource('videos', VideoController::class)->names('video');
-    Route::resource('posts', PostController::class)->names('post');
-    Route::resource('users', UserController::class)->names('user');
-
+    Route::resource('videos', VideoController::class)->names('video')->only(['index', 'show']);
+    Route::resource('posts', PostController::class)->names('post')->only(['index', 'show']);
+    Route::resource('users', UserController::class)->names('user')->only(['index', 'show']);
     Route::resource('chats', ChatController::class)->names('chat');
+
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/update', [ProfileController::class, 'update'])->name('update');

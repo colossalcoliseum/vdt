@@ -16,9 +16,6 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (User::canAccessAdminPanel()){
-            $next($request);
-        }
-
+        return User::canAccessAdminPanel()? $next($request): back();
     }
 }

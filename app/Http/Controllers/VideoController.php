@@ -36,17 +36,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        $response = Gate::inspect('create', Video::class);
-        if ($response->allowed()) {
             return Inertia::render('Videos/CreateVideo');
-        }
-        flash()
-            ->option('position', 'top-right')
-            ->option('duration', 10000)
-            ->option('direction', 'top')
-            ->warning("You don't have permission to create videos", [], 'Missing permission');
-        return back();
-
     }
 
     /**
@@ -69,13 +59,13 @@ class VideoController extends Controller
                         'description' => $validated['description'],
                         'video_path' => "/storage/" . $videoPath,
                         'thumbnail_path' => $thumbnailPath,
-                        'creator_id' => auth()->user()->id,
+                        'user_id' => auth()->user()->id,
                         'original_filename' => $videoFile->getClientOriginalName(),
                         'file_size' => $videoFile->getSize(),
                         'video_mime_type' => $videoFile->getMimeType(),
-                        'visibility' => $validated['visibility'],
+                        'visibility_id' => $validated['visibility_id'],
                     ]);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     die($e->getMessage());
                 }
             } else {
