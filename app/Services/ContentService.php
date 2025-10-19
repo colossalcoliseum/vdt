@@ -1,7 +1,9 @@
 <?php
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\SubCategory;
 use App\Models\Video;
 
 class ContentService
@@ -61,6 +63,22 @@ class ContentService
         try {
             $post = Post::with('creator')->find($id);
 
+        }
+        catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+    }
+    public function loadCategories(){
+        try {
+            return Category::all();
+        }
+        catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+    }
+    public function loadSubCategories(){
+        try {
+            return SubCategory::all();
         }
         catch (\Exception $exception){
             return $exception->getMessage();

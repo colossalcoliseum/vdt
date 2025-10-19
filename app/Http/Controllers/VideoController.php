@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use _PHPStan_781aefaf6\Nette\Neon\Exception;
 use App\Http\Requests\UploadVideoRequest;
+use App\Models\Category;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
 use App\Services\ContentService;
@@ -36,7 +37,10 @@ class VideoController extends Controller
      */
     public function create()
     {
-            return Inertia::render('Videos/CreateVideo');
+            return Inertia::render('Videos/CreateVideo',[
+                'categories' => $this->contentService->loadCategories(),
+                'subCategories' => $this->contentService->loadSubCategories(),
+            ]);
     }
 
     /**
@@ -47,9 +51,9 @@ class VideoController extends Controller
         $response = Gate::inspect('create', Video::class);
         if ($response->allowed()) {
 
-
             $validated = $request->validated();
-            if ($request->hasFile('video') && $request->hasFile('video')) {
+
+            if ($request->hasFile('thumbnail') && $request->hasFile('video')) {
                 try {
                     $videoPath = $request->file('video')->store('videos', 'public');
                     $thumbnailPath = $request->file('thumbnail')->store('videoThumbnails', 'public');
@@ -64,6 +68,7 @@ class VideoController extends Controller
                         'file_size' => $videoFile->getSize(),
                         'video_mime_type' => $videoFile->getMimeType(),
                         'visibility_id' => $validated['visibility_id'],
+                        'status_id' => 1,
                     ]);
                 } catch (\Exception $e) {
                     die($e->getMessage());
