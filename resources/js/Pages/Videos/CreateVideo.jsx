@@ -18,8 +18,14 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import {Chip} from "@mui/material";
 import {CloudUploadIcon} from "lucide-react";
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import MultipleSelectChip from "@/Components/MultipleSelectChip.jsx";
+import CustomizedDialog from "@/Components/CustomizedDialog.jsx";
+import CardActionArea from "@mui/material/CardActionArea";
+import Link from "@mui/material/Link";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import * as React from "react";
 
 
 //export default function CreateVideo() {
@@ -30,7 +36,8 @@ const CreateVideo = ({categories, subCategories}) => {
     const {flash} = usePage().props;
     const props = usePage().props
     const [visibility, setVisibility] = useState();
-    const [videoPreview, setVideoPreview] = useState(null);
+    const [videoPreview, setVideoPreview] = useState('');
+    const [titlePreview, setTitlePreview] = useState(null);
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
     const visibilities = [
@@ -42,7 +49,7 @@ const CreateVideo = ({categories, subCategories}) => {
         setVisibility(e);
 
     }
-
+    const user = usePage().props.auth.user
     const handleVideoChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -53,6 +60,10 @@ const CreateVideo = ({categories, subCategories}) => {
         } else {
             console.log("No Video Provided!")
         }
+    };
+    const previewTitle = (e) => {
+        const title = e.target.value;
+        setTitlePreview(title);
     };
     const handleThumbnailChange = (e) => {
         const file = e.target.files[0];
@@ -68,7 +79,7 @@ const CreateVideo = ({categories, subCategories}) => {
     };
 
     const {data, setData, post, progress, processing} = useForm({
-        title: null,
+        title: '',
         description: '',
         visibility_id: 1,
         thumbnail: '',
@@ -110,34 +121,62 @@ const CreateVideo = ({categories, subCategories}) => {
     return (
         <Paper elevation={3} sx={{m: 5, p: 5}}
         >
+            <Grid size={12}
+                  justifyContent="right"
+                  display="flex"
 
-            <Box component="form" onSubmit={submit} sx={{m:3 , p:3}}>
+            >
+
+                <Button variant="contained" color="warning"
+                        disabled={processing}
+                        type={'submit'}
+                >
+                    X
+                </Button>
+
+            </Grid>
+
+            <Box component="form" onSubmit={submit} sx={{mx: 3, px: 3}}
+                 alignItems="center"
+            >
                 <Head title="Create Video"/>
                 <Typography variant="h4" gutterBottom
                             sx={{
                                 color: 'text.secondary',
 
-                                mb:4
+                                mb: 4,
+                                ml: 5,
                             }}
 
                 >
                     Create New Video
                 </Typography>
 
-                <Grid container spacing={2} columns={12}>
+
+
+                <Grid container spacing={4} columns={12}
+
+                >
 
                     <Grid size={12} sx={{}}>
                         <TextField
-                            id="filled-textarea"
+                            id="title"
+                            name="title"
                             label="Title"
                             placeholder="Title"
                             multiline
                             fullWidth
                             variant="filled"
+                            value={data.title}
+                            onChange={(e)=>
+                            {setData('title', e.target.value);}}
                         />
 
                     </Grid>
-                    <Grid size={6}  sx={{ p:'1ch'}}>
+                    <Grid size={6} sx={{p: '1ch'}}
+                    display="flex"
+                          alignItems="center"
+                    >
 
 
                         <Button
@@ -147,7 +186,7 @@ const CreateVideo = ({categories, subCategories}) => {
                             tabIndex={-1}
                             fullWidth
                             loadingPosition="end"
-                            startIcon={<CloudUploadIcon />}
+                            startIcon={<CloudUploadIcon/>}
                         >
                             Video Thumbnail
                             <VisuallyHiddenInput
@@ -157,7 +196,7 @@ const CreateVideo = ({categories, subCategories}) => {
                             />
                         </Button>
                     </Grid>
-                    <Grid size={6} sx={{p:'1ch'}}>
+                    <Grid size={6} sx={{p: '1ch'}}>
 
                         <Button
                             component="label"
@@ -166,7 +205,7 @@ const CreateVideo = ({categories, subCategories}) => {
                             tabIndex={-1}
                             fullWidth
                             loadingPosition="end"
-                            startIcon={<CloudUploadIcon />}
+                            startIcon={<CloudUploadIcon/>}
                         >
                             Video File
                             <VisuallyHiddenInput
@@ -176,11 +215,14 @@ const CreateVideo = ({categories, subCategories}) => {
                             />
                         </Button>
                     </Grid>
-                    <Grid size={6} sx={{p:'1ch'}}>
+                    <Grid size={6} sx={{p: '1ch'}}
+
+                          justifyContent="center"
+                          display="flex">
 
                         <MultipleSelectChip
                             label="Category"
-                            categories={  categories.map((category) => {
+                            categories={categories.map((category) => {
                                 return (
                                     <a>
                                         {category.name}
@@ -189,12 +231,14 @@ const CreateVideo = ({categories, subCategories}) => {
                             })}
                         />
                     </Grid>
-                    <Grid size={6} sx={{p:'1ch'}}>
+                    <Grid size={6} sx={{p: '1ch'}}
+                          justifyContent="center"
+                          display="flex">
 
 
                         <MultipleSelectChip
                             label="Sub Category"
-                            categories={  subCategories.map((category) => {
+                            categories={subCategories.map((category) => {
                                 return (
                                     <a>
                                         {category.name}
@@ -203,7 +247,7 @@ const CreateVideo = ({categories, subCategories}) => {
                             })}
                         />
                     </Grid>
-                    <Grid size={12} sx={{p:'1ch'}}>
+                    <Grid size={12} sx={{p: '1ch'}}>
 
                         <TextField
                             id="filled-textarea"
@@ -214,7 +258,76 @@ const CreateVideo = ({categories, subCategories}) => {
                             variant="filled"
                         />
                     </Grid>
-                </Grid>
+
+                        <Grid size={6} sx={{p: '1ch'}}
+                              justifyContent="center"
+                              display="flex"
+
+                        >
+
+                            {/*<Button variant="contained" color="info"
+                                    disabled={processing}
+                                    type={'submit'}
+                            >
+                                See Preview
+                            </Button>*/}
+                            <CustomizedDialog
+                            title={"Preview"}
+                            toggleButtonLabel={"See Preview"}
+                            closeButtonLabel={"Close Preview"}
+
+                            >
+                                <Paper elevation={4}
+                                       sx={{ maxWidth: 445,
+                                           m:6,
+                                       }}>
+                                    <CardActionArea>
+                                        <Paper  underline="none"
+                                              sx={{ color: 'text.primary' }}>
+                                            <CardMedia
+                                                component="img"
+                                                height="140"
+                                                src={thumbnailPreview}
+
+                                                alt="green iguana"
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div"
+                                                            sx={{
+                                                                overflow: "hidden",
+                                                                textOverflow: "ellipsis",
+                                                                display: "-webkit-box",
+                                                                WebkitLineClamp: "2",
+                                                                WebkitBoxOrient: "vertical",
+                                                            }}>
+
+                                                    {data.title}
+                                                </Typography>
+                                                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                                    {user.name}
+                                                </Typography>
+                                            </CardContent>
+                                        </Paper>
+                                    </CardActionArea>
+                                </Paper>
+                            </CustomizedDialog>
+
+                        </Grid>
+                        <Grid size={6} justifyContent="center"
+                              sx={{p: '1ch'}}
+                              display="flex"
+                        >
+
+
+                            <Button variant="contained" color="success"
+                                    disabled={processing}
+                                    type={'submit'}
+                            >
+                                Post
+                            </Button>
+                        </Grid>
+                    </Grid>
+
             </Box>
 
         </Paper>
