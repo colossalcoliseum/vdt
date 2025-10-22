@@ -1,32 +1,23 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
-import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
-import TextInput from "@/Components/TextInput.jsx";
-import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import {useTranslation} from 'react-i18next';
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";
-import Checkbox from "@/Components/Checkbox.jsx";
-import VDTCreationStudioDiv from "@/Components/VDTCreationStudioDiv.jsx";
-import {ChangeEvent} from "react";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import ListMenu from "@/Components/ListMenu.jsx";
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import {Chip} from "@mui/material";
 import {CloudUploadIcon} from "lucide-react";
 import {styled} from '@mui/material/styles';
 import MultipleSelectChip from "@/Components/MultipleSelectChip.jsx";
 import CustomizedDialog from "@/Components/CustomizedDialog.jsx";
 import CardActionArea from "@mui/material/CardActionArea";
-import Link from "@mui/material/Link";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import * as React from "react";
-
+import {red} from "@mui/material/colors";
+import {lightBlue} from "@mui/material/colors";
 
 //export default function CreateVideo() {
 const CreateVideo = ({categories, subCategories}) => {
@@ -119,207 +110,210 @@ const CreateVideo = ({categories, subCategories}) => {
         width: 1,
     });
     return (
-        <Paper elevation={3} sx={{m: 5, p: 5}}
-        >
-            <Grid size={12}
-                  justifyContent="right"
-                  display="flex"
-
-            >
-
-                <Button variant="contained" color="warning"
-                        disabled={processing}
-                        type={'submit'}
-                >
-                    X
-                </Button>
-
-            </Grid>
-
-            <Box component="form" onSubmit={submit} sx={{mx: 3, px: 3}}
-                 alignItems="center"
-            >
-                <Head title="Create Video"/>
-                <Typography variant="h4" gutterBottom
-                            sx={{
-                                color: 'text.secondary',
-
-                                mb: 4,
-                                ml: 5,
-                            }}
-
-                >
-                    Create New Video
-                </Typography>
-
-
-
-                <Grid container spacing={4} columns={12}
-
-                >
-
-                    <Grid size={12} sx={{}}>
-                        <TextField
-                            id="title"
-                            name="title"
-                            label="Title"
-                            placeholder="Title"
-                            multiline
-                            fullWidth
-                            variant="filled"
-                            value={data.title}
-                            onChange={(e)=>
-                            {setData('title', e.target.value);}}
-                        />
-
-                    </Grid>
-                    <Grid size={6} sx={{p: '1ch'}}
+<Box>
+    <Typography variant="h4" gutterBottom
+                sx={{ color: 'text.secondary',
+                    py:8
+                }}
+    >
+        Create Video
+    </Typography>
+            <Grid
+                    borderRadius={3}
+                    elevation={1}
+                    spacing={2}
+                sx={{p:4, border:3,bgcolor:'white',borderColor: lightBlue['100'] }}>
+                <Grid
+                    justifyContent={"flex"}
                     display="flex"
-                          alignItems="center"
+                    spacing={2}
+                >
+
+
+
+
+                    <Grid size={"grow"}
+                          justifyContent="right"
+                          display="flex"
+
+
                     >
 
-
-                        <Button
-                            component="label"
-                            role='button'
-                            variant="outlined"
-                            tabIndex={-1}
-                            fullWidth
-                            loadingPosition="end"
-                            startIcon={<CloudUploadIcon/>}
-                        >
-                            Video Thumbnail
-                            <VisuallyHiddenInput
-                                type="file"
-                                onChange={handleThumbnailChange}
-                                multiple
-                            />
-                        </Button>
-                    </Grid>
-                    <Grid size={6} sx={{p: '1ch'}}>
-
-                        <Button
-                            component="label"
-                            role='button'
-                            variant="outlined"
-                            tabIndex={-1}
-                            fullWidth
-                            loadingPosition="end"
-                            startIcon={<CloudUploadIcon/>}
-                        >
-                            Video File
-                            <VisuallyHiddenInput
-                                type="file"
-                                onChange={handleVideoChange}
-                                multiple
-                            />
-                        </Button>
-                    </Grid>
-                    <Grid size={6} sx={{p: '1ch'}}
-
-                          justifyContent="center"
-                          display="flex">
-
-                        <MultipleSelectChip
-                            label="Category"
-                            categories={categories.map((category) => {
-                                return (
-                                    <a>
-                                        {category.name}
-                                    </a>
-                                )
-                            })}
-                        />
-                    </Grid>
-                    <Grid size={6} sx={{p: '1ch'}}
-                          justifyContent="center"
-                          display="flex">
-
-
-                        <MultipleSelectChip
-                            label="Sub Category"
-                            categories={subCategories.map((category) => {
-                                return (
-                                    <a>
-                                        {category.name}
-                                    </a>
-                                )
-                            })}
-                        />
-                    </Grid>
-                    <Grid size={12} sx={{p: '1ch'}}>
-
-                        <TextField
-                            id="filled-textarea"
-                            label="Description"
-                            placeholder="Describe your video"
-                            multiline
-                            fullWidth
-                            variant="filled"
-                        />
-                    </Grid>
-
-                        <Grid size={6} sx={{p: '1ch'}}
-                              justifyContent="center"
-                              display="flex"
-
-                        >
-
-                            {/*<Button variant="contained" color="info"
-                                    disabled={processing}
-                                    type={'submit'}
-                            >
-                                See Preview
-                            </Button>*/}
-                            <CustomizedDialog
+                        <CustomizedDialog
                             title={"Preview"}
-                            toggleButtonLabel={"See Preview"}
+                            toggleButtonLabel={"Preview"}
                             closeButtonLabel={"Close Preview"}
 
-                            >
-                                <Paper elevation={4}
-                                       sx={{ maxWidth: 445,
-                                           m:6,
-                                       }}>
-                                    <CardActionArea>
-                                        <Paper  underline="none"
-                                              sx={{ color: 'text.primary' }}>
-                                            <CardMedia
-                                                component="img"
-                                                height="140"
-                                                src={thumbnailPreview}
+                        >
+                            <Paper elevation={4}
+                                   sx={{
+                                       maxWidth: 445,
+                                       m: 6,
+                                   }}>
+                                <CardActionArea>
+                                    <Paper underline="none"
+                                           sx={{color: 'text.primary'}}>
+                                        <CardMedia
+                                            component="img"
+                                            height="140"
+                                            src={thumbnailPreview}
 
-                                                alt="green iguana"
-                                            />
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="div"
-                                                            sx={{
-                                                                overflow: "hidden",
-                                                                textOverflow: "ellipsis",
-                                                                display: "-webkit-box",
-                                                                WebkitLineClamp: "2",
-                                                                WebkitBoxOrient: "vertical",
-                                                            }}>
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div"
+                                                        sx={{
+                                                            overflow: "hidden",
+                                                            textOverflow: "ellipsis",
+                                                            display: "-webkit-box",
+                                                            WebkitLineClamp: "2",
+                                                            WebkitBoxOrient: "vertical",
+                                                        }}>
 
-                                                    {data.title}
-                                                </Typography>
-                                                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                                                    {user.name}
-                                                </Typography>
-                                            </CardContent>
-                                        </Paper>
-                                    </CardActionArea>
-                                </Paper>
-                            </CustomizedDialog>
+                                                {data.title}
+                                            </Typography>
+                                            <Typography variant="body2" sx={{color: 'text.secondary'}}>
+                                                {user.name}
+                                            </Typography>
+                                        </CardContent>
+                                    </Paper>
+                                </CardActionArea>
+                            </Paper>
+                        </CustomizedDialog>
+                        <Button variant="contained" color="error"
+                                disabled={processing}
+
+                                sx={{ml: 2,
+                                }}
+                        >
+                            X
+                        </Button>
+
+                    </Grid>
+                </Grid>
+
+                <Box component="form" onSubmit={submit}
+                     alignItems="center"
+                >
+                    <Head title="Create New Video"/>
+
+
+                    <Grid container columns={12} spacing={2}
+
+                    >
+
+                        <Grid size={12}
+
+                        >
+                            <TextField
+                                id="title"
+                                name="title"
+                                label="Type Your Title"
+                                placeholder="Describe Your Title"
+
+                                fullWidth
+
+                                variant="standard"
+                                value={data.title}
+                                onChange={(e) => {
+                                    setData('title', e.target.value);
+                                }}
+                            />
 
                         </Grid>
-                        <Grid size={6} justifyContent="center"
-                              sx={{p: '1ch'}}
-                              display="flex"
+                        <Grid size={6}
+
                         >
 
 
-                            <Button variant="contained" color="success"
+                            <Button
+                                component="label"
+                                role='button'
+                                variant="outlined"
+                                tabIndex={-1}
+                                fullWidth
+                                loadingPosition="end"
+                                startIcon={<CloudUploadIcon/>}
+                            >
+                                Add Video Thumbnail
+                                <VisuallyHiddenInput
+                                    type="file"
+                                    onChange={handleThumbnailChange}
+                                    multiple
+                                />
+                            </Button>
+                        </Grid>
+                        <Grid size={6} >
+
+                            <Button
+                                component="button"
+                                role='button'
+                                variant="outlined"
+                                tabIndex={-1}
+                                fullWidth
+                                loadingPosition="end"
+                                startIcon={<CloudUploadIcon/>}
+                            >
+                                Add Video File
+                                <VisuallyHiddenInput
+                                    type="file"
+                                    onChange={handleVideoChange}
+                                    multiple
+                                />
+                            </Button>
+                        </Grid>
+                        <Grid size={6}
+
+                              justifyContent="center"
+                              display="flex">
+
+                            <MultipleSelectChip
+
+                                label="Add Category"
+                                categories={categories.map((category) => {
+                                    return (
+                                        <a>
+                                            {category.name}
+                                        </a>
+                                    )
+                                })}
+                            />
+                        </Grid>
+                        <Grid size={6}
+                              justifyContent="center"
+                              display="flex">
+
+
+                            <MultipleSelectChip
+                                label="Add Sub Category (optional)"
+                                categories={subCategories.map((category) => {
+                                    return (
+                                        <a>
+                                            {category.name}
+                                        </a>
+                                    )
+                                })}
+                            />
+                        </Grid>
+                        <Grid size={12} >
+
+                            <TextField
+
+                                id="filled-textarea"
+                                label="Type Your Description"
+                                placeholder="Describe your video"
+                                multiline
+                                fullWidth
+
+                                variant="standard"
+                            />
+                        </Grid>
+
+                        <Grid size={12}
+                              justifyContent="right"
+                              display="flex"
+                        >
+                            <Button variant="contained" color="info"
                                     disabled={processing}
                                     type={'submit'}
                             >
@@ -328,12 +322,11 @@ const CreateVideo = ({categories, subCategories}) => {
                         </Grid>
                     </Grid>
 
-            </Box>
-
-        </Paper>
-
+                </Box>
+            </Grid>
+</Box>
 
     )
 }
-CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true} title="hohoho"/>
+CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true} />
 export default CreateVideo

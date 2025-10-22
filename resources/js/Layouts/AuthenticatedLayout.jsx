@@ -1,11 +1,7 @@
 import {useState} from 'react';
-import Footer from "@/Components/Footer.jsx";
 import {TopNav} from "@/Components/TopNav.jsx";
-import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
 import LeftDrawer from "@/Components/LeftDrawer.jsx";
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 import IconButton from '@mui/material/IconButton';
@@ -50,8 +46,8 @@ export default function AuthenticatedLayout({header, children}) {
         <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
             {/* Main Content */}
             <div
-                className={`col-span-12 row-span-full transition-all duration-300`}>
-                <nav className="border-b pt-6 bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
+                className={`col-span-12 row-span-full transition-all  duration-300`}>
+                <nav className="py-1 bg-white ">
                     <div className="flex mx-12 sm:px-6 lg:px-8">
                         <div className="flex h-24 items-center">
                             <button onClick={toggleSidebar}
@@ -94,13 +90,13 @@ export default function AuthenticatedLayout({header, children}) {
                 </nav>
 
                 {header && (
-                    <header className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100">
+                    <header>
                         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
                     </header>
                 )}
 
                 <main
-                    className="bg-gradient-to-r from-indigo-100 via-indigo-100 via-50% to-pink-100 min-h-[calc(100vh-6rem)]">
+                    className="bg-gradient-to-br from-blue-100 from-1% via-blue-200 via-600% to-red-50 bg-fixed min-h-[calc(100vh-6rem)]">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {children}
                     </div>

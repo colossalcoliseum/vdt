@@ -27,7 +27,8 @@ export default function PostsDashboard({posts}) {
 
             <Typography variant="h4" gutterBottom
                         sx={{ color: 'text.secondary',
-                            }}
+                            pt:8
+                        }}
             >
                 Latest Posts
             </Typography>
