@@ -9,8 +9,11 @@ import Paper from "@mui/material/Paper";
 import {usePage} from "@inertiajs/react";
 import SecondaryButton from "@/Components/SecondaryButton.jsx";
 import {Avatar, Chip} from "@mui/material";
-import LogoutIcon from '@mui/icons-material/Logout';
-
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 export default function LeftDrawer({
                                        user,
                                        className
@@ -28,16 +31,20 @@ export default function LeftDrawer({
             <List sx={{ width: '100%', maxWidth: 280,minWidth: 230, bgcolor: 'background.paper' }}>
                 <ApplicationLogo
                     className=" fill-current mx-auto hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 mb-6"/>
-                <ListItemButton component="a" href="/">
+                <ListItemButton component="a" sx={{p:2}} href="/">
+                   <HomeOutlinedIcon sx={{mr:1}}></HomeOutlinedIcon>
                     <ListItemText primary="Home"/>
                 </ListItemButton>
-                <ListItemButton component="a" href={route('video.index')}>
+                <ListItemButton component="a" sx={{p:2}} href={route('video.index')}>
+                    <VideocamOutlinedIcon sx={{mr:1}}></VideocamOutlinedIcon>
                     <ListItemText primary="Videos"/>
                 </ListItemButton>
-                <ListItemButton component="a" href={route('post.index')}>
+                <ListItemButton component="a" sx={{p:2}} href={route('post.index')}>
+                    <ContentCopyOutlinedIcon sx={{mr:1}}></ContentCopyOutlinedIcon>
                     <ListItemText primary="Posts"/>
                 </ListItemButton>
-                <ListItemButton component="a" href={route('profile.edit')}>
+                <ListItemButton component="a" sx={{p:2}} href={route('profile.edit')}>
+                    <LogoutOutlinedIcon sx={{mr:1}}></LogoutOutlinedIcon>
                     <ListItemText primary="Log Out"/>
                 </ListItemButton>
             </List>
@@ -49,15 +56,7 @@ export default function LeftDrawer({
             <SecondaryButton className={"bg-opacity-0 hover:bg-opacity-0 border-none " + className}
                              onClick={toggleDrawer(true)}>
 
-                <svg width="32px" height="48px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
-                        <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
-                        <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
-                    </g>
-                </svg>
+              <MenuIcon sx={{mt:1.5}} aria-label="menu" />
 
 
             </SecondaryButton>

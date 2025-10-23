@@ -11,6 +11,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import SecondaryButton from "@/Components/SecondaryButton.jsx";
+import SendIcon from '@mui/icons-material/Send';
+import { Icon } from "@iconify/react";
 
 export default function RightDrawer() {
     const [state, setState] = React.useState({
@@ -22,12 +24,12 @@ export default function RightDrawer() {
             return;
         }
 
-        setState({ ...state, [anchor]: open });
+        setState({...state, [anchor]: open});
     };
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            sx={{width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250}}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
@@ -37,22 +39,22 @@ export default function RightDrawer() {
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={text}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            <Divider/>
             <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={text}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -61,10 +63,23 @@ export default function RightDrawer() {
     );
 
     return (
-        <div>
+        <div className="">
             {['right'].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <SecondaryButton className="from-muted/50 to-muted  flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md" onClick={toggleDrawer(anchor, true)}>View Messages</SecondaryButton>
+                    <Button variant="outlined" color="info"
+                            onClick={toggleDrawer(anchor, true)}
+                            sx={{ml: 2,mt: 2
+
+                            }}
+                    >
+                        <SendIcon></SendIcon>
+                    </Button>
+                    <SecondaryButton
+                        className="from-muted/50 to-muted flex h-full  justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
+                        onClick={toggleDrawer(anchor, true)}>
+
+
+                    </SecondaryButton>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}
