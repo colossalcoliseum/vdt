@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('status_id')->after('email')->default(1)->constrained('statuses');
-            $table->boolean('is_active')->default(true)->after('status_id');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('status_id');
-            $table->dropForeign('is_active');
         });
     }
 };

@@ -22,8 +22,10 @@ class PostFactory extends Factory
         return [//TODO: довърши
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
+            'slug' => $this->faker->slug(4),
             'thumbnail' => self::getPictureUrl(300,200),
-            'user_id' =>$this->faker->numberBetween(1,10),
+            'creator_id' =>$this->faker->numberBetween(1,10),
+            'updated_by' =>$this->faker->numberBetween(1,10),
             'status_id' => $this->faker->numberBetween(1,3),
             'category_id' => $this->faker->numberBetween(1,15),
             'is_published' => $this->faker->boolean(),

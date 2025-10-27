@@ -23,7 +23,6 @@
         "laravel/wayfinder": "^0.1.6",
         "livewire/livewire": "^3.6",
         "mckenziearts/laravel-notify": "^2.7",
-        "meilisearch/meilisearch-php": "^1.15",
         "php-flasher/flasher-laravel": "^2.1",
         "php-flasher/flasher-sweetalert-symfony": "^2.1",
         "socialiteproviders/instagram": "^5.1",

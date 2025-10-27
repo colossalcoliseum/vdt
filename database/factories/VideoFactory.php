@@ -17,16 +17,19 @@ class VideoFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
+            'title' => $title = $this->faker->sentence(),
             'description' => $this->faker->paragraph(1),
+            'slug' => $this->faker->slug(4),
             'video_path' => "/storage/videos/video_".$this->faker->numberBetween(1,10).".mp4",
-            'thumbnail_path' => "/storage/thumbnails/thumbnail_".$this->faker->numberBetween(1, 10).".jpg",
+            'thumbnail' => "/storage/thumbnails/thumbnail_".$this->faker->numberBetween(1, 10).".jpg",
             'original_filename' => $this->faker->uuid(),
             'file_size' => $this->faker->numberBetween(1, 1000),
             'video_mime_type' => "video/mp4",
             'status_id' => $this->faker->numberBetween(1,3),
             'category_id' => $this->faker->numberBetween(1,15),
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'creator_id' => $this->faker->numberBetween(1, 10),/*TODO: user_id беше тук*/
+            'updated_by' => $this->faker->numberBetween(1, 10),
             'visibility_id' => $this->faker->numberBetween(1, 2),];
     }
+
 }

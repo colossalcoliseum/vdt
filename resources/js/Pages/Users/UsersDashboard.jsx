@@ -4,7 +4,6 @@ import PrimaryButton from "@/Components/PrimaryButton.jsx";
 //import SearchBox from "@/Pages/Users/SearchBox.jsx";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import {Meilisearch} from "meilisearch";
 import {InstantSearch, SearchBox, InfiniteHits} from 'react-instantsearch';
 import {instantMeiliSearch} from '@meilisearch/instant-meilisearch';
 import 'instantsearch.css/themes/satellite.css';
