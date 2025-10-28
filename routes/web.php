@@ -38,9 +38,9 @@ Route::get('/dashboard', function () {
 /*  'search engine'  */
 Route::middleware(['auth'])->group(function () {
     Route::prefix('search')->group(function () {
-        Route::get('/videos/{video}', [SearchController::class, 'searchVideos'])->name('search.videos');
-        Route::get('/posts/{post}', [SearchController::class, 'searchPosts'])->name('search.posts');
-        Route::get('/users/{user}', [SearchController::class, 'searchUsers'])->name('search.users');
+        Route::get('/videos/', [SearchController::class, 'searchVideos'])->name('search.videos');
+        Route::get('/posts/', [SearchController::class, 'searchPosts'])->name('search.posts');
+        Route::get('/users/', [SearchController::class, 'searchUsers'])->name('search.users');
     });
 });
 /*  Create; Update; Delete  content*/

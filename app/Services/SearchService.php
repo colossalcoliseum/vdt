@@ -10,6 +10,7 @@ class SearchService
 {
     public function searchPosts($query)
     {
+        //dd($query);
 
         try {
             return Post::where(function ($qu) use ($query) {
@@ -21,7 +22,11 @@ class SearchService
                     ->orWhere('name', "like", "%$query%")
                     ->orWhere('description', "like", "%$query%");
             })
-                ->get();
+                ->with('creator')
+                ->paginate(9)
+                ->onEachSide(0)
+                ->appends($query)
+                ->withQueryString();
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }

@@ -13,7 +13,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+
 export default function LeftDrawer({
                                        user,
                                        className
@@ -31,22 +32,37 @@ export default function LeftDrawer({
             <List sx={{ width: '100%', maxWidth: 280,minWidth: 230, bgcolor: 'background.paper' }}>
                 <ApplicationLogo
                     className=" fill-current mx-auto hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 mb-6"/>
-                <ListItemButton component="a" sx={{p:2}} href="/">
+                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                        bgcolor: "#fff4c4",
+
+                    }}} href="/">
                    <HomeOutlinedIcon sx={{mr:1}}></HomeOutlinedIcon>
                     <ListItemText primary="Home"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{p:2}} href={route('video.index')}>
+                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                        bgcolor: "#fff4c4",
+                    }}} href={route('video.index')}>
                     <VideocamOutlinedIcon sx={{mr:1}}></VideocamOutlinedIcon>
                     <ListItemText primary="Videos"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{p:2}} href={route('post.index')}>
+                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                        bgcolor: "#fff4c4",
+
+                    }}} href={route('post.index')}>
                     <ContentCopyOutlinedIcon sx={{mr:1}}></ContentCopyOutlinedIcon>
                     <ListItemText primary="Posts"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{p:2}} href={route('profile.edit')}>
+                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                        bgcolor: "#fff4c4",
+
+                    }}} href={route('post.index')}>
+                    <PersonOutlineOutlinedIcon sx={{mr:1}}></PersonOutlineOutlinedIcon>
+                    <ListItemText primary={user.name}/>
+                </ListItemButton>
+               {/* <ListItemButton component="a" sx={{p:2}} href={route('profile.edit')}>
                     <LogoutOutlinedIcon sx={{mr:1}}></LogoutOutlinedIcon>
                     <ListItemText primary="Log Out"/>
-                </ListItemButton>
+                </ListItemButton>*/}
             </List>
         </Paper>
     );

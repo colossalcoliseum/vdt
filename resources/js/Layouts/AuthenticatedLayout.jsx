@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import {router, useForm, usePage} from "@inertiajs/react";
 
 export default function AuthenticatedLayout({header, children}) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,6 +29,7 @@ export default function AuthenticatedLayout({header, children}) {
 
     const handleChangeLocale = (e) => setLanguage(e.target.value);
 
+    const props = usePage().props
 
     function sleep(duration) {
         return new Promise((resolve) => {
@@ -35,7 +38,18 @@ export default function AuthenticatedLayout({header, children}) {
             }, duration);
         });
     }
+    const {data, setData,processing} = useForm({
+       query:''
+    })
+    const submit = (e) => {
+        e.preventDefault()
 
+        router.get(route('search.posts'), {
+            query: data.query
+        }, {
+            preserveScroll: true
+        })
+    }
 
     const [loading, setLoading] = React.useState(false);
     React.useEffect(() => {
@@ -67,21 +81,33 @@ export default function AuthenticatedLayout({header, children}) {
                             <ApplicationLogo height={32} className={"my-4 pl-12 ml-12 flex absolute"}></ApplicationLogo>
                     </Button>
                             <div className={"flex justify-between mx-auto "}>
+                             {/*   <form onSubmit={submit}>
+                                    <input name="query" />
+                                    <button type="submit">Search</button>
+                                </form>*/}
+                                <form  onSubmit={submit}>
+                                    <TextField
+                                        id="filled-search"
+                                        label="Search"
+                                        type="search"
+                                        name="query"
+                                        variant="standard"
+                                        value={data.query}
+                                        onChange={(e) => {
+                                            setData('query', e.target.value);
+                                        }}
+                                        disabled={processing}
+                                    />
 
-                                {/*TODO: добави форма , както и страница за резултатие*/}
-                                <TextField
-                                    id="filled-search"
-                                    label="Search"
-                                    type="search"
-                                    variant="standard"
-                                />
+                                    <Button
+                                        type="submit"
+                                        onClick={() => setLoading(true)}
 
-                                <Tooltip title="Search for everything !">
-                                    <IconButton onClick={() => setLoading(true)} loading={loading}>
-                                    <SearchSharpIcon />
-                                    </IconButton>
-                                </Tooltip>
-
+                                        color="primary"
+                                    >
+                                        <SearchSharpIcon />
+                                    </Button>
+                                </form>
 
                             </div>
 

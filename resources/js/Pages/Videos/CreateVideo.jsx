@@ -110,26 +110,25 @@ const CreateVideo = ({categories, subCategories}) => {
         width: 1,
     });
     return (
-<Box>
-    <Typography variant="h4" gutterBottom
-                sx={{ color: 'text.secondary',
-                    py:8
-                }}
-    >
-        Create Video
-    </Typography>
+        <Box>
+            <Typography variant="h4" gutterBottom
+                        sx={{
+                            color: 'text.secondary',
+                            py: 8
+                        }}
+            >
+                Create Video
+            </Typography>
             <Grid
-                    borderRadius={3}
-                    elevation={1}
-                    spacing={2}
-                sx={{p:4, border:3,bgcolor:'white',borderColor: lightBlue['100'] }}>
+                borderRadius={3}
+                elevation={1}
+                spacing={2}
+                sx={{p: 4, border: 3, bgcolor: 'white', borderColor: lightBlue['100']}}>
                 <Grid
                     justifyContent={"flex"}
                     display="flex"
                     spacing={2}
                 >
-
-
 
 
                     <Grid size={"grow"}
@@ -183,7 +182,8 @@ const CreateVideo = ({categories, subCategories}) => {
                         <Button variant="contained" color="error"
                                 disabled={processing}
 
-                                sx={{ml: 2,
+                                sx={{
+                                    ml: 2,
                                 }}
                         >
                             X
@@ -243,7 +243,7 @@ const CreateVideo = ({categories, subCategories}) => {
                                 />
                             </Button>
                         </Grid>
-                        <Grid size={6} >
+                        <Grid size={6}>
 
                             <Button
                                 component="button"
@@ -295,7 +295,7 @@ const CreateVideo = ({categories, subCategories}) => {
                                 })}
                             />
                         </Grid>
-                        <Grid size={12} >
+                        <Grid size={12}>
 
                             <TextField
 
@@ -324,9 +324,9 @@ const CreateVideo = ({categories, subCategories}) => {
 
                 </Box>
             </Grid>
-</Box>
+        </Box>
 
     )
 }
-CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true} />
+CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true}/>
 export default CreateVideo
