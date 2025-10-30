@@ -27,9 +27,10 @@ class VideoController extends Controller
     ){}
     public function index()
     {
-        return Inertia::render('Videos/VideosDashboard',
-            ['videos' => $this->contentService->getVideos()]
-        );
+        return Inertia::render('Videos/VideosDashboard', [
+            'videos' =>  $this->contentService->getPaginatedVideos()
+
+        ]);
     }
 
     /**

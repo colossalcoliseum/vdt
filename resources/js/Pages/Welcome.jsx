@@ -3,6 +3,7 @@ import Footer from "@/Components/Footer.jsx";
 import { useTranslation } from 'react-i18next';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import {useInView} from "react-intersection-observer";
+import GuestLayout from "@/Layouts/GuestLayout.jsx";
 
 export default function Welcome({ auth,posts, laravelVersion, phpVersion }) {
     const { ref, inView, entry } = useInView({});
@@ -19,7 +20,7 @@ export default function Welcome({ auth,posts, laravelVersion, phpVersion }) {
     };
 
     return (
-        <>
+        <GuestLayout>
             <Head title="Welcome" />
             <div className=" bg-gradient-to-r from-indigo-100 via-indigo-100 to-pink-100">
 
@@ -575,6 +576,6 @@ export default function Welcome({ auth,posts, laravelVersion, phpVersion }) {
                     </div>
                 </div>
             </div>
-        </>
+        </GuestLayout>
     );
 }

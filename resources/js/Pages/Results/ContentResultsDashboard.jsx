@@ -14,6 +14,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import {shadows} from '@mui/system';
 import Grid from "@mui/material/Grid";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import {Avatar} from "@mui/material";
 
 export default function ContentResultsDashboard({content, query, type}) {
 
@@ -49,16 +50,15 @@ export default function ContentResultsDashboard({content, query, type}) {
         <AuthenticatedLayout
 
         >
-            {console.log(type)}
             <Head title="Posts"/>
             <Grid><Box sx={{display: 'flex', flexDirection: 'row'}}>
-                <Item><SearchOutlinedIcon/> Search | {type}  </Item><Item>{query}</Item>
+                <Item><SearchOutlinedIcon/> Search | <Link href={route('post.index')} underline={'none'}>{type}</Link>  </Item><Item>{query}</Item>
             </Box>
 
             </Grid>
             <Box sx={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateColumns: 'repeat(4, 1fr)',
                 alignItems: 'center',
                 justifyContent: 'start'
             }}>
@@ -106,8 +106,8 @@ export default function ContentResultsDashboard({content, query, type}) {
                                                     WebkitLineClamp: "2",
                                                     WebkitBoxOrient: "vertical",
                                                 }}>{item.title}</Typography>
-                                                <Typography variant="body2" sx={{color: "black",}}>{item.creator.name}</Typography>
-                                            </Box>>
+                                                <Box sx={{display:"flex", alignItems:"center", px:0.5}}>  <Avatar alt={item.creator.name} variant="square" sx={{ width: 30, height: 30 }} src={item.creator.avatar} /> <Typography variant="p" sx={{color: "black",px:2}}>{item.creator.name}</Typography></Box>
+                                            </Box>
                                         </CardContent>
                                     </Link>}
                                 {type === "videos" && <Link href={route("video.show", item.id)}

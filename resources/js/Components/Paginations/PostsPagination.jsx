@@ -21,6 +21,7 @@ const PostsPagination = ({
             spacing={3}
             justifyContent="center"
             alignItems="center"
+            sx={{mt:3}}
         >            {links.map((link) => (
 
                 <Button variant={'contained'}

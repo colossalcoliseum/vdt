@@ -10,6 +10,12 @@ import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {router, useForm, usePage} from "@inertiajs/react";
+import {AppBar, Toolbar, useScrollTrigger} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Container from '@mui/material/Container';
+import {NavigationMenu, NavigationMenuItem, NavigationMenuList} from "@/Components/ui/navigation-menu.jsx";
+import RightDrawer from "@/Components/RightDrawer.jsx";
+import Grid from "@mui/material/Grid";
 
 export default function AuthenticatedLayout({header, children}) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -51,6 +57,8 @@ export default function AuthenticatedLayout({header, children}) {
         })
     }
 
+
+
     const [loading, setLoading] = React.useState(false);
     React.useEffect(() => {
         const timeout = setTimeout(() => {
@@ -59,63 +67,66 @@ export default function AuthenticatedLayout({header, children}) {
         return () => clearTimeout(timeout);
     });
     return (
-        <div className="grid grid-cols-12 grid-rows-12 min-h-screen">
+       <Container disableGutters maxWidth={false}  >
+
+
             {/* Main Content */}
-            <div
-                className={`col-span-12 row-span-full transition-all  duration-300`}>
-                <nav className=" ">
-                    <div className="flex mx-6 sm:px-6 lg:px-8">
-                            <button onClick={toggleSidebar}
-                                    className="lg:hidden flex justify-center items-center w-8 h-8 text-gray-600 hover:bg-white/20 rounded-full mr-4 backdrop-blur-sm transition-all">
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <line x1="3" x2="21" y1="6" y2="6"/>
-                                    <line x1="3" x2="21" y1="12" y2="12"/>
-                                    <line x1="3" x2="21" y1="18" y2="18"/>
-                                </svg>
-                            </button>
 
-                            <LeftDrawer
+                    <AppBar sx={{bgcolor: 'white',
+                                background: 'rgba(255, 255, 255, 0.4)',
+                        backdropFilter: "blur(4px)",
+                        py:0.5
 
-                            />
-                        <Button href='/'>
-                            <ApplicationLogo height={32} className={"my-4 pl-12 ml-12 flex absolute"}></ApplicationLogo>
-                    </Button>
-                            <div className={"flex justify-between mx-auto "}>
-                             {/*   <form onSubmit={submit}>
-                                    <input name="query" />
-                                    <button type="submit">Search</button>
-                                </form>*/}
-                                <form  onSubmit={submit}>
-                                    <TextField
-                                        id="filled-search"
-                                        label="Search"
-                                        type="search"
-                                        name="query"
-                                        variant="standard"
-                                        value={data.query}
-                                        onChange={(e) => {
-                                            setData('query', e.target.value);
-                                        }}
-                                        disabled={processing}
-                                    />
 
-                                    <Button
-                                        type="submit"
-                                        onClick={() => setLoading(true)}
+                    }}
+                            >
+                                <div className="flex  sm:px-6 lg:px-8">
 
-                                        color="primary"
-                                    >
-                                        <SearchSharpIcon />
+
+                                    <LeftDrawer/>
+                                    <Button href='/'>
+                                        <ApplicationLogo height={32} className={"my-4 pl-12 ml-12 flex absolute"}></ApplicationLogo>
                                     </Button>
-                                </form>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        mx: 'auto',
+                                    }}>
 
-                            </div>
+                                        <form  onSubmit={submit}>
+                                            <TextField
+                                                id="filled-search"
+                                                label="Search"
+                                                type="search"
+                                                name="query"
+                                                variant="filled"
+                                                value={data.query}
+                                                onChange={(e) => {
+                                                    setData('query', e.target.value);
+                                                }}
+                                                disabled={processing}
+                                            />
 
-                            <TopNav/>
+                                            <Button
+                                                type="submit"
+                                                onClick={() => setLoading(true)}
 
-                        </div>
+                                                sx={{color: 'black',py:'auto'}}
+                                            >
+                                                <SearchSharpIcon />
+                                            </Button>
+                                        </form>
 
-                </nav>
+                                    </Box>
+                                    <RightDrawer/>
+
+
+                                </div>
+
+
+
+                    </AppBar>
+
 
                 {header && (
                     <header>
@@ -123,22 +134,33 @@ export default function AuthenticatedLayout({header, children}) {
                     </header>
                 )}
 
-                <main
-                    className="bg-gradient-to-br from-blue-100 from-1% via-blue-200 via-600% to-red-50 bg-fixed min-h-[calc(100vh-6rem)]">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <Box
+                    component="main"
+
+           sx={{
+                        background: 'linear-gradient(160deg,rgba(196, 242, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 224, 224, 1) 100%);',
+                        position: "relative",
+                        backgroundAttachment: 'fixed',
+               display: "flex",
+               flexDirection: 'column',
+                width: '100%',
+
+                    }}
+                >
+
+                            <Box sx={{ my:8, mx: 12 }}>
                         {children}
-                    </div>
-                </main>
-                {/*TODO: footer ?*/}
-            </div>
-
-            {/* Right Sidebar */}
+                            </Box>
 
 
-            {/* Mobile Backdrop */}
+                    </Box>
+
+
             {isSidebarOpen && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden" onClick={toggleSidebar}></div>
             )}
-        </div>
+
+        </Container>
+
     );
 }

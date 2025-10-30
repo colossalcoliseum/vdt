@@ -42,6 +42,11 @@ class Video extends Model
             'description' => (string) $this->description,
         ];
     }
+    public function visibility(): BelongsTo
+    {
+        return $this->belongsTo(Visibility::class);
+    }
+
     protected function makeAllSearchableUsing(Builder $query): Builder
     {
         return $query

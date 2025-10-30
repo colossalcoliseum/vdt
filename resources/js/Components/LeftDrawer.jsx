@@ -14,6 +14,8 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 export default function LeftDrawer({
                                        user,
@@ -28,57 +30,73 @@ export default function LeftDrawer({
     };
 
     const DrawerList = (
-        <Paper class="p-5">
-            <List sx={{ width: '100%', maxWidth: 280,minWidth: 230, bgcolor: 'background.paper' }}>
+        <Box sx={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: "blur(4px)",
+            m: 1,
+            mx: 1.5
+        }}>
+            <List sx={{
+                width: '100%', maxWidth: 280, minWidth: 230,
+
+            }}>
                 <ApplicationLogo
                     className=" fill-current mx-auto hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 mb-6"/>
-                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                <ListItemButton component="a" sx={{
+                    p: 2, borderRadius: 3, '&:hover': {
                         bgcolor: "#fff4c4",
 
-                    }}} href="/">
-                   <HomeOutlinedIcon sx={{mr:1}}></HomeOutlinedIcon>
+                    }
+                }} href="/">
+                    <HomeOutlinedIcon sx={{mr: 1}}></HomeOutlinedIcon>
                     <ListItemText primary="Home"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                <ListItemButton component="a" sx={{
+                    p: 2, borderRadius: 3, '&:hover': {
                         bgcolor: "#fff4c4",
-                    }}} href={route('video.index')}>
-                    <VideocamOutlinedIcon sx={{mr:1}}></VideocamOutlinedIcon>
+                    }
+                }} href={route('video.index')}>
+                    <VideocamOutlinedIcon sx={{mr: 1}}></VideocamOutlinedIcon>
                     <ListItemText primary="Videos"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                <ListItemButton component="a" sx={{
+                    p: 2, borderRadius: 3, '&:hover': {
                         bgcolor: "#fff4c4",
 
-                    }}} href={route('post.index')}>
-                    <ContentCopyOutlinedIcon sx={{mr:1}}></ContentCopyOutlinedIcon>
+                    }
+                }} href={route('post.index')}>
+                    <ContentCopyOutlinedIcon sx={{mr: 1}}></ContentCopyOutlinedIcon>
                     <ListItemText primary="Posts"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{p:2, borderRadius:3,'&:hover': {
+                <ListItemButton component="a" sx={{
+                    p: 2, borderRadius: 3, '&:hover': {
                         bgcolor: "#fff4c4",
 
-                    }}} href={route('post.index')}>
-                    <PersonOutlineOutlinedIcon sx={{mr:1}}></PersonOutlineOutlinedIcon>
+                    }
+                }} href={route('post.index')}>
+                    <PersonOutlineOutlinedIcon sx={{mr: 1}}></PersonOutlineOutlinedIcon>
                     <ListItemText primary={user.name}/>
                 </ListItemButton>
-               {/* <ListItemButton component="a" sx={{p:2}} href={route('profile.edit')}>
-                    <LogoutOutlinedIcon sx={{mr:1}}></LogoutOutlinedIcon>
-                    <ListItemText primary="Log Out"/>
-                </ListItemButton>*/}
+
             </List>
-        </Paper>
+        </Box>
     );
 
     return (
         <div>
-            <SecondaryButton className={"bg-opacity-0 hover:bg-opacity-0 border-none " + className}
-                             onClick={toggleDrawer(true)}>
+            <Button
+                onClick={toggleDrawer(true)}>
 
-              <MenuIcon sx={{mt:1.5}} aria-label="menu" />
+                <MenuIcon sx={{mt: 1}} aria-label="menu"/>
 
 
-            </SecondaryButton>
+            </Button>
 
             <Drawer open={open} onClose={toggleDrawer(false)}
-                    className="backdrop-blur-xs "
+
+                    sx={{
+                        backdropFilter: "blur(2px)",
+                    }}
             >
                 {DrawerList}
             </Drawer>

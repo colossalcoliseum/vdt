@@ -22,8 +22,7 @@ class PostController extends Controller
     ){}
     public function index()
     {
-      //  dd($this->contentService->getPaginatedPosts());
-       //dd($this->contentService->getAllPosts());
+
         return Inertia::render('Posts/PostsDashboard', [
             'posts' =>  $this->contentService->getPaginatedPosts()
 

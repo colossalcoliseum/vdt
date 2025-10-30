@@ -64,31 +64,30 @@ export default function RightDrawer() {
 
     return (
         <div className="">
-            {['right'].map((anchor) => (
-                <React.Fragment key={anchor}>
+                <React.Fragment key={"right"}>
                     <Button variant="outlined" color="info"
-                            onClick={toggleDrawer(anchor, true)}
-                            sx={{ml: 2,mt: 2
+                            onClick={toggleDrawer("right", true)}
+                            sx={{py:"auto"
 
                             }}
                     >
                         <SendIcon></SendIcon>
                     </Button>
-                    <SecondaryButton
-                        className="from-muted/50 to-muted flex h-full  justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
-                        onClick={toggleDrawer(anchor, true)}>
+                    <Button
+                        sx={{py:"auto"}}
+                        onClick={toggleDrawer("right", true)}>
 
 
-                    </SecondaryButton>
+                    </Button>
                     <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
+                        anchor={"right"}
+                        open={state["right"]}
+                        onClose={toggleDrawer("right", false)}
                     >
-                        {list(anchor)}
+                        {list("right")}
                     </Drawer>
                 </React.Fragment>
-            ))}
+
         </div>
     );
 }

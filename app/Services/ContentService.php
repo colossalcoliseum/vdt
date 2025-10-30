@@ -8,16 +8,18 @@ use App\Models\Video;
 
 class ContentService
 {
-    public function getVideos($status = "active", $visibility = "public")
+    public function getPaginatedVideos($status = "active", $visibility = "public")
     {
         try {
-            return Video::whereHas('visibility', function ($query) use ($visibility) {
+            $videos = Video::whereHas('visibility', function ($query) use ($visibility) {
                 $query->where('slug', $visibility);
             })
-                ->WhereHas('status', function ($query) use ($status) {
+                ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->get();
+                ->with('creator')->paginate(20)->onEachSide(0);
+
+            return $videos;
 
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -34,7 +36,7 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->paginate(9)->onEachSide(0);
+                ->with('creator')->paginate(20)->onEachSide(0);
 
             return $posts;
 

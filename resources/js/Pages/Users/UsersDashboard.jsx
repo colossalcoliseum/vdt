@@ -16,23 +16,6 @@ import Grid from '@mui/material/Grid';
 export default function UsersDashboard({users}) {
 
 
-    const {searchClient} = instantMeiliSearch(
-        'http://127.0.0.1:7700',
-        'masterKey',
-        {
-            placeholderSearch: false
-        }
-    );
-    const Item = styled(Paper)(({theme}) => ({
-        backgroundColor: '#fff',
-        ...theme.typography.body1,
-        padding: theme.spacing(5),
-        textAlign: 'center',
-        color: (theme.vars ?? theme).palette.text.secondary,
-        ...theme.applyStyles('dark', {
-            backgroundColor: '#FFF9EC',
-        }),
-    }));
 console.log(users);
     const Hit = ({hit}) => (
 
