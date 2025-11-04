@@ -6,7 +6,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import Paper from "@mui/material/Paper";
-import {usePage} from "@inertiajs/react";
+import {router, usePage} from "@inertiajs/react";
 import SecondaryButton from "@/Components/SecondaryButton.jsx";
 import {Avatar, Chip} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,7 +16,9 @@ import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
+import TextField from "@mui/material/TextField";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import Link from "@mui/material/Link";
 export default function LeftDrawer({
                                        user,
                                        className
@@ -28,7 +30,9 @@ export default function LeftDrawer({
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
-
+    const handleLogout = () => {
+        router.post(route('logout'));
+    };
     const DrawerList = (
         <Box sx={{
             background: 'rgba(255, 255, 255, 0.1)',
@@ -68,15 +72,26 @@ export default function LeftDrawer({
                     <ContentCopyOutlinedIcon sx={{mr: 1}}></ContentCopyOutlinedIcon>
                     <ListItemText primary="Posts"/>
                 </ListItemButton>
-                <ListItemButton component="a" sx={{
-                    p: 2, borderRadius: 3, '&:hover': {
-                        bgcolor: "#fff4c4",
+                {user&& <ListItemButton component="a" sx={{
+                                p: 2, borderRadius: 3, '&:hover': {
+                                    bgcolor: "#fff4c4",
 
-                    }
-                }} href={route('post.index')}>
-                    <PersonOutlineOutlinedIcon sx={{mr: 1}}></PersonOutlineOutlinedIcon>
-                    <ListItemText primary={user.name}/>
-                </ListItemButton>
+                                }
+                            }} href={route('post.index')}>
+                                <PersonOutlineOutlinedIcon sx={{mr: 1}}></PersonOutlineOutlinedIcon>
+                                <ListItemText primary={user.name}/>
+                            </ListItemButton>}
+                {user&&<ListItemButton
+                    onClick={handleLogout}
+                    sx={{
+                        p: 2,
+                        borderRadius: 3,
+                        '&:hover': { bgcolor: "#fff4c4" }
+                    }}
+                >
+
+                    <ListItemText primary="Logout"/>
+                </ListItemButton>}
 
             </List>
         </Box>

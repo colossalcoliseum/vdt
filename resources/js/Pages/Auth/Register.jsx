@@ -4,6 +4,13 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import Button from "@mui/material/Button";
+
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -26,14 +33,38 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                <Paper sx={{
+                    p: 6,
+                    maxWidth: '65vh',
+                    margin: '0 auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    borderRadius: 3,
+                    background: 'rgba(255, 255, 255, 0.35)',
+                    backdropFilter: "blur(4px)",
+                }}
+                       elevation={3}
+                >
 
-                    <TextInput
+
+                    <Box sx={{
+                        p: 3,
+                        margin: '0 auto',
+                        flexDirection: 'column',
+                    }}>
+                        <Typography variant="h3" sx={{color: '#595959'}}>
+                            Register
+                        </Typography> </Box>
+                <div>
+
+                    <TextField
+                        variant="filled"
                         id="name"
                         name="name"
-                        value={data.name}
+                        label="Name"
                         className="mt-1 block w-full"
+
+                        value={data.name}
                         autoComplete="name"
                         isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
@@ -44,14 +75,16 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
 
-                    <TextInput
+                    <TextField
+                        variant="filled"
                         id="email"
                         type="email"
+                        label="Email"
                         name="email"
-                        value={data.email}
                         className="mt-1 block w-full"
+
+                        value={data.email}
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                         required
@@ -61,12 +94,14 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
 
-                    <TextInput
+                    <TextField
+                        variant="filled"
                         id="password"
                         type="password"
+                        label="Password"
                         name="password"
+
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
@@ -78,14 +113,12 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
 
-                    <TextInput
+                    <TextField
+                        variant="filled"
                         id="password_confirmation"
                         type="password"
+                        label="Confirm Password"
                         name="password_confirmation"
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
@@ -101,19 +134,23 @@ export default function Register() {
                         className="mt-2"
                     />
                 </div>
+                    <Box display="flex" justifyContent="center" mt={2}>
 
-                <div className="mt-4 flex items-center justify-end">
-                    <Link
-                        href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Already registered?
-                    </Link>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                        <div className="mt-4 flex items-center justify-center w-full">
+                            <Link
+                                href={route('login')}
+                                underline="none">
+                                Already registered?
+                            </Link>
+
+                        </div>
+                    <Button  variant="contained" sx={{mx:2}}  disabled={processing}>
                         Register
-                    </PrimaryButton>
-                </div>
+                    </Button>
+                    </Box>
+
+                </Paper>
             </form>
         </GuestLayout>
     );
