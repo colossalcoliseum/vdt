@@ -62,7 +62,7 @@ export default function PostsDashboard({posts}) {
             <Head title="Posts"/>
 
 
-            <Grid><Box sx={{display: 'flex', flexDirection: 'row'}}>
+            <Grid><Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
                 <Item> Latest Posts </Item>
             </Box>
             </Grid>
@@ -73,23 +73,21 @@ export default function PostsDashboard({posts}) {
             }}>
 
 
-                        {posts.data.map((post, id) => (
+                        {posts.data.map((post) => (
                             <Card elevation={4}
                                   sx={{
                                       maxWidth: 445,
-                                      m: 2,
-                                      p: 0.5,
-                                      bgcolor: 'rgba(207,207,207,0.6)',
+                                      m: 1,
+                                      borderRadius: 2,
+                                      border: '1px solid',
                                   }}>
                                 <Box sx={{position: 'relative'}}>
-                                    <CardActionArea sx={{bgcolor: 'rgba(0, 0, 0, 0.6)',}}>
+                                    <CardActionArea>
 
-                                            <Link href={route("post.show", post.id)}
+                                            <Link underline="none" href={route("post.show", post.id)}
 
 
-                                                  sx={{
-                                                      color: 'black',
-                                                  }}>
+                                                  >
                                                 <CardMedia
                                                     component="img"
                                                     height="140"
@@ -103,24 +101,25 @@ export default function PostsDashboard({posts}) {
                                                 <CardContent>
                                                     <Box
                                                         sx={{
-                                                            position: 'absolute',
-                                                            bottom: 0,
-                                                            left: 0,
-                                                            width: '100%',
-                                                            bgcolor: '#ffffff',
-                                                            color: 'white',
-                                                            padding: '10px',
+                                                            display: 'flex'
                                                         }}
                                                     >
-                                                        <Typography variant="h5" sx={{
-                                                            color: "black", overflow: "hidden",
+                                                        <Box sx={{display:"flex", alignItems:"center"}}>
+                                                            <Avatar alt={post.creator.name} variant="square" sx={{ width: 40, height: 'auto' }} src={post.creator.avatar} />
+                                                            <Typography variant="p" sx={{color: "black",px:2}}>{post.creator.name}</Typography>
+                                                        </Box>
+
+                                                        <Typography variant="h6" sx={{
+                                                            color: "black",
+                                                            overflow: "hidden",
                                                             textOverflow: "ellipsis",
                                                             display: "-webkit-box",
                                                             WebkitLineClamp: "2",
+
+
                                                             WebkitBoxOrient: "vertical",
                                                         }}>{post.title}</Typography>
-                                                        <Box sx={{display:"flex", alignItems:"center", px:0.5}}>  <Avatar alt={post.creator.name} variant="square" sx={{ width: 30, height: 30 }} src={post.creator.avatar} /> <Typography variant="p" sx={{color: "black",px:2}}>{post.creator.name}</Typography></Box>
-                                                    </Box>>
+                                                    </Box>
                                                 </CardContent>
                                             </Link>
 

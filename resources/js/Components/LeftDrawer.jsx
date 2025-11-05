@@ -72,7 +72,7 @@ export default function LeftDrawer({
                     <ContentCopyOutlinedIcon sx={{mr: 1}}></ContentCopyOutlinedIcon>
                     <ListItemText primary="Posts"/>
                 </ListItemButton>
-                {user&& <ListItemButton component="a" sx={{
+                <ListItemButton component="a" sx={{
                                 p: 2, borderRadius: 3, '&:hover': {
                                     bgcolor: "#fff4c4",
 
@@ -80,8 +80,8 @@ export default function LeftDrawer({
                             }} href={route('post.index')}>
                                 <PersonOutlineOutlinedIcon sx={{mr: 1}}></PersonOutlineOutlinedIcon>
                                 <ListItemText primary={user.name}/>
-                            </ListItemButton>}
-                {user&&<ListItemButton
+                            </ListItemButton>
+                <ListItemButton
                     onClick={handleLogout}
                     sx={{
                         p: 2,
@@ -91,14 +91,14 @@ export default function LeftDrawer({
                 >
 
                     <ListItemText primary="Logout"/>
-                </ListItemButton>}
+                </ListItemButton>
 
             </List>
         </Box>
     );
 
     return (
-        <div>
+        <Box>
             <Button
                 onClick={toggleDrawer(true)}>
 
@@ -115,6 +115,6 @@ export default function LeftDrawer({
             >
                 {DrawerList}
             </Drawer>
-        </div>
+        </Box>
     );
 }

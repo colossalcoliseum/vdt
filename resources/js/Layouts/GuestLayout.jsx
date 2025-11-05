@@ -11,8 +11,9 @@ import TextField from "@mui/material/TextField";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import RightDrawer from "@/Components/RightDrawer.jsx";
 import * as React from "react";
-
-
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
 export default function GuestLayout({ children }) {
     const submit = (e) => {
         e.preventDefault()
@@ -49,7 +50,7 @@ export default function GuestLayout({ children }) {
                 <div className="flex  sm:px-6 lg:px-8">
 
 
-                    <LeftDrawer/>
+
                     <Button href='/'>
                         <ApplicationLogo height={32} className={"my-4 pl-12 ml-12 flex absolute"}></ApplicationLogo>
                     </Button>
@@ -59,35 +60,16 @@ export default function GuestLayout({ children }) {
                         mx: 'auto',
                     }}>
 
-                        <form  onSubmit={submit}>
-                            <TextField
-                                id="filled-search"
-                                label="Search"
-                                type="search"
-                                name="query"
-                                variant="filled"
-                                value={data.query}
-                                onChange={(e) => {
-                                    setData('query', e.target.value);
-                                }}
-                                disabled={processing}
-                            />
 
-                            <Button
-                                type="submit"
-                                onClick={() => setLoading(true)}
-
-                                sx={{color: 'black',py:'auto'}}
-                            >
-                                <SearchSharpIcon />
-                            </Button>
-                        </form>
 
                     </Box>
-                    {user&&
-                    <RightDrawer/>
-                    }
-
+                    <Box>
+                        <List sx={{display:'flex',px:3}}>
+                            <ListItem sx={{ color:'black', borderRadius:1}}><Button  variant="outlined" href={route('register')} type="button">Register</Button></ListItem>
+                            <Typography sx={{color:"black", my:'auto'}}>or</Typography>
+                            <ListItem sx={{ color:'black', borderRadius:1}}><Button  variant="contained" href={route('login')} type="button">Log In</Button></ListItem>
+                        </List>
+                    </Box>
                 </div>
 
 

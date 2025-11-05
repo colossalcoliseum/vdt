@@ -63,7 +63,7 @@ export default function VideosDashboard({videos}) {
 
 
 
-            <Grid><Box sx={{display: 'flex', flexDirection: 'row'}}>
+            <Grid><Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
                 <Item> Latest Videos </Item>
             </Box>
             </Grid>
@@ -79,57 +79,49 @@ export default function VideosDashboard({videos}) {
                     <Card elevation={4}
                           sx={{
                               maxWidth: 445,
-                              m: 3,
-                              p: 0.5,
-                              bgcolor: 'rgba(207,207,207,0.6)',
+                              m: 1,
+                              borderRadius: 2,
+                              border: '1px solid',
                           }}>
-                        <Box sx={{position: 'relative',
+                        <Box sx={{position: 'relative'}}>
+                            <CardActionArea>
 
-                        }}>
-                            <CardActionArea sx={{bgcolor: 'rgba(0, 0, 0, 0.6)',}}>
-
-                                <Link href={route("video.show", video.id)}
+                                <Link underline="none" href={route("video.show", video.id)}
 
 
-                                      sx={{
-                                          color: 'black',
-                                      }}>
+                                >
                                     <CardMedia
                                         component="img"
                                         height="140"
                                         image={video.thumbnail}
-
+                                        alt={video.title}
                                         sx={{  objectFit: "scaleDown",
                                             width: '100%',
                                             height:"20ch",
-                                             }}
-
-
+                                        }}
                                     />
-                                    <CardContent sx={{bottom:0}}>
+                                    <CardContent>
                                         <Box
                                             sx={{
-                                                position: 'absolute',
-                                                bottom: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                bgcolor: '#ffffff',
-                                                color: '#',
-                                                padding: 1,
+                                                display: 'flex'
                                             }}
                                         >
-
+                                            <Box sx={{display:"flex", alignItems:"center"}}>
+                                                <Avatar alt={video.creator.name} variant="square" sx={{ width: 40, height: 'auto' }} src={video.creator.avatar} />
+                                                <Typography variant="p" sx={{color: "black",px:2}}>{video.creator.name}</Typography>
+                                            </Box>
 
                                             <Typography variant="h6" sx={{
-                                                color: "black", overflow: "hidden",
+                                                color: "black",
+                                                overflow: "hidden",
                                                 textOverflow: "ellipsis",
                                                 display: "-webkit-box",
                                                 WebkitLineClamp: "2",
+
+
                                                 WebkitBoxOrient: "vertical",
-                                                fontWeight: "normal",
                                             }}>{video.title}</Typography>
-                                            <Box sx={{display:"flex", alignItems:"center", px:0.5}}>  <Avatar alt={video.creator.name} variant="square" sx={{ width: 30, height: 30 }} src={video.creator.avatar} /> <Typography variant="p" sx={{color: "black",px:2}}>{video.creator.name}</Typography></Box>
-                                        </Box>>
+                                        </Box>
                                     </CardContent>
                                 </Link>
 
