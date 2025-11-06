@@ -8,11 +8,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import SecondaryButton from "@/Components/SecondaryButton.jsx";
+import ReplyIcon from '@mui/icons-material/Reply';
 import SendIcon from '@mui/icons-material/Send';
 import { Icon } from "@iconify/react";
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
+import {blue} from "@mui/material/colors";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
+import MessageIcon from '@mui/icons-material/Message';
 
 export default function RightDrawer() {
     const [state, setState] = React.useState({
@@ -26,6 +29,36 @@ export default function RightDrawer() {
 
         setState({...state, [anchor]: open});
     };
+    function Item(props) {
+        const {sx, ...other} = props;
+        return (
+            <Box
+                sx={[
+                    (theme) => ({
+                        bgcolor: '#fff',
+                        color: 'grey.100',
+
+                        borderColor: 'grey.900',
+                        p: 1,
+                        m: 1,
+
+                        background: 'rgba(0,0,0,0.1)',
+                        justifyContent: 'center',
+                        backdropFilter: "blur(4px)",
+                        py:0.5,
+                        display: 'flex',
+
+                        borderRadius: 2,
+                        fontSize: '1.3rem',
+                        fontWeight: '200',
+
+                    }),
+                    ...(Array.isArray(sx) ? sx : [sx]),
+                ]}
+                {...other}
+            />
+        );
+    }
 
     const list = (anchor) => (
         <Box
@@ -34,30 +67,39 @@ export default function RightDrawer() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider/>
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+            <List sx={{
+                width: '100%', maxWidth: 280, minWidth: 230,
+                alignItems: 'left',
+
+            }}>
+               <Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
+                    <Item>Messages</Item>
+                </Box>
+
+                <ListItemButton component="a" sx={{
+                    my: 2,p: 1.5, borderRadius: 2, '&:hover': {
+                        bgcolor: blue[100],
+                        color: '#000000'
+                    },color: '#ffffff',
+
+                }} href="/">
+                    <MessageIcon sx={{mr:3}}></MessageIcon>
+                    <ListItemText primary="All Messages" />
+                </ListItemButton>
+                <ListItemButton component="a" sx={{
+                    my: 2,p: 1.5, borderRadius: 2, '&:hover': {
+                        bgcolor: blue[100],
+                        color: '#000000'
+                    },color: '#ffffff',
+
+                }} href={route('video.index')}>
+                    <ReplyIcon sx={{mr: 3}}></ReplyIcon>
+                    <ListItemText primary="Latest"/>
+                </ListItemButton>
+
+
+
+
             </List>
         </Box>
     );
@@ -67,14 +109,19 @@ export default function RightDrawer() {
                 <React.Fragment key={"right"}>
                     <Button variant="outlined" color="info"
                             onClick={toggleDrawer("right", true)}
-                            sx={{py:"auto"
+                            sx={{
+                                my:1,
 
-                            }}
+                                boxShadow:'none',
+                                '&:hover': {
+                                    boxShadow:'none'
+                                },
+                                color: 'black', border: '1px solid',}}
                     >
-                        <SendIcon></SendIcon>
+                        <SendIcon/>
                     </Button>
                     <Button
-                        sx={{py:"auto"}}
+
                         onClick={toggleDrawer("right", true)}>
 
 
@@ -83,6 +130,14 @@ export default function RightDrawer() {
                         anchor={"right"}
                         open={state["right"]}
                         onClose={toggleDrawer("right", false)}
+                        sx={{
+                            '& .MuiDrawer-paper': {
+                                bgcolor: 'rgba(0,0,0,0.7)',
+                                backdropFilter: "blur(10px) saturate(180%)",
+                                WebkitBackdropFilter: "blur(10px) saturate(180%)",
+                                color: 'white',
+                            },
+                        }}
                     >
                         {list("right")}
                     </Drawer>

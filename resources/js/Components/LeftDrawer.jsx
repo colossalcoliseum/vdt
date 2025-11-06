@@ -1,120 +1,149 @@
 import * as React from 'react';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/joy/Box';
+import IconButton from '@mui/joy/IconButton';
+import Drawer from '@mui/joy/Drawer';
+import Input from '@mui/joy/Input';
+import List from '@mui/joy/List';
+import ListItemButton from '@mui/joy/ListItemButton';
+import Typography from '@mui/joy/Typography';
+import ModalClose from '@mui/joy/ModalClose';
+import Menu from '@mui/icons-material/Menu';
+import Search from '@mui/icons-material/Search';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
-import Paper from "@mui/material/Paper";
-import {router, usePage} from "@inertiajs/react";
-import SecondaryButton from "@/Components/SecondaryButton.jsx";
-import {Avatar, Chip} from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
-import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import {router, useForm} from "@inertiajs/react";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import Link from "@mui/material/Link";
-export default function LeftDrawer({
-                                       user,
-                                       className
-                                   }) {
+
+export default function LeftDrawer(props) {
     const [open, setOpen] = React.useState(false);
-    const props = usePage().props
-    user = usePage().props.auth.user
+    const {data, setData,processing} = useForm({
+        query:''
+    })
+    const submit = (e) => {
+        e.preventDefault()
 
-    const toggleDrawer = (newOpen) => () => {
-        setOpen(newOpen);
-    };
-    const handleLogout = () => {
-        router.post(route('logout'));
-    };
-    const DrawerList = (
-        <Box sx={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: "blur(4px)",
-            m: 1,
-            mx: 1.5
-        }}>
-            <List sx={{
-                width: '100%', maxWidth: 280, minWidth: 230,
-
-            }}>
-                <ApplicationLogo
-                    className=" fill-current mx-auto hover:text-blue-700 transition duration-300 ease-in-out text-blue-900 h-16 mb-6"/>
-                <ListItemButton component="a" sx={{
-                    p: 2, borderRadius: 3, '&:hover': {
-                        bgcolor: "#fff4c4",
-
-                    }
-                }} href="/">
-                    <HomeOutlinedIcon sx={{mr: 1}}></HomeOutlinedIcon>
-                    <ListItemText primary="Home"/>
-                </ListItemButton>
-                <ListItemButton component="a" sx={{
-                    p: 2, borderRadius: 3, '&:hover': {
-                        bgcolor: "#fff4c4",
-                    }
-                }} href={route('video.index')}>
-                    <VideocamOutlinedIcon sx={{mr: 1}}></VideocamOutlinedIcon>
-                    <ListItemText primary="Videos"/>
-                </ListItemButton>
-                <ListItemButton component="a" sx={{
-                    p: 2, borderRadius: 3, '&:hover': {
-                        bgcolor: "#fff4c4",
-
-                    }
-                }} href={route('post.index')}>
-                    <ContentCopyOutlinedIcon sx={{mr: 1}}></ContentCopyOutlinedIcon>
-                    <ListItemText primary="Posts"/>
-                </ListItemButton>
-                <ListItemButton component="a" sx={{
-                                p: 2, borderRadius: 3, '&:hover': {
-                                    bgcolor: "#fff4c4",
-
-                                }
-                            }} href={route('post.index')}>
-                                <PersonOutlineOutlinedIcon sx={{mr: 1}}></PersonOutlineOutlinedIcon>
-                                <ListItemText primary={user.name}/>
-                            </ListItemButton>
-                <ListItemButton
-                    onClick={handleLogout}
+        router.get(route('search.posts'), {
+            query: data.query
+        }, {
+            preserveScroll: true
+        })
+    }
+    return (
+        <React.Fragment>
+            <IconButton variant="outlined" color="neutral" sx={{
+                '&:hover': {
+                    bgcolor: 'inherit',
+                }
+            }} onClick={() => setOpen(true)}>
+                <Menu />
+            </IconButton>
+            <Drawer open={open} onClose={() => setOpen(false)}
                     sx={{
-                        p: 2,
-                        borderRadius: 3,
-                        '&:hover': { bgcolor: "#fff4c4" }
+                        '& .MuiDrawer-content': {
+                            bgcolor: 'rgba(0,0,0,0.7)',
+                            backdropFilter: "blur(10px) saturate(180%)",
+                            WebkitBackdropFilter: "blur(10px) saturate(180%)",
+                        },
+                        backdropFilter: "blur(1px) saturate(180%)",
+                    }}
+                    size={'sm'}
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 0.5,
+                        ml: 'auto',
+                        mt: 1,
+                        mr: 2,
+
                     }}
                 >
+                    <Typography
+                        component="label"
+                        htmlFor="close-icon"
+                        sx={{ fontSize: 'sm', fontWeight: 'lg', cursor: 'pointer',color:'white' }}
+                    >
+                        Close
+                    </Typography>
+                    <ModalClose id="close-icon" sx={{ position: 'initial', bgcolor:"white" }} />
+                </Box>
+                <ApplicationLogo
+                    className=" fill-current mx-auto  transition duration-300 ease-in-out text-blue-100 h-16 mb-6"/>
+                <form  onSubmit={submit}>
 
-                    <ListItemText primary="Logout"/>
-                </ListItemButton>
+                    <Input
+                        id="filled-search"
+                        label="Search"
+                        type="search"
+                        name="query"
+                        value={data.query}
+                        onChange={(e) => {
+                            setData('query', e.target.value);
+                        }}
+                        disabled={processing}
+                        size="sm"
+                        placeholder="Search Content ..."
+                        variant="plain"
+                        endDecorator={<Button
+                            type="submit"
+                            onClick={() => setLoading(true)}
 
-            </List>
-        </Box>
-    );
+                            sx={{color: 'white',py:'auto'}}
+                        >
+                            <SearchSharpIcon />
+                        </Button>}
+                        slotProps={{
+                            input: {
+                                'aria-label': 'Search anything',
+                            },
+                        }}
+                        sx={{
+                            m: 3,
+                            borderRadius: 0,
+                            borderBottom: '2px solid',
+                            borderColor: 'neutral.outlinedBorder',
+                            bgcolor: 'inherit',
+                            color: 'white',
+                            '&:hover': {
+                                borderColor: 'neutral.outlinedHoverBorder',
+                                color: 'white',
+                            },
+                            '&::before': {
+                                border: '1px solid var(--Input-focusedHighlight)',
+                                transform: 'scaleX(0)',
+                                left: 0,
+                                right: 0,
+                                bottom: '-2px',
+                                top: 'unset',
+                                transition: 'transform .15s cubic-bezier(0.1,0.9,0.2,1)',
+                                borderRadius: 0,
+                            },
+                            '&:focus-within::before': {
+                                transform: 'scaleX(1)',
+                            },
+                        }}
+                    >
 
-    return (
-        <Box>
-            <Button
-                onClick={toggleDrawer(true)}>
+                    </Input>
+                </form>
 
-                <MenuIcon sx={{mt: 1}} aria-label="menu"/>
-
-
-            </Button>
-
-            <Drawer open={open} onClose={toggleDrawer(false)}
-
+                <List
+                    size="lg"
+                    component="nav"
                     sx={{
-                        backdropFilter: "blur(2px)",
+                        flex: 'none',
+                        fontSize: 'xl',
+                        '& > div': { justifyContent: 'center' },
                     }}
-            >
-                {DrawerList}
+                >
+                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>Home</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>About</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>Studio</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>Contact</ListItemButton>
+                </List>
             </Drawer>
-        </Box>
+        </React.Fragment>
     );
 }

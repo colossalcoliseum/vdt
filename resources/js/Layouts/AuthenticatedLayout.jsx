@@ -73,58 +73,24 @@ export default function AuthenticatedLayout({header, children}) {
             {/* Main Content */}
 
                     <AppBar sx={{bgcolor: 'white',
-                                background: 'rgba(255, 255, 255, 0.4)',
-                        backdropFilter: "blur(4px)",
+                                background: 'rgb(187,222,251,0.5)',
+                        backdropFilter: "blur(10px)",
                         py:0.5
 
 
                     }}
                             >
-                                <div className="flex  sm:px-6 lg:px-8">
-
-
-                                    <LeftDrawer/>
-                                    <Button href='/'>
-                                        <ApplicationLogo height={32} className={"my-4 pl-12 ml-12 flex absolute"}></ApplicationLogo>
-                                    </Button>
-                                    <Box sx={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        mx: 'auto',
-                                    }}>
-
-                                        <form  onSubmit={submit}>
-                                            <TextField
-                                                id="filled-search"
-                                                label="Search"
-                                                type="search"
-                                                name="query"
-                                                variant="filled"
-                                                value={data.query}
-                                                onChange={(e) => {
-                                                    setData('query', e.target.value);
-                                                }}
-                                                disabled={processing}
-                                            />
-
-                                            <Button
-                                                type="submit"
-                                                onClick={() => setLoading(true)}
-
-                                                sx={{color: 'black',py:'auto'}}
-                                            >
-                                                <SearchSharpIcon />
-                                            </Button>
-                                        </form>
-
+                                <Box sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    px:6,
+                                    justifyContent: 'space-between',
+                                }}>
+                                    <Box sx={{display:'flex', flexDirection:"row"}}>                                 <LeftDrawer/>   <ApplicationLogo className={'h-12 pl-12'}/>
                                     </Box>
+
                                     <RightDrawer/>
-
-
-                                </div>
-
-
-
+                                </Box>
                     </AppBar>
 
 
