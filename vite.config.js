@@ -13,9 +13,9 @@ export default defineConfig({
         react(),
         i18n(),
     ],
-    /*resolve: {
+    resolve: {
         alias: {
             '@': path.resolve(__dirname, './resources/js'),
         },
-    },*/
+    },
 });

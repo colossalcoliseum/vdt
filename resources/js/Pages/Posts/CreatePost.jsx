@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";
 import VDTCreationStudioDiv from "@/Components/VDTCreationStudioDiv.jsx";
-
+import Tiptap from "@/Pages/Posts/Tiptap";
 //export default function CreateVideo() {
 const CreatePost = ({user}) => {
     const {t, i18n} = useTranslation();
@@ -81,12 +81,15 @@ const CreatePost = ({user}) => {
                                 {t("description")}
                                 {errors.description && <div className="text-red-500">{t("important")}: {errors.description}</div>}
                             </label>
-                            <textarea id="editor" rows="4" value={data.description}
+
+                            <Tiptap></Tiptap>
+
+                           {/* <textarea id="editor" rows="4" value={data.description}
                                       onChange={e => setData('description', e.target.value)}
                                       className="block border-none p-2.5 w-full h-40 text-sm text-gray-900 bg-gray-50 rounded-sm  dark:bg-gray-100 dark:text-gray-900"
                                       placeholder="">
 
-                            </textarea>
+                            </textarea>*/}
                         </div>
                         <div>
 
