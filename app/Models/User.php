@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,7 +64,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'avatar',
+        'avatar'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -111,6 +112,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Video::class);
     }
+    public function groups():belongsToMany
+    {
+        return $this->belongsToMany(Group::class, 'group_users');
+    }
+
 
 
 }
