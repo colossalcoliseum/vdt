@@ -38,7 +38,6 @@ export default function RightDrawer() {
                         bgcolor: '#fff',
                         color: 'grey.100',
 
-                        borderColor: 'grey.900',
                         p: 1,
                         m: 1,
 
@@ -114,9 +113,10 @@ export default function RightDrawer() {
 
                                 boxShadow:'none',
                                 '&:hover': {
-                                    boxShadow:'none'
+                                    boxShadow:'none',
+                                    backgroundColor:'none',
                                 },
-                                color: 'black', border: '1px solid',}}
+                                color: 'black', border: 'none',}}
                     >
                         <SendIcon/>
                     </Button>

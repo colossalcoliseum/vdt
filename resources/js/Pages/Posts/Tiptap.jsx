@@ -13,7 +13,16 @@ import FormatStrikethroughSharpIcon from '@mui/icons-material/FormatStrikethroug
 import FormatAlignRightSharpIcon from '@mui/icons-material/FormatAlignRightSharp';
 import FormatAlignLeftSharpIcon from '@mui/icons-material/FormatAlignLeftSharp';
 import FormatAlignCenterSharpIcon from '@mui/icons-material/FormatAlignCenterSharp';
-const MenuBar = ({editor}) => {
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Document from '@tiptap/extension-document'
+import Image from '@tiptap/extension-image'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+import { Dropcursor } from '@tiptap/extensions'
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+
+const MenuBar = ({editor, imageEditor}) => {
     if (!editor) {
         return null
     }
@@ -24,222 +33,102 @@ const MenuBar = ({editor}) => {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
+
         }}>
+
             <Paper sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                p: 1,
+                p: 2,
                 m: 2,
-                bgcolor: 'rgba(255,255,255,0.7)',
+                maxWidth: '80rem',
+                mx: 'auto',
+                background: 'linear-gradient(1deg,rgba(238, 174, 202, 0.25) 0%, rgba(148, 187, 233, 0.3) 100%);',
                 backdropFilter: "blur(10px) saturate(180%)",
-                WebkitBackdropFilter: "blur(10px) saturate(180%)",
-                borderBottom: '0.20rem solid rgba(0,0,0,0.08)',
             }} elevation={0}>
-                <Typography sx={{ mb: 2 }}>Tools</Typography>
 
-                {/* Тук са инструментите */}
-                <Box sx={{ display: 'flex', gap: 1 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center' }}>
+                    <ButtonGroup size="medium" variant="contained">
+                        <Button onClick={() => editor.chain().focus().toggleHeading({level: 1}).run()}>H1</Button>
+                        <Button onClick={() => editor.chain().focus().toggleHeading({level: 2}).run()}>H2</Button>
+                        <Button onClick={() => editor.chain().focus().toggleHeading({level: 3}).run()}>H3</Button>
+                        <Button onClick={() => editor.chain().focus().setParagraph().run()}>P</Button>
 
+                        <Button onClick={() => editor.chain().focus().toggleBold().run()}>
+                            <FormatBoldSharpIcon fontSize="small" />
+                        </Button>
+                        <Button onClick={() => editor.chain().focus().toggleItalic().run()}>
+                            <FormatItalicIcon fontSize="small" />
+                        </Button>
+                        <Button onClick={() => editor.chain().focus().toggleStrike().run()}>
+                            <FormatStrikethroughSharpIcon fontSize="small" />
+                        </Button>
+                        <Button onClick={imageEditor}>
+                            <AddAPhotoIcon fontSize="small" />
+                        </Button>
 
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: '#000000',
+                        <Button onClick={() => editor.chain().focus().toggleHighlight().run()}>
+                            Highlight
+                        </Button>
 
-                        П: 0.5,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleHeading({level: 1}).run()}
-                            className={editor.isActive('heading', {level: 1}) ? 'is-active' : ''}
-                    >
-                        H1
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        fontWeight: 'bold',
-                        color: 'black',
+                        <Button onClick={() => editor.chain().focus().setTextAlign('left').run()}>
+                            <FormatAlignLeftSharpIcon fontSize="small" />
+                        </Button>
+                        <Button onClick={() => editor.chain().focus().setTextAlign('center').run()}>
+                            <FormatAlignCenterSharpIcon fontSize="small" />
+                        </Button>
+                        <Button onClick={() => editor.chain().focus().setTextAlign('right').run()}>
+                            <FormatAlignRightSharpIcon fontSize="small" />
+                        </Button>
+                        <Button onClick={() => editor.chain().focus().setTextAlign('justify').run()}>≡</Button>
+                    </ButtonGroup>
+                </Box>
+            </Paper>
 
-                        m: 0.5,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleHeading({level: 2}).run()}
-                            className={editor.isActive('heading', {level: 2}) ? 'is-active' : ''}
-                    >
-                        H2
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleHeading({level: 3}).run()}
-                            className={editor.isActive('heading', {level: 3}) ? 'is-active' : ''}
-                    >
-                        H3
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,233,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().setParagraph().run()}
-                            className={editor.isActive('paragraph') ? 'is-active' : ''}
-                    >
-                        Paragraph
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleBold().run()}
-                            className={editor.isActive('bold') ? 'is-active' : ''}
-                    >
-                        <FormatBoldSharpIcon/>
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleItalic().run()}
-                            className={editor.isActive('italic') ? 'is-active' : ''}
-                    >
-                        <FormatItalicIcon/>
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleStrike().run()}
-                            className={editor.isActive('strike') ? 'is-active' : ''}
-                    >
-                        <FormatStrikethroughSharpIcon/>
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().toggleHighlight().run()}
-                            className={editor.isActive('highlight') ? 'is-active' : ''}
-                    >
-                        Highlight
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().setTextAlign('left').run()}
-                            className={editor.isActive({textAlign: 'left'}) ? 'is-active' : ''}
-                    >
-                        <FormatAlignLeftSharpIcon/>
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().setTextAlign('center').run()}
-                            className={editor.isActive({textAlign: 'center'}) ? 'is-active' : ''}
-                    >
-                        <FormatAlignCenterSharpIcon/>
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().setTextAlign('right').run()}
-                            className={editor.isActive({textAlign: 'right'}) ? 'is-active' : ''}
-                    >
-                        <FormatAlignRightSharpIcon/>
-                    </Button>
-                    <Button sx={{
-                        bgcolor: 'rgb(205,235,255)',
-                        color: 'black',
-                        p: 2,
-                        m: 1,
-                        border: '0.1rem solid rgba(0,0,0,0.08)',
-                    }}
-                            onClick={() => editor.chain().focus().setTextAlign('justify').run()}
-                            className={editor.isActive({textAlign: 'justify'}) ? 'is-active' : ''}
-                    >
-                        Justify
-                    </Button>
-            </Box>
-        </Paper>
         </Box>
     )
 }
 
 export default () => {
+
+    const addImage = () => {
+        const url = window.prompt('URL')
+
+        if (url) {
+            editor.chain().focus().setImage({ src: url }).run()
+        }
+    }
     const editor = useEditor({
         extensions: [
-            StarterKit,
-            /*TODO: добави емотикони*/
+            StarterKit,Document, Paragraph, Text, Image, Dropcursor,
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
             Highlight,
         ],
-        content:
+        content: `
+      <p>This is a basic example of implementing images. Drag to re-order.</p>
 
-            `
-
-      <h3 style="text-align:center">
-        Devs Just Want to Have Fun by Cyndi Lauper
-      </h3>
-      <p style="text-align:center">
-        I come home in the morning light<br>
-        My mother says, <mark>“When you gonna live your life right?”</mark><br>
-        Oh mother dear we’re not the fortunate ones<br>
-        And devs, they wanna have fun<br>
-        Oh devs just want to have fun</p>
-      <p style="text-align:center">
-        The phone rings in the middle of the night<br>
-        My father yells, "What you gonna do with your life?"<br>
-        Oh daddy dear, you know you’re still number one<br>
-        But <s>girls</s>devs, they wanna have fun<br>
-        Oh devs just want to have
-      </p>
-      <p style="text-align:center">
-        That’s all they really want<br>
-        Some fun<br>
-        When the working day is done<br>
-        Oh devs, they wanna have fun<br>
-        Oh devs just wanna have fun<br>
-        (devs, they wanna, wanna have fun, devs wanna have)
-      </p>
-    `
-        ,
+    `,
     })
 
     return (
         <>
-            <MenuBar editor={editor}/>
-            <Paper><EditorContent editor={editor}/></Paper>
+            <MenuBar editor={editor} imageEditor={addImage} />
+            <Paper sx={{
+                maxWidth: '85rem',
+                minWidth: '60rem',
+                '& .ProseMirror': {
+                    minHeight: '8rem',
+                    outline: 'none',
+
+                    '& p.is-editor-empty:first-of-type::before': {
+                        content: 'attr(data-placeholder)',
+                        float: 'left',
+                        color: 'text.disabled',
+                        pointerEvents: 'none',
+                        height: 0,
+                    },
+                }
+            }}><EditorContent editor={editor} /></Paper>
         </>
     )
 }

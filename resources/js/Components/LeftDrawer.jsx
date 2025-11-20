@@ -102,7 +102,7 @@ export default function LeftDrawer(props) {
                         sx={{
                             m: 3,
                             borderRadius: 0,
-                            borderBottom: '2px solid',
+                            borderBottom: '0.15rem solid',
                             borderColor: 'neutral.outlinedBorder',
                             bgcolor: 'inherit',
                             color: 'white',

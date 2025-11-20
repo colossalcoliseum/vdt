@@ -1,14 +1,13 @@
 import {useState} from 'react';
 import {TopNav} from "@/Components/TopNav.jsx";
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import LeftDrawer from "@/Components/LeftDrawer.jsx";
-import SearchSharpIcon from '@mui/icons-material/SearchSharp';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import Box from '@mui/joy/Box';
+import List from '@mui/joy/List';
+import ListDivider from '@mui/joy/ListDivider';
+import ListItem from '@mui/joy/ListItem';
+import ListItemButton from '@mui/joy/ListItemButton';
+import Home from '@mui/icons-material/Home';
+import Person from '@mui/icons-material/Person';
 import {router, useForm, usePage} from "@inertiajs/react";
 import {AppBar, Toolbar, useScrollTrigger} from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -16,6 +15,8 @@ import Container from '@mui/material/Container';
 import {NavigationMenu, NavigationMenuItem, NavigationMenuList} from "@/Components/ui/navigation-menu.jsx";
 import RightDrawer from "@/Components/RightDrawer.jsx";
 import Grid from "@mui/material/Grid";
+import LeftDrawer from "@/Components/LeftDrawer.jsx";
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
 export default function AuthenticatedLayout({header, children}) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -80,17 +81,46 @@ export default function AuthenticatedLayout({header, children}) {
 
                     }}
                             >
+                        <List role="menubar" orientation="horizontal">
+                            <ListItem role="none">
                                 <Box sx={{
                                     display: 'flex',
                                     flexDirection: 'row',
                                     px:6,
                                     justifyContent: 'space-between',
                                 }}>
-                                    <Box sx={{display:'flex', flexDirection:"row"}}>                                 <LeftDrawer/>   <ApplicationLogo className={'h-12 pl-12'}/>
+                                    <Box sx={{display:'flex', flexDirection:"row"}}>
+                                        <LeftDrawer/>
                                     </Box>
 
-                                    <RightDrawer/>
                                 </Box>
+                            </ListItem>
+                            <ListDivider />
+                            <ListItem role="none">
+                                <ListItemButton role="menuitem" component="a" href="#horizontal-list">
+                                    Home
+                                </ListItemButton>
+                            </ListItem>
+                            <ListDivider />
+                            <ListItem role="none">
+                                <ListItemButton role="menuitem" component="a" href="#horizontal-list">
+                                Videos
+                                </ListItemButton>
+                            </ListItem>
+                            <ListDivider />
+
+                            <ListItem role="none">
+                                <ListItemButton role="menuitem" component="a" href="#horizontal-list">
+                                    Posts
+                                </ListItemButton>
+                            </ListItem>
+                            <ListDivider />
+
+                            <ListItem role="none" sx={{ marginInlineStart: 'auto' }}>
+                                <RightDrawer/>
+                            </ListItem>
+
+                        </List>
                     </AppBar>
 
 

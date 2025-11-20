@@ -6,15 +6,18 @@ import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import * as React from "react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import {shadows} from '@mui/system';
 import Grid from "@mui/material/Grid";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {Avatar} from "@mui/material";
+import AspectRatio from '@mui/joy/AspectRatio';
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+import CardOverflow from '@mui/joy/CardOverflow';
+import Divider from '@mui/joy/Divider';
+import Typography from '@mui/joy/Typography';
 
 export default function ContentResultsDashboard({content, query, type}) {
 
@@ -30,8 +33,14 @@ export default function ContentResultsDashboard({content, query, type}) {
                         borderColor: 'grey.300',
                         p: 1,
                         m: 1,
+
+                        background: 'rgba(255, 255, 255, 0.4)',
+                        backdropFilter: "blur(4px)",
+                        py:0.5,
+                        display: 'flex',
+
                         borderRadius: 2,
-                        fontSize: '1rem',
+                        fontSize: '1.3rem',
                         fontWeight: '700',
                         ...theme.applyStyles('dark', {
                             bgcolor: '#101010',
@@ -46,103 +55,72 @@ export default function ContentResultsDashboard({content, query, type}) {
         );
     }
 
+
     return (
         <AuthenticatedLayout
 
         >
             <Head title="Posts"/>
-            <Grid><Box sx={{display: 'flex', flexDirection: 'row'}}>
-                <Item><SearchOutlinedIcon/> Search | <Link href={route('post.index')} underline={'none'}>{type}</Link>  </Item><Item>{query}</Item>
-            </Box>
 
+
+            <Grid><Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
+                <Item> Latest Posts </Item>
+            </Box>
             </Grid>
             <Box sx={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                alignItems: 'center',
-                justifyContent: 'start'
+                gridTemplateColumns: 'repeat(4, auto)',
+
             }}>
 
                 {content.data.map((item) => (
-                    <Card elevation={4}
-                          sx={{
-                              maxWidth: 445,
-                              m: 3,
-                              p: 0.5,
-                              bgcolor: 'rgba(207,207,207,0.6)',
-                          }}>
-                        <Box sx={{position: 'relative'}}>
-                            <CardActionArea sx={{bgcolor: 'rgba(0, 0, 0, 0.6)',}}>
-                                {type === "posts" &&
-                                    <Link href={route("post.show", item.id)}
+                    <Card variant="outlined" sx={{ m:2, }}>
+                        <CardOverflow>
+                            <AspectRatio ratio="2">
+                                <img
+                                    src={item.thumbnail}
+                                    srcSet={item.thumbnail}
+                                    loading="lazy"
+                                    alt={item.title}
+                                />
+                            </AspectRatio>
+                        </CardOverflow>
+                        <CardContent>
+                            <Typography level="title-md" sx={{
+                                color: "black",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitLineClamp: "2",
 
 
-                                          sx={{
-                                              color: 'black',
-                                          }}>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            image={item.thumbnail}
-                                            alt={item.title}
+                                WebkitBoxOrient: "vertical",
+                            }}>{item.title}</Typography>
+                            <Typography level="body-sm">{item.creator.name}</Typography>
+                        </CardContent>
+                        <CardOverflow variant="soft" sx={{ bgcolor: 'background.level1' }}>
+                            <Divider inset="context" />
+                            <CardContent orientation="horizontal">
+                                <Typography
+                                    level="body-xs"
+                                    textColor="text.secondary"
+                                    sx={{ fontWeight: 'md' }}
+                                >
+                                    6.3k views
+                                </Typography>
+                                <Divider orientation="vertical" />
+                                <Typography
+                                    level="body-xs"
+                                    textColor="text.secondary"
+                                    sx={{ fontWeight: 'md' }}
+                                >
 
-                                        />
-                                        <CardContent>
-                                            <Box
-                                                sx={{
-                                                    position: 'absolute',
-                                                    bottom: 0,
-                                                    left: 0,
-                                                    width: '100%',
-                                                    bgcolor: '#ffffff',
-                                                    color: 'white',
-                                                    padding: '10px',
-                                                }}
-                                            >
-                                                <Typography variant="h5" sx={{
-                                                    color: "black", overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    display: "-webkit-box",
-                                                    WebkitLineClamp: "2",
-                                                    WebkitBoxOrient: "vertical",
-                                                }}>{item.title}</Typography>
-                                                <Box sx={{display:"flex", alignItems:"center", px:0.5}}>  <Avatar alt={item.creator.name} variant="square" sx={{ width: 30, height: 30 }} src={item.creator.avatar} /> <Typography variant="p" sx={{color: "black",px:2}}>{item.creator.name}</Typography></Box>
-                                            </Box>
-                                        </CardContent>
-                                    </Link>}
-                                {type === "videos" && <Link href={route("video.show", item.id)}
-
-                                                            underline="none"
-                                                            sx={{
-                                                                color: 'text.primary',
-                                                            }}>
-                                    <CardMedia
-                                        component="img"
-                                        height="140"
-                                        image={item.thumbnail}
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Box
-                                            sx={{
-                                                position: 'absolute',
-                                                bottom: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                bgcolor: 'rgba(0, 0, 0, 0.54)',
-                                                color: 'white',
-                                                padding: '10px',
-                                            }}
-                                        >
-                                            <Typography variant="h5">Lizard</Typography>
-                                            <Typography variant="body2">Subtitle</Typography>
-                                        </Box>>
-                                    </CardContent>
-                                </Link>}
-
-                            </CardActionArea>
-                        </Box>
+                                    {item.created_at}
+                                </Typography>
+                            </CardContent>
+                        </CardOverflow>
                     </Card>
+
                 ))}
             </Box>
 
