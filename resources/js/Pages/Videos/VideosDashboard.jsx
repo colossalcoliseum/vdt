@@ -22,39 +22,7 @@ export default function VideosDashboard({videos}) {
         page: videos.currentPage,
     });
 
-    function Item(props) {
-        const {sx, ...other} = props;
-        return (
-            <Box
-                sx={[
-                    (theme) => ({
-                        bgcolor: '#fff',
-                        color: 'grey.800',
-                        border: '1px solid',
-                        borderColor: 'grey.300',
-                        p: 1,
-                        m: 1,
 
-                        background: 'rgba(255, 255, 255, 0.4)',
-                        backdropFilter: "blur(4px)",
-                        py:0.5,
-                        display: 'flex',
-
-                        borderRadius: 2,
-                        fontSize: '1.3rem',
-                        fontWeight: '700',
-                        ...theme.applyStyles('dark', {
-                            bgcolor: '#101010',
-                            color: 'grey.300',
-                            borderColor: 'grey.800',
-                        }),
-                    }),
-                    ...(Array.isArray(sx) ? sx : [sx]),
-                ]}
-                {...other}
-            />
-        );
-    }
     return (
         <AuthenticatedLayout
 
@@ -64,7 +32,9 @@ export default function VideosDashboard({videos}) {
 
 
             <Grid><Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
-                <Item> Latest Videos </Item>
+                <Typography level="h2" sx={{pt: 4 , fontWeight:'normal'}}>
+                    Latest Videos
+                </Typography>
             </Box>
             </Grid>
 

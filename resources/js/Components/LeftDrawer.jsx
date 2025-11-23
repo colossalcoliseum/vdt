@@ -34,7 +34,8 @@ export default function LeftDrawer(props) {
             <IconButton variant="outlined" color="neutral" sx={{
                 '&:hover': {
                     bgcolor: 'inherit',
-                }
+                },
+                borderColor: 'inherit',
             }} onClick={() => setOpen(true)}>
                 <Menu />
             </IconButton>
@@ -55,22 +56,16 @@ export default function LeftDrawer(props) {
                         alignItems: 'center',
                         gap: 0.5,
                         ml: 'auto',
-                        mt: 1,
+                        mt: 2,
                         mr: 2,
 
                     }}
                 >
-                    <Typography
-                        component="label"
-                        htmlFor="close-icon"
-                        sx={{ fontSize: 'sm', fontWeight: 'lg', cursor: 'pointer',color:'white' }}
-                    >
-                        Close
-                    </Typography>
+
                     <ModalClose id="close-icon" sx={{ position: 'initial', bgcolor:"white" }} />
                 </Box>
                 <ApplicationLogo
-                    className=" fill-current mx-auto  transition duration-300 ease-in-out text-blue-100 h-16 mb-6"/>
+                    className="fill-current text-blue-100 h-16 "/>
                 <form  onSubmit={submit}>
 
                     <Input
@@ -83,7 +78,7 @@ export default function LeftDrawer(props) {
                             setData('query', e.target.value);
                         }}
                         disabled={processing}
-                        size="sm"
+                        size="md"
                         placeholder="Search Content ..."
                         variant="plain"
                         endDecorator={<Button
@@ -135,13 +130,14 @@ export default function LeftDrawer(props) {
                     sx={{
                         flex: 'none',
                         fontSize: 'xl',
+
                         '& > div': { justifyContent: 'center' },
                     }}
                 >
-                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>Home</ListItemButton>
-                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>About</ListItemButton>
-                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>Studio</ListItemButton>
-                    <ListItemButton sx={{ fontWeight: 'lg', color:'white' }}>Contact</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Home</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>About</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Studio</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Contact</ListItemButton>
                 </List>
             </Drawer>
         </React.Fragment>

@@ -24,6 +24,7 @@ import Dropdown from '@mui/joy/Dropdown';
 import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
+import * as React from "react";
 
 const CreatePost = ({user}) => {
     const {t, i18n} = useTranslation();
@@ -82,7 +83,13 @@ const CreatePost = ({user}) => {
     `;
     return (
 
-        <Grid container spacing={2} sx={{flexGrow: 1, mt:12}}>
+        <Grid container spacing={2} >
+            <Grid size={12}>
+                <Typography level="h2" sx={{pt: 4 , fontWeight:'sm'}}>
+                    Create Post
+                </Typography>
+
+            </Grid>
             <Grid size={8}>
                 <Item>
                     <Typography variant="h6" sx={{p: 4}}>

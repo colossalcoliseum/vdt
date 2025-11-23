@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import Typography from "@mui/material/Typography";
+import Typography from '@mui/joy/Typography';
 
 const PostsPagination = ({
                              links,
@@ -26,12 +26,15 @@ const PostsPagination = ({
 
                 <Button variant={'contained'}
                         sx={{
-                            bgcolor: link.active ? '#fff4c4' : '#ffffff',
-                            color: '#616161', fontWeight: 'bold',m:2
+                            bgcolor: link.active ? '#96ceff' : '#ffffff',
+                            color: '#000000', fontWeight: 'bold',m:2
                         }}
                         size="medium" href={link.url}>
-                        <span
-                            dangerouslySetInnerHTML={{__html: link.label}}></span>
+
+                    <Typography level="body-sm" sx={{p: 0.5 , fontWeight:'normal'}}>
+                       <span
+                           dangerouslySetInnerHTML={{__html: link.label}}></span>
+                </Typography>
                 </Button>
             ))}
         </Stack>

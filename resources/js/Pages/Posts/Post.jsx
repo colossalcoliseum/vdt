@@ -8,7 +8,18 @@ import Card from "@mui/material/Card";
 import Link from '@mui/material/Link';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import NormalSpeedDial from "@/Components/SpeedDial/SpeedDial.jsx";
+import dateFormat, { masks } from "dateformat";
+import Dropdown from "@mui/joy/Dropdown";
+import MenuButton from "@mui/joy/MenuButton";
+import IconButton from "@mui/joy/IconButton";
+import MoreVert from "@mui/icons-material/MoreVert";
+import Menu from "@mui/joy/Menu";
+import MenuItem from "@mui/joy/MenuItem";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import IosShareIcon from "@mui/icons-material/IosShare";
+import DownloadIcon from "@mui/icons-material/Download";
+import * as React from "react";
+
 
 export default function Post({post}) {
     const user = usePage().props.auth.user;
@@ -34,15 +45,47 @@ export default function Post({post}) {
                 direction="column"
                 alignItems="center"
                 justify="center"
+                sx={{pt:6}}
             >
 
-                <Card sx={{maxWidth: '90%'}} alignItems="center">
                     <Paper elevation={3} centered sx={{p: 10}}>
-                        <h1 className="text-4xl tracking font-thin text-black mb-4">
+
+                        <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                            <Grid size={7}>
+                                <h1 className="text-4xl tracking font-thin text-black mb-4">
                             {post.title}
                         </h1>
-                        <NormalSpeedDial pointed={"left"}/>
-                        <Link href={route('user.show',post.creator.id)} underline="none"
+                            </Grid>
+                            <Grid size={3}>
+                                <Typography
+                                    level="body-xs"
+                                    textColor="text.secondary"
+                                    sx={{ fontWeight: 'md' }}
+                                >
+                                    {
+
+                                        dateFormat(post.created_at, "longDate")}
+
+                                </Typography>
+                            </Grid>
+                            <Grid size={2}>
+
+                            <Dropdown>
+                            <MenuButton
+                                slots={{ root: IconButton }}
+                                slotProps={{ root: { variant: 'outlined', color: 'inherit' } }}
+                            >
+                                <MoreVert />
+                            </MenuButton>
+                            <Menu>
+                                <MenuItem><BookmarkBorderIcon/>Save</MenuItem>
+                                <MenuItem><IosShareIcon/>Share</MenuItem>
+                                <MenuItem><DownloadIcon/>Download</MenuItem>
+                            </Menu>
+                            </Dropdown>
+                            </Grid>
+                        </Grid>
+                            <Link href={route('user.show',post.creator.id)} underline="none"
                               sx={{ color: 'text.primary' }}
                         >
                             {post.creator.name}
@@ -66,7 +109,6 @@ export default function Post({post}) {
                             </Typography>
                         </div>
                     </Paper>
-                </Card>
 
             </Grid>
         </AuthenticatedLayout>
