@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             StatusSeeder::class,
             UsersSeeder::class,
+            GroupSeeder::class,
             CategorySeeder::class,
             VisibilitySeeder::class,
             PostSeeder::class,

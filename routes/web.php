@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -13,16 +14,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-       /* 'posts' => Post::with('creator')->get(),
-        'videos' => Video::with('creator')->get(),*/
-    ]);
-});
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
@@ -52,7 +44,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 });
 /*  Users Layout    */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', /*'verified'*/])->group(function () {
+    Route::get('/', [HomeController::class,'home'])->name('home');
+
     Route::resource('videos', VideoController::class)->names('video')->only(['index', 'show']);
     Route::resource('posts', PostController::class)->names('post')->only(['index', 'show']);
     Route::resource('users', UserController::class)->names('user')->only(['index', 'show']);

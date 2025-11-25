@@ -25,17 +25,16 @@ import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import DownloadIcon from '@mui/icons-material/Download';
+import {Layout} from "lucide-react";
 
-export default function PostsDashboard({posts}) {
+function PostsDashboard({posts}) {
     const now = new Date();
     const {data, setData} = useForm({
         page: posts.currentPage,
     });
 
     return (
-        <AuthenticatedLayout
-
-        >
+      <>
             <Head title="Posts"/>
 
             {console.log(posts)}
@@ -131,6 +130,17 @@ export default function PostsDashboard({posts}) {
                 currentPage={posts.currentPage}
                 setCurrentPage={(page) => setData('page', page)}
             />
-        </AuthenticatedLayout>
+      </>
     );
 }
+PostsDashboard.layout = (page)=>{
+    return(
+        <AuthenticatedLayout
+        user={page.props.auth.user}
+            children={page}
+        >
+
+        </AuthenticatedLayout>
+    )
+}
+export default PostsDashboard;

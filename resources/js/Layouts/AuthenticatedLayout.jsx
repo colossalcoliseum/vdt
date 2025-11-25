@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {TopNav} from "@/Components/TopNav.jsx";
 import * as React from 'react';
 import Box from '@mui/joy/Box';
@@ -12,13 +12,14 @@ import {router, useForm, usePage} from "@inertiajs/react";
 import {AppBar, Toolbar, useScrollTrigger} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Container from '@mui/material/Container';
-import {NavigationMenu, NavigationMenuItem, NavigationMenuList} from "@/Components/ui/navigation-menu.jsx";
 import RightDrawer from "@/Components/RightDrawer.jsx";
 import Grid from "@mui/material/Grid";
 import LeftDrawer from "@/Components/LeftDrawer.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
-export default function AuthenticatedLayout({header, children}) {
+export default function AuthenticatedLayout({user, children}) {
+    const page = usePage();
+    user = page.props.auth.user;
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [openAccordions, setOpenAccordions] = useState({
@@ -31,42 +32,15 @@ export default function AuthenticatedLayout({header, children}) {
         {name: "English", code: "en"},
         {name: "Български", code: "bg"}
     ];
-
+    useEffect(() => {
+        console.log("AuthenticatedLayout mounted");
+    },[])
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
     const handleChangeLocale = (e) => setLanguage(e.target.value);
 
     const props = usePage().props
 
-    function sleep(duration) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve();
-            }, duration);
-        });
-    }
-    const {data, setData,processing} = useForm({
-       query:''
-    })
-    const submit = (e) => {
-        e.preventDefault()
-
-        router.get(route('search.posts'), {
-            query: data.query
-        }, {
-            preserveScroll: true
-        })
-    }
-
-
-
-    const [loading, setLoading] = React.useState(false);
-    React.useEffect(() => {
-        const timeout = setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-        return () => clearTimeout(timeout);
-    });
     return (
        <Container disableGutters maxWidth={false}  >
 
@@ -97,20 +71,20 @@ export default function AuthenticatedLayout({header, children}) {
                             </ListItem>
                             <ListDivider />
                             <ListItem role="none">
-                                <ListItemButton role="menuitem" component="a" href="#horizontal-list">
+                                <ListItemButton role="menuitem" component="a" href={route('home')}>
                                     Home
                                 </ListItemButton>
                             </ListItem>
                             <ListDivider />
                             <ListItem role="none">
-                                <ListItemButton role="menuitem" component="a" href="#horizontal-list">
+                                <ListItemButton role="menuitem" component="a" href={route('video.index')}>
                                 Videos
                                 </ListItemButton>
                             </ListItem>
                             <ListDivider />
 
                             <ListItem role="none">
-                                <ListItemButton role="menuitem" component="a" href="#horizontal-list">
+                                <ListItemButton role="menuitem" component="a" href={route('post.index')}>
                                     Posts
                                 </ListItemButton>
                             </ListItem>
@@ -123,12 +97,6 @@ export default function AuthenticatedLayout({header, children}) {
                         </List>
                     </AppBar>
 
-
-                {header && (
-                    <header>
-                        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{header}</div>
-                    </header>
-                )}
 
                 <Box
                     component="main"
