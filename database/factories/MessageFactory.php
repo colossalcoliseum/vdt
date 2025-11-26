@@ -17,10 +17,10 @@ class MessageFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {/* https://www.youtube.com/watch?v=UyEZ74l40yU ~~ 44:20*/ /*TODO: изтрий*/
-        $senderId = $this->faker->numberBetween([0,1]);
+    {
+        $senderId = $this->faker->numberBetween(0,1);// без масиви
         if ($senderId === 0) {
-            $senderId = $this->faker->randomElement(User::where('sender_id','!=',1)
+            $senderId = $this->faker->randomElement(User::where('id','!=',1)
                 ->pluck('id')->toArray());
             $recieverId = 1;
         }
@@ -30,13 +30,20 @@ class MessageFactory extends Factory
         $groupId = null;
         if ($this->faker->boolean(50)) {
             $groupId = $this->faker->randomElement(Group::pluck('id')->toArray());
+            //dump("groupID->".$groupId."; ");
             $group = Group::find($groupId);
+            //dump("group->".$group."; ");
             $senderId = $this->faker->randomElement($group->users->pluck('id')->toArray());
+            dump("senderId->".$senderId.";");
+
             $recieverId=null;
         }
         return [
             'sender_id'=>$senderId,
-            'reciever_id'=>$recieverId,
+            'receiver_id'=>$recieverId,
+            'group_id'=>$groupId,
+            'message'=>$this->faker->realText(200),
+            'created_at'=>$this->faker->dateTimeBetween('-1 years', 'now'),
         ];
     }
 }

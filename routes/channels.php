@@ -1,10 +1,7 @@
 <?php
 
-use App\Broadcasting\PostChannel;
 use Illuminate\Support\Facades\Broadcast;
-use App\Models\User;
-use App\Models\Post;
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+
+Broadcast::channel('online', function ($user){
+    return $user;
 });
-Broadcast::channel('posts.{postId}', PostChannel::class,['guards'=>['web'/*,'admin'*/]]);
