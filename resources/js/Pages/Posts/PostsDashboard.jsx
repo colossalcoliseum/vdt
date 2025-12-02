@@ -26,6 +26,7 @@ import MoreVert from '@mui/icons-material/MoreVert';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import DownloadIcon from '@mui/icons-material/Download';
 import {Layout} from "lucide-react";
+import PostCard from "@/Pages/Posts/PostCard.jsx";
 
 function PostsDashboard({posts}) {
     const now = new Date();
@@ -36,9 +37,7 @@ function PostsDashboard({posts}) {
     return (
       <>
             <Head title="Posts"/>
-
-            {console.log(posts)}
-            <Grid>
+           <Grid>
                 <Typography level="h2" sx={{pt: 4 , fontWeight:'sm'}}>
                     Latest Posts
                 </Typography>
@@ -52,73 +51,13 @@ function PostsDashboard({posts}) {
 
 
                         {posts.data.map((post) => (
-                            <Card variant="outlined" sx={{ m:2,width:'23rem' }}>
-                                <CardOverflow>
-                                    <AspectRatio ratio="1.8">
-                                        <img
-                                            src={post.thumbnail}
-                                            srcSet={post.thumbnail}
-                                            loading="lazy"
-                                            alt={post.title}
-                                        />
-                                    </AspectRatio>
-                                </CardOverflow>
-                                <CardContent>
-                                    <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                                    <Grid size={10}>
-                                        <Typography level="title-sm" sx={{
-                                            color: "black",
-                                            overflow: "hidden",
-                                            textOverflow: "ellipsis",
-                                            display: "-webkit-box",
-                                            WebkitLineClamp: "2",
+                           <PostCard
+                            creator={post.creator.name}
+                            thumbnail={post.thumbnail}
+                            title={post.title}
+                            createdAt={post.created_at}
+                           />
 
-
-                                            WebkitBoxOrient: "vertical",
-                                        }}>{post.title}
-                                        </Typography>
-                                     </Grid>
-                                    <Grid size={2}>
-                                        <Dropdown>
-                                            <MenuButton
-                                                slots={{ root: IconButton }}
-                                                slotProps={{ root: { variant: 'outlined', color: 'inherit' } }}
-                                            >
-                                                <MoreVert />
-                                            </MenuButton>
-                                            <Menu>
-                                                <MenuItem><BookmarkBorderIcon/>Save</MenuItem>
-                                                <MenuItem><IosShareIcon/>Share</MenuItem>
-                                                <MenuItem><DownloadIcon/>Download</MenuItem>
-                                            </Menu>
-                                        </Dropdown>
-                                    </Grid>
-                                    </Grid>
-                                    <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                                    <Grid size={7.75}>
-                                        <Typography level="body-sm">{post.creator.name}
-                                        </Typography>
-                                     </Grid>
-                                    <Grid size={4.25}>
-                                        <Typography
-                                            level="body-xs"
-                                            textColor="text.secondary"
-                                            sx={{ fontWeight: 'md' }}
-                                        >
-                                            {
-
-                                                dateFormat(post.created_at, "longDate")}
-
-                                        </Typography>
-                                    </Grid>
-                                    </Grid>
-
-
-
-
-                                </CardContent>
-
-                            </Card>
                         ))}
 
 

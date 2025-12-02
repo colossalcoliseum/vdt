@@ -7,6 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ably/laravel-broadcaster": "^1.0",
         "blade-ui-kit/blade-icons": "*",
         "davidhsianturi/blade-bootstrap-icons": "^2.1",
         "filament/forms": "^3.3",
@@ -15,7 +16,7 @@
         "http-interop/http-factory-guzzle": "^1.2",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
-        "laravel/reverb": "^1.0",
+        "laravel/reverb": "^1.6",
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.19",
         "laravel/socialite": "^5.21",
@@ -25,6 +26,7 @@
         "mckenziearts/laravel-notify": "^2.7",
         "php-flasher/flasher-laravel": "^2.1",
         "php-flasher/flasher-sweetalert-symfony": "^2.1",
+        "pusher/pusher-php-server": "^7.2",
         "socialiteproviders/instagram": "^5.1",
         "spatie/laravel-permission": "^6.20",
         "stevebauman/location": "^7.5",
@@ -79,7 +81,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+
+            ]
         }
     },
     "config": {
