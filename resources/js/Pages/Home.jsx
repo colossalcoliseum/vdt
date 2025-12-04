@@ -27,44 +27,52 @@ function Home() {
         <>
             <Box component="container"
                  sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
-                <Grid container columns={18} sx={{flexGrow: 0, width: '100%', height: '100%',
-                    bgcolor: 'rgba(142,121,121,0.18)',
+                <Grid container columns={18} sx={{
+                    flexGrow: 1, width: '100%', height: '100%',
+
 
                 }}>
-                    <Grid size={16} sx={{ minWidth: '60rem',
 
-                        WebkitBackdropFilter: "blur(10px) saturate(100%)",
-
-                        backdropFilter: "blur(1px) saturate(380%)",
-                    }}>
-                        <Typography level="h1" sx={{
-                            p: 2, mt: 12, width: '100%',
-
+                        <Typography level="h6" sx={{
+                            py:'2.5rem',
+                            width: '100%',
+                            textAlign: 'center',
                             color: 'black',
-                            flexDirection: "row",
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            fontWeight: 'lighter',
-                            fontFamily: "manrope",
-                            fontSize: '6rem',
+                            fontWeight: 'bold',
+                            fontFamily: "Alumni Sans Pinstripe",
+                            fontSize: '5rem',
+
                         }}>
-                            Editor's Pick
+                            Welcome to the world of VDT!
                         </Typography>
+                    <Box sx={{height: '80rem', width: '100rem', justifyContent: 'center', bgcolor: 'rgba(255,0,0,0.18)',
+                         mx:5,
+                        }}>
 
-                    </Grid>
-                    <Grid size={2} >
-                        <Grid container columns={6} sx={{flexGrow: 1}}>
+                        <Grid columns={5} sx={{display: 'flex', justifyContent: 'space-between',gap:0, alignItems: 'center',}}>
 
-                            <Grid size={4} >
-                                <img src="https://picsum.photos/400/" alt="hello"/>
+                            <Grid size={2}>
+                                <Typography  sx={{
+                                    mx:'1.5rem',
+                                    maxWidth: '80rem',
+                                    textAlign: 'center',
+                                    color: 'black',
+                                    fontWeight: 'bold',
+                                    fontFamily: "Alumni Sans Pinstripe",
+                                    fontSize: '7rem',
+
+                                }}>
+                                    Watch Videos, Read Blogs, and Discuss with your Friends.
+                                </Typography>
                             </Grid>
-                            <Grid size={2} sx={{p: 1}}>
-
+                                <Grid size={3} sx={{  bgcolor: 'rgba(0,0,0,0.18)'}}>
+                                    <img src="https://picsum.photos/700/700" alt="hello"/>
 
                             </Grid>
+
                         </Grid>
-                    </Grid>
+
+                    </Box>
 
 
                 </Grid>

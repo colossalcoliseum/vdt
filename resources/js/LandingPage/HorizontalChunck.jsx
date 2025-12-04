@@ -22,8 +22,10 @@ function HorizontalChunck(){
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontWeight: 'lighter',
-                    fontFamily: "manrope",
+                    fontWeight: 'bold',
+                    fontFamily: "Alumni Sans Pinstripe",
+                    letterSpacing: 2,
+
                     fontSize: '6rem',
                 }}>
                     Editor's Pick
@@ -41,9 +43,11 @@ function HorizontalChunck(){
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            fontFamily:"manrope",
+                            fontWeight: 'bold',
+                            fontFamily: "Alumni Sans Pinstripe",
                             fontSize: '3rem',
-                            fontWeight: 'lighter',
+                            letterSpacing: 1,
+
                             my:5,
                             mx:1
                         }}>
@@ -55,9 +59,12 @@ function HorizontalChunck(){
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             display: "-webkit-box",
-                            WebkitLineClamp: "10",
+                            WebkitLineClamp: "4",
                             maxWidth: "15rem",
-                            fontWeight: 'lighter',
+                            fontWeight: 'bold',
+                            fontFamily: "Alumni Sans Pinstripe",
+                            fontSize: '2rem',
+                            letterSpacing: 1,
                             my:2,
                             px:1,
 
