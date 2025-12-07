@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "/components/ui/button";
+import Button from '@mui/joy/Box'
 
 const CarouselContext = createContext(null);
 
@@ -53,19 +53,19 @@ function Carousel({
         hasNext,
         setTotalCards,
       }}>
-      <div
+             <CarouselPrevious />
+        <div
         onKeyDownCapture={handleKeyDown}
-        className={cn("relative flex flex-col", className)}
+        className={cn("relative flex flex-row", className)}
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"
         {...props}>
         {children}
-        <div className="flex justify-between mt-4">
-          <CarouselPrevious />
+
           <CarouselNext />
         </div>
-      </div>
+
     </CarouselContext.Provider>
   );
 }
@@ -162,10 +162,15 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn("size-8 rounded-full", className)}
+
       disabled={!hasPrevious}
       onClick={goToPrevious}
-      {...props}>
-      <ChevronUp className="size-4" />
+      {...props}
+      sx={{ pr:3, pt:12}}
+    >
+      <ChevronUp className="size-4"
+
+      />
       <span className="sr-only">Previous card</span>
     </Button>
   );
@@ -187,7 +192,10 @@ function CarouselNext({
       className={cn("size-8 rounded-full", className)}
       disabled={!hasNext}
       onClick={goToNext}
-      {...props}>
+      {...props}
+      sx={{ pl:3, pt:12}}
+
+    >
       <ChevronDown className="size-4" />
       <span className="sr-only">Next card</span>
     </Button>

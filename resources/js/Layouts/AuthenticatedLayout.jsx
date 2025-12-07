@@ -391,11 +391,10 @@ export default function AuthenticatedLayout({user, children}) {
                display: "flex",
                flexDirection: 'column',
                 width: '100%',
-
                     }}
                 >
 
-                            <Box sx={{ my:8, mx: 12 }}>
+                            <Box sx={{ mx: '0.5rem' }}>
                         {children}
                             </Box>
 
