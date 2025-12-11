@@ -12,6 +12,7 @@ import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import {Carousel, CarouselContent, CarouselItem} from "../../../../components/ui/carousel.jsx";
+import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
 
 function Home() {
@@ -44,7 +45,8 @@ function Home() {
             <Box component="container" sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
                  }}>
 
-                <Grid container columns={18} sx={{flexGrow: 1, zIndex:1}}>
+                <Grid container columns={18} sx={{flexGrow: 1, zIndex:1, my:'4.5rem'}}>
+                    <Box sx={{height: '30rem', width: '100%', justifyContent: 'center', bgcolor: '', margin: '0 auto',}}>
 
                         <Typography level="h6" sx={{
                             py:'2.5rem',
@@ -57,9 +59,18 @@ function Home() {
                             fontSize: '5rem'}}
 
                         >
+                            <ApplicationLogo
+                             className="mx-auto"
+
+                             width={381}
+                             height={171}
+                             startStroke="#0000000"
+                             stopStroke="#000000"
+                            />
                             Welcome to the world of VDT!
 
                         </Typography>
+                    </Box>
                     <Box  sx={{height: 'relative', width: '100%', justifyContent: 'center',
                             margin: '0 auto',
                         }}>

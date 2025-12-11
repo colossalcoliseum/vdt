@@ -1,19 +1,37 @@
-import {useState} from "react";
-
-export default function ApplicationLogo(
-                                            props,
-                                            viewbox,
-                                        ) {
-    viewbox = useState("0 0 130 130")//TODO: Нужна е възможност логото да се променя по размер чрез state
+export default function ApplicationLogo({
+                                            width = "126.879", height = "56.957",
+                                            stroke = "",
+                                            startStroke = "rgba(255, 224, 224)",
+                                            stopStroke = "rgba(196, 242, 255)",
+                                            ...props
+                                        }) {
     return (
-
         <svg
             {...props}
-            viewBox="0 0 62.939 27.979"//{viewbox}
+            className="mx-auto"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 128 58"
             xmlns="http://www.w3.org/2000/svg"
+            width={width}
+            height={height}
         >
-            <path
-                d="M 13.086 0 L 18.018 0 L 12.988 27.979 L 4.98 27.979 L 0 0 L 4.688 0 L 8.203 23.975 L 9.619 23.975 L 13.086 0 Z M 57.178 3.564 L 57.178 27.979 L 53.467 27.979 L 53.467 3.564 L 47.412 3.564 L 47.412 0 L 62.939 0 L 62.939 3.564 L 57.178 3.564 Z M 34.473 27.979 L 23.975 27.979 L 23.975 0 L 34.961 0 L 39.453 6.494 L 39.453 21.973 L 34.473 27.979 Z M 27.686 3.516 L 27.686 24.17 L 34.082 24.17 L 35.059 22.998 L 35.059 4.98 L 34.082 3.516 L 27.686 3.516 Z"/>
+            <defs>
+                <linearGradient id="myGradient">
+                    <stop offset="0%" stop-color="rgba(255, 224, 224)"/>
+                    <stop offset="100%" stop-color="rgba(196, 242, 255)"/>
+                </linearGradient>
+            </defs>
+            <g
+                id="svgGroup"
+
+                stroke={stroke}
+                fill="url(#myGradient)"
+            >
+                <path
+                    d="M 26.172 0 L 36.035 0 L 25.977 55.957 L 9.961 55.957 L 0 0 L 9.375 0 L 16.406 47.949 L 19.238 47.949 L 26.172 0 Z M 114.355 7.129 L 114.355 55.957 L 106.934 55.957 L 106.934 7.129 L 94.824 7.129 L 94.824 0 L 125.879 0 L 125.879 7.129 L 114.355 7.129 Z M 68.945 55.957 L 47.949 55.957 L 47.949 0 L 69.922 0 L 78.906 12.988 L 78.906 43.945 L 68.945 55.957 Z M 55.371 7.031 L 55.371 48.34 L 68.164 48.34 L 70.117 45.996 L 70.117 9.961 L 68.164 7.031 L 55.371 7.031 Z"
+                    vectorEffect="non-scaling-stroke"
+                />
+            </g>
         </svg>
     );
 }
