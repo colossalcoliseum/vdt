@@ -1,8 +1,11 @@
-export default function ApplicationLogo({
+import {useState} from "react";
+
+export default function ApplicationLogo({   colored=true,
                                             width = "126.879", height = "56.957",
                                             stroke = "",
-                                            startStroke = "rgba(255, 224, 224)",
-                                            stopStroke = "rgba(196, 242, 255)",
+                                            startStroke =  "rgba(255, 224, 224)" ,
+                                            stopStroke = "rgba(196, 242, 255)" ,
+
                                             ...props
                                         }) {
     return (
@@ -17,8 +20,8 @@ export default function ApplicationLogo({
         >
             <defs>
                 <linearGradient id="myGradient">
-                    <stop offset="0%" stop-color="rgba(255, 224, 224)"/>
-                    <stop offset="100%" stop-color="rgba(196, 242, 255)"/>
+                    <stop offset="0%" stop-color={stopStroke}/>
+                    <stop offset="100%" stop-color={startStroke}/>
                 </linearGradient>
             </defs>
             <g

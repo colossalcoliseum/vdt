@@ -14,8 +14,11 @@ import {router, useForm} from "@inertiajs/react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import {Laptop, Moon, Sun} from "lucide-react";
+import {ThemeSwitch} from "../../../components/ui/theme-switch.jsx";
+import ListItem from "@mui/joy/ListItem";
 
-export default function LeftDrawer(props) {
+export default function LeftDrawer({logoStartColor,logoEndColor}) {
     const [open, setOpen] = React.useState(false);
     const {data, setData,processing} = useForm({
         query:''
@@ -65,7 +68,9 @@ export default function LeftDrawer(props) {
                     <ModalClose id="close-icon" sx={{ position: 'initial', bgcolor:"white" }} />
                 </Box>
                 <ApplicationLogo
-                    className="fill-current text-blue-100 h-16 "/>
+                startStroke={logoStartColor}
+                stopStroke={logoEndColor}
+                />
                 <form  onSubmit={submit}>
 
                     <Input
@@ -138,6 +143,16 @@ export default function LeftDrawer(props) {
                     <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>About</ListItemButton>
                     <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Studio</ListItemButton>
                     <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Contact</ListItemButton>
+                    <ListItem  sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white', '&hover': {color:'black'} }} >
+                    <ThemeSwitch
+                        modes={["light", "dark", "system"]}
+                        icons={[
+                            <Sun key="sun-icon" size={16} />,
+                            <Moon key="moon-icon" size={16} />,
+                            <Laptop key="laptop-icon" size={16} />,
+                        ]}
+                        showInactiveIcons="all"
+                    /></ListItem >
                 </List>
             </Drawer>
         </React.Fragment>

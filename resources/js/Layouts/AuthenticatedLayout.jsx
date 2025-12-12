@@ -22,12 +22,14 @@ import {router, useForm, usePage} from "@inertiajs/react";
 import {AppBar, Toolbar, useScrollTrigger} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Container from '@mui/material/Container';
-import RightDrawer from "@/Components/RightDrawer.jsx";
-import Grid from "@mui/material/Grid";
-import LeftDrawer from "@/Components/LeftDrawer.jsx";
-import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
-export default function AuthenticatedLayout({user, children}) {
+import { Sun, Moon, Laptop } from "lucide-react";
 
+import LeftDrawer from "@/Components/LeftDrawer.jsx";
+ export default function AuthenticatedLayout({user, children,logoStartColor,logoStopColor }) {
+
+   /* const [logoStartColor, setLogoStartColor] = useState('rgb(196, 242, 255)');
+    const [logoStopColor, setLogoStopColor] = useState('rgb(255, 224, 224)');*/
+    logoStartColor = logoStartColor || 'rgb(196, 242, 255)';
     const useRovingIndex = (options) => {
         const {
             initialActiveIndex = 0,
@@ -360,7 +362,10 @@ export default function AuthenticatedLayout({user, children}) {
                             >
 
 
-                                        <LeftDrawer/>
+                                        <LeftDrawer
+                                            logoStartColor={logoStartColor}
+                                            logoEndColor={logoStopColor}
+                                        />
 
 
                                 <ListItem role="none">
@@ -374,6 +379,8 @@ export default function AuthenticatedLayout({user, children}) {
 
                                     />
                                 </ListItem>
+
+
                             </List>
                         </Box>
 
@@ -385,10 +392,9 @@ export default function AuthenticatedLayout({user, children}) {
                     component="main"
 
            sx={{
-                        background: 'linear-gradient(160deg,rgba(196, 242, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 224, 224, 1) 100%);',
+                        background: 'black',
                         position: "relative",
-                        backgroundAttachment: 'fixed',
-               display: "flex",
+                display: "flex",
                flexDirection: 'column',
                 width: '100%',
                     }}
