@@ -13,8 +13,6 @@ class SearchController extends Controller
     ){}
     public function searchPosts(Request $request){
         $query = $request->input('query');
-//        dd($query);
-        $test = "posts";
         return Inertia::render('Results/ContentResultsDashboard', [
             'content' =>  $this->searchService->searchPosts($query),
             'query' =>  $query,
@@ -22,11 +20,20 @@ class SearchController extends Controller
 
         ]);
     }
-    public function searchVideos($query){
+    public function searchVideos(Request $request){
+        $query = $request->input('query');
+        return Inertia::render('Results/ContentResultsDashboard', [
+            'content' =>  $this->searchService->searchPosts($query),
+            'query' =>  $query,
+            'type'=>"videos",
+
+        ]);
+    }
+   /* public function searchVideos($query){
         return Inertia::render('Results/ContentResultsDashboard', [
             'content' =>  $this->searchService->searchPosts($query)
         ]);
-    }
+    }*/
     public function searchUsers($query){
         dd( $this->searchService->searchUsers($query));
     }

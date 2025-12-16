@@ -1,104 +1,119 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
-import Paper from '@mui/material/Paper';
-import {useEcho} from "@laravel/echo-react";
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
-import Link from '@mui/material/Link';
-
 import * as React from "react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea';
-import Box from "@mui/material/Box";
+import Box from '@mui/joy/Box';
 import Grid from "@mui/material/Grid";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import {Avatar} from "@mui/material";
-
-export default function VideosDashboard({videos}) {
-
+import Typography from '@mui/joy/Typography';
+import PostCard from "@/Pages/Posts/PostCard.jsx";
+import Input from '@mui/joy/Input';
+import Button from "@mui/joy/Button";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+function VideosDashboard({videos: videos}) {
+    const now = new Date();
     const {data, setData} = useForm({
         page: videos.currentPage,
     });
 
 
-    return (
-        <AuthenticatedLayout
+    const submit = (e) => {
+        e.preventDefault()
 
-        >
+        router.get(route('search.videos'), {
+            query: data.query
+        }, {
+            preserveScroll: true
+        })
+    }
+    return (
+        <>
             <Head title="Posts"/>
 
+            <Grid container columns={18} sx={{flexGrow: 1,my:'1rem', borderRadius:'1rem', width: '80%', height: '100%', mx: 'auto',
 
 
-            <Grid><Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
-                <Typography level="h2" sx={{pt: 4 , fontWeight:'normal'}}>
-                    Latest Videos
-                </Typography>
-            </Box>
+            }}>
+                <Grid size={15}>
+                    <Typography level="h1" sx={{
+                        color: 'white',
+                        fontFamily: "Segoe UI Variable Display Light",
+                        letterSpacing: 1,
+                        fontSize: '3rem',
+
+                    }}>
+                        Videos
+                    </Typography>
+                </Grid>
+                <Grid size={3} sx={{display: 'flex', gap: '1rem', justifyContent: 'flex-end'}}>
+                    <form  onSubmit={submit}>
+                        <Input
+                            id="filled-search"
+                            label="Search"
+                            type="search"
+                            name="query"
+
+                            value={data.query}
+                            onChange={(e) => {
+                                setData('query', e.target.value);
+                            }}
+
+                            /*
+                                                               disabled={processing}
+                            */
+
+                            size="md"
+                            placeholder="Search Content ..."
+                            variant="solid"
+                            endDecorator={<Button
+
+                                type="submit"
+                                /* onClick={() => setLoading(true)}*/
+
+                                sx={{color: 'white',py:'auto', backgroundColor:'white',
+                                    '&:hover': {backgroundColor: 'white'},
+                                }}
+                            >
+                                <SearchSharpIcon sx={{color:'black'}} />
+                            </Button>}
+
+
+                            sx={{
+                                '--Input-focusedInset': 'var(--any, )',
+                                '--Input-focusedThickness': '0px',
+                                fontFamily: "Segoe UI Variable Display Light",
+
+                            }}
+                        >
+
+                        </Input>
+
+
+                    </form>
+                </Grid>
+
+
+
             </Grid>
-
             <Box sx={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '1.5rem',
+                mx: '5%',
+                pl:'2rem'
+
 
             }}>
 
 
-                {videos.data.map((video,id) => (
-                    <Card elevation={4}
-                          sx={{
-                              maxWidth: 445,
-                              m: 1,
-                              borderRadius: 2,
-                              border: '1px solid',
-                          }}>
-                        <Box sx={{position: 'relative'}}>
-                            <CardActionArea>
+                {videos.data.map((video) => (
+                    <PostCard
+                        width='80%'
+                        creator={video.creator.name}
+                        thumbnail={video.thumbnail}
+                        title={video.title}
+                        createdAt={video.created_at}
+                    />
 
-                                <Link underline="none" href={route("video.show", video.id)}
-
-
-                                >
-                                    <CardMedia
-                                        component="img"
-                                        height="140"
-                                        image={video.thumbnail}
-                                        alt={video.title}
-                                        sx={{  objectFit: "scaleDown",
-                                            width: '100%',
-                                            height:"20ch",
-                                        }}
-                                    />
-                                    <CardContent>
-                                        <Box
-                                            sx={{
-                                                display: 'flex'
-                                            }}
-                                        >
-                                            <Box sx={{display:"flex", alignItems:"center"}}>
-                                                <Avatar alt={video.creator.name} variant="square" sx={{ width: 40, height: 'auto' }} src={video.creator.avatar} />
-                                                <Typography variant="p" sx={{color: "black",px:2}}>{video.creator.name}</Typography>
-                                            </Box>
-
-                                            <Typography variant="h6" sx={{
-                                                color: "black",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                display: "-webkit-box",
-                                                WebkitLineClamp: "2",
-
-
-                                                WebkitBoxOrient: "vertical",
-                                            }}>{video.title}</Typography>
-                                        </Box>
-                                    </CardContent>
-                                </Link>
-
-
-                            </CardActionArea>
-                        </Box>
-                    </Card>
                 ))}
 
 
@@ -110,6 +125,17 @@ export default function VideosDashboard({videos}) {
                 currentPage={videos.currentPage}
                 setCurrentPage={(page) => setData('page', page)}
             />
-        </AuthenticatedLayout>
+        </>
     );
 }
+VideosDashboard.layout = (page)=>{
+    return(
+        <AuthenticatedLayout
+            user={page.props.auth.user}
+            children={page}
+        >
+
+        </AuthenticatedLayout>
+    )
+}
+export default VideosDashboard;

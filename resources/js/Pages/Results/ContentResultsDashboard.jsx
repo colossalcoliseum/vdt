@@ -1,127 +1,122 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
-import Paper from '@mui/material/Paper';
-import {useEcho} from "@laravel/echo-react";
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
 import * as React from "react";
-import CardMedia from '@mui/material/CardMedia';
-import CardActionArea from '@mui/material/CardActionArea';
-import {shadows} from '@mui/system';
+import Box from '@mui/joy/Box';
 import Grid from "@mui/material/Grid";
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import {Avatar} from "@mui/material";
-import AspectRatio from '@mui/joy/AspectRatio';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CardOverflow from '@mui/joy/CardOverflow';
-import Divider from '@mui/joy/Divider';
 import Typography from '@mui/joy/Typography';
+import PostCard from "@/Pages/Posts/PostCard.jsx";
+import Input from '@mui/joy/Input';
+import Button from "@mui/joy/Button";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+function ContentResultsDashboard({content: content}) {
+    const now = new Date();
+    const {data, setData} = useForm({
+        page: content.currentPage,
+    });
 
-export default function ContentResultsDashboard({content, query, type}) {
 
-    function Item(props) {
-        const {sx, ...other} = props;
-        return (
-            <Box
-                sx={[
-                    (theme) => ({
-                        bgcolor: '#fff',
-                        color: 'grey.800',
-                        border: '1px solid',
-                        borderColor: 'grey.300',
-                        p: 1,
-                        m: 1,
+    const submit = (e) => {
+        e.preventDefault()
 
-                        background: 'rgba(255, 255, 255, 0.4)',
-                        backdropFilter: "blur(4px)",
-                        py:0.5,
-                        display: 'flex',
-
-                        borderRadius: 2,
-                        fontSize: '1.3rem',
-                        fontWeight: '700',
-                        ...theme.applyStyles('dark', {
-                            bgcolor: '#101010',
-                            color: 'grey.300',
-                            borderColor: 'grey.800',
-                        }),
-                    }),
-                    ...(Array.isArray(sx) ? sx : [sx]),
-                ]}
-                {...other}
-            />
-        );
+        router.get(route('search.posts'), {
+            query: data.query
+        }, {
+            preserveScroll: true
+        })
     }
-
-
     return (
-        <AuthenticatedLayout
-
-        >
+        <>
             <Head title="Posts"/>
 
+            <Grid container columns={18} sx={{flexGrow: 1,my:'1rem', borderRadius:'1rem', width: '80%', height: '100%', mx: 'auto',
 
-            <Grid><Box sx={{display: 'flex',m:1, flexDirection: 'row'}}>
-                <Item> Latest Posts </Item>
-            </Box>
+
+            }}>
+                <Grid size={15}>
+                    <Typography level="h1" sx={{
+                        color: 'white',
+                        fontFamily: "Segoe UI Variable Display Light",
+                        letterSpacing: 1,
+                        fontSize: '3rem',
+
+                    }}>
+                        Search
+                    </Typography>
+                </Grid>
+                <Grid size={3} sx={{display: 'flex', gap: '1rem', justifyContent: 'flex-end'}}>
+                    <form  onSubmit={submit}>
+                        <Input
+                            id="filled-search"
+                            label="Search"
+                            type="search"
+                            name="query"
+
+                            value={data.query}
+                            onChange={(e) => {
+                                setData('query', e.target.value);
+                            }}
+
+                            /*
+                                                               disabled={processing}
+                            */
+
+                            size="md"
+                            placeholder="Search Content ..."
+                            variant="solid"
+                            endDecorator={<Button
+
+                                type="submit"
+                                /* onClick={() => setLoading(true)}*/
+
+                                sx={{color: 'white',py:'auto', backgroundColor:'white',
+                                    '&:hover': {backgroundColor: 'white'},
+                                }}
+                            >
+                                <SearchSharpIcon sx={{color:'black'}} />
+                            </Button>}
+
+
+                            sx={{
+                                '--Input-focusedInset': 'var(--any, )',
+                                '--Input-focusedThickness': '0px',
+                                fontFamily: "Segoe UI Variable Display Light",
+
+                            }}
+                        >
+
+                        </Input>
+
+
+                    </form>
+                </Grid>
+
+
+
             </Grid>
             <Box sx={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, auto)',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '1.5rem',
+                mx: '5%',
+                pl:'2rem'
+
 
             }}>
 
+
                 {content.data.map((item) => (
-                    <Card variant="outlined" sx={{ m:2, }}>
-                        <CardOverflow>
-                            <AspectRatio ratio="2">
-                                <img
-                                    src={item.thumbnail}
-                                    srcSet={item.thumbnail}
-                                    loading="lazy"
-                                    alt={item.title}
-                                />
-                            </AspectRatio>
-                        </CardOverflow>
-                        <CardContent>
-                            <Typography level="title-md" sx={{
-                                color: "black",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                display: "-webkit-box",
-                                WebkitLineClamp: "2",
-
-
-                                WebkitBoxOrient: "vertical",
-                            }}>{item.title}</Typography>
-                            <Typography level="body-sm">{item.creator.name}</Typography>
-                        </CardContent>
-                        <CardOverflow variant="soft" sx={{ bgcolor: 'background.level1' }}>
-                            <Divider inset="context" />
-                            <CardContent orientation="horizontal">
-                                <Typography
-                                    level="body-xs"
-                                    textColor="text.secondary"
-                                    sx={{ fontWeight: 'md' }}
-                                >
-                                    6.3k views
-                                </Typography>
-                                <Divider orientation="vertical" />
-                                <Typography
-                                    level="body-xs"
-                                    textColor="text.secondary"
-                                    sx={{ fontWeight: 'md' }}
-                                >
-
-                                    {item.created_at}
-                                </Typography>
-                            </CardContent>
-                        </CardOverflow>
-                    </Card>
+                    <PostCard
+                        width='80%'
+                        creator={item.creator.name}
+                        thumbnail={item.thumbnail}
+                        title={item.title}
+                        createdAt={item.created_at}
+                    />
 
                 ))}
+
+
             </Box>
 
 
@@ -130,6 +125,17 @@ export default function ContentResultsDashboard({content, query, type}) {
                 currentPage={content.currentPage}
                 setCurrentPage={(page) => setData('page', page)}
             />
-        </AuthenticatedLayout>
+        </>
     );
 }
+ContentResultsDashboard.layout = (page)=>{
+    return(
+        <AuthenticatedLayout
+            user={page.props.auth.user}
+            children={page}
+        >
+
+        </AuthenticatedLayout>
+    )
+}
+export default ContentResultsDashboard;

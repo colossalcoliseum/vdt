@@ -22,8 +22,8 @@ function HorizontalChunck(){
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontWeight: 'bold',
-                    fontFamily: "Alumni Sans Pinstripe",
+                    fontWeight: 'normal',
+                    fontFamily: "Segoe UI Variable Display Light",
                     letterSpacing: 2,
 
                     fontSize: '6rem',
@@ -38,21 +38,19 @@ function HorizontalChunck(){
             <Grid size={2} >
                 <Grid container columns={6} sx={{flexGrow: 1, height:'15rem'}}>
 
-                    <Grid size={1} sx={{py: '7.5rem'}} >
-
-                    </Grid>
-                    <Grid size={5} sx={{p: 1,pt:'7.5rem',}}>
+                    <Grid size={6} sx={{p: 1,pt:'7.5rem',}}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '7.5rem' }}>
                             <Typography   sx={{
                                 color: 'black',
-                                fontWeight: 'bold',
-                                fontFamily: "Alumni Sans Pinstripe",
+                                fontWeight: 'light',
+                                fontFamily: "Segoe UI Variable Display Light",
                                 letterSpacing: 2,
-                                fontSize: '2rem',
+                                fontSize: '1.6rem',
                             }}>
                                 Stay up to date with the latest news and trends
                             </Typography>
                             <Button
+                                type="submit"
                             sx={{ borderRadius: '1rem', ml:'2rem', height:'3rem', width:'10rem', backgroundColor:'#eafbff', color:'white',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',   }}
                             href="#"

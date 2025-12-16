@@ -1,57 +1,113 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
-import Paper from '@mui/material/Paper';
-import {useEcho} from "@laravel/echo-react";
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
-
 import * as React from "react";
-import Link from '@mui/joy/Link';
 import Box from '@mui/joy/Box';
 import Grid from "@mui/material/Grid";
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import {Avatar} from "@mui/material";
-import AspectRatio from '@mui/joy/AspectRatio';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CardOverflow from '@mui/joy/CardOverflow';
-import Divider from '@mui/joy/Divider';
 import Typography from '@mui/joy/Typography';
-import dateFormat, { masks } from "dateformat";
-import Dropdown from '@mui/joy/Dropdown';
-import IconButton from '@mui/joy/IconButton';
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import MoreVert from '@mui/icons-material/MoreVert';
-import IosShareIcon from '@mui/icons-material/IosShare';
-import DownloadIcon from '@mui/icons-material/Download';
-import {Layout} from "lucide-react";
 import PostCard from "@/Pages/Posts/PostCard.jsx";
-
+import Input from '@mui/joy/Input';
+import Button from "@mui/joy/Button";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 function PostsDashboard({posts}) {
     const now = new Date();
     const {data, setData} = useForm({
         page: posts.currentPage,
     });
 
+
+    const submit = (e) => {
+        e.preventDefault()
+
+        router.get(route('search.posts'), {
+            query: data.query
+        }, {
+            preserveScroll: true
+        })
+    }
     return (
       <>
             <Head title="Posts"/>
-           <Grid>
-                <Typography level="h2" sx={{pt: 4 , fontWeight:'sm'}}>
-                    Latest Posts
-                </Typography>
+
+               <Grid container columns={18} sx={{flexGrow: 1,my:'1rem', borderRadius:'1rem', width: '80%', height: '100%', mx: 'auto',
+
+
+               }}>
+                        <Grid size={15}>
+                           <Typography level="h1" sx={{
+                               color: 'white',
+                                fontFamily: "Segoe UI Variable Display Light",
+                               letterSpacing: 1,
+                               fontSize: '3rem',
+
+                           }}>
+                               Posts
+                           </Typography>
+                       </Grid>
+                       <Grid size={3} sx={{display: 'flex', gap: '1rem', justifyContent: 'flex-end'}}>
+                           <form  onSubmit={submit}>
+                               <Input
+                                   id="filled-search"
+                                   label="Search"
+                                   type="search"
+                                    name="query"
+
+                                   value={data.query}
+                                   onChange={(e) => {
+                                       setData('query', e.target.value);
+                                   }}
+
+/*
+                                   disabled={processing}
+*/
+
+                                   size="md"
+                                   placeholder="Search Content ..."
+                                   variant="solid"
+                                   endDecorator={<Button
+
+                                       type="submit"
+                                      /* onClick={() => setLoading(true)}*/
+
+                                       sx={{color: 'white',py:'auto', backgroundColor:'white',
+                                        '&:hover': {backgroundColor: 'white'},
+}}
+                                   >
+                                       <SearchSharpIcon sx={{color:'black'}} />
+                                   </Button>}
+
+
+                                   sx={{
+                                       '--Input-focusedInset': 'var(--any, )',
+                                       '--Input-focusedThickness': '0px',
+                                       fontFamily: "Segoe UI Variable Display Light",
+
+                                   }}
+                               >
+
+                               </Input>
+
+
+                           </form>
+                       </Grid>
+
+
 
             </Grid>
             <Box sx={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, auto)',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '1.5rem',
+                mx: '5%',
+                pl:'2rem'
+
 
             }}>
 
 
                         {posts.data.map((post) => (
                            <PostCard
+                               width='80%'
                             creator={post.creator.name}
                             thumbnail={post.thumbnail}
                             title={post.title}

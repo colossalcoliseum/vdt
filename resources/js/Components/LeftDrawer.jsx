@@ -10,42 +10,26 @@ import ModalClose from '@mui/joy/ModalClose';
 import Menu from '@mui/icons-material/Menu';
 import Search from '@mui/icons-material/Search';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
-import {router, useForm} from "@inertiajs/react";
-import TextField from "@mui/material/TextField";
+ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import {Laptop, Moon, Sun} from "lucide-react";
 import {ThemeSwitch} from "../../../components/ui/theme-switch.jsx";
 import ListItem from "@mui/joy/ListItem";
 
-export default function LeftDrawer({logoStartColor,logoEndColor}) {
+export default function LeftDrawer() {
     const [open, setOpen] = React.useState(false);
-    const {data, setData,processing} = useForm({
-        query:''
-    })
-    const submit = (e) => {
-        e.preventDefault()
 
-        router.get(route('search.posts'), {
-            query: data.query
-        }, {
-            preserveScroll: true
-        })
-    }
+
     return (
         <React.Fragment>
-            <IconButton variant="outlined" color="neutral" sx={{
-                '&:hover': {
-                    bgcolor: 'inherit',
-                },
-                borderColor: 'inherit',
-            }} onClick={() => setOpen(true)}>
+            <IconButton variant="contained" onClick={() => setOpen(true)}>
                 <Menu />
             </IconButton>
             <Drawer open={open} onClose={() => setOpen(false)}
                     sx={{
                         '& .MuiDrawer-content': {
-                            bgcolor: 'rgba(0,0,0,0.7)',
+                            bgcolor: 'rgba(0,0,0,0.8)',
                             backdropFilter: "blur(10px) saturate(180%)",
                             WebkitBackdropFilter: "blur(10px) saturate(180%)",
                         },
@@ -57,7 +41,6 @@ export default function LeftDrawer({logoStartColor,logoEndColor}) {
                     sx={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 0.5,
                         ml: 'auto',
                         mt: 2,
                         mr: 2,
@@ -65,85 +48,29 @@ export default function LeftDrawer({logoStartColor,logoEndColor}) {
                     }}
                 >
 
-                    <ModalClose id="close-icon" sx={{ position: 'initial', bgcolor:"white" }} />
+                    <ModalClose id="close-icon" sx={{ position: 'initial' }} />
                 </Box>
+                <Box  sx={{ml:'2rem', width:'relative', height:'relative ', mt:'1rem', mb:'1rem' }} >
                 <ApplicationLogo
-                startStroke={logoStartColor}
-                stopStroke={logoEndColor}
+
                 />
-                <form  onSubmit={submit}>
-
-                    <Input
-                        id="filled-search"
-                        label="Search"
-                        type="search"
-                        name="query"
-                        value={data.query}
-                        onChange={(e) => {
-                            setData('query', e.target.value);
-                        }}
-                        disabled={processing}
-                        size="md"
-                        placeholder="Search Content ..."
-                        variant="plain"
-                        endDecorator={<Button
-                            type="submit"
-                            onClick={() => setLoading(true)}
-
-                            sx={{color: 'white',py:'auto'}}
-                        >
-                            <SearchSharpIcon />
-                        </Button>}
-                        slotProps={{
-                            input: {
-                                'aria-label': 'Search anything',
-                            },
-                        }}
-                        sx={{
-                            m: 3,
-                            borderRadius: 0,
-                            borderBottom: '0.15rem solid',
-                            borderColor: 'neutral.outlinedBorder',
-                            bgcolor: 'inherit',
-                            color: 'white',
-                            '&:hover': {
-                                borderColor: 'neutral.outlinedHoverBorder',
-                                color: 'white',
-                            },
-                            '&::before': {
-                                border: '1px solid var(--Input-focusedHighlight)',
-                                transform: 'scaleX(0)',
-                                left: 0,
-                                right: 0,
-                                bottom: '-2px',
-                                top: 'unset',
-                                transition: 'transform .15s cubic-bezier(0.1,0.9,0.2,1)',
-                                borderRadius: 0,
-                            },
-                            '&:focus-within::before': {
-                                transform: 'scaleX(1)',
-                            },
-                        }}
-                    >
-
-                    </Input>
-                </form>
+            </Box>
 
                 <List
                     size="lg"
                     component="nav"
                     sx={{
                         flex: 'none',
-                        fontSize: 'xl',
-
+                        fontSize: 'md',
+                        mt:'3rem',
                         '& > div': { justifyContent: 'center' },
                     }}
                 >
-                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Home</ListItemButton>
-                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>About</ListItemButton>
-                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Studio</ListItemButton>
-                    <ListItemButton sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white' }}>Contact</ListItemButton>
-                    <ListItem  sx={{ fontWeight: 'light', lineHeight: 2.5 ,color:'white', '&hover': {color:'black'} }} >
+                    <ListItemButton sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}>Home</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}>About</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}>Studio</ListItemButton>
+                    <ListItemButton sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}>Contact</ListItemButton>
+                    <ListItem  sx={{ fontWeight: 'light', lineHeight: 2.5,pt:'5rem' ,color:'white', '&hover': {color:'black'} }} >
                     <ThemeSwitch
                         modes={["light", "dark", "system"]}
                         icons={[

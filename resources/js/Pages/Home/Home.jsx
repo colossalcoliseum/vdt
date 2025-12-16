@@ -1,18 +1,7 @@
-import ChatLayout from "@/Layouts/ChatLayout.jsx";
-  import {Layout} from "lucide-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
 import Grid from "@mui/joy/Grid";
-
-import { Particles } from "/components/ui/particles";
-
-
-
 import React from "react";
-import { LayeredText } from "/components/ui/layered-text";
-import { MotionGrid } from "/components/ui/motion-grid";
-
-
-
+import {motion} from "motion/react"
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
@@ -25,63 +14,34 @@ import HorizontalChunck from "@/LandingPage/HorizontalChunck.jsx";
 
 function Home() {
 
-    const images = [
-        {
-            imgURL:
-                "https://picsum.photos/300/300",
-            imgAlt: "img-1"
-        },
-        {
-            imgURL:
-                "https://picsum.photos/300/300",
-            imgAlt: "img-2"
-        },
-        {
-            imgURL:
-                "https://picsum.photos/300/300",
-            imgAlt: "img-3"
-        },
-        {
-            imgURL:
-                "https://picsum.photos/300/300",
-            imgAlt: "img-4"
-        }
-    ];
-
     return (
         <>
-            <Box component="container" sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                 }}>
+            <Box component="container" sx={{
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundImage: 'linear-gradient(to right, #076585, #fff);',
+            }}>
 
-                <Grid container columns={18} sx={{flexGrow: 1, zIndex:1, my:'4.5rem'}}>
+                <Grid container columns={18} sx={{flexGrow: 1,  zIndex: 1, py: '4.5rem'}}>
 
-                    <Box sx={{height: '30rem', width: '100%', justifyContent: 'center',
-                        borderRadius: '2rem', py: '1rem',
-                        backgroundImage: 'linear-gradient(-90deg, rgba(255, 255, 255, 1) 5%, rgba(0, 77, 108, 1) 50%, rgba(0, 54, 83, 1) 60%, rgba(0, 33, 60, 1) 75%, rgba(0, 3, 38, 1) 87%, rgba(0, 1, 16, 1) 95%, rgba(0, 0, 0, 1) 100%);',
+                    <Box sx={{
+                        height: '60rem',
+                        width: '100%',
+                        borderBottomRightRadius: '20rem',
+                        borderTopRightRadius: '20rem',
+                        backgroundSize: 'cover',
+                        py: '1rem',
 
-                         margin: '0 auto',}}>
-
-
-                            <ApplicationLogo
-                             className="mx-auto"
-
-
-                             width={381}
-                             height={171}
-
-                            />
-
-
-
+                    }}>
+                        <ApplicationLogo className=" "/>
 
 
                     </Box>
+                    <Box sx={{
+                        height: 'relative', width: '100%', justifyContent: 'center',
+                        margin: '0 auto', pt: '5rem',
+                    }}>
 
-                    <Box  sx={{height: 'relative', width: '100%', justifyContent: 'center',
-                            margin: '0 auto', pt:'5rem',
-                        }}>
-
-                    <Grid size={18} sx={{display: 'flex', justifyContent: 'center', gap:'4rem', alignItems: 'center',}}>
+                        <Grid size={18}
+                              sx={{display: 'flex', justifyContent: 'center', gap: '4rem', alignItems: 'center',}}>
                             <Grid size={8}
                                   sx={{
                                       height: '45rem',
@@ -92,13 +52,13 @@ function Home() {
 
                                   }}>
 
-                                <Typography  sx={{
-                                    pt:'3rem',
+                                <Typography sx={{
+                                    pt: '3rem',
                                     textAlign: 'center',
                                     color: 'white',
                                     height: 'relative',
-                                    fontWeight: 'bold',
-                                    fontFamily: "Alumni Sans Pinstripe",
+                                    fontWeight: 'light',
+                                    fontFamily: "Segoe UI Variable Display Light",
                                     fontSize: '9rem',
                                     margin: '0 auto',
                                     letterSpacing: '1rem',
@@ -106,14 +66,14 @@ function Home() {
                                 }}>
                                     Create
                                 </Typography>
-                                <Typography  sx={{
-                                    pt:'3rem',
-                                    px:'1rem',
+                                <Typography sx={{
+                                    pt: '3rem',
+                                    px: '1rem',
                                     textAlign: 'center',
                                     color: 'white',
                                     height: 'relative',
-                                    fontWeight: 'bold',
-                                    fontFamily: "Alumni Sans Pinstripe",
+                                    fontWeight: 'light',
+                                    fontFamily: "Segoe UI Variable Display Light",
                                     fontSize: '3rem',
                                     margin: '0 auto',
                                     letterSpacing: '0.4rem',
@@ -123,206 +83,272 @@ function Home() {
                                 </Typography>
 
 
+                            </Grid>
+
+
+                            <Grid size={8}
+                                  sx={{
+                                      height: '45rem',
+                                      backgroundSize: 'cover',
+                                      borderRadius: '1rem',
+                                      background: 'linear-gradient(to right, #076585, #fff);',
+                                      width: '45%',
+
+                                  }}>
+
+
+                                <Typography sx={{
+                                    pt: '3rem',
+                                    color: '#000000',
+                                    textAlign: 'center',
+                                     height: 'relative',
+                                    fontWeight: 'normal',
+                                    fontFamily: "Segoe UI Variable Display Light",
+                                    fontSize: '9rem',
+                                    margin: '0 auto',
+                                    letterSpacing: '1rem',
+
+
+                                }}>
+                                    Explore
+                                </Typography>
+                                <Typography sx={{
+                                    pt: '3rem',
+                                    px: '1rem',
+                                    textAlign: 'center',
+                                    color: 'white',
+                                    height: 'relative',
+                                    fontWeight: 'normal',
+                                    fontFamily: "Segoe UI Variable Display Light",
+                                    fontSize: '3rem',
+                                    margin: '0 auto',
+                                    letterSpacing: '0.4rem',
+
+                                }}>
+                                    Search for your favorite content here!
+                                </Typography>
+
+                            </Grid>
+                        </Grid>
+                        <Grid sx={{display: 'flex', justifyContent: 'center', gap: '1rem',py:'15rem', alignItems: 'center',}}>
+                            <Grid
+                                  sx={{
+                                      height: '45rem',
+                                      backgroundSize: 'cover',
+                                      borderRadius: '1rem',
+                                       backgroundImage:
+                                          "linear-gradient(rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 1)), url('/storage/VDTCanva.png')",
+                                       width: '100%',
+                                  }}
+                            >
+                                <Grid sx={{ width: '40%', display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center',}}>
+                                    <Typography sx={{
+                                        pt: '3rem',
+                                        px: '1rem',
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        height: 'relative',
+                                        fontWeight: 'normal',
+                                        fontFamily: "Segoe UI Variable Display Light",
+                                        fontSize: '3rem',
+                                        margin: '0 auto',
+                                        letterSpacing: '0.4rem',
+                                    }}>
+                                        Tested on Mobile Devices
+                                    </Typography>
+                                </Grid>
+                                <Grid sx={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center',}}>
+
+                                </Grid>
+                            </Grid>
 
                         </Grid>
 
 
-                        <Grid size={8}
-                              sx={{
-                                  height: '45rem',
-                                  backgroundSize: 'cover',
-                                  borderRadius: '1rem',
-                                  background: 'linear-gradient(to right, #076585, #fff);',
-                                  width: '45%',
-
-                              }}>
+                        <Grid columns={12}
+                              sx={{display: 'flex', justifyContent: 'center', gap: 0, alignItems: 'center',}}>
 
 
-                            <Typography  sx={{
-                                pt:'3rem',
-                                textAlign: 'center',
-                                color: 'black',
-                                height: 'relative',
-                                fontWeight: 'bold',
-                                fontFamily: "Alumni Sans Pinstripe",
-                                fontSize: '9rem',
-                                margin: '0 auto',
-                                letterSpacing: '1rem',
-
-                            }}>
-                                Explore
-                            </Typography>
-                            <Typography  sx={{
-                                pt:'3rem',
-                                px:'1rem',
-                                textAlign: 'center',
-                                color: 'white',
-                                height: 'relative',
-                                fontWeight: 'bold',
-                                fontFamily: "Alumni Sans Pinstripe",
-                                fontSize: '3rem',
-                                margin: '0 auto',
-                                letterSpacing: '0.4rem',
-
-                            }}>
-                                Search for your favorite content here!
-                            </Typography>
-
-                     </Grid>
-                      </Grid>
-
-
-
-                    <Grid columns={12} sx={{display: 'flex', justifyContent: 'center',gap:0, alignItems: 'center',}}>
-
-
-
-                    <HorizontalChunck/>
-
-
+                            <HorizontalChunck/>
 
 
                         </Grid>
                     </Box>
-                    <Grid size={18} sx={{pb:'3rem',margin: '0 auto'}}>
-                    <Typography level="h6" sx={{
-                        pt:'2.5rem',
-                        width: '100%',
-                        textAlign: 'center',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        fontFamily: "Alumni Sans Pinstripe",
-                        fontSize: '4rem',
+                    <Grid size={18} sx={{pb: '3rem', margin: '0 auto'}}>
+                        <Typography level="h6" sx={{
+                            pt: '2.5rem',
+                            width: '100%',
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'normal',
+                            fontFamily: "Segoe UI Variable Display Light",
+                            fontSize: '4rem',
 
-                    }}>
-                        Or Want to Browse our Gallery of Videos and Images?
-
-
-                    </Typography>
-                    <Typography level="h6" sx={{
-
-                        width: '100%',
-                        textAlign: 'center',
-                        color: 'white',
-                        fontWeight: 'bold',
-                        fontFamily: "Alumni Sans Pinstripe",
-                        fontSize: '2rem',
-
-                    }}>
-                        We have amazing collection of content from all over the world.
+                        }}>
+                            Or Want to Browse our Gallery of Videos and Images?
 
 
-                    </Typography>
+                        </Typography>
+                        <Typography level="h6" sx={{
+
+                            width: '100%',
+                            textAlign: 'center',
+                            color: 'white',
+                            fontWeight: 'normal',
+                            fontFamily: "Segoe UI Variable Display Light",
+                            fontSize: '2rem',
+
+                        }}>
+                            We have amazing collection of content from all over the world.
+
+
+                        </Typography>
                     </Grid>
-                    <Grid size={18} sx={{display:'flex', justifyContent: 'center', alignItems: 'center',margin: '0 auto', gap:'10rem'}}>
-                    <Box sx={{ display:'flex',height: '30rem', width: '23rem', justifyContent: 'center', margin: '0 auto',    }}>
-                        <Carousel className="w-full">
+                    <Grid size={18} sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: '0 auto',
+                        gap: '10rem'
+                    }}>
+                        <Box sx={{
+                            display: 'flex',
+                            height: '30rem',
+                            width: '23rem',
+                            justifyContent: 'center',
+                            margin: '0 auto',
+                        }}>
+                            <Carousel className="w-full">
 
-                            <CarouselContent>
-                                {Array.from({ length: 5 }).map((_, index) => (
-                                    <CarouselItem key={index}>
-                                        <div className="p-1">
-                                            <Card component="li" sx={{ minWidth: 300, flexGrow: 1 }}>
-                                                <CardCover>
-                                                    <img
-                                                        src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-                                                        srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
-                                                        loading="lazy"
-                                                        alt=""
-                                                    />
-                                                </CardCover>
-                                                <CardContent>
-                                                    <Typography
-                                                        level="body-lg"
-                                                        textColor="#fff"
-                                                        sx={{   fontFamily: "Alumni Sans Pinstripe",fontWeight: 'lg', mt: { xs: 12, sm: 18 } }}
-                                                    >
-                                                        Image
-                                                    </Typography>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </Carousel>
-
-                    </Box>
-                    <Box sx={{ display:'flex',height: '30rem', width: '23rem', justifyContent: 'center', margin: '0 auto',    }}>
-                        <Carousel className="w-full">
-
-                            <CarouselContent>
-                                {Array.from({ length: 5 }).map((_, index) => (
-                                    <CarouselItem key={index}>
-                                        <div className="p-1">
-                                            <Card component="li" sx={{ minWidth: 300, flexGrow: 1 }}>
-                                                <CardCover>
-                                                    <img
-                                                        src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-                                                        srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
-                                                        loading="lazy"
-                                                        alt=""
-                                                    />
-                                                </CardCover>
-                                                <CardContent>
-                                                    <Typography
-                                                        level="body-lg"
-                                                        textColor="#fff"
-
-
-                                                    sx={{   fontFamily: "Alumni Sans Pinstripe",fontWeight: 'lg', mt: { xs: 12, sm: 18 } }}
-                                                    >
-                                                        Image
-                                                    </Typography>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </Carousel>
-
-                    </Box>
-                    <Box sx={{ display:'flex',height: '30rem', width: '23rem', justifyContent: 'center', margin: '0 auto',    }}>
-                        <Carousel className="w-full">
-
-                            <CarouselContent>
-                                {Array.from({ length: 5 }).map((_, index) => (
-                                    <CarouselItem key={index}>
-                                        <div className="p-0">
-                                            <Card component="li" sx={{ minWidth: 300, flexGrow: 1 }}>
-                                                <CardCover>
-                                                    <img
-                                                        src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-                                                        srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
-                                                        loading="lazy"
-                                                        alt=""
-                                                    />
-                                                </CardCover>
-                                                <CardContent>
-                                                    <Typography
-                                                        level="body-lg"
-                                                        textColor="#fff"
-                                                        sx={{   fontFamily: "Alumni Sans Pinstripe",fontWeight: 'lg', mt: { xs: 12, sm: 18 } }}
+                                <CarouselContent>
+                                    {Array.from({length: 5}).map((_, index) => (
+                                        <CarouselItem key={index}>
+                                            <div className="p-1">
+                                                <Card component="li" sx={{minWidth: 300, flexGrow: 1}}>
+                                                    <CardCover>
+                                                        <img
+                                                            src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
+                                                            srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
+                                                            loading="lazy"
+                                                            alt=""
+                                                        />
+                                                    </CardCover>
+                                                    <CardContent>
+                                                        <Typography
+                                                            level="body-lg"
+                                                            textColor="#fff"
+                                                            sx={{
+                                                                fontFamily: "Alumni Sans Pinstripe",
+                                                                fontWeight: 'lg',
+                                                                mt: {xs: 12, sm: 18}
+                                                            }}
                                                         >
-                                                        Image
-                                                    </Typography>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                        </Carousel>
+                                                            Image
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Card>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </Carousel>
 
-                    </Box>
+                        </Box>
+                        <Box sx={{
+                            display: 'flex',
+                            height: '30rem',
+                            width: '23rem',
+                            justifyContent: 'center',
+                            margin: '0 auto',
+                        }}>
+                            <Carousel className="w-full">
+
+                                <CarouselContent>
+                                    {Array.from({length: 5}).map((_, index) => (
+                                        <CarouselItem key={index}>
+                                            <div className="p-1">
+                                                <Card component="li" sx={{minWidth: 300, flexGrow: 1}}>
+                                                    <CardCover>
+                                                        <img
+                                                            src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
+                                                            srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
+                                                            loading="lazy"
+                                                            alt=""
+                                                        />
+                                                    </CardCover>
+                                                    <CardContent>
+                                                        <Typography
+                                                            level="body-lg"
+                                                            textColor="#fff"
+
+
+                                                            sx={{
+                                                                fontFamily: "Alumni Sans Pinstripe",
+                                                                fontWeight: 'lg',
+                                                                mt: {xs: 12, sm: 18}
+                                                            }}
+                                                        >
+                                                            Image
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Card>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </Carousel>
+
+                        </Box>
+                        <Box sx={{
+                            display: 'flex',
+                            height: '30rem',
+                            width: '23rem',
+                            justifyContent: 'center',
+                            margin: '0 auto',
+                        }}>
+                            <Carousel className="w-full">
+
+                                <CarouselContent>
+                                    {Array.from({length: 5}).map((_, index) => (
+                                        <CarouselItem key={index}>
+                                            <div className="p-0">
+                                                <Card component="li" sx={{minWidth: 300, flexGrow: 1}}>
+                                                    <CardCover>
+                                                        <img
+                                                            src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
+                                                            srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
+                                                            loading="lazy"
+                                                            alt=""
+                                                        />
+                                                    </CardCover>
+                                                    <CardContent>
+                                                        <Typography
+                                                            level="body-lg"
+                                                            textColor="#fff"
+                                                            sx={{
+                                                                fontFamily: "Alumni Sans Pinstripe",
+                                                                fontWeight: 'lg',
+                                                                mt: {xs: 12, sm: 18}
+                                                            }}
+                                                        >
+                                                            Image
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Card>
+                                            </div>
+                                        </CarouselItem>
+                                    ))}
+                                </CarouselContent>
+                            </Carousel>
+
+                        </Box>
 
                     </Grid>
 
                 </Grid>
 
 
-             </Box>
+            </Box>
         </>
     );
 }

@@ -15,9 +15,10 @@ import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import DownloadIcon from '@mui/icons-material/Download';
-function PostCard ({title, creator, thumbnail, createdAt, ratio=1.8}) {
+function PostCard ({title, creator, thumbnail, createdAt, ratio=1.8, width='23rem'}) {
     return(
-        <Card variant="outlined" sx={{ m:2,width:'23rem' }}>
+        <Card variant="contained" sx={{ m:'1rem',width:width,height:'relative', backgroundColor: 'rgba(53,53,53,0.6)',
+        }}>
             <CardOverflow>
                 <AspectRatio ratio={ratio}>
                     <img
@@ -29,16 +30,17 @@ function PostCard ({title, creator, thumbnail, createdAt, ratio=1.8}) {
                 </AspectRatio>
             </CardOverflow>
             <CardContent>
-                <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                <Grid container sx={{ flexGrow: 1 }}>
                     <Grid size={10}>
                         <Typography level="title-sm" sx={{
-                            color: "black",
+                            color: "rgb(255,255,255)",
+                            fontSize: "1rem",
+                             fontFamily: "Segoe UI Variable Display Light",
+                            letterSpacing: "0.017em",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             display: "-webkit-box",
                             WebkitLineClamp: "2",
-
-
                             WebkitBoxOrient: "vertical",
                         }}>{title}
                         </Typography>
@@ -59,16 +61,27 @@ function PostCard ({title, creator, thumbnail, createdAt, ratio=1.8}) {
                         </Dropdown>
                     </Grid>
                 </Grid>
-                <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                <Grid container spacing={1} sx={{ flexGrow: 1 }}>
                     <Grid size={7.75}>
-                        <Typography level="body-sm">{creator}
+                        <Typography sx={{
+                            color: "rgb(255,255,255)",
+                            fontSize: "0.875rem",
+                            fontWeight:'light',
+                            fontFamily: "Segoe UI Variable Display Light",
+                            letterSpacing: "0.017em",
+                        }}>{creator}
                         </Typography>
                     </Grid>
                     <Grid size={4.25}>
                         <Typography
                             level="body-xs"
                             textColor="text.secondary"
-                            sx={{ fontWeight: 'md' }}
+                            sx={{
+                                color: "rgb(255,255,255)",
+                                fontWeight:'light',
+                                fontFamily: "Segoe UI Variable Display Light",
+                                letterSpacing: "0.017em",
+                            }}
                         >
                             {
 
