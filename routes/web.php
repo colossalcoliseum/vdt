@@ -14,8 +14,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         'permissions' => auth()->user()->getAllPermissions()->toArray()
@@ -43,6 +41,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('users', UserController::class)->names('moderate.users')->except(['index', 'show']);
     });
 });
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('{user}')->group(function () {
+        Route::resource('videos', VideoController::class)->names('moderate.videos')->except([ 'show']);
+        Route::resource('posts', PostController::class)->names('moderate.posts')->except([ 'show']);
+        //Route::resource('users', UserController::class)->names('moderate.users')->except(['index', 'show']);
+    });
+});
 /*  Users Layout    */
 Route::middleware(['auth', /*'verified'*/])->group(function () {
     Route::get('/', [HomeController::class,'home'])->name('home');
@@ -59,6 +64,5 @@ Route::middleware(['auth', /*'verified'*/])->group(function () {
         Route::singleton('/avatar', UpdateUserAvatarController::class)->except(['edit']);
     });
 });
-
 
 require __DIR__ . '/auth.php';

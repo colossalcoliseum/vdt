@@ -29,7 +29,6 @@ class VideoController extends Controller
     {
         return Inertia::render('Videos/VideosDashboard', [
             'videos' =>  $this->contentService->getPaginatedVideos()
-
         ]);
     }
 
@@ -47,7 +46,7 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UploadVideoRequest $request)
+    public function store(UploadVideoRequest $request)/*TODO: използвай сървис за това*/
     {
         $response = Gate::inspect('create', Video::class);
         if ($response->allowed()) {

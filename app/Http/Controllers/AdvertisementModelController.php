@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdvertisementModel;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
 class AdvertisementModelController extends Controller
@@ -34,7 +34,7 @@ class AdvertisementModelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AdvertisementModel $advertisementModel)
+    public function show(Advertisement $advertisementModel)
     {
         //
     }
@@ -42,7 +42,7 @@ class AdvertisementModelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AdvertisementModel $advertisementModel)
+    public function edit(Advertisement $advertisementModel)
     {
         //
     }
@@ -50,7 +50,7 @@ class AdvertisementModelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AdvertisementModel $advertisementModel)
+    public function update(Request $request, Advertisement $advertisementModel)
     {
         //
     }
@@ -58,7 +58,7 @@ class AdvertisementModelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AdvertisementModel $advertisementModel)
+    public function destroy(Advertisement $advertisementModel)
     {
         //
     }

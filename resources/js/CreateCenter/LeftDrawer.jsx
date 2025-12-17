@@ -2,21 +2,15 @@ import * as React from 'react';
 import Box from '@mui/joy/Box';
 import IconButton from '@mui/joy/IconButton';
 import Drawer from '@mui/joy/Drawer';
-import Input from '@mui/joy/Input';
 import List from '@mui/joy/List';
 import ListItemButton from '@mui/joy/ListItemButton';
-import Typography from '@mui/joy/Typography';
 import ModalClose from '@mui/joy/ModalClose';
 import Menu from '@mui/icons-material/Menu';
-import Search from '@mui/icons-material/Search';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
- import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import {Laptop, Moon, Sun} from "lucide-react";
 import {ThemeSwitch} from "../../../components/ui/theme-switch.jsx";
 import ListItem from "@mui/joy/ListItem";
- export default function LeftDrawer() {
+export default function LeftDrawer() {
     const [open, setOpen] = React.useState(false);
 
 
@@ -36,7 +30,7 @@ import ListItem from "@mui/joy/ListItem";
                         '--Drawer-transitionFunction': 'cubic-bezier(0.4,0.5,0.6,0.90)',
                     }
 
-            }
+                    }
                     size={'sm'}
             >
                 <Box
@@ -46,16 +40,16 @@ import ListItem from "@mui/joy/ListItem";
                         ml: 'auto',
                         mt: 2,
                         mr: 2,
-                     }}
+                    }}
                 >
 
                     <ModalClose id="close-icon" sx={{ position: 'initial' }} />
                 </Box>
                 <Box  sx={{ml:'2rem', width:'relative', height:'relative ', mt:'1rem', mb:'1rem' }} >
-                <ApplicationLogo
+                    <ApplicationLogo
 
-                />
-            </Box>
+                    />
+                </Box>
 
                 <List
                     size="lg"
@@ -68,20 +62,20 @@ import ListItem from "@mui/joy/ListItem";
                         '& > div': { justifyContent: 'center' },
                     }}
                 >
-                    <ListItemButton href={route('home')} style={{ transition: '100ms'}} sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }} >Home</ListItemButton>
-                    <ListItemButton href={route('video.index')} style={{ transition: '100ms'}} sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}  >Watch</ListItemButton>
-                    <ListItemButton href={route('post.index')} style={{ transition: '100ms'}} sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }} >Read</ListItemButton>
-                    <ListItemButton    style={{ transition: '100ms'}}   sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}  >Create</ListItemButton>
+                    <ListItemButton href={route('home')} style={{ transition: '100ms'}} sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }} >My Videos</ListItemButton>
+                    <ListItemButton href={route('video.index')} style={{ transition: '100ms'}} sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}>My Posts</ListItemButton>
+                    <ListItemButton href={route('post.index')} style={{ transition: '100ms'}} sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }} >Summary</ListItemButton>
+                    <ListItemButton style={{ transition: '100ms'}}   sx={{ fontWeight: 'light', fontFamily: "Segoe UI Variable Display Light", my:'0.25rem', lineHeight: 2.5 ,color:'white' }}>Exit Centre</ListItemButton>
                     <ListItem  sx={{ fontWeight: 'light', lineHeight: 2.5,pt:'5rem' ,color:'white', '&hover': {color:'black'} }} >
-                    <ThemeSwitch
-                        modes={["light", "dark", "system"]}
-                        icons={[
-                            <Sun key="sun-icon" size={16} />,
-                            <Moon key="moon-icon" size={16} />,
-                            <Laptop key="laptop-icon" size={16} />,
-                        ]}
-                        showInactiveIcons="all"
-                    /></ListItem >
+                        <ThemeSwitch
+                            modes={["light", "dark", "system"]}
+                            icons={[
+                                <Sun key="sun-icon" size={16} />,
+                                <Moon key="moon-icon" size={16} />,
+                                <Laptop key="laptop-icon" size={16} />,
+                            ]}
+                            showInactiveIcons="all"
+                        /></ListItem >
                 </List>
             </Drawer>
         </React.Fragment>

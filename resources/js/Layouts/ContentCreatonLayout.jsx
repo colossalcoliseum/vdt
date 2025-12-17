@@ -1,15 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/joy/Box';
-import List from '@mui/joy/List';
-import ListItem from '@mui/joy/ListItem';
-import Dropdown from '@mui/joy/Dropdown';
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import {AppBar, Toolbar, useScrollTrigger} from "@mui/material";
-import LeftDrawer from "@/Components/LeftDrawer.jsx";
+import {AppBar} from "@mui/material";
+import LeftDrawer from "@/CreateCenter/LeftDrawer.jsx";
 
-export default function AuthenticatedLayout({user, children, logoStartColor, logoStopColor}) {
+export default function ContentCreationLayout({children}) {
 
     return (
         <Box
@@ -23,7 +17,7 @@ export default function AuthenticatedLayout({user, children, logoStartColor, log
         >
             <AppBar sx={{
                 backgroundColor: 'inherit',
-                backdropFilter: "",
+                backdropFilter: "blur(10px)",
                 p: 0, m: 0,
                 pl: '5rem',
                 position: 'relative'
@@ -32,16 +26,16 @@ export default function AuthenticatedLayout({user, children, logoStartColor, log
                 <Box sx={{margin: 0, padding: 0}}>
 
 
-                        <LeftDrawer
+                    <LeftDrawer
 
-                        />
+                    />
 
 
                 </Box>
             </AppBar>
             <Box component="main" sx={{
                 flex: 1,
-                backgroundColor: 'inherit',
+                background: 'black',
                 margin: 0,
                 padding: 0
             }}>
