@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadPostRequest;
 use App\Models\Post;
+use App\Models\User;
 use App\Services\ContentService;
 use App\Services\SearchService;
 use Illuminate\Http\Request;
@@ -18,16 +19,25 @@ class PostController extends Controller
      * Display a listing of the resource.
      */
     public function __construct(
-       public ContentService $contentService
-    ){}
-    public function index()
+        public ContentService $contentService
+    )
+    {
+    }
+
+    public function index(User $user=null)
     {
 
-        return Inertia::render('Posts/PostsDashboard', [
-            'posts' =>  $this->contentService->getPaginatedPosts()
-
+        return Inertia::render('ContentGrid', [
+             'content' =>
+                $user ?
+                    $this->contentService->getUserPaginatedPosts($user->id) :
+                    $this->contentService->getPaginatedPosts(),
+            'headerText' => $user ? "Posts by $user->name" : 'Posts',
+            'type' => 'posts',
+            'user' => $user ?? null
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -70,7 +80,7 @@ class PostController extends Controller
                 'thumbnail' => $thumbnailPath
             ]);
             $post->save();
-           // PostPublished::dispatch($post);//<--- event
+            // PostPublished::dispatch($post);//<--- event
             return Redirect::route('dashboard');
         }
         flash()

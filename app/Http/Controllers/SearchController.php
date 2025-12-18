@@ -11,29 +11,17 @@ class SearchController extends Controller
     public function __construct(
         public SearchService $searchService
     ){}
-    public function searchPosts(Request $request){
+    public function searchContent(Request $request){
         $query = $request->input('query');
-        return Inertia::render('Results/ContentResultsDashboard', [
-            'content' =>  $this->searchService->searchPosts($query),
-            'query' =>  $query,
+/*        dd($this->searchService->searchContent($query));*/
+        return Inertia::render('ContentGrid', [
+            'content' =>  $this->searchService->searchContent($query),
             'type'=>"posts",
+            'headerText' => 'Search Results'
 
         ]);
     }
-    public function searchVideos(Request $request){
-        $query = $request->input('query');
-        return Inertia::render('Results/ContentResultsDashboard', [
-            'content' =>  $this->searchService->searchPosts($query),
-            'query' =>  $query,
-            'type'=>"videos",
-
-        ]);
-    }
-   /* public function searchVideos($query){
-        return Inertia::render('Results/ContentResultsDashboard', [
-            'content' =>  $this->searchService->searchPosts($query)
-        ]);
-    }*/
+ 
     public function searchUsers($query){
         dd( $this->searchService->searchUsers($query));
     }

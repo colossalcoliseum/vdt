@@ -1,15 +1,15 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
 import * as React from "react";
 import Box from '@mui/joy/Box';
 import Grid from "@mui/material/Grid";
-import Typography from '@mui/joy/Typography';
-import PostCard from "@/Pages/Posts/PostCard.jsx";
+ import {ContentCard} from "@/Pages/ContentCard.jsx";
 import Input from '@mui/joy/Input';
 import Button from "@mui/joy/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-function ContentResultsDashboard({content: content}) {
+import Typography from '@mui/joy/Typography';
+function ContentGrid({content: content,type:type, headerText:headerText}) {
     const now = new Date();
     const {data, setData} = useForm({
         page: content.currentPage,
@@ -19,7 +19,9 @@ function ContentResultsDashboard({content: content}) {
     const submit = (e) => {
         e.preventDefault()
 
-        router.get(route('search.posts'), {
+        router.get(route('search.content', {
+            content: data.query,
+        }), {
             query: data.query
         }, {
             preserveScroll: true
@@ -33,7 +35,7 @@ function ContentResultsDashboard({content: content}) {
 
 
             }}>
-                <Grid size={15}>
+                <Grid size={15} sx={{display: 'flex', gap: '1rem', alignItems: 'center', flexDirection: 'row'}}>
                     <Typography level="h1" sx={{
                         color: 'white',
                         fontFamily: "Segoe UI Variable Display Light",
@@ -41,8 +43,10 @@ function ContentResultsDashboard({content: content}) {
                         fontSize: '3rem',
 
                     }}>
-                        Search
+                        {headerText}
+
                     </Typography>
+
                 </Grid>
                 <Grid size={3} sx={{display: 'flex', gap: '1rem', justifyContent: 'flex-end'}}>
                     <form  onSubmit={submit}>
@@ -106,12 +110,10 @@ function ContentResultsDashboard({content: content}) {
 
 
                 {content.data.map((item) => (
-                    <PostCard
+                    <ContentCard
                         width='80%'
-                        creator={item.creator.name}
-                        thumbnail={item.thumbnail}
-                        title={item.title}
-                        createdAt={item.created_at}
+                        type={type}
+                        content={item}
                     />
 
                 ))}
@@ -128,14 +130,13 @@ function ContentResultsDashboard({content: content}) {
         </>
     );
 }
-ContentResultsDashboard.layout = (page)=>{
+ContentGrid.layout = (page)=>{
     return(
         <AuthenticatedLayout
             user={page.props.auth.user}
             children={page}
-        >
+        />
 
-        </AuthenticatedLayout>
     )
 }
-export default ContentResultsDashboard;
+export default ContentGrid;

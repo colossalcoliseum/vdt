@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 class Video extends Model
@@ -30,18 +31,22 @@ class Video extends Model
     {
         return $this->belongsTo(Category::class, 'category_id','id');
     }
+    public function categories(): hasMany
+    {
+        return $this->hasMany(Category::class);
+    }
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
     }
-    public function toSearchableArray()
+/*    public function toSearchableArray()
     {
         return [
             'id' => (int) $this->id,
             'title' => $this->title,
             'description' => (string) $this->description,
         ];
-    }
+    }*/
     public function visibility(): BelongsTo
     {
         return $this->belongsTo(Visibility::class);
@@ -60,4 +65,9 @@ class Video extends Model
     {
         return $this->is_active?? false;
     }
+    public function getRouteKeyName ()
+    {
+        return 'slug';
+    }
+
 }

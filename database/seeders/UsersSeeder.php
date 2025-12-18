@@ -20,9 +20,10 @@ class UsersSeeder extends Seeder
         User::factory()
             ->count(1)
             ->create([
-                'name' => 'admin',
+                'name' => 'Admin',
+                'handle' => 'admin',
                 'email' => 'admin@admin.com',
-                'password' => Hash::make('123123123'),
+                'password' => Hash::make('123456789'),
                 'avatar' => 'avatars/defaultAvatar.jpg',
             ]) ->each(function ($user) {
                 $user->assignRole('admin');

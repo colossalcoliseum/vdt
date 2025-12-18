@@ -43,7 +43,8 @@ export default function AuthenticatedLayout({user, children, logoStartColor, log
                 flex: 1,
                 backgroundColor: 'inherit',
                 margin: 0,
-                padding: 0
+                padding: 0,
+
             }}>
                 {children}
             </Box>

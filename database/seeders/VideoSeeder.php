@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Video;
 use Database\Factories\VideoFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,6 +15,9 @@ class VideoSeeder extends Seeder
      */
     public function run(): void
     {
+        Category::factory(10)
+            ->has(Video::factory(4))
+            ->create();
         Video::factory()->count(10)->create();
     }
 }

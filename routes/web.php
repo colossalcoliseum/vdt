@@ -19,19 +19,14 @@ Route::get('/dashboard', function () {
         'permissions' => auth()->user()->getAllPermissions()->toArray()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
-/*  Admin Layout, Panel, etc.   */
-/*Route::middleware(['auth', 'admin'])->group(function () {
-    Route::prefix('admin')->group(function () {
 
-    });
-});*/
-/*  'search engine'  */
+Route::get('/', [HomeController::class,'home'])->name('home');
+
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('search')->group(function () {
-        Route::get('/videos/', [SearchController::class, 'searchVideos'])->name('search.videos');
-        Route::get('/posts/', [SearchController::class, 'searchPosts'])->name('search.posts');
-        Route::get('/users/', [SearchController::class, 'searchUsers'])->name('search.users');
-    });
+         Route::get('search', [SearchController::class, 'searchContent'])->name('search.content');
+       // Route::get('/posts/', [SearchController::class, 'searchPosts'])->name('search.posts');
+       // Route::get('/users/', [SearchController::class, 'searchUsers'])->name('search.users');
+
 });
 /*  Create; Update; Delete  content*/
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -41,21 +36,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('users', UserController::class)->names('moderate.users')->except(['index', 'show']);
     });
 });
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('{user}')->group(function () {
-        Route::resource('videos', VideoController::class)->names('moderate.videos')->except([ 'show']);
-        Route::resource('posts', PostController::class)->names('moderate.posts')->except([ 'show']);
-        //Route::resource('users', UserController::class)->names('moderate.users')->except(['index', 'show']);
-    });
-});
+
 /*  Users Layout    */
 Route::middleware(['auth', /*'verified'*/])->group(function () {
-    Route::get('/', [HomeController::class,'home'])->name('home');
 
-    Route::resource('videos', VideoController::class)->names('video')->only(['index', 'show']);
-    Route::resource('posts', PostController::class)->names('post')->only(['index', 'show']);
-    Route::resource('users', UserController::class)->names('user')->only(['index', 'show']);
-    Route::resource('chats', ChatController::class)->names('chat');
+    Route::resource('videos', VideoController::class)->names('videos');
+    Route::resource('posts', PostController::class)->names('posts');
+     Route::resource('users', UserController::class)->names('user')->only(['index', 'show']);
 
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
@@ -64,5 +51,10 @@ Route::middleware(['auth', /*'verified'*/])->group(function () {
         Route::singleton('/avatar', UpdateUserAvatarController::class)->except(['edit']);
     });
 });
-
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('{user}')->group(function () {
+        Route::resource('videos', VideoController::class)->names('manage.videos');
+        Route::resource('posts', PostController::class)->names('manage.posts');
+    });
+});
 require __DIR__ . '/auth.php';

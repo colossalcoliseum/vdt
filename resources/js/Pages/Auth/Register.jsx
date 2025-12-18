@@ -145,7 +145,7 @@ export default function Register() {
                             </Link>
 
                         </div>
-                    <Button  variant="contained" sx={{mx:2}}  disabled={processing}>
+                    <Button  type="submit" variant="contained" sx={{mx:2}}  disabled={processing}>
                         Register
                     </Button>
                     </Box>

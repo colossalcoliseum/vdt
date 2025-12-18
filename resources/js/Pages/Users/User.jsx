@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import SendIcon from '@mui/icons-material/Send';
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-export default function User({user}) {
+export default function User({user: user}) {
 
 
 

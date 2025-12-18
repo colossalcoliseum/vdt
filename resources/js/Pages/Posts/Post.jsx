@@ -85,7 +85,7 @@ export default function Post({post}) {
                             </Dropdown>
                             </Grid>
                         </Grid>
-                            <Link href={route('user.show',post.creator.id)} underline="none"
+                            <Link href={route('user.show',post.creator.handle)} underline="none"
                               sx={{ color: 'text.primary' }}
                         >
                             {post.creator.name}

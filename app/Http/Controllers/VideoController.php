@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use _PHPStan_781aefaf6\Nette\Neon\Exception;
 use App\Http\Requests\UploadVideoRequest;
 use App\Models\Category;
+use App\Models\User;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
 use App\Services\ContentService;
@@ -24,12 +25,23 @@ class VideoController extends Controller
      */
     public function __construct(
         public ContentService $contentService
-    ){}
-    public function index()
+    )
     {
-        return Inertia::render('Videos/VideosDashboard', [
-            'videos' =>  $this->contentService->getPaginatedVideos()
-        ]);
+    }
+
+    public function index(User $user=null)
+    {
+        return
+            Inertia::render('ContentGrid', [
+                'content' =>
+                    $user?
+                        $this->contentService->getUserPaginatedVideos($user->id):
+                        $this->contentService->getPaginatedVideos(),
+                'headerText' => $user ? "Videos by $user->name":'Videos',
+                'type'=>'videos',
+                'user' => $user??null
+            ]);
+
     }
 
     /**
@@ -37,10 +49,10 @@ class VideoController extends Controller
      */
     public function create()
     {
-            return Inertia::render('Videos/CreateVideo',[
-                'categories' => $this->contentService->loadCategories(),
-                'subCategories' => $this->contentService->loadSubCategories(),
-            ]);
+        return Inertia::render('Videos/CreateVideo', [
+            'categories' => $this->contentService->loadCategories(),
+            'subCategories' => $this->contentService->loadSubCategories(),
+        ]);
     }
 
     /**
@@ -84,7 +96,7 @@ class VideoController extends Controller
             }
 
 
-            return Redirect::route('video.show',$video->id);
+            return Redirect::route('video.show', $video->id);
         }
         flash()
             ->option('position', 'top-right')

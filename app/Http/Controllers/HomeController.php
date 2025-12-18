@@ -11,8 +11,6 @@ class HomeController extends Controller
 {
     public function home(){
 
-        return Inertia::render('Home/Home', [
-            'vdt' => Storage::url('vdt.png')
-        ]);
+        return Inertia::render('Home/Home', []);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\SubCategory;
+use App\Models\User;
 use App\Models\Video;
 
 class ContentService
@@ -17,7 +18,20 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->paginate(20)->onEachSide(0);
+                ->with(['creator','category'])->paginate(20)->onEachSide(0);
+
+            return $videos;
+
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
+    }
+    public function getUserPaginatedVideos( $userId, $status = "active", $visibility = "public")
+    {
+        try {
+            $videos = Video::where('creator_id', $userId)
+                ->with(['creator','categories'])->paginate(20)->onEachSide(0);
 
             return $videos;
 
@@ -44,6 +58,19 @@ class ContentService
             return $exception->getMessage();
         }
     }
+    public function getUserPaginatedPosts( $userId, $status = "active", $visibility = "public")
+    {
+        try {
+            $posts = Post::where('creator_id', $userId)
+                ->with('creator')->paginate(20)->onEachSide(0);
+
+            return $posts;
+
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
+    }
     public function getAllPosts($status = "active", $visibility = "public")
     {
         try {
@@ -64,7 +91,6 @@ class ContentService
     public function getPost($id){
         try {
             $post = Post::with('creator')->find($id);
-
         }
         catch (\Exception $exception){
             return $exception->getMessage();

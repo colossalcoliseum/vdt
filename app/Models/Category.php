@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 class Category extends Model
@@ -151,6 +152,18 @@ class Category extends Model
     }
     public function shouldBeSearchable(): bool
     {
-        return $this->is_active;
+        return $this->is_active?? false;
+    }
+    public function getRouteKeyName (): bool
+    {
+        return 'slug';
+    }
+    public function post(): hasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function video(): hasMany
+    {
+        return $this->hasMany(Video::class);
     }
 }

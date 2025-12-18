@@ -18,6 +18,7 @@ import CardContent from "@mui/material/CardContent";
 import * as React from "react";
 import {red} from "@mui/material/colors";
 import {lightBlue} from "@mui/material/colors";
+import ContentCreationLayout from "@/Layouts/ContentCreatonLayout.jsx";
 
 //export default function CreateVideo() {
 const CreateVideo = ({categories, subCategories}) => {
@@ -328,5 +329,5 @@ const CreateVideo = ({categories, subCategories}) => {
 
     )
 }
-CreateVideo.layout = page => <AuthenticatedLayout children={page} active={true}/>
+CreateVideo.layout = page => <ContentCreationLayout children={page} active={true}/>
 export default CreateVideo

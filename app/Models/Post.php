@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\BroadcastsEvents;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 
 class Post extends Model
@@ -36,7 +37,10 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class, 'category_id','id');
     }
-
+    public function categories(): hasMany
+    {
+        return $this->hasMany(Category::class, 'category_id','id');
+    }
     public function broadcastOn(string $event): array
     {
         return match ($event) {
@@ -64,6 +68,10 @@ class Post extends Model
     public function shouldBeSearchable(): bool
     {
         return $this->is_published;
+    }
+    public function getRouteKeyName ()
+    {
+        return 'slug';
     }
 
 }

@@ -5,54 +5,65 @@ namespace App\Services;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Video;
+use Illuminate\Support\Facades\DB;
 
 class SearchService
 {
-    public function searchPosts($query)
+    public function searchContent($query)
     {
 
         try {
-            return Post::where(function ($qu) use ($query) {
+            $videoResults = Video::select([
+                'id',
+                'title',
+                'description',
+                'thumbnail',
+                'slug',
+                'creator_id'
+            ])->where(function ($qu) use ($query) {
                 $qu->where('title', "like", "%$query%")
                     ->orWhere('description', "like", "%$query%");
             })
                 ->orWhereHas('creator', function ($qu) use ($query) {
-                $qu->where('email', "like", "%$query%")
-                    ->orWhere('name', "like", "%$query%")
-                    ->orWhere('description', "like", "%$query%");
-            })
-                ->with('creator')
-                ->paginate(9)
-                ->onEachSide(0)
-                ->appends($query)
-                ->withQueryString();
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-    }
-    public function searchVideos($query)
-    {
+                    $qu->where('email', "like", "%$query%")
+                        ->orWhere('name', "like", "%$query%")
+                        ->orWhere('description', "like", "%$query%");
+                })
 
-        try {
-            return Post::where(function ($qu) use ($query) {
+                ->addSelect(DB::raw("'video' as type"));
+
+            $postResults = Post::select([
+                'id',
+                'title',
+                'description',
+                'thumbnail',
+                'slug',
+                'creator_id'
+
+            ])->where(function ($qu) use ($query) {
                 $qu->where('title', "like", "%$query%")
                     ->orWhere('description', "like", "%$query%");
             })
                 ->orWhereHas('creator', function ($qu) use ($query) {
-                $qu->where('email', "like", "%$query%")
-                    ->orWhere('name', "like", "%$query%")
-                    ->orWhere('description', "like", "%$query%");
-            })
+                    $qu->where('email', "like", "%$query%")
+                        ->orWhere('name', "like", "%$query%")
+                        ->orWhere('description', "like", "%$query%");
+                })
+                ->addSelect(DB::raw("'post' as type"));
+
+            $result = $videoResults
+                ->union($postResults)
                 ->with('creator')
-                ->paginate(9)
+                ->paginate(20)
                 ->onEachSide(0)
                 ->appends($query)
                 ->withQueryString();
-        } catch (\Exception $exception) {
+            return $result;
+
+         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
-
 
     public function searchUsers($query)//TODO: използвай отделни заявки
     {
