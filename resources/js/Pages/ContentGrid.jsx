@@ -108,15 +108,14 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
 
             }}>
 
-
                 {content.data.map((item) => (
                     <ContentCard
                         width='80%'
-                        type={type}
+                        type={item.type??type}
                         content={item}
                     />
-
                 ))}
+
 
 
             </Box>

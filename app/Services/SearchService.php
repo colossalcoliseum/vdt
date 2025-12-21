@@ -30,7 +30,7 @@ class SearchService
                         ->orWhere('description', "like", "%$query%");
                 })
 
-                ->addSelect(DB::raw("'video' as type"));
+                ->addSelect(DB::raw("'videos' as type"));
 
             $postResults = Post::select([
                 'id',
@@ -49,7 +49,7 @@ class SearchService
                         ->orWhere('name', "like", "%$query%")
                         ->orWhere('description', "like", "%$query%");
                 })
-                ->addSelect(DB::raw("'post' as type"));
+                ->addSelect(DB::raw("'posts' as type"));
 
             $result = $videoResults
                 ->union($postResults)

@@ -1,81 +1,114 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import {Head} from '@inertiajs/react';
-import PrimaryButton from "@/Components/PrimaryButton.jsx";
+
 import * as React from "react";
 import ImageGrid from "@/Pages/Profile/ImageGrid.jsx"
 import Typography from '@mui/material/Typography';
-import NormalSpeedDial from "@/Components/SpeedDial/SpeedDial.jsx"
-import Button from "@mui/material/Button";
-import SendIcon from '@mui/icons-material/Send';
+import dateFormat, {masks} from "dateformat";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-export default function User({user: user}) {
+import List from '@mui/joy/List';
+import ListItem from '@mui/joy/ListItem';
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import Grid from "@mui/joy/Grid";
 
+function User({user: user}) {
 
 
     return (
-        <AuthenticatedLayout
+        <Box sx={{ width: "100%", height: "100%", bgcolor: "#000", p: "2rem" }}>
 
-        >
-            <Head title="user"/>
+             <Box sx={{ display: "flex", gap: "2rem", mb: "2rem" }}>
 
-                <div className="mx-auto py-12  max-w-7xl sm:px-6 lg:px-8 ">
+                {/* Ляво - Зеленият квадрат с avatar в горния десен ъгъл */}
+                <Box
+                    sx={{
+                        position: "relative",
+                        bgcolor: "green",
+                        height: "30rem",
+                        width: "85rem",
+                        borderRadius: "1rem",
+                        p: "2rem",
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
+                    <Typography
+                        variant="h1"
+                        sx={{
+                            color: "white",
+                            fontFamily: "Segoe UI Variable Display Light",
+                            fontSize: "3rem",
+                        }}
+                    >
+                        Posts
+                    </Typography>
 
-                    <Box sx={{display: 'flex', flexDirection: 'column'}}>
-                        <Box sx={{p:2}}>
-
-
-                            <img src={user.avatar} alt={user.name}
-                                 className="rounded-3xl col-span-2 object-fill shadow-lg"/><Typography sx={{fontSize:'2.2rem'}}>{user.name}</Typography>
-                            <Button variant="contained" sx={{borderRadius:2,mt:2,
-                                backgroundColor:'#bbdefb ',
-                                color:"black",
-
-                            }}>
-                              <SendIcon sx={{mr:1}}/>  Send Messege
-                            </Button>
-
-                        </Box>
-
-
-
-
-                        <Box
-                            sx={{
-                                bgcolor: 'rgba(0,138,255,0.1)',
-                                backdropFilter: "blur(10px) ",
-                                WebkitBackdropFilter: "blur(10px)",
-                                color:'black',
-                                borderRadius:3,
-                                p:3
+                    {/* Avatar в горния десен ъгъл */}
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: "1rem",
+                            right: "1rem",
+                            width: "200px",
+                            height: "200px",
+                            borderRadius: "0.5rem",
+                            overflow: "hidden",
+                        }}
+                    >
+                        <img
+                            src={user.avatar}
+                            alt="profile"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
                             }}
-                           >
-                            <Typography sx={{fontSize:'1.5rem'}}>About</Typography>
+                        />
+                    </Box>
+                </Box>
 
-
-                            <Typography variant="body1"
-
-                                        gutterBottom noWrap={true}
-                            >
-                                {user.description}
-                            </Typography>
-                        </Box>
+                {/* Дясно - Сините квадрати един в/у друг */}
+                <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <Box sx={{ bgcolor: "blue", height: "240px", width: "20rem", borderRadius: "1rem" }}>
+                        <Typography
+                            variant="h3"
+                            sx={{
+                                color: "white",
+                                fontFamily: "Segoe UI Variable Display Light",
+                                p: "1rem",
+                            }}
+                        >
+                            Posts
+                        </Typography>
                     </Box>
 
-
-
-
-
-            </div>
-            <Box display="flex" flexDirection="row" justifyContent="space-between" >
-                <div className="col-span-full ml-auto mr-auto">
-                    <Typography variant="h5" gutterBottom>
-                        {user.name}'s Posts
-                    </Typography>
-                    <ImageGrid></ImageGrid>
-                </div>
+                    <Box sx={{ bgcolor: "blue", height: "240px", width: "rem", borderRadius: "1rem" }}>
+                        <Typography
+                            variant="h3"
+                            sx={{
+                                color: "white",
+                                fontFamily: "Segoe UI Variable Display Light",
+                                p: "1rem",
+                            }}
+                        >
+                            Videos
+                        </Typography>
+                    </Box>
+                </Box>
             </Box>
-
-        </AuthenticatedLayout>
+        </Box>
     );
 }
+
+User.layout = (page) => {
+    return (
+        <AuthenticatedLayout
+            user={page.props.auth.user}
+            children={page}
+        />
+
+    )
+}
+export default User;

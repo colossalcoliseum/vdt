@@ -34,17 +34,19 @@ class UserFactory extends Factory
             'city' => fake()->city(),
             'country' => fake()->country(),
             'ip_address' => fake()->ipv6(),
-            'avatar' => self::getAvatarUrl(),
+            'avatar' => self::getPictureUrl(),
+            'cover' => self::getPictureUrl(1500, 500),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('123123123'),
             'remember_token' => Str::random(10),
         ];
     }
-    public static function getAvatarUrl(): string{
+    public static function getPictureUrl($width=200, $height=200): string{
         $client = new Client();
         $avatarUri = '';
        try {
-            $response = $client->get('https://picsum.photos/200', [
+            $response = $client->get(
+                "https://picsum.photos/$width/$height", [
                 'on_stats' => function (TransferStats $stats) use (&$url, &$avatarUri) {
                     $avatarUri = $stats->getEffectiveUri();
                 }

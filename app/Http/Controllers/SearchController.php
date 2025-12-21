@@ -14,14 +14,16 @@ class SearchController extends Controller
     public function searchContent(Request $request){
         $query = $request->input('query');
 /*        dd($this->searchService->searchContent($query));*/
+        $results = $this->searchService->searchContent($query);
+       // dd($results[0]['type']);
         return Inertia::render('ContentGrid', [
-            'content' =>  $this->searchService->searchContent($query),
-            'type'=>"posts",
+            'content' =>  $results,
+            //'type'=>$results,
             'headerText' => 'Search Results'
 
         ]);
     }
- 
+
     public function searchUsers($query){
         dd( $this->searchService->searchUsers($query));
     }

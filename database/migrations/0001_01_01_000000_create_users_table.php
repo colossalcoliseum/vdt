@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('handle')->unique()->default('user'.fake()->randomNumber(7, true));
             $table->string('avatar')->nullable();
+            $table->string('cover')->nullable();
             $table->string('country')->nullable();//TODO: направи отделна таблица с градове, държави и тн. и ги посочвай от тук
             $table->string('city')->nullable();
             $table->string('ip_address')->nullable();
