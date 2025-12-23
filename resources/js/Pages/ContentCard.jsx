@@ -21,12 +21,13 @@ import ListItem from '@mui/joy/ListItem';
 import Link from '@mui/joy/Link';
 
 
-function ContentCard({   content: content,
-                      type,
-                      ratio = 1.8,
-                      width = '23rem',
-                      height = 'relative'
-                  }) {
+function ContentCard({
+                         content: content,
+                         type,
+                         ratio = 1.8,
+                         width = '23rem',
+                         height = 'relative'
+                     }) {
     return (
         <Card variant="contained" sx={{
             m: '1rem', width: width, height: {height}, backgroundColor: 'rgba(53,53,53,0.6)',
@@ -48,22 +49,22 @@ function ContentCard({   content: content,
                             overlay
                             underline="none"
                             href={route(`${type}.show`, content.slug)}
-                            sx={{ color: 'text.tertiary' }}
+                            sx={{color: 'text.tertiary'}}
                         >
 
 
-                        <Typography level="title-sm" sx={{
-                            color: "rgb(255,255,255)",
-                            fontSize: "1rem",
-                            fontFamily: "Segoe UI Variable Display Light",
-                            letterSpacing: "0.017em",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            display: "-webkit-box",
-                            WebkitLineClamp: "2",
-                            WebkitBoxOrient: "vertical",
-                        }}>{content.title}
-                        </Typography>
+                            <Typography level="title-sm" sx={{
+                                color: "rgb(255,255,255)",
+                                fontSize: "1rem",
+                                fontFamily: "Segoe UI Variable Display Light",
+                                letterSpacing: "0.017em",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitLineClamp: "2",
+                                WebkitBoxOrient: "vertical",
+                            }}>{content.title}
+                            </Typography>
                         </Link>
                     </Grid>
                     <Grid size={0.8}>
@@ -133,12 +134,13 @@ function ContentCard({   content: content,
 }
 
 function HorizontalContentCard({
-                                content,
-                                type,
-                                width = '23rem',
-                                height = 'relative',
+                                   content,
+                                   type,
 
-                            }) {
+                                   width = '23rem',
+                                   height = 'relative',
+
+                               }) {
     return (
         <Grid container columns={18} sx={{
             flexGrow: 1, borderRadius: '1rem', width: '100%', height: '15rem',
@@ -175,7 +177,7 @@ function HorizontalContentCard({
                             {content.title}
                         </Typography>
                     </ListItem>
-                    <ListItem  >
+                    <ListItem>
                         <Typography level="p"
                                     sx={{
                                         color: 'white',
@@ -192,9 +194,9 @@ function HorizontalContentCard({
                                         width: '1.5rem'
                                     }}> </Box>
                                 </Grid>
-                            <Grid>
-                                <p> {content.creator.name}</p>
-                            </Grid>
+                                <Grid>
+                                    <p> {content.creator.name}</p>
+                                </Grid>
                             </Grid>
                         </Typography>
                     </ListItem>

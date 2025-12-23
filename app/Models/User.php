@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -96,7 +97,7 @@ class User extends Authenticatable
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'creator_id','id');
     }
 
     public static function canAccessAdminPanel(): bool
@@ -110,12 +111,13 @@ class User extends Authenticatable
 
     public function videos(): HasMany
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(Video::class, 'creator_id','id');
     }
     public function getRouteKeyName ()
     {
         return 'handle';
     }
+
 
 
 }

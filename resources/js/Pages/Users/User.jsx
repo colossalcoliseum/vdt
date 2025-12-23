@@ -3,135 +3,223 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import * as React from "react";
 import ImageGrid from "@/Pages/Profile/ImageGrid.jsx"
 import Typography from '@mui/material/Typography';
-import dateFormat, {masks} from "dateformat";
+import {Head, router, useForm, usePage} from '@inertiajs/react';
 import Box from "@mui/material/Box";
 import List from '@mui/joy/List';
 import ListItem from '@mui/joy/ListItem';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import LocationPinIcon from '@mui/icons-material/LocationPin';
+import dateFormat from "dateformat";
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import Divider from '@mui/joy/Divider';
 import Grid from "@mui/joy/Grid";
+import Input from "@mui/joy/Input";
+import Button from "@mui/joy/Button";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import ContentGrid from "@/Pages/ContentGrid.jsx";
+import {ContentCard} from "@/Pages/ContentCard.jsx";
 
-function User({user: user}) {
+function User({user: user, content:content}) {
+    const {data, setData} = useForm({});
+    const submit = (e) => {
+        e.preventDefault()
 
-
+        router.get(route('search.content', {
+            content: data.query,
+        }), {
+            query: data.query
+        }, {
+            preserveScroll: true
+        })
+    }
     return (
-        <Box sx={{width: "100%", height: "100%", bgcolor: "#000", p: "1rem"}}>
+        <>
+            <Box sx={{
+                flexGrow: 1, my: '1rem', borderRadius: '1rem', width: '80%', height: '100%', mx: 'auto',
 
-            <Box sx={{display: "flex", gap: "2rem"}}>
+
+            }}>
+
+                <Box sx={{
+                    display: 'flex',
+                    alignContent: 'end',
+                    gap: '1rem',
+                    pb: '4rem',
+                    justifyContent: 'flex-end', /*mx:'4rem'*/
+                }}>
+
+                    <form onSubmit={submit}>
+                        <Input
+                            id="filled-search"
+                            label="Search"
+                            type="search"
+                            name="query"
+
+                            value={data.query}
+                            onChange={(e) => {
+                                setData('query', e.target.value);
+                            }}
+
+                            /*
+                                                               disabled={processing}
+                            */
+
+                            size="md"
+                            placeholder="Search Content ..."
+                            variant="solid"
+                            endDecorator={<Button
+
+                                type="submit"
+                                /* onClick={() => setLoading(true)}*/
+
+                                sx={{
+                                    color: 'white', py: 'auto', backgroundColor: 'white',
+                                    '&:hover': {backgroundColor: 'white'},
+                                }}
+                            >
+                                <SearchSharpIcon sx={{color: 'black'}}/>
+                            </Button>}
 
 
-                {/* Ляво - Зеленият квадрат с avatar в горния десен ъгъл */}
+                            sx={{
+                                '--Input-focusedInset': 'var(--any, )',
+                                '--Input-focusedThickness': '0px',
+                                fontFamily: "Segoe UI Variable Display Light",
+
+                            }}
+                        >
+
+                        </Input>
+
+
+                    </form>
+                </Box>
+
+
                 <Box
                     sx={{
-                        position: "relative",
-                        height: "relative",
-                        maxHeight: "30rem",
+
+                        height: "13rem",
+
                         width: "100%",
 
-                        borderRadius: "1rem",
+                        borderRadius: "0.5rem",
                         backgroundImage: `url('${user.cover}')`,
                         backgroundSize: "cover",
                         p: "1rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "top",
-                        alignItems: "start",
-                    }}
-                > <Box sx={{display: "flex",top:0, gap: "2rem", mb: "2rem"}}> <Box
-                    sx={{
-                        position: "flex",
-
-
-                        width: "10rem",
-                        height: "10rem",
-                        borderRadius: "0.5rem",
-                        overflow: "hidden",
                     }}
                 >
-                    <img
-                        src={user.avatar}
-                        alt="profile"
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                        }}
-                    />
+
 
                 </Box>
-                    <Box>   <Typography
-                        variant="h1"
+                <Box sx={{py: '2rem', display: 'flex', gap: '1rem', alignItems: 'center', flexDirection: 'row'}}>
+                    <Box
                         sx={{
-                            color: "white", backgroundColor: 'rgba(0,0,0,0.5)', p: 1, borderRadius: '1rem',
-                            fontFamily: "Segoe UI Variable Display Light",
-                            fontSize: "3rem",
+                            position: "flex",
+
+                            backgroundImage: `url('${user.avatar}')`,
+                            width: "10rem",
+                            height: "10rem",
+                            borderRadius: "0.5rem",
+                            overflow: "hidden",
                         }}
-                    >
-                        {user.name}
-                    </Typography></Box>
-                </Box>
-                    <Box sx={{display: "flex", gap: "1rem", pt: '2rem', flexDirection: "column"}}>
+                    /> <Typography
+                    variant="h2"
+                    sx={{
+                        color: "white", p: 1,
+                        fontFamily: "Segoe UI Variable Display",
 
+                    }}
+                >
+                    <span>{user.name} ({user.handle})</span>
+                </Typography></Box>
+                <Box sx={{display: 'sticky', gap: '1rem', alignItems: 'center', flexDirection: 'row'}}>
+                    <Box sx={{display: 'flex', gap: '1rem', alignItems: 'top', flexDirection: 'row', pb: '4rem'}}>
                         <Box sx={{
-                            display: "flex",
-                            gap: "1rem",
-                            height: "relative",
-                            maxHeight: "10rem",
-                            overflow: "hidden"
+                            display: 'flex',
+                            gap: '1rem',
+                            alignItems: 'top',
+                            flexDirection: 'column',
+                            p: 1,
+                            borderRadius: '0.5rem',
+                            width: '35%',
+                            height: '25rem',
+                            border: '0.25rem solid grey'
                         }}>
-                            <Typography
-                                variant="h5"
-                                sx={{
-                                    color: "white",
-                                    backgroundColor: 'rgba(0,0,0,0.5)',
-                                    p: 1,
-                                    borderRadius: '1rem',
-                                    fontFamily: "Segoe UI Variable Display Light",
-                                    textOverflow: 'scroll',
-                                    overflow: 'auto'
 
-                                }}
-                            >
-                                {user.description}
-                            </Typography>
+                            <List>
+                                <Divider>
+                                    <Typography variant="h3" style={{color: 'white  '}}>
+                                        About
+                                    </Typography>
+                                </Divider>
+                                <ListItem>
+                                    <p style={{color: 'white'}}><LocationPinIcon/> {user.city}, {user.country}</p>
+                                </ListItem>
+                                <ListItem>
+                                    <p style={{color: 'white'}}><AlternateEmailIcon/> {user.email} </p>
+                                </ListItem>
+                                <ListItem>
+                                  <p style={{color: 'white'}}>Joined: {dateFormat(user.created_at, "longDate")} </p>
+                                </ListItem>
+
+                            </List>
+                        </Box>
+                        <Box sx={{
+                            display: 'flex',
+                            gap: '1rem',
+                            alignItems: 'top',
+                            flexDirection: 'column',
+                            p: 1,
+                            borderRadius: '0.5rem',
+                            width: '65%',
+                            height: '25rem',
+                            border: '0.25rem solid grey'
+                        }}>
+                            <List>
+                                <Divider>
+                                    <Typography variant="h3" style={{color: 'white  '}}>
+                                        Bio
+                                    </Typography>
+                                </Divider>
+                                <ListItem>
+                                    <p style={{color: 'white'}}>{user.description}</p>
+                                </ListItem>
+
+                            </List>
+
+
                         </Box>
                     </Box>
-                    {/* Avatar в горния десен ъгъл */}
+                    <Box sx={{display: 'flex', gap: '1rem', flexDirection: 'column'}}>
+                        <Typography variant="h5" style={{color: 'white'}}>
 
-                </Box>
+                            <List>
+                                <Divider>
+                                    <Typography variant="h5" style={{color: 'white  '}}>
+                                        Content by {user.name}
+                                    </Typography>
+                                </Divider>
 
-                {/* Дясно - Сините квадрати един в/у друг */}
-                <Box sx={{display: "flex", flexDirection: "column", gap: "1rem"}}>
-                    <Box sx={{bgcolor: "blue", height: "240px", width: "20rem", borderRadius: "1rem"}}>
-                        <Typography
-                            variant="h3"
-                            sx={{
-                                color: "white",
-                                fontFamily: "Segoe UI Variable Display Light",
-                                p: "1rem",
-                            }}
-                        >
-                            Posts
+
+                            </List>
                         </Typography>
-                    </Box>
 
-                    <Box sx={{bgcolor: "blue", height: "240px", width: "rem", borderRadius: "1rem"}}>
-                        <Typography
-                            variant="h3"
-                            sx={{
-                                color: "white",
-                                fontFamily: "Segoe UI Variable Display Light",
-                                p: "1rem",
-                            }}
-                        >
-                            Videos
-                        </Typography>
+                        <Box sx={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(3, 1fr)',
+                            gap: '1.5rem',
+                            mx: '5%',
+                            pl: '2rem'
+                        }}>
+                            {content.data.map((item) => (
+                                <ContentCard content={item} type={item.type} headerText="Content by {user.name}"/>
+
+                            ))}
+                        </Box>
                     </Box>
                 </Box>
             </Box>
-        </Box>
+        </>
     );
 }
 

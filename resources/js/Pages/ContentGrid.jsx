@@ -29,7 +29,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
     }
     return (
         <>
-            <Head title="Posts"/>
+            <Head title={type??""}/>
 
             <Grid container columns={18} sx={{flexGrow: 1,my:'1rem', borderRadius:'1rem', width: '80%', height: '100%', mx: 'auto',
 

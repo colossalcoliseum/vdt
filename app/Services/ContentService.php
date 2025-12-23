@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\SubCategory;
 use App\Models\User;
 use App\Models\Video;
+use Illuminate\Support\Facades\DB;
 
 class ContentService
 {
@@ -96,21 +97,25 @@ class ContentService
             return $exception->getMessage();
         }
     }
-    public function loadCategories(){
+    public function getAllUserContent(User $user)
+    {
         try {
-            return Category::all();
-        }
-        catch (\Exception $exception){
-            return $exception->getMessage();
-        }
-    }
-    public function loadSubCategories(){
-        try {
-            return SubCategory::all();
-        }
-        catch (\Exception $exception){
-            return $exception->getMessage();
-        }
-    }
+            $videos = Video::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
+                ->where( 'creator_id', "like", $user->id)
+                ->addSelect(DB::raw("'videos' as type"));
+            $posts = Post::select([ 'id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
+                ->where( 'creator_id', "like", $user->id)
+                ->addSelect(DB::raw("'posts' as type"));
+            $result = $videos
+                ->union($posts)
+/*                ->orderBy('created_at', 'desc')*/
+                ->with('creator')
+                ->paginate(20)
+                ->onEachSide(0);
+            return $result;
 
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
 }
