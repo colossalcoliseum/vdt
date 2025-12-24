@@ -96,7 +96,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post = Post::with('creator')->find($post->id);
+        $post = Post::with('creator', 'category')->find($post->id);
         //dd($post);
         return Inertia::render('Posts/Post', ['post' => $post]);
     }
