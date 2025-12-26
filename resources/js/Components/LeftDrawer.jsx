@@ -43,61 +43,50 @@ export default function LeftDrawer() {
                 <Box
                     sx={{
                         display: 'flex',
-                        alignItems: 'center',
-                        ml: 'auto',
-                        mt: 2,
-                        mr: 2,
+                         ml: 'auto',
+
                     }}
                 >
 
                     <ModalClose id="close-icon" sx={{position: 'initial'}}/>
                 </Box>
-                <Box sx={{ml: '2rem', width: 'relative', height: 'relative ', mt: '1rem', mb: '1rem'}}>
+                <Box sx={{mx: 'auto', my: '2rem'}}>
                     <ApplicationLogo
 
                     />
                 </Box>
 
                 <List
-                    size="lg"
+                    size="md"
                     component="nav"
                     sx={{
                         flex: 'none',
-                        fontSize: 'md',
-                        mt: '3rem',
-                        '&hover:': {backgroundColor: 'yellow'},
-                        '& > div': {justifyContent: 'center'},
+                        fontSize: 'sm',
+
+                         '& > div': {justifyContent: 'center'},
                     }}
                 >
                     <Button href={route('home')} sx={{
-                        fontWeight: 'normal',
-                        fontFamily: "Segoe UI Variable Display  ",
-                        my: '0.25rem',
+
                         lineHeight: 2.5,
                         color: 'white'
                     }}>Home</Button>
                     <Button href={route('videos.index')} sx={{
-                        fontWeight: 'normal',
-                        fontFamily: "Segoe UI Variable Display  ",
-                        my: '0.25rem',
+
                         lineHeight: 2.5,
                         color: 'white'
                     }}>Watch</Button>
                     <Button href={route('posts.index')} sx={{
-                        fontWeight: 'normal',
-                        fontFamily: "Segoe UI Variable Display ",
-                        my: '0.25rem',
+
                         lineHeight: 2.5,
                         color: 'white'
                     }}>Read</Button>
                     <Button sx={{
-                        fontWeight: 'normal',
-                        fontFamily: "Segoe UI Variable Display  ",
-                        my: '0.25rem',
+
                         lineHeight: 2.5,
                         color: 'white'
                     }}>Create</Button>
-                    <ListItem sx={{lineHeight: 2.5, pt: '5rem', color: 'white'}}>
+                    <ListItem sx={{ pt: '4rem', color: 'white'}}>
                         <ThemeSwitch
                             modes={["light", "dark", "system"]}
                             icons={[

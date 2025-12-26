@@ -4,7 +4,7 @@ import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
 import * as React from "react";
 import Box from '@mui/joy/Box';
 import Grid from "@mui/material/Grid";
- import {ContentCard} from "@/Pages/ContentCard.jsx";
+import ContentCard from "@/Pages/ContentCard.jsx";
 import Input from '@mui/joy/Input';
 import Button from "@mui/joy/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
@@ -110,7 +110,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
 
                 {content.data.map((item) => (
                     <ContentCard
-                        width='80%'
+                        width='70%'
                         type={item.type??type}
                         content={item}
                     />

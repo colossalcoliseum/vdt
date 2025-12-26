@@ -36,31 +36,36 @@ export default function Post({post: post}) {
                     alignItems: 'center',
                     flexDirection: 'row',
                     width: '100%',
-                    height: '5rem',
+                    height: 'relative',
                     pt: '1rem',
+                    overflow: 'none',
                     justifyContent: 'center',
                 }}>
                     <Grid size={12} sx={{
                         display: 'flex',
                         justifyContent: 'center',
-                    }}>
+                        width: '50%',
+
+                        py:'1rem',
+                     }}>
                         <Typography level="h1" sx={{
                             color: 'white',
                             fontFamily: "Segoe UI Variable Display",
                             letterSpacing: 1,
-
-                            fontSize: '3rem',
-
+                            height: '100%',
+                            fontSize: '2.3rem',
                         }}>
                             {post.title}
-                        </Typography></Grid> </Box>
+                        </Typography>
+                    </Grid>
+                </Box>
 
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     width: '100%',
-                    gap: '1rem'
+                    gap: '0.8rem'
                 }}>
                     <Box>
                         <Typography  level="h5" sx={{
@@ -89,6 +94,20 @@ export default function Post({post: post}) {
                             width: '100%',
                         }}>{post.category.name} </Typography>
                     </Box>
+                </Box>
+                    <Box sx={{width: '50%', mx:'auto', borderRadius:'0.5rem',  height: '35rem', px:'0 auto',
+                        backgroundImage:`url('${post.thumbnail}')`,  backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                </Box>
+                <Box sx={{width: '50%', mx:'auto', borderRadius:'0.5rem',  height: 'relative', px:'0 auto',pb:'10rem'}}>
+                    <Divider sx={{mb:'1rem',mt:'0.1rem'}}>
+                        <Typography variant="h6" style={{color: 'white'}}>
+                            More on the story
+                        </Typography>
+                    </Divider>
+                    <p style={{color:'white', whiteSpace:'pre-wrap', fontSize:'1rem', lineHeight:'1.5rem', fontFamily: "Segoe UI Variable Display"}}>
+                        <span dangerouslySetInnerHTML={{__html: sanitizedHTML}}></span>
+
+                    </p>
                 </Box>
             </Grid>
         </AuthenticatedLayout>

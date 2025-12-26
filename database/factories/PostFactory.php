@@ -21,7 +21,7 @@ class PostFactory extends Factory
     {
         return [//TODO: довърши
             'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraphs(15, true),
             'slug' => $this->faker->slug(4),
             'thumbnail' => self::getPictureUrl(300,200),
             'creator_id' =>$this->faker->numberBetween(1,10),

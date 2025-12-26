@@ -15,9 +15,6 @@ import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import DownloadIcon from '@mui/icons-material/Download';
-import Box from "@mui/joy/Box";
-import List from '@mui/joy/List';
-import ListItem from '@mui/joy/ListItem';
 import Link from '@mui/joy/Link';
 
 
@@ -49,15 +46,11 @@ function ContentCard({
                             overlay
                             underline="none"
                             href={route(`${type}.show`, content.slug)}
-                            sx={{color: 'text.tertiary'}}
-                        >
+                         >
 
 
                             <Typography level="title-sm" sx={{
                                 color: "rgb(255,255,255)",
-                                fontSize: "1rem",
-                                fontFamily: "Segoe UI Variable Display Light",
-                                letterSpacing: "0.017em",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 display: "-webkit-box",
@@ -83,45 +76,21 @@ function ContentCard({
                         </Dropdown>
                     </Grid>
                 </Grid>
-                <Grid container spacing={1} sx={{flexGrow: 1}}>
-                    <Grid size={8.5}>
-                        <Typography level="p"
-                                    sx={{
-                                        color: 'white',
-                                        fontWeight: 'normal',
-                                        fontFamily: "Segoe UI Variable Display Light",
-                                        letterSpacing: 1,
-                                    }}>
-                            <Grid container columns={2} sx={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                                <Grid>
-                                    <Box sx={{
-                                        backgroundImage: `url('${content.creator.avatar}')`,
-                                        height: '1.5rem',
-                                        borderRadius: '10%',
-                                        width: '1.5rem'
-                                    }}> </Box>
-                                </Grid>
-                                <Grid>
-                                    <p> {content.creator.name}</p>
-                                </Grid>
-                            </Grid>
+                <Grid container sx={{flexGrow: 1}}>
+                    <Grid size={9.3}>
+                        <Typography
+                            sx={{
+                                color: 'white',
+                                fontWeight: 'normal',
+                                fontSize: '0.85rem'
+                            }}>
+                            {content.creator.name}
                         </Typography>
                     </Grid>
-                    <Grid size={3.5}>
-                        <Typography
-                            level="body-xs"
-                            textColor="text.secondary"
-                            sx={{
-                                color: "rgb(255,255,255)",
-                                fontWeight: 'light',
-                                fontFamily: "Segoe UI Variable Display Light",
-                                letterSpacing: "0.017em",
-                            }}
-                        >
-                            {
-
-                                dateFormat(content.created_at, "longDate")}
-
+                    <Grid size={2.7}>
+                        <Typography level="body-sm"
+                                    sx={{color: "rgb(255,255,255)"}}>
+                            {dateFormat(content.created_at, "mm/dd/yy")}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -133,100 +102,4 @@ function ContentCard({
     )
 }
 
-function HorizontalContentCard({
-                                   content,
-                                   type,
-
-                                   width = '23rem',
-                                   height = 'relative',
-
-                               }) {
-    return (
-        <Grid container columns={18} sx={{
-            flexGrow: 1, borderRadius: '1rem', width: '100%', height: '15rem',
-            background: 'rgba(255,255,255,0.1)',
-            color: 'white', gap: '0rem',
-
-        }}>
-            <Grid size={5}>
-                <Box sx={{
-                    backgroundImage: `url('${content.thumbnail}')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',/*TODO: направи този параметър променлив*/
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '1rem 1rem 1rem 1rem',
-                }}>
-
-
-                </Box>
-
-            </Grid>
-            <Grid size={13}>
-
-
-                <List aria-labelledby="decorated-list-demo">
-                    <ListItem>
-                        <Typography level="h3"
-                                    sx={{
-                                        color: 'white',
-                                        fontWeight: 'normal',
-                                        fontFamily: "Segoe UI Variable Display",
-                                        letterSpacing: 1,
-                                    }}>
-                            {content.title}
-                        </Typography>
-                    </ListItem>
-                    <ListItem>
-                        <Typography level="p"
-                                    sx={{
-                                        color: 'white',
-                                        fontWeight: 'normal',
-                                        fontFamily: "Segoe UI Variable Display Light",
-                                        letterSpacing: 1,
-                                    }}>
-                            <Grid container columns={2} sx={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                                <Grid>
-                                    <Box sx={{
-                                        backgroundImage: `url('${content.creator.avatar}')`,
-                                        height: '1.5rem',
-                                        borderRadius: '10%',
-                                        width: '1.5rem'
-                                    }}> </Box>
-                                </Grid>
-                                <Grid>
-                                    <p> {content.creator.name}</p>
-                                </Grid>
-                            </Grid>
-                        </Typography>
-                    </ListItem>
-                    <ListItem>
-                        <Typography level="p"
-                                    sx={{
-                                        WebkitLineClamp: "1",
-                                        fontSize: '0.85rem',
-                                        WebkitBoxOrient: "vertical",
-                                        color: 'white',
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                        display: "-webkit-box",
-                                        fontWeight: 'normal',
-                                        fontFamily: "Segoe UI Variable Display Light",
-                                        letterSpacing: 1,
-                                    }}>
-                            {content.description}
-
-                        </Typography>
-                    </ListItem>
-
-
-                </List>
-            </Grid>
-
-
-        </Grid>
-    )
-}
-
-
-export {ContentCard, HorizontalContentCard}
+export default ContentCard
