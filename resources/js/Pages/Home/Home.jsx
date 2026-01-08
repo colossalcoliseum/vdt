@@ -1,12 +1,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
-import Grid from "@mui/joy/Grid";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import {motion} from "motion/react"
-import Box from '@mui/joy/Box';
-import Card from '@mui/joy/Card';
-import CardCover from '@mui/joy/CardCover';
-import CardContent from '@mui/joy/CardContent';
-import Typography from '@mui/joy/Typography';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import {Carousel, CarouselContent, CarouselItem} from "../../../../components/ui/carousel.jsx";
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 import HorizontalChunck from "@/LandingPage/HorizontalChunck.jsx";
@@ -204,147 +203,6 @@ function Home() {
 
                         </Typography>
                     </Grid>
-                    <Grid size={18} sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        margin: '0 auto',
-                        gap: '10rem'
-                    }}>
-                        <Box sx={{
-                            display: 'flex',
-                            height: '30rem',
-                            width: '23rem',
-                            justifyContent: 'center',
-                            margin: '0 auto',
-                        }}>
-                            <Carousel className="w-full">
-
-                                <CarouselContent>
-                                    {Array.from({length: 5}).map((_, index) => (
-                                        <CarouselItem key={index}>
-                                            <div className="p-1">
-                                                <Card component="li" sx={{minWidth: 300, flexGrow: 1}}>
-                                                    <CardCover>
-                                                        <img
-                                                            src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-                                                            srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
-                                                            loading="lazy"
-                                                            alt=""
-                                                        />
-                                                    </CardCover>
-                                                    <CardContent>
-                                                        <Typography
-                                                            level="body-lg"
-                                                            textColor="#fff"
-                                                            sx={{
-                                                                fontFamily: "Alumni Sans Pinstripe",
-                                                                fontWeight: 'lg',
-                                                                mt: {xs: 12, sm: 18}
-                                                            }}
-                                                        >
-                                                            Image
-                                                        </Typography>
-                                                    </CardContent>
-                                                </Card>
-                                            </div>
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
-
-                        </Box>
-                        <Box sx={{
-                            display: 'flex',
-                            height: '30rem',
-                            width: '23rem',
-                            justifyContent: 'center',
-                            margin: '0 auto',
-                        }}>
-                            <Carousel className="w-full">
-
-                                <CarouselContent>
-                                    {Array.from({length: 5}).map((_, index) => (
-                                        <CarouselItem key={index}>
-                                            <div className="p-1">
-                                                <Card component="li" sx={{minWidth: 300, flexGrow: 1}}>
-                                                    <CardCover>
-                                                        <img
-                                                            src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-                                                            srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
-                                                            loading="lazy"
-                                                            alt=""
-                                                        />
-                                                    </CardCover>
-                                                    <CardContent>
-                                                        <Typography
-                                                            level="body-lg"
-                                                            textColor="#fff"
-
-
-                                                            sx={{
-                                                                fontFamily: "Alumni Sans Pinstripe",
-                                                                fontWeight: 'lg',
-                                                                mt: {xs: 12, sm: 18}
-                                                            }}
-                                                        >
-                                                            Image
-                                                        </Typography>
-                                                    </CardContent>
-                                                </Card>
-                                            </div>
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
-
-                        </Box>
-                        <Box sx={{
-                            display: 'flex',
-                            height: '30rem',
-                            width: '23rem',
-                            justifyContent: 'center',
-                            margin: '0 auto',
-                        }}>
-                            <Carousel className="w-full">
-
-                                <CarouselContent>
-                                    {Array.from({length: 5}).map((_, index) => (
-                                        <CarouselItem key={index}>
-                                            <div className="p-0">
-                                                <Card component="li" sx={{minWidth: 300, flexGrow: 1}}>
-                                                    <CardCover>
-                                                        <img
-                                                            src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-                                                            srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
-                                                            loading="lazy"
-                                                            alt=""
-                                                        />
-                                                    </CardCover>
-                                                    <CardContent>
-                                                        <Typography
-                                                            level="body-lg"
-                                                            textColor="#fff"
-                                                            sx={{
-                                                                fontFamily: "Alumni Sans Pinstripe",
-                                                                fontWeight: 'lg',
-                                                                mt: {xs: 12, sm: 18}
-                                                            }}
-                                                        >
-                                                            Image
-                                                        </Typography>
-                                                    </CardContent>
-                                                </Card>
-                                            </div>
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
-
-                        </Box>
-
-                    </Grid>
-
                 </Grid>
 
 

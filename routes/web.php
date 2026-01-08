@@ -16,7 +16,8 @@ use Inertia\Inertia;
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
-        'permissions' => auth()->user()->getAllPermissions()->toArray()
+        'permissions' => auth()->user()->getAllPermissions()->toArray(),
+        'user' => auth()->user(),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

@@ -34,7 +34,7 @@ class HandleInertiaRequests extends Middleware
             'messages' => flash()->render('array'),
             'auth' => [
                 'user' => $request->user(),
-            ],
+                 ],
         ];
     }
 }

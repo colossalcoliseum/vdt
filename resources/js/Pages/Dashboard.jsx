@@ -1,14 +1,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head, usePage} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
+import Button from "@mui/material/Button";
 
-export default function Dashboard() {
-    const user = usePage().props.auth.user;
+function Dashboard({user: user}) {
 
     return (
-        <AuthenticatedLayout
-
-        >
+     <>
             <Head title="Dashboard"/>
 
             <div className="py-12 ">
@@ -30,6 +28,7 @@ export default function Dashboard() {
                         </div>
 
 
+                        <Button variant="contained">Тест на MUI</Button>
                     </div>
                 </div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
@@ -82,6 +81,9 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     );
 }
+Dashboard.layout = (page) => <AuthenticatedLayout children={page} title="Dashboard"/>;
+
+export default Dashboard;

@@ -1,21 +1,10 @@
-import Grid from "@mui/material/Grid";
-import * as React from "react";
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import AspectRatio from '@mui/joy/AspectRatio';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CardOverflow from '@mui/joy/CardOverflow';
-import Typography from '@mui/joy/Typography';
-import dateFormat, {masks} from "dateformat";
-import Dropdown from '@mui/joy/Dropdown';
-import IconButton from '@mui/joy/IconButton';
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import MoreVert from '@mui/icons-material/MoreVert';
-import IosShareIcon from '@mui/icons-material/IosShare';
-import DownloadIcon from '@mui/icons-material/Download';
-import Link from '@mui/joy/Link';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import CardActionArea from '@mui/material/CardActionArea';
+import Button from '@mui/material/Button';
+import CardActions from '@mui/material/CardActions';
 
 
 function ContentCard({
@@ -26,79 +15,41 @@ function ContentCard({
                          height = 'relative'
                      }) {
     return (
-        <Card variant="contained" sx={{
-            m: '1rem', width: width, height: {height}, backgroundColor: 'rgba(53,53,53,0.6)',
-        }}>
-            <CardOverflow>
-                <AspectRatio ratio={ratio}>
-                    <img
-                        src={content.thumbnail}
-                        srcSet={content.thumbnail}
-                        loading="lazy"
-                        alt={content.title}
-                    />
-                </AspectRatio>
-            </CardOverflow>
+
+
+
+    <Card sx={{ maxWidth: 345, width: width, height: height, borderRadius: '1rem' }}>
+        <CardActionArea>
+            <CardMedia
+                component="img"
+                height="140"
+
+                image={content.thumbnail}
+                alt={content.title}
+                sx={{ height: '15rem' }}
+            />
             <CardContent>
-                <Grid container sx={{flexGrow: 1}}>
-                    <Grid size={11.2}>
-                        <Link
-                            overlay
-                            underline="none"
-                            href={route(`${type}.show`, content.slug)}
-                         >
-
-
-                            <Typography level="title-sm" sx={{
-                                color: "rgb(255,255,255)",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                display: "-webkit-box",
-                                WebkitLineClamp: "2",
-                                WebkitBoxOrient: "vertical",
-                            }}>{content.title}
-                            </Typography>
-                        </Link>
-                    </Grid>
-                    <Grid size={0.8}>
-                        <Dropdown>
-                            <MenuButton
-                                slots={{root: IconButton}}
-                                slotProps={{root: {variant: 'outlined', color: 'inherit'}}}
-                            >
-                                <MoreVert/>
-                            </MenuButton>
-                            <Menu>
-                                <MenuItem><BookmarkBorderIcon/>Save</MenuItem>
-                                <MenuItem><IosShareIcon/>Share</MenuItem>
-                                <MenuItem><DownloadIcon/>Download</MenuItem>
-                            </Menu>
-                        </Dropdown>
-                    </Grid>
-                </Grid>
-                <Grid container sx={{flexGrow: 1}}>
-                    <Grid size={9.3}>
-                        <Typography
+                <Typography gutterBottom variant="h5" component="div"
                             sx={{
-                                color: 'white',
-                                fontWeight: 'normal',
-                                fontSize: '0.85rem'
-                            }}>
-                            {content.creator.name}
-                        </Typography>
-                    </Grid>
-                    <Grid size={2.7}>
-                        <Typography level="body-sm"
-                                    sx={{color: "rgb(255,255,255)"}}>
-                            {dateFormat(content.created_at, "mm/dd/yy")}
-                        </Typography>
-                    </Grid>
-                </Grid>
 
-
+                    overflow: "hidden",
+                     display: "-webkit-box",
+                    WebkitLineClamp: "2",
+                    WebkitBoxOrient: "vertical",
+                }}>
+                    {content.title}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    {content.creator.name}
+                </Typography>
             </CardContent>
-
-        </Card>
+        </CardActionArea>
+        <CardActions>
+            <Button size="small" color="primary">
+                Share
+            </Button>
+        </CardActions>
+    </Card>
     )
 }
 

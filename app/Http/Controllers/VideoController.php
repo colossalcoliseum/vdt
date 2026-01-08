@@ -24,10 +24,8 @@ class VideoController extends Controller
      * Display a listing of the resource.
      */
     public function __construct(
-        public ContentService $contentService
-    )
-    {
-    }
+        public ContentService $contentService,
+    ) {}
 
     public function index(User $user=null)
     {
@@ -111,7 +109,7 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        $video = Video::with('creator')->find($video->id);//TODO: премести в service
+        $video = Video::find($video->id);//TODO: премести в service
         return Inertia::render('Videos/Video', ['video' => $video]);
     }
 

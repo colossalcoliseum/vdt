@@ -51,7 +51,7 @@ class UserController extends Controller
         //dd($this->contentService->getAllUserContent($user));
         return Inertia::render('Users/User',[
             'user' => $user->load(['roles', 'videos.creator', 'posts.creator']),
-            'content' => $this->contentService->getAllUserContent($user)]);
+                    'content' => $this->contentService->getAllUserContent($user)]);
     }
 
     /**

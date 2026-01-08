@@ -2,13 +2,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
 import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
 import * as React from "react";
-import Box from '@mui/joy/Box';
+import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 import ContentCard from "@/Pages/ContentCard.jsx";
-import Input from '@mui/joy/Input';
-import Button from "@mui/joy/Button";
+import Input from '@mui/material/Input';
+import Button from "@mui/material/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import Typography from '@mui/joy/Typography';
+import Typography from '@mui/material/Typography';
 function ContentGrid({content: content,type:type, headerText:headerText}) {
     const now = new Date();
     const {data, setData} = useForm({
@@ -29,22 +29,14 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
     }
     return (
         <>
-            <Head title={type??""}/>
 
-            <Grid container columns={18} sx={{flexGrow: 1,my:'1rem', borderRadius:'1rem', width: '80%', height: '100%', mx: 'auto',
+            <Grid container columns={18} sx={{flexGrow: 1,my:'2rem', width: '80%', height: '100%', mx: 'auto',
 
 
             }}>
                 <Grid size={15} sx={{display: 'flex', gap: '1rem', alignItems: 'center', flexDirection: 'row'}}>
-                    <Typography level="h1" sx={{
-                        color: 'white',
-                        fontFamily: "Segoe UI Variable Display Light",
-                        letterSpacing: 1,
-                        fontSize: '3rem',
-
-                    }}>
+                    <Typography variant="h1" color='primary.main' sx={{}} >
                         {headerText}
-
                     </Typography>
 
                 </Grid>
@@ -81,12 +73,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
                             </Button>}
 
 
-                            sx={{
-                                '--Input-focusedInset': 'var(--any, )',
-                                '--Input-focusedThickness': '0px',
-                                fontFamily: "Segoe UI Variable Display Light",
 
-                            }}
                         >
 
                         </Input>
@@ -110,6 +97,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
 
                 {content.data.map((item) => (
                     <ContentCard
+                        key={item.id}
                         width='70%'
                         type={item.type??type}
                         content={item}

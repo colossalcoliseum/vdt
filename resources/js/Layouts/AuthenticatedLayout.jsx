@@ -1,53 +1,55 @@
 import * as React from 'react';
-import Box from '@mui/joy/Box';
-import List from '@mui/joy/List';
-import ListItem from '@mui/joy/ListItem';
-import Dropdown from '@mui/joy/Dropdown';
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import {AppBar, Toolbar, useScrollTrigger} from "@mui/material";
-import LeftDrawer from "@/Components/LeftDrawer.jsx";
+import Box from '@mui/material/Box';
+import {Toolbar, useScrollTrigger} from "@mui/material";
+import LeftDrawer from "@/Components/LeftDrawer";
+  import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import { ThemeProvider, createTheme, useColorScheme } from '@mui/material/styles';
 
-export default function AuthenticatedLayout({user, children, logoStartColor, logoStopColor}) {
-
+export default function AuthenticatedLayout({children }) {
+    const { mode, setMode } = useColorScheme();
+    if (!mode) {
+        return null;
+    }
     return (
-        <Box
-            sx={{
-                backgroundColor: 'black',
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100vh',
-                position: 'relative'
-            }}
-        >
-            <AppBar sx={{
-                backgroundColor: 'inherit',
-                backdropFilter: "",
-                p: 0, m: 0,
-                pl: '5rem',
-                position: 'relative'
-            }}
-            >
-                <Box sx={{margin: 0, padding: 0}}>
-
-
-                        <LeftDrawer
-
-                        />
-
-
+        < >
+            <Toolbar>
+                <Box>
+                    <LeftDrawer />
                 </Box>
-            </AppBar>
-            <Box component="main" sx={{
-                flex: 1,
-                backgroundColor: 'inherit',
-                margin: 0,
-                padding: 0,
-
-            }}>
-                {children}
-            </Box>
-        </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        width: '100%',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        bgcolor: 'background.default',
+                        color: 'text.primary',
+                        borderRadius: 1,
+                        p: 3,
+                        minHeight: '56px',
+                    }}
+                >
+                    <FormControl>
+                        <FormLabel id="demo-theme-toggle">Theme</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-theme-toggle"
+                            name="theme-toggle"
+                            row
+                            value={mode}
+                            onChange={(event) => setMode(event.target.value)}
+                        >
+                            <FormControlLabel value="system" control={<Radio />} label="System" />
+                            <FormControlLabel value="light" control={<Radio />} label="Light" />
+                            <FormControlLabel value="dark" control={<Radio />} label="Dark" />
+                        </RadioGroup>
+                    </FormControl>
+                </Box>
+            </Toolbar>
+            {children}
+        </ >
     );
 }

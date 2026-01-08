@@ -5,18 +5,17 @@ import ImageGrid from "@/Pages/Profile/ImageGrid.jsx"
 import Typography from '@mui/material/Typography';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
 import Box from "@mui/material/Box";
-import List from '@mui/joy/List';
-import ListItem from '@mui/joy/ListItem';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import dateFormat from "dateformat";
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import Divider from '@mui/joy/Divider';
-import Grid from "@mui/joy/Grid";
-import Input from "@mui/joy/Input";
-import Button from "@mui/joy/Button";
+import Divider from '@mui/material/Divider';
+ import Input from '@mui/material/Input';
+import Button from "@mui/material/Button";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import ContentGrid from "@/Pages/ContentGrid.jsx";
-import {ContentCard} from "@/Pages/ContentCard.jsx";
+import ContentCard from "@/Pages/ContentCard.jsx";
 
 function User({user: user, content:content}) {
     const {data, setData} = useForm({});

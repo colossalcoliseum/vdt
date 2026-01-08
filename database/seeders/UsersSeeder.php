@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
             ->create([
                 'name' => 'Admin',
                 'handle' => 'admin',
+                'is_admin' => true,
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('123456789'),
                 'avatar' => 'avatars/defaultAvatar.jpg',
