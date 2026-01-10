@@ -99,7 +99,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class, 'creator_id','id');
     }
-
+    public static function canAccessAdminPanel(): bool
+    {
+        return auth()->user()->hasRole('admin') || auth()->user()->hasRole('super_admin');
+    }
+    public static function isSuperAdmin(): bool
+    {
+        return auth()->user()->hasRole('super_admin');
+    }
 
     public function videos(): HasMany
     {

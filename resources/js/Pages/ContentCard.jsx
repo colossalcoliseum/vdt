@@ -18,7 +18,7 @@ function ContentCard({
 
 
 
-    <Card sx={{ maxWidth: 345, width: width, height: height, borderRadius: '1rem' }}>
+    <Card sx={{ maxWidth: 545, width: width, height: height, borderRadius: '1rem' }}>
         <CardActionArea>
             <CardMedia
                 component="img"
@@ -39,7 +39,7 @@ function ContentCard({
                 }}>
                     {content.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography variant="body1" sx={{ color: 'text.secondary' }}>
                     {content.creator.name}
                 </Typography>
             </CardContent>

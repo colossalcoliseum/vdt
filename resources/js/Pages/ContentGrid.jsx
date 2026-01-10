@@ -98,7 +98,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
                 {content.data.map((item) => (
                     <ContentCard
                         key={item.id}
-                        width='70%'
+
                         type={item.type??type}
                         content={item}
                     />

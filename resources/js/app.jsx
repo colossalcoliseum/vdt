@@ -7,8 +7,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssVarsProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+ import CssBaseline from '@mui/material/CssBaseline';
 
 const appName = import.meta.env.VITE_APP_NAME || 'VDT';
 
