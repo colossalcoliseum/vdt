@@ -2,18 +2,18 @@ import {createTheme} from '@mui/material/styles';
 import type {ThemeOptions} from '@mui/material/styles';
 
 export const brandedTokens: ThemeOptions = {
-        palette: {
-            primary: {
-                light: '#8c7db5',
-                main: '#2a2d67',
-                dark: '#0d0e3c',
-                contrastText: '#fff',
-            },
-            secondary: {
-                light: '#b6465f',
-                main: '#ad2831',
-                dark: '#640d14',
-                contrastText: '#000',
+    palette: {
+        primary: {
+            light: '#8c7db5',
+            main: '#2a2d67',
+            dark: '#0d0e3c',
+            contrastText: '#fff',
+        },
+        secondary: {
+            light: '#b6465f',
+            main: '#ad2831',
+            dark: '#640d14',
+            contrastText: '#000',
         },
     },
     shape: {
@@ -43,7 +43,7 @@ export const brandedTokens: ThemeOptions = {
             }
         },
     },
-    };
+};
 
 export const brandedComponents: ThemeOptions['components'] = {
     MuiButton: {
@@ -65,8 +65,26 @@ export const brandedComponents: ThemeOptions['components'] = {
 
 const mainTheme = createTheme({
     ...brandedTokens,
+    cssVariables: {
+        colorSchemeSelector: 'data',
+    },
     colorSchemes: {
-        dark: true,
+        dark: {
+            palette: {
+                primary: {
+                    light: '#a895d8',
+                    main: '#494eb3',
+                    dark: '#45469c',
+                    contrastText: '#fff',
+                },
+                secondary: {
+                    light: '#ef728e',
+                    main: '#ca454e',
+                    dark: '#811c24',
+                    contrastText: '#000',
+                }
+            },
+        }
     },
     components: brandedComponents,
 });

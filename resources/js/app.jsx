@@ -2,12 +2,12 @@ import './bootstrap';
 import '../css/app.css';
 import "../i18n";
 import mainTheme from './mainTheme';
-
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@mui/material/styles';
- import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline';
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 
 const appName = import.meta.env.VITE_APP_NAME || 'VDT';
 
@@ -22,11 +22,14 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <ThemeProvider theme={mainTheme}>
+            <>
+                <InitColorSchemeScript attribute="data" />
+                <ThemeProvider theme={mainTheme}>
                      <CssBaseline />
                     <App {...props}  />
              </ThemeProvider>
-        );
+            </>
+                );
     },
     progress: {
         color: '#283148',
