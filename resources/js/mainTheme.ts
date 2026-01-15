@@ -21,27 +21,25 @@ export const brandedTokens: ThemeOptions = {
     },
     typography: {
         fontFamily:
-            'var(--font-primary, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display Light", Roboto, "Helvetica Neue", Arial, sans-serif)',
+            'var(--font-primary, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", Roboto, "Helvetica Neue", Arial, sans-serif)',
         fontSize: 14,
+        fontWeightLight: 'normal',
+        h4: {
+            fontSize: '2rem',
+            margin: '0.25rem',
+        },
         h3: {
             fontSize: '2.5rem',
-            heading: {
-                fontSize: '3rem',
-            }
+            margin: '0.5rem',
         },
         h2: {
             fontSize: '3.5rem',
-
-            heading: {
-                fontSize: '4rem',
-            }
+            margin: '0.75rem',
         },
         h1: {
             fontSize: '4.5rem',
-            heading: {
-                fontSize: '5rem',
-            }
-        },
+            margin: '1rem',
+         },
     },
 };
 
@@ -72,9 +70,9 @@ const mainTheme = createTheme({
         dark: {
             palette: {
                 primary: {
-                    light: '#a895d8',
-                    main: '#494eb3',
-                    dark: '#45469c',
+                    light: 'rgba(147,203,255,0.5)',
+                    main: 'rgba(96,182,255,0.5)',
+                    dark: 'rgba(72,170,253,0.5)',
                     contrastText: '#fff',
                 },
                 secondary: {

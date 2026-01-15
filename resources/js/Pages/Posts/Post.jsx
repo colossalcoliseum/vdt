@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout.jsx';
 import {Head, usePage} from '@inertiajs/react';
 import DOMPurify from 'dompurify';
 import List from '@mui/material/List';
@@ -28,7 +28,7 @@ export default function Post({post: post}) {
     });
 
     return (
-        <AuthenticatedLayout>
+        <MainLayout>
             <Grid container columns={12} spacing={2}>
                 <Box sx={{
                     display: 'flex',
@@ -110,6 +110,6 @@ export default function Post({post: post}) {
                     </p>
                 </Box>
             </Grid>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

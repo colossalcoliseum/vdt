@@ -11,6 +11,8 @@ class HomeController extends Controller
 {
     public function home(){
 
-        return Inertia::render('Home/Home', []);
+        return Inertia::render('Home/Home', [
+            'user' => auth()->user(),
+        ]);
     }
 }

@@ -1,6 +1,6 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
+import MainLayout from '@/Layouts/MainLayout.jsx';
 import {Head, router, useForm, usePage} from '@inertiajs/react';
-import PostsPagination from "@/Components/Paginations/PostsPagination.jsx";
+import Pagination from "@/Components/Paginations/MainPagination.jsx";
 import * as React from "react";
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
@@ -15,6 +15,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
         page: content.currentPage,
     });
 
+    {console.log(content)}
 
     const submit = (e) => {
         e.preventDefault()
@@ -40,47 +41,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
                     </Typography>
 
                 </Grid>
-                <Grid size={3} sx={{display: 'flex', gap: '1rem', justifyContent: 'flex-end'}}>
-                    <form  onSubmit={submit}>
-                        <Input
-                            id="filled-search"
-                            label="Search"
-                            type="search"
-                            name="query"
 
-                            value={data.query}
-                            onChange={(e) => {
-                                setData('query', e.target.value);
-                            }}
-
-                            /*
-                                                               disabled={processing}
-                            */
-
-                            size="md"
-                            placeholder="Search Content ..."
-                            variant="solid"
-                            endDecorator={<Button
-
-                                type="submit"
-                                /* onClick={() => setLoading(true)}*/
-
-                                sx={{color: 'white',py:'auto', backgroundColor:'white',
-                                    '&:hover': {backgroundColor: 'white'},
-                                }}
-                            >
-                                <SearchSharpIcon sx={{color:'black'}} />
-                            </Button>}
-
-
-
-                        >
-
-                        </Input>
-
-
-                    </form>
-                </Grid>
 
 
 
@@ -105,11 +66,10 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
                 ))}
 
 
-
             </Box>
 
 
-            <PostsPagination
+            <Pagination
                 links={content.links}
                 currentPage={content.currentPage}
                 setCurrentPage={(page) => setData('page', page)}
@@ -119,7 +79,7 @@ function ContentGrid({content: content,type:type, headerText:headerText}) {
 }
 ContentGrid.layout = (page)=>{
     return(
-        <AuthenticatedLayout
+        <MainLayout
             user={page.props.auth.user}
             children={page}
         />

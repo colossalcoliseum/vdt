@@ -51,6 +51,10 @@ class Video extends Model
     {
         return $this->belongsTo(Visibility::class);
     }
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(ContentType::class, 'type','id');
+    }
 
     protected function makeAllSearchableUsing(Builder $query): Builder
     {

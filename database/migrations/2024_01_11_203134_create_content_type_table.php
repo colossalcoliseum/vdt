@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advertisement_models', function (Blueprint $table) {
+        Schema::create('content_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->foreignId('creator_id')->default(1)->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('advertisement_models');
+        Schema::dropIfExists('content_type');
     }
 };

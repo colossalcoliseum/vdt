@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
+import MainLayout from "@/Layouts/MainLayout.jsx";
 import {useTranslation} from 'react-i18next';
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";
@@ -11,8 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
  import OutlinedInput from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 import Typography from "@mui/material/Typography";import { useTheme } from '@mui/material/styles';
-
-const CreatePost = ({user}) => {
+ const CreatePost = ({user}) => {
     const {t, i18n} = useTranslation();
     const FormGrid = styled(Grid)(() => ({
         display: 'flex',
@@ -66,6 +65,7 @@ const CreatePost = ({user}) => {
     `;
     return (
 <Box sx={{width: '80%', margin:'0 auto'}}>
+    <Head title="Create Post"/>
     <Typography variant="h1"  sx={{ color: 'primary.main' }} >
         Create
     </Typography>
@@ -190,5 +190,5 @@ const CreatePost = ({user}) => {
 </Box>
     )
 }
-CreatePost.layout = page => <AuthenticatedLayout children={page} title="hohoho"/>
+CreatePost.layout = page => <MainLayout children={page} title="hohoho"/>
 export default CreatePost

@@ -15,10 +15,10 @@ class SearchController extends Controller
         $query = $request->input('query');
 /*        dd($this->searchService->searchContent($query));*/
         $results = $this->searchService->searchContent($query);
-       // dd($results[0]['type']);
+       //dd($results[0]['type']);
         return Inertia::render('ContentGrid', [
             'content' =>  $results,
-            //'type'=>$results,
+           // 'type'=>$results->type,
             'headerText' => 'Search Results'
 
         ]);

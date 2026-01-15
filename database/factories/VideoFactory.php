@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ContentType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,8 @@ class VideoFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    private static array $contentTypeId=[];
+
     public function definition(): array
     {
         return [
@@ -29,7 +32,17 @@ class VideoFactory extends Factory
             'category_id' => $this->faker->numberBetween(1,15),
             'creator_id' => $this->faker->numberBetween(1, 10),/*TODO: user_id беше тук*/
             'updated_by' => $this->faker->numberBetween(1, 10),
-            'visibility_id' => $this->faker->numberBetween(1, 2),];
-    }
+            'visibility_id' => $this->faker->numberBetween(1, 2),
+            'type' => $this->getContentTypeID('video'),
+            ];
 
+    }
+    public function getContentTypeID(string $type):int{
+        if (isset(self::$contentTypeId[$type])){
+            return self::$contentTypeId[$type];
+        }
+        $contentType = ContentType::where('slug', $type)->firstOrFail()->id;
+        self::$contentTypeId[$type] = $contentType;
+        return $contentType;
+    }
 }

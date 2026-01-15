@@ -21,7 +21,6 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [HomeController::class,'home'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
          Route::get('search', [SearchController::class, 'searchContent'])->name('search.content');
@@ -40,7 +39,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 /*  Users Layout    */
 Route::middleware(['auth', /*'verified'*/])->group(function () {
-
+    Route::get('/', [HomeController::class,'home'])->name('home');
     Route::resource('videos', VideoController::class)->names('videos');
     Route::resource('posts', PostController::class)->names('posts');
      Route::resource('users', UserController::class)->names('user')->only(['index', 'show']);

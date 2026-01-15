@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
+import MainLayout from "@/Layouts/MainLayout.jsx";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import {router} from '@inertiajs/react'
@@ -115,6 +115,6 @@ const UpdateAvatar = ({user}) => {
     );
 
 }
-UpdateAvatar.layout = page => <AuthenticatedLayout children={page} title="Update User Avatar"/>
+UpdateAvatar.layout = page => <MainLayout children={page} title="Update User Avatar"/>
 
 export default UpdateAvatar

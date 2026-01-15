@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import SecondaryButton from "@/Components/SecondaryButton.jsx";
-import LeftDrawer from "@/Components/LeftDrawer.jsx";
+import {MainDrawer} from "@/Components/MainDrawer.jsx";
 
 const components = [
     {

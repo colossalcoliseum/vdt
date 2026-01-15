@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout.jsx';
 import {Head, usePage} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Button from "@mui/material/Button";
@@ -28,8 +28,7 @@ function Dashboard({user: user}) {
                         </div>
 
 
-                        <Button variant="contained">Тест на MUI</Button>
-                    </div>
+                     </div>
                 </div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
                     <div className="overflow-hidden bg-[#283148] shadow-sm sm:rounded-sm">
@@ -84,6 +83,6 @@ function Dashboard({user: user}) {
         </>
     );
 }
-Dashboard.layout = (page) => <AuthenticatedLayout children={page} title="Dashboard"/>;
+Dashboard.layout = (page) => <MainLayout children={page} title="Dashboard"/>;
 
 export default Dashboard;

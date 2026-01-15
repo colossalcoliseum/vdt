@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
+import MainLayout from "@/Layouts/MainLayout.jsx";
 import {useTranslation} from 'react-i18next';
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";

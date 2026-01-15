@@ -29,7 +29,7 @@ class SearchService
                         ->orWhere('name', "like", "%$query%")
                         ->orWhere('description', "like", "%$query%");
                 })
-
+                ->with('creator','type')
                 ->addSelect(DB::raw("'videos' as type"));
 
             $postResults = Post::select([
@@ -49,6 +49,7 @@ class SearchService
                         ->orWhere('name', "like", "%$query%")
                         ->orWhere('description', "like", "%$query%");
                 })
+                ->with('creator','type')
                 ->addSelect(DB::raw("'posts' as type"));
 
             $result = $videoResults

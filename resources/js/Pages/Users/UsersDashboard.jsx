@@ -1,4 +1,4 @@
-import AutenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
+import AutenticatedLayout from "@/Layouts/MainLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 //import SearchBox from "@/Pages/Users/SearchBox.jsx";

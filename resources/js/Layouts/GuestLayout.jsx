@@ -4,7 +4,7 @@ import SideNav from "@/Components/SideNav.jsx";
 import Footer from "@/Components/Footer.jsx";
 import Container from '@mui/material/Container';
 import {AppBar} from "@mui/material";
-import LeftDrawer from "@/Components/LeftDrawer.jsx";
+import {MainDrawer} from "@/Components/MainDrawer.jsx";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -51,7 +51,7 @@ export default function GuestLayout({ children }) {
 
 
 
-                    <Button href='/'>
+                    <Button href='/' variant="outlined" sx={{hover:'none', color:'black', border:'none', background:'none',}}>
                         <ApplicationLogo height={32} className={"my-4 pl-12 ml-12 flex absolute"}></ApplicationLogo>
                     </Button>
                     <Box sx={{
@@ -63,13 +63,13 @@ export default function GuestLayout({ children }) {
 
 
                     </Box>
-                    <Box>
+                {/*    <Box>
                         <List sx={{display:'flex',px:3}}>
                             <ListItem sx={{ color:'black', borderRadius:1}}><Button  variant="outlined" href={route('register')} type="button">Register</Button></ListItem>
                             <Typography sx={{color:"black", my:'auto'}}>or</Typography>
                             <ListItem sx={{ color:'black', borderRadius:1}}><Button  variant="contained" href={route('login')} type="button">Log In</Button></ListItem>
                         </List>
-                    </Box>
+                    </Box>*/}
                 </div>
 
 
@@ -81,7 +81,7 @@ export default function GuestLayout({ children }) {
                 component="main"
 
                 sx={{
-                    background: 'linear-gradient(160deg,rgba(196, 242, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 224, 224, 1) 100%);',
+                    background: 'linear-gradient(160deg,rgba(158, 234, 255) 0%, rgba(250, 230, 230) 50%, rgb(255,255,255) 100%);',
                     position: "relative",
                     backgroundAttachment: 'fixed',
                     display: "flex",

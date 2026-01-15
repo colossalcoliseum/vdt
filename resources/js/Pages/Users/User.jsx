@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout.jsx';
 
 import * as React from "react";
 import ImageGrid from "@/Pages/Profile/ImageGrid.jsx"
@@ -224,7 +224,7 @@ function User({user: user, content:content}) {
 
 User.layout = (page) => {
     return (
-        <AuthenticatedLayout
+        <MainLayout
             user={page.props.auth.user}
             children={page}
         />

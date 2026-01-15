@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ContentType;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\TransferStats;
@@ -17,7 +18,8 @@ class PostFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    private static array $contentTypeId=[];
+     public function definition(): array
     {
         return [//TODO: довърши
             'title' => $this->faker->sentence(),
@@ -30,6 +32,7 @@ class PostFactory extends Factory
             'category_id' => $this->faker->numberBetween(1,15),
             'is_published' => $this->faker->boolean(),
             'main_image' => self::getPictureUrl(400,300),
+            'type' => $this->getContentTypeID('video'),
             'visibility_id' => $this->faker->numberBetween(1,2),
         ];
     }
@@ -48,4 +51,14 @@ class PostFactory extends Factory
         }
         return '';
     }
+
+    public function getContentTypeID(string $type):int{
+       if (isset(self::$contentTypeId[$type])){
+           return self::$contentTypeId[$type];
+       }
+       $contentType = ContentType::where('slug', $type)->firstOrFail()->id;
+        self::$contentTypeId[$type] = $contentType;
+        return $contentType;
+     }
+
 }
