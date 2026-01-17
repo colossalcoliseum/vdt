@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\ContentService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Spatie\Permission\Traits\HasRoles;
 
 class UserController extends Controller
 {
@@ -17,12 +15,12 @@ class UserController extends Controller
     public function __construct(
         public ContentService $contentService
     ){}
+
     public function index()
     {
-
         $users = User::all();
         return Inertia::render('Users/UsersDashboard'
-            , ['users' => $users]);//TODO: използвай кеш
+            , ['users' => $users]);
     }
 
     /**
@@ -47,11 +45,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = User::find($user->id);
-        //dd($user);
-        //dd($this->contentService->getAllUserContent($user));
-        return Inertia::render('Users/User',[
+        return Inertia::render('Users/User', [
             'user' => $user->load(['roles', 'videos.creator', 'posts.creator']),
-                    'content' => $this->contentService->getAllUserContent($user)]);
+            'content' => $this->contentService->getAllUserContent($user)]);
     }
 
     /**

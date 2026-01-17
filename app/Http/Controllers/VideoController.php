@@ -25,21 +25,21 @@ class VideoController extends Controller
      */
     public function __construct(
         public ContentService $contentService,
-    ) {}
+    )
+    {
+    }
 
-    public function index(User $user=null)
+    public function index(User $user = null)
     {
         return
             Inertia::render('ContentGrid', [
                 'content' =>
-                    $user?
-                        $this->contentService->getUserPaginatedVideos($user->id):
+                    $user ?
+                        $this->contentService->getUserPaginatedVideos($user->id) :
                         $this->contentService->getPaginatedVideos(),
-                'headerText' => $user ? "Videos by $user->name":'Videos',
-                'type'=>'videos',
-                'user' => $user??null
+                'headerText' => $user ? "Videos by $user->name" : 'Videos',
+                'user' => $user ?? null
             ]);
-
     }
 
     /**
@@ -56,13 +56,11 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UploadVideoRequest $request)/*TODO: използвай сървис за това*/
+    public function store(UploadVideoRequest $request)/*TODO: използвай сървис*/
     {
         $response = Gate::inspect('create', Video::class);
         if ($response->allowed()) {
-
             $validated = $request->validated();
-
             if ($request->hasFile('thumbnail') && $request->hasFile('video')) {
                 try {
                     $videoPath = $request->file('video')->store('videos', 'public');
@@ -84,16 +82,11 @@ class VideoController extends Controller
                     die($e->getMessage());
                 }
             } else {
-
                 dd([
                     $request->file('video')->getErrorMessage(),
                     $request->file('thumbnail')->getErrorMessage(),
-
                 ]);
-
             }
-
-
             return Redirect::route('video.show', $video->id);
         }
         flash()
@@ -109,8 +102,8 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        $video = Video::find($video->id);//TODO: премести в service
-        return Inertia::render('Videos/Video', ['video' => $video]);
+        $video = Video::with('creator', 'category', 'type')->find($video->id);
+        return Inertia::render('Content', ['content' => $video]);
     }
 
     /**

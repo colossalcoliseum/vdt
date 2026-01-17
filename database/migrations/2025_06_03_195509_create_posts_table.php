@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('visibility_id')->constrained('visibilities')->onDelete('cascade');
             $table->foreignId('creator_id')->constrained('users')->onDelete('cascade');/*TODO: user_id беше тук*/
             $table->foreignId('updated_by')->constrained('users')->onDelete('cascade');
-            $table->foreignId('type')->constrained('content_types')->onDelete('cascade');
+            $table->foreignId('type_id')->constrained('content_types')->onDelete('cascade');
             $table->timestamps();
         });
     }

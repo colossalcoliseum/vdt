@@ -1,11 +1,12 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import MainLayout from '@/Layouts/MainLayout';
 import {Head, usePage} from '@inertiajs/react';
 import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
-import Dropdown from "@/Components/Dropdown.jsx";
-import SecondaryButton from "@/Components/SecondaryButton.jsx";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import Divider from "@mui/material/Divider";
+import ImageUploadForm from "@/Pages/Profile/Partials/ImageUploadForm.jsx";
 
 export default function Edit({mustVerifyEmail, status, user, permissions}) {
 
@@ -19,17 +20,13 @@ export default function Edit({mustVerifyEmail, status, user, permissions}) {
         return `${user.avatar}`;
     }
     return (
-        <AuthenticatedLayout
-
-        >
-            <Head title="Profile"/>
-            <div className="grid">
-                <h1 className="text-2xl col-span-full mx-auto mt-10 font-sans leading-tight text-gray-700">
+        <MainLayout>
+            <Head title="Edit Profile"/>
+            <Divider>
+                <Typography level="h1" variant="h4">
                     Your Profile
-
-                </h1>
-            </div>
-
+                </Typography>
+            </Divider>
             <div className="grid grid-cols-12 my-12">
                 <div className="col-span-6 row-span-12">
                     <div className="grid grid-cols-12 grid-rows-12">
@@ -37,26 +34,23 @@ export default function Edit({mustVerifyEmail, status, user, permissions}) {
                             <UpdateProfileInformationForm
                                 mustVerifyEmail={mustVerifyEmail}
                                 status={status}
-                                className="max-w-xl pb-12"
-                            />
+                                className="max-w-xl pb-12"/>
                             <UpdatePasswordForm className="max-w-xl pb-12"/>
                             <DeleteUserForm className="max-w-xl "/>
-
-
                         </div>
                     </div>
                 </div>
                 <div className="col-span-6 mx-auto">
-
-
-                    <UpdateAvatar/>
-                    <span className="text-xl tracking-wide">Your Permissions:</span>
+                    <ImageUploadForm/>
+                    <img style={{width: '15rem', borderRadius: '1rem'}} src={user.avatar}
+                         alt="Click here to change your profile avatar"/>
+                    <Typography variant="p">
+                        Your Permissions:
+                    </Typography>
                     <div className="h-52 border border-black overflow-auto">
                         <p className=" px-6 py-6">  {permissions.map(({name, id}) => (
-
                             <ul className="list-disc list-none   py-2">
                                 <li><p> - to {name.replace("_", " ")}</p></li>
-
                             </ul>
                         ))
                         }</p></div>
@@ -65,6 +59,6 @@ export default function Edit({mustVerifyEmail, status, user, permissions}) {
             </div>
 
 
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

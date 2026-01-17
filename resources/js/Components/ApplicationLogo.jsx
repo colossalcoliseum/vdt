@@ -1,5 +1,3 @@
-import {useState} from "react";
-
 export default function ApplicationLogo({   colored=true,
                                             width = "126.879", height = "56.957",
                                             stroke = "",

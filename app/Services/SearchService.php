@@ -11,7 +11,6 @@ class SearchService
 {
     public function searchContent($query)
     {
-
         try {
             $videoResults = Video::select([
                 'id',
@@ -19,7 +18,8 @@ class SearchService
                 'description',
                 'thumbnail',
                 'slug',
-                'creator_id'
+                'creator_id',
+                'type_id',
             ])->where(function ($qu) use ($query) {
                 $qu->where('title', "like", "%$query%")
                     ->orWhere('description', "like", "%$query%");
@@ -29,8 +29,7 @@ class SearchService
                         ->orWhere('name', "like", "%$query%")
                         ->orWhere('description', "like", "%$query%");
                 })
-                ->with('creator','type')
-                ->addSelect(DB::raw("'videos' as type"));
+                ->with(['creator', 'type']);
 
             $postResults = Post::select([
                 'id',
@@ -38,7 +37,8 @@ class SearchService
                 'description',
                 'thumbnail',
                 'slug',
-                'creator_id'
+                'creator_id',
+                'type_id'
 
             ])->where(function ($qu) use ($query) {
                 $qu->where('title', "like", "%$query%")
@@ -49,8 +49,7 @@ class SearchService
                         ->orWhere('name', "like", "%$query%")
                         ->orWhere('description', "like", "%$query%");
                 })
-                ->with('creator','type')
-                ->addSelect(DB::raw("'posts' as type"));
+                ->with(['creator', 'type']);
 
             $result = $videoResults
                 ->union($postResults)
@@ -61,12 +60,12 @@ class SearchService
                 ->withQueryString();
             return $result;
 
-         } catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
 
-    public function searchUsers($query)//TODO: използвай отделни заявки
+    public function searchUsers($query)
     {
         try {
             return User::where('name', "like", "%{$query}%")
@@ -80,29 +79,9 @@ class SearchService
                 ->WhereHas('role.creator', function ($qu) use ($query) {
                     $qu->where('name', "like", "%{$query}%");
                 })
-                ->get(['name', 'avatar','description']);
+                ->get(['name', 'avatar', 'description']);
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
-    public function globalSearch($query)
-    {
-        try {
-            $this->searchPosts($query);
-            $this->searchVideos($query);
-            $this->searchUsers($query);
-            /*TODO: създаваш колекция и я връщаш*/
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-    }
-
- /*   public function globalSearch($query)
-    {
-        try {
-
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-    }*/
 }

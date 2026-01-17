@@ -65,7 +65,7 @@ import Typography from "@mui/material/Typography";import { useTheme } from '@mui
     `;
     return (
 <Box sx={{width: '80%', margin:'0 auto'}}>
-    <Head title="Create Post"/>
+    <Head title="Create Content"/>
     <Typography variant="h1"  sx={{ color: 'primary.main' }} >
         Create
     </Typography>

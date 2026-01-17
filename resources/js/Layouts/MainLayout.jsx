@@ -3,11 +3,12 @@ import {Toolbar} from "@mui/material";
 import MainDrawer from "@/Components/MainDrawer.jsx";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
-import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import SearchIcon from '@mui/icons-material/Search';
 import * as React from "react";
 import {router, useForm} from "@inertiajs/react";
 
-export default function MainLayout({children }) {
+export default function MainLayout({children}) {
+
     const {data, setData} = useForm({
         query: ''
     });
@@ -26,11 +27,10 @@ export default function MainLayout({children }) {
 
     return (
         <>
-            <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', }}>
-                <MainDrawer />
-
-                <form onSubmit={submit}  >
-                    <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', maxWidth: '500px' }}>
+            <Toolbar sx={{display: 'flex', justifyContent: 'space-between',}}>
+                <MainDrawer/>
+                <form onSubmit={submit}>
+                    <Box sx={{display: 'flex', alignItems: 'center', width: '100%', maxWidth: '500px'}}>
                         <Input
                             id="filled-search"
                             type="search"
@@ -40,16 +40,10 @@ export default function MainLayout({children }) {
                                 setData('query', e.target.value);
                             }}
                             placeholder="Search Content ..."
-                            sx={{ flex: 1 }}
+                            sx={{flex: 1}}
                         />
-                        <Button
-                            type="submit"
-                            sx={{
-                                 backgroundColor: 'white',
-                               m:'0.3rem'
-                            }}
-                        >
-                            <SearchSharpIcon sx={{ color: 'black' }} />
+                        <Button type="submit">
+                            <SearchIcon/>
                         </Button>
                     </Box>
                 </form>

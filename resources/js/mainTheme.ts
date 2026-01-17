@@ -4,17 +4,21 @@ import type {ThemeOptions} from '@mui/material/styles';
 export const brandedTokens: ThemeOptions = {
     palette: {
         primary: {
-            light: '#8c7db5',
-            main: '#2a2d67',
-            dark: '#0d0e3c',
+            light: '#433D8B',
+            main: '#2E236C',
+            dark: '#17153B',
             contrastText: '#fff',
         },
         secondary: {
-            light: '#b6465f',
-            main: '#ad2831',
-            dark: '#640d14',
+            light: '#910A67',
+            main: '#720455',
+            dark: '#3C0753',
             contrastText: '#000',
         },
+        text:{
+            primary: '#000',
+            secondary: '#fff',
+        }
     },
     shape: {
         borderRadius: 4,
@@ -70,17 +74,21 @@ const mainTheme = createTheme({
         dark: {
             palette: {
                 primary: {
-                    light: 'rgba(147,203,255,0.5)',
-                    main: 'rgba(96,182,255,0.5)',
-                    dark: 'rgba(72,170,253,0.5)',
+                    light: '#EFECE3',
+                    main: '#8FABD4',
+                    dark: '#4A70A9',
                     contrastText: '#fff',
                 },
                 secondary: {
-                    light: '#ef728e',
-                    main: '#ca454e',
-                    dark: '#811c24',
+                    light: '#624E88',
+                    main: '#8967B3',
+                    dark: '#CB80AB',
                     contrastText: '#000',
-                }
+                },
+                text:{
+                    primary: '#fff',
+                    secondary: '#000',
+                 }
             },
         }
     },

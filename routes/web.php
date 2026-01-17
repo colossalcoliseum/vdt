@@ -1,16 +1,12 @@
 <?php
 
-use App\Http\Controllers\ChatController;
-use App\Http\Controllers\HomeController;
+ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UpdateUserAvatarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
-use App\Models\Post;
-use App\Models\Video;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,9 +20,6 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function () {
          Route::get('search', [SearchController::class, 'searchContent'])->name('search.content');
-       // Route::get('/posts/', [SearchController::class, 'searchPosts'])->name('search.posts');
-       // Route::get('/users/', [SearchController::class, 'searchUsers'])->name('search.users');
-
 });
 /*  Create; Update; Delete  content*/
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -38,7 +31,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 /*  Users Layout    */
-Route::middleware(['auth', /*'verified'*/])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class,'home'])->name('home');
     Route::resource('videos', VideoController::class)->names('videos');
     Route::resource('posts', PostController::class)->names('posts');

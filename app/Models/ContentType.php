@@ -11,8 +11,8 @@ class ContentType extends Model
     protected $table = 'content_types';
 
     public static array $contentTypes = [
-        'video'=>'Video',
-        'post'=>'Post',
-        'comment'=>'Comment',
+        'videos'=>'Videos',
+        'posts'=>'Posts',
+        'comments'=>'Comments',
     ];
 }

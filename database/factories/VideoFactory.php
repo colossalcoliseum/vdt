@@ -33,7 +33,7 @@ class VideoFactory extends Factory
             'creator_id' => $this->faker->numberBetween(1, 10),/*TODO: user_id беше тук*/
             'updated_by' => $this->faker->numberBetween(1, 10),
             'visibility_id' => $this->faker->numberBetween(1, 2),
-            'type' => $this->getContentTypeID('video'),
+            'type_id' => $this->getContentTypeID('videos'),
             ];
 
     }

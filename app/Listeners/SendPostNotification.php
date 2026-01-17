@@ -3,9 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\PostPublished;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 class SendPostNotification
 {
     /**
@@ -21,7 +18,6 @@ class SendPostNotification
      */
     public function handle(PostPublished $event): void
     {
-        info("Post [{$event->post->id}] published." );
-        //notify()->success('Post Published');
-    }
+        info("Content [{$event->post->id}] published." );
+     }
 }

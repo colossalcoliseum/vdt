@@ -6,8 +6,7 @@ use App\Http\Requests\UploadPostRequest;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\ContentService;
-use App\Services\SearchService;
-use Illuminate\Http\Request;
+ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -20,9 +19,7 @@ class PostController extends Controller
      */
     public function __construct(
         public ContentService $contentService
-    )
-    {
-    }
+    ){}
 
     public function index(User $user=null)
     {
@@ -54,7 +51,6 @@ class PostController extends Controller
             ->warning("You don't have permission to create posts", [], 'Missing permission');
         return back();
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -66,7 +62,6 @@ class PostController extends Controller
             $validated = $request->validated();
             $mainImage = $request->file('main_image')->store('postImages', 'public');
             $thumbnailPath = $request->file('thumbnail')->store('storage/postThumbnails', 'public');
-            //dd($path);
             $post = Post::create([
                 'title' => $validated['title'],
                 'is_published' => $validated['is_published'],
@@ -80,7 +75,6 @@ class PostController extends Controller
                 'thumbnail' => $thumbnailPath
             ]);
             $post->save();
-            // PostPublished::dispatch($post);//<--- event
             return Redirect::route('dashboard');
         }
         flash()
@@ -96,9 +90,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post = Post::with('creator', 'category')->find($post->id);
-        //dd($post);
-        return Inertia::render('Posts/Post', ['post' => $post]);
+        $post = Post::with('creator', 'category','type')->find($post->id);
+        return Inertia::render('Content', ['content' => $post]);
     }
 
     /**

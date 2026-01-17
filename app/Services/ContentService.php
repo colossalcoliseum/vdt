@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Category;
@@ -19,27 +20,23 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with(['creator','category'])->paginate(20)->onEachSide(0);
-
+                ->with(['creator', 'category', 'type'])->paginate(20)->onEachSide(0);
             return $videos;
-
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
 
     }
-    public function getUserPaginatedVideos( $userId, $status = "active", $visibility = "public")
+
+    public function getUserPaginatedVideos($userId, $status = "active", $visibility = "public")
     {
         try {
             $videos = Video::where('creator_id', $userId)
-                ->with(['creator','categories'])->paginate(20)->onEachSide(0);
-
+                ->with(['creator', 'categories'])->paginate(20)->onEachSide(0);
             return $videos;
-
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
-
     }
 
     public function getPaginatedPosts($status = "active", $visibility = "public")
@@ -51,7 +48,7 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with('creator')->paginate(20)->onEachSide(0);
+                ->with(['creator', 'category', 'type'])->paginate(20)->onEachSide(0);
 
             return $posts;
 
@@ -59,19 +56,18 @@ class ContentService
             return $exception->getMessage();
         }
     }
-    public function getUserPaginatedPosts( $userId, $status = "active", $visibility = "public")
+
+    public function getUserPaginatedPosts($userId, $status = "active", $visibility = "public")
     {
         try {
             $posts = Post::where('creator_id', $userId)
                 ->with('creator')->paginate(20)->onEachSide(0);
-
             return $posts;
-
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
-
     }
+
     public function getAllPosts($status = "active", $visibility = "public")
     {
         try {
@@ -82,18 +78,8 @@ class ContentService
                     $query->where('slug', $status);
                 })
                 ->get();
-
             return $posts;
-
         } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-    }
-    public function getPost($id){
-        try {
-            $post = Post::with('creator')->find($id);
-        }
-        catch (\Exception $exception){
             return $exception->getMessage();
         }
     }
@@ -101,15 +87,14 @@ class ContentService
     {
         try {
             $videos = Video::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
-                ->where( 'creator_id', "like", $user->id)
+                ->where('creator_id', "like", $user->id)
                 ->addSelect(DB::raw("'videos' as type"));
-            $posts = Post::select([ 'id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
-                ->where( 'creator_id', "like", $user->id)
+            $posts = Post::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
+                ->where('creator_id', "like", $user->id)
                 ->addSelect(DB::raw("'posts' as type"));
             $result = $videos
                 ->union($posts)
-/*                ->orderBy('created_at', 'desc')*/
-                ->with('creator')
+                 ->with('creator')
                 ->paginate(20)
                 ->onEachSide(0);
             return $result;

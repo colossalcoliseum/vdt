@@ -1,14 +1,12 @@
-import DangerButton from '@/Components/DangerButton';
+import Button from '@mui/material/Button';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
+import InputLabel from '@mui/material/InputLabel';
 import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
-import { useRef, useState } from 'react';
-import PrimaryButton from "@/Components/PrimaryButton.jsx";
+import {useForm} from '@inertiajs/react';
+import {useRef, useState} from 'react';
 
-export default function DeleteUserForm({ className = '' }) {
+export default function DeleteUserForm({className = ''}) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -30,7 +28,6 @@ export default function DeleteUserForm({ className = '' }) {
 
     const deleteUser = (e) => {
         e.preventDefault();
-
         destroy(route('profile.destroy'), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
@@ -41,7 +38,6 @@ export default function DeleteUserForm({ className = '' }) {
 
     const closeModal = () => {
         setConfirmingUserDeletion(false);
-
         clearErrors();
         reset();
     };
@@ -49,42 +45,37 @@ export default function DeleteUserForm({ className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
+                <h2 className="text-lg font-medium text-gray-600">
                     Delete Account
                 </h2>
-
-                <p className="mt-1 text-sm text-gray-900">
+                <p className="mt-1 text-sm text-gray-500">
                     Once your account is deleted, all of its resources and data
                     will be permanently deleted. Before deleting your account,
                     please download any data or information that you wish to
                     retain.
                 </p>
             </header>
-
-            <PrimaryButton
-                className="border-none text-gray-900 rounded-sm bg-red-400 hover:bg-red-600 "
-                onClick={confirmUserDeletion}>
+            <Button variant="contained" type="submit"
+                    color="error"
+                    onClick={confirmUserDeletion}>
                 Delete Account
-            </PrimaryButton>
-
+            </Button>
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
                         Are you sure you want to delete your account?
                     </h2>
-
                     <p className="mt-1 text-sm text-gray-600">
-
-                        Think twice before deleting your account. It's permanent. We cannot restore it afterward.
+                        Your account will be permanently deleted!
                     </p>
-
                     <div className="mt-6">
                         <InputLabel
+                            sx={{color: 'grey'}}
                             htmlFor="password"
-                            value="Password"
-                            className="sr-only"
-                        />
-
+                            className="text-gray-600"
+                        >
+                            Enter Your Password to Continue
+                        </InputLabel>
                         <TextInput
                             id="password"
                             type="password"
@@ -106,15 +97,14 @@ export default function DeleteUserForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>
+                        <Button type="contained" onClick={closeModal}>
                             Cancel
-                        </SecondaryButton>
+                        </Button>
 
-                        <DangerButton
-                            className="ms-3"
-                                      disabled={processing}>
+                        <Button variant="contained" color="error"
+                                disabled={processing}>
                             Delete Account
-                        </DangerButton>
+                        </Button>
                     </div>
                 </form>
             </Modal>

@@ -151,7 +151,7 @@ export default function Login({status, canResetPassword}) {
                                 fullWidth
                                 variant="contained"
                                 disabled={processing}>
-                                Sign In
+                                Log In
                             </Button>
                         </Box>
                     </form>

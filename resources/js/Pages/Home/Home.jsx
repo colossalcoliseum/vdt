@@ -54,8 +54,7 @@ function Home({user:user}) {
                                     color: 'white',
                                     height: 'relative',
                                     fontWeight: 'light',
-                                    fontFamily: "Segoe UI Variable Display Light",
-                                    fontSize: '9rem',
+                                     fontSize: '9rem',
                                     margin: '0 auto',
                                     letterSpacing: '1rem',
 
@@ -69,8 +68,7 @@ function Home({user:user}) {
                                     color: 'white',
                                     height: 'relative',
                                     fontWeight: 'light',
-                                    fontFamily: "Segoe UI Variable Display Light",
-                                    fontSize: '3rem',
+                                     fontSize: '3rem',
                                     margin: '0 auto',
                                     letterSpacing: '0.4rem',
 
@@ -99,8 +97,7 @@ function Home({user:user}) {
                                     textAlign: 'center',
                                      height: 'relative',
                                     fontWeight: 'normal',
-                                    fontFamily: "Segoe UI Variable Display Light",
-                                    fontSize: '9rem',
+                                     fontSize: '9rem',
                                     margin: '0 auto',
                                     letterSpacing: '1rem',
 
@@ -115,8 +112,7 @@ function Home({user:user}) {
                                     color: 'white',
                                     height: 'relative',
                                     fontWeight: 'normal',
-                                    fontFamily: "Segoe UI Variable Display Light",
-                                    fontSize: '3rem',
+                                     fontSize: '3rem',
                                     margin: '0 auto',
                                     letterSpacing: '0.4rem',
 
@@ -145,8 +141,7 @@ function Home({user:user}) {
                                         color: 'white',
                                         height: 'relative',
                                         fontWeight: 'normal',
-                                        fontFamily: "Segoe UI Variable Display Light",
-                                        fontSize: '3rem',
+                                         fontSize: '3rem',
                                         margin: '0 auto',
                                         letterSpacing: '0.4rem',
                                     }}>
@@ -174,7 +169,7 @@ function Home({user:user}) {
 
                                 }}>
                                     <Typography level="h1" sx={{
-                                        p: 2, my: '10%', width: '100%',
+                                        p: 2, my: '5rem', width: '100%',
 
                                         color: 'black',
                                         flexDirection: "row",
@@ -182,8 +177,7 @@ function Home({user:user}) {
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         fontWeight: 'normal',
-                                        fontFamily: "Segoe UI Variable Display Light",
-                                        letterSpacing: 2,
+                                         letterSpacing: 2,
 
                                         fontSize: '6rem',
                                     }}>
@@ -195,34 +189,20 @@ function Home({user:user}) {
 
                                 </Grid>
                                 <Grid size={2} >
-                                    <Grid container columns={6} sx={{flexGrow: 1, height:'15rem'}}>
+                                    <Grid container columns={6} sx={{flexGrow: 1,  }}>
 
-                                        <Grid size={6} sx={{p: 1,pt:'7.5rem',}}>
+                                        <Grid size={6} sx={{p: 1, }}>
                                             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '7.5rem' }}>
-                                                <Typography   sx={{
-                                                    color: 'black',
-                                                    fontWeight: 'light',
-                                                    fontFamily: "Segoe UI Variable Display Light",
-                                                    letterSpacing: 2,
-                                                    fontSize: '1.6rem',
-                                                }}>
-                                                    Stay up to date with the latest news and trends
-                                                </Typography>
+
                                                 <Button
                                                     type="submit"
-                                                    sx={{ borderRadius: '1rem', ml:'2rem', height:'3rem', width:'10rem', backgroundColor:'#eafbff', color:'white',
+                                                    sx={{ borderRadius: '1rem', ml:'2rem', height:'3rem', width:'10rem', backgroundColor:'#eafbff',
                                                         display: 'flex', alignItems: 'center', justifyContent: 'center',   }}
                                                     href="#"
                                                 >
-                                                    <Typography   sx={{
-                                                        color: 'black',
-                                                        fontWeight: 'bold',
-                                                        fontFamily: "Alumni Sans Pinstripe",
-                                                        letterSpacing: 2,
-                                                        fontSize: '2rem',
-                                                    }}>
+
                                                         Join now
-                                                    </Typography>
+
                                                 </Button>
                                             </Box>
 
@@ -244,8 +224,7 @@ function Home({user:user}) {
                             textAlign: 'center',
                             color: 'white',
                             fontWeight: 'normal',
-                            fontFamily: "Segoe UI Variable Display Light",
-                            fontSize: '4rem',
+                             fontSize: '4rem',
 
                         }}>
                             Or Want to Browse our Gallery of Videos and Images?
@@ -258,8 +237,7 @@ function Home({user:user}) {
                             textAlign: 'center',
                             color: 'white',
                             fontWeight: 'normal',
-                            fontFamily: "Segoe UI Variable Display Light",
-                            fontSize: '2rem',
+                             fontSize: '2rem',
 
                         }}>
                             We have amazing collection of content from all over the world.

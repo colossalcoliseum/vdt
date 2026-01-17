@@ -4,19 +4,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import Link from '@mui/material/Link';
-import CardActions from '@mui/material/CardActions';
 
+function ContentCard({content: content, type:type}) {
 
-function ContentCard({
-                         content: content,
-                         type:type,
-                         ratio = 1.8,
-                         width = '23rem',
-                         height = 'relative'
-                     }) {
     return (
-
-
     <Card sx={{ maxWidth: 345, borderRadius: theme => theme.shape.borderRadius  }}>
         <Link
             overlay
@@ -34,7 +25,6 @@ function ContentCard({
                 sx={{ height: '15rem' }}
             />
             <CardContent>
-
                 <Typography gutterBottom variant="h5" component="div"
                             sx={{
 
@@ -47,7 +37,6 @@ function ContentCard({
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                     {content.creator.name}
-
                 </Typography>
             </CardContent>
         </CardActionArea>
@@ -55,5 +44,4 @@ function ContentCard({
     </Card>
     )
 }
-
 export default ContentCard

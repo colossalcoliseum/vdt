@@ -62,8 +62,7 @@ const CreateVideo = ({categories, subCategories}) => {
         if (file) {
             setData('thumbnail', file);
 
-            // Създаваме preview URL за thumbnail-а
-            const imageUrl = URL.createObjectURL(file);
+             const imageUrl = URL.createObjectURL(file);
             setThumbnailPreview(imageUrl);
         } else {
             console.log("No Thumbnail Provided!")

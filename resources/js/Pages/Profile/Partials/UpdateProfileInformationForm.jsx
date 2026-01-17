@@ -1,19 +1,18 @@
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import UpdateAvatar from "@/Pages/Profile/Partials/Avatar/UpdateAvatar.jsx";
+ import TextInput from '@/Components/TextInput';
+import {Transition} from '@headlessui/react';
+import {Link, useForm, usePage} from '@inertiajs/react';
+import InputLabel from '@mui/material/InputLabel';
+import Button from "@mui/material/Button";
 
 export default function UpdateProfileInformation({
-    mustVerifyEmail,
-    status,
-    className = '',
-}) {
+                                                     mustVerifyEmail,
+                                                     status,
+                                                     className = '',
+                                                 }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
+    const {data, setData, patch, errors, processing, recentlySuccessful} =
         useForm({
             name: user.name,
             email: user.email,
@@ -27,18 +26,12 @@ export default function UpdateProfileInformation({
 
     return (
         <section className={className}>
-            <header>
-
-
-            </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-{/*
-                    <UpdateAvatar/>
-*/}
-                    <InputLabel htmlFor="name" value="Name" />
-
+                    <InputLabel sx={{color: 'grey'}} variant="standard" htmlFor="name">
+                        Name
+                    </InputLabel>
                     <TextInput
                         id="name"
                         className="mt-1 block w-full"
@@ -49,12 +42,12 @@ export default function UpdateProfileInformation({
                         autoComplete="name"
                     />
 
-                    <InputError className="mt-2" message={errors.name} />
+                    <InputError className="mt-2" message={errors.name}/>
                 </div>
-
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
+                    <InputLabel sx={{color: 'grey'}} variant="standard" htmlFor="email">
+                        Email
+                    </InputLabel>
                     <TextInput
                         id="email"
                         type="email"
@@ -64,10 +57,8 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="username"
                     />
-
-                    <InputError className="mt-2" message={errors.email} />
+                    <InputError className="mt-2" message={errors.email}/>
                 </div>
-
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-900">
@@ -90,10 +81,8 @@ export default function UpdateProfileInformation({
                         )}
                     </div>
                 )}
-
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
-
+                    <Button variant="outlined" type="submit" disabled={processing}>Save</Button>
                     <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"

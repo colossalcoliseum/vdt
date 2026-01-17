@@ -32,7 +32,7 @@ class PostFactory extends Factory
             'category_id' => $this->faker->numberBetween(1,15),
             'is_published' => $this->faker->boolean(),
             'main_image' => self::getPictureUrl(400,300),
-            'type' => $this->getContentTypeID('video'),
+            'type_id' => $this->getContentTypeID('posts'),
             'visibility_id' => $this->faker->numberBetween(1,2),
         ];
     }
