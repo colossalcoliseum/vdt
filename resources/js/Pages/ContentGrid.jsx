@@ -5,27 +5,29 @@ import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 import ContentCard from "@/Pages/ContentCard.jsx";
 import Typography from '@mui/material/Typography';
+import Divider from "@mui/material/Divider";
 
-function ContentGrid({content: content, headerText: headerText}) {
+const ContentGrid = ({content: content, headerText: headerText}) => {
 
     return (
         <>
-            <Grid container columns={18} sx={{
-                flexGrow: 1, my: '2rem', width: '80%', height: '100%', mx: 'auto',
+            <Box sx={{
+               display: 'flex', justifyContent: 'center',  pb: '2rem',
             }}>
-                <Grid size={15} sx={{display: 'flex', gap: '1rem', alignItems: 'center', flexDirection: 'row'}}>
-                    <Typography variant="h1" color='primary.main' sx={{}}>
+                <Divider variant="fullWidth" sx={{width: '80%'}}>
+                     <Typography variant="h4" color='primary.main' >
                         {headerText}
                     </Typography>
-                </Grid>
-            </Grid>
+                </Divider>
+            </Box>
             <Box sx={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '1.5rem',
-                mx: '5%',
-                pl: '2rem'
-            }}>
+                placeItems: 'center',
+                justifyContent: 'center',
+                gap: '4rem',
+                mx: 'auto',
+              }}>
                 {content.data.map((item) => (
                     <ContentCard
                         key={item.id}
@@ -35,6 +37,7 @@ function ContentGrid({content: content, headerText: headerText}) {
                     </ContentCard>
                 ))}
             </Box>
+            <Divider sx={{mt: '3rem', width: '80%', mx: 'auto'}}/>
             <Pagination
                 links={content.links}
                 currentPage={content.currentPage}

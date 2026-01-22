@@ -8,7 +8,7 @@ export default function MainPagination({links}) {
             spacing={5}
             justifyContent="center"
             alignItems="center"
-            sx={{mt: '3rem', mb: '3rem'}} >
+            sx={{py: '3rem'}} >
             {links.map((link) => (
 
             <Button variant="contained" href={link.url}>

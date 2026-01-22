@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import SearchIcon from '@mui/icons-material/Search';
 import * as React from "react";
 import {router, useForm} from "@inertiajs/react";
+import InputLabel from '@mui/material/InputLabel';
 
 export default function MainLayout({children}) {
 
@@ -31,9 +32,16 @@ export default function MainLayout({children}) {
                 <MainDrawer/>
                 <form onSubmit={submit}>
                     <Box sx={{display: 'flex', alignItems: 'center', width: '100%', maxWidth: '500px'}}>
+                         
                         <Input
                             id="filled-search"
+                            multiline={true}
+                            maxRows={2}
                             type="search"
+                            disableUnderline={false}
+                            autoFocus={true}
+
+                            color='primary.light'
                             name="query"
                             value={data.query}
                             onChange={(e) => {

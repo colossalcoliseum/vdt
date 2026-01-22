@@ -1,5 +1,4 @@
-import MainLayout from "@/Layouts/MainLayout.jsx";
-import {useTranslation} from 'react-i18next';
+ import {useTranslation} from 'react-i18next';
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";
 import Typography from "@mui/material/Typography";
@@ -18,8 +17,7 @@ import CardContent from "@mui/material/CardContent";
 import * as React from "react";
 import {red} from "@mui/material/colors";
 import {lightBlue} from "@mui/material/colors";
-import ContentCreationLayout from "@/Layouts/ContentCreatonLayout.jsx";
-
+ import MainLayout from "@/Layouts/MainLayout.jsx";
 //export default function CreateVideo() {
 const CreateVideo = ({categories, subCategories}) => {
     const {t, i18n} = useTranslation();
@@ -328,5 +326,5 @@ const CreateVideo = ({categories, subCategories}) => {
 
     )
 }
-CreateVideo.layout = page => <ContentCreationLayout children={page} active={true}/>
+CreateVideo.layout = page => <MainLayout children={page} active={true}/>
 export default CreateVideo

@@ -18,7 +18,8 @@ export const brandedTokens: ThemeOptions = {
         text:{
             primary: '#000',
             secondary: '#fff',
-        }
+
+         }
     },
     shape: {
         borderRadius: 4,
@@ -86,7 +87,7 @@ const mainTheme = createTheme({
                     contrastText: '#000',
                 },
                 text:{
-                    primary: '#fff',
+                    primary: '#8FABD4',
                     secondary: '#000',
                  }
             },

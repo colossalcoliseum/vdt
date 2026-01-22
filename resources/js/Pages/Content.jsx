@@ -8,7 +8,7 @@ import dateFormat, {masks} from "dateformat";
 import * as React from "react";
 import Divider from "@mui/joy/Divider";
 
-export default function Content({content: content}) {
+const Content = ({content: content}) => {
     const user = usePage().props.auth.user;
 
     const sanitizedHTML = DOMPurify.sanitize(content.description, {
@@ -24,7 +24,7 @@ export default function Content({content: content}) {
     });
 
     return (
-        <MainLayout>
+        < >
             <Grid container columns={12} spacing={2}>
                 <Box sx={{
                     display: 'flex',
@@ -140,6 +140,9 @@ export default function Content({content: content}) {
                     </p>
                 </Box>
             </Grid>
-        </MainLayout>
+        </ >
     );
 }
+Content.layout = page => <MainLayout user={page.props.auth.user} children={page} />;
+
+export default Content;

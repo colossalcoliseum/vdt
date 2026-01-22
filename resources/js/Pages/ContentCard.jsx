@@ -35,7 +35,7 @@ function ContentCard({content: content, type:type}) {
                             }}>
                     {content.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography variant="body1" sx={{ color: 'text.primary' }}>
                     {content.creator.name}
                 </Typography>
             </CardContent>
