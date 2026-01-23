@@ -20,7 +20,8 @@ class ContentService
                 ->orWhereHas('status', function ($query) use ($status) {
                     $query->where('slug', $status);
                 })
-                ->with(['creator', 'category', 'type'])->paginate(20)->onEachSide(0);
+                ->with(['creator', 'type'])
+                 ->paginate(20)->onEachSide(0);
             return $videos;
         } catch (\Exception $exception) {
             return $exception->getMessage();

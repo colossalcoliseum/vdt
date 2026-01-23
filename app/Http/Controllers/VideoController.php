@@ -32,7 +32,7 @@ class VideoController extends Controller
     public function index(User $user = null)
     {
         return
-            Inertia::render('ContentGrid', [
+            inertia('ContentGrid', [
                 'content' =>
                     $user ?
                         $this->contentService->getUserPaginatedVideos($user->id) :

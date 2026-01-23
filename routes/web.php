@@ -17,6 +17,8 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::inertia('/about', 'About')->name('about');
+Route::inertia('/faq', 'FAQ')->name('faq');
 
 Route::middleware(['auth'])->group(function () {
          Route::get('search', [SearchController::class, 'searchContent'])->name('search.content');

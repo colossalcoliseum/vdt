@@ -21,7 +21,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import ArticleIcon from '@mui/icons-material/Article';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import SettingsIcon from '@mui/icons-material/Settings';
-
+import LogoutIcon from '@mui/icons-material/Logout';
 export default function MainDrawer() {
 
     const [open, setOpen] = React.useState(false);
@@ -49,7 +49,7 @@ export default function MainDrawer() {
                     </g>
                 </svg>
             </Box>
-            <Divider/>
+            <Divider sx={{bgcolor: 'text.secondary'}}/>
 
             <List>
                 <ListItem disablePadding>
@@ -84,7 +84,7 @@ export default function MainDrawer() {
                 <ListItem disablePadding>
                     <ListItemButton href={route('dashboard')}>
                         <ListItemIcon>
-                            <CreateIcon sx={{color: 'text.secondary'}}/>
+                            <CreateIcon sx={{color: 'text.primary', bgcolor: 'text.secondary'}}/>
                         </ListItemIcon>
                         <ListItemText sx={{color: 'text.secondary'}}>
                             Create
@@ -92,7 +92,7 @@ export default function MainDrawer() {
                     </ListItemButton>
                 </ListItem>
             </List>
-            <Divider/>
+            <Divider sx={{bgcolor: 'text.secondary'}}/>
             <List>
                 <ListItem disablePadding>
                     <ListItemButton>
@@ -124,15 +124,44 @@ export default function MainDrawer() {
                 </ListItem>
 
                 <Divider/>
-                <ListItem sx={{color: 'text.secondary'}}>
+                <ListItem >
+
+
+                        <ListItemIcon>
+                            <LogoutIcon sx={{color: 'text.secondary'}}/>
+                        </ListItemIcon>
+                        <Link
+                            method="post"
+                            href={route('logout')}
+                            as="button">
+                        <span style={{bgcolor: 'text.primary'}}>
+                            Log Out
+                        </span>
+                        </Link>
+
+                </ListItem>
+                <Box sx={{display: 'flex', placeItems: 'center', color: 'white'}}>
+
+
+                <ListItem >
                     <Link
-                        method="post"
-                         href={route('logout')}
-                        as="button">
-                        Log Out
+                        sx={{color: 'text.secondary'}}
+                        href={route('faq')}
+                        >
+                        FAQ's
                     </Link>
                 </ListItem>
-                <Divider/>
+
+                <Divider orientation="vertical" variant="middle" flexItem  sx={{bgcolor: 'text.secondary'}}/>
+                <ListItem>
+                     <Link
+                         sx={{color: 'text.secondary'}}
+                          href={route('about')}
+                        >
+                        About
+                    </Link>
+                </ListItem>
+        </Box>
             </List>
         </Box>
     );
@@ -144,7 +173,7 @@ export default function MainDrawer() {
                 paper: {
                     elevation: 0,
                     sx: {
-                        backgroundColor: "primary.dark",
+                        backgroundColor: "primary.light",
                     }
                 }
             }}>

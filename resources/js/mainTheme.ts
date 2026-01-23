@@ -4,22 +4,19 @@ import type {ThemeOptions} from '@mui/material/styles';
 export const brandedTokens: ThemeOptions = {
     palette: {
         primary: {
-            light: '#433D8B',
-            main: '#2E236C',
-            dark: '#17153B',
-            contrastText: '#fff',
+            light: '#E5E3D6',
+            main: '#D9CDBD',
+            dark: '#DBC9BB'
         },
         secondary: {
-            light: '#910A67',
-            main: '#720455',
-            dark: '#3C0753',
-            contrastText: '#000',
+            light: '#9FB3BF',
+            main: '#6F8CA6',
+            dark: '#1D3D59'
         },
-        text:{
-            primary: '#000',
-            secondary: '#fff',
-
-         }
+        text: {
+            primary: '#A5A5A5',
+            secondary: '#62676B'
+        }
     },
     shape: {
         borderRadius: 4,
@@ -75,21 +72,19 @@ const mainTheme = createTheme({
         dark: {
             palette: {
                 primary: {
-                    light: '#EFECE3',
-                    main: '#8FABD4',
-                    dark: '#4A70A9',
-                    contrastText: '#fff',
+                    light: '#E5E3D6',
+                    main: '#D9CDBD',
+                    dark: '#DBC9BB'
                 },
                 secondary: {
-                    light: '#624E88',
-                    main: '#8967B3',
-                    dark: '#CB80AB',
-                    contrastText: '#000',
+                    light: '#9FB3BF',
+                    main: '#6F8CA6',
+                    dark: '#1D3D59'
                 },
-                text:{
-                    primary: '#8FABD4',
-                    secondary: '#000',
-                 }
+                text: {
+                    primary: '#A5A5A5',
+                    secondary: '#62676B'
+                }
             },
         }
     },

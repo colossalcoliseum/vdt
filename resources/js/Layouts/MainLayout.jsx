@@ -32,7 +32,7 @@ export default function MainLayout({children}) {
                 <MainDrawer/>
                 <form onSubmit={submit}>
                     <Box sx={{display: 'flex', alignItems: 'center', width: '100%', maxWidth: '500px'}}>
-                         
+
                         <Input
                             id="filled-search"
                             multiline={true}

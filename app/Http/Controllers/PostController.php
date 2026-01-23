@@ -24,7 +24,7 @@ class PostController extends Controller
     public function index(User $user=null)
     {
 
-        return Inertia::render('ContentGrid', [
+        return inertia('ContentGrid', [
              'content' =>
                 $user ?
                     $this->contentService->getUserPaginatedPosts($user->id) :

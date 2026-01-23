@@ -13,8 +13,7 @@ function ContentCard({content: content, type:type}) {
             overlay
             underline="none"
             href={route(`${type}.show`, content.slug)}
-            sx={{ color: 'text.tertiary' }}
-        >
+         >
         <CardActionArea>
             <CardMedia
                 component="img"
