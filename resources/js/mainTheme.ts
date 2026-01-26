@@ -5,8 +5,8 @@ export const brandedTokens: ThemeOptions = {
     palette: {
         primary: {
             light: '#E5E3D6',
-            main: '#D9CDBD',
-            dark: '#DBC9BB'
+            main: '#8e7759',
+            dark: '#83543b'
         },
         secondary: {
             light: '#9FB3BF',
@@ -14,8 +14,8 @@ export const brandedTokens: ThemeOptions = {
             dark: '#1D3D59'
         },
         text: {
-            primary: '#A5A5A5',
-            secondary: '#62676B'
+            primary: '#4c5053',
+            secondary: '#8d8d8d'
         }
     },
     shape: {
@@ -41,7 +41,7 @@ export const brandedTokens: ThemeOptions = {
         h1: {
             fontSize: '4.5rem',
             margin: '1rem',
-         },
+        },
     },
 };
 
@@ -60,6 +60,8 @@ export const brandedComponents: ThemeOptions['components'] = {
             },
         },
     },
+
+
 };
 
 
@@ -73,8 +75,8 @@ const mainTheme = createTheme({
             palette: {
                 primary: {
                     light: '#E5E3D6',
-                    main: '#D9CDBD',
-                    dark: '#DBC9BB'
+                    main: '#8e7759',
+                    dark: '#83543b'
                 },
                 secondary: {
                     light: '#9FB3BF',
@@ -84,10 +86,14 @@ const mainTheme = createTheme({
                 text: {
                     primary: '#A5A5A5',
                     secondary: '#62676B'
-                }
+                },
+
             },
+
         }
     },
-    components: brandedComponents,
+    components: {
+
+    }
 });
 export default mainTheme;

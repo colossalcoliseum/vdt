@@ -8,7 +8,7 @@ import Link from '@mui/material/Link';
 function ContentCard({content: content, type:type}) {
 
     return (
-    <Card sx={{ maxWidth: 345, borderRadius: theme => theme.shape.borderRadius  }}>
+    <Card sx={{ maxWidth: 345, borderRadius: theme => theme.shape.borderRadius  }} elevation={3}>
         <Link
             overlay
             underline="none"
@@ -23,10 +23,10 @@ function ContentCard({content: content, type:type}) {
                 alt={content.title}
                 sx={{ height: '15rem' }}
             />
-            <CardContent>
+            <CardContent  >
                 <Typography gutterBottom variant="h5" component="div"
                             sx={{
-
+                                color:'text.primary',
                                 overflow: "hidden",
                                 display: "-webkit-box",
                                 WebkitLineClamp: "2",
@@ -34,7 +34,7 @@ function ContentCard({content: content, type:type}) {
                             }}>
                     {content.title}
                 </Typography>
-                <Typography variant="body1" sx={{ color: 'text.primary' }}>
+                <Typography variant="body2" sx={{ color: 'text.primary' }}>
                     {content.creator.name}
                 </Typography>
             </CardContent>

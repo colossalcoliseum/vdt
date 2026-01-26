@@ -1,8 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use _PHPStan_781aefaf6\Nette\Neon\Exception;
 use App\Http\Requests\UploadVideoRequest;
 use App\Models\Category;
 use App\Models\User;
