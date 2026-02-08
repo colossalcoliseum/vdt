@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Divider from "@mui/material/Divider";
 
 const ContentGrid = ({content: content, headerText: headerText}) => {
-
+        console.log(content)
     return (
         <>
             <Box sx={{
@@ -34,6 +34,7 @@ const ContentGrid = ({content: content, headerText: headerText}) => {
                         type={item.type.slug}
                         content={item}
                     >
+                        {console.log(item)}
                     </ContentCard>
                 ))}
             </Box>

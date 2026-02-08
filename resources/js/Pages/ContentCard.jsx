@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
-import Link from '@mui/material/Link';
+import {Link} from '@inertiajs/react'
 
 function ContentCard({content: content, type:type}) {
 

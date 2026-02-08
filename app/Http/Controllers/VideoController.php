@@ -26,7 +26,7 @@ class VideoController extends Controller
     {
     }
 
-    public function index(User $user = null)
+    public function index(?User $user = null)
     {
         return
             inertia('ContentGrid', [

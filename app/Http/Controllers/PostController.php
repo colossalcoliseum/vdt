@@ -21,7 +21,7 @@ class PostController extends Controller
         public ContentService $contentService
     ){}
 
-    public function index(User $user=null)
+    public function index(?User $user=null)
     {
 
         return inertia('ContentGrid', [
@@ -30,8 +30,6 @@ class PostController extends Controller
                     $this->contentService->getUserPaginatedPosts($user->id) :
                     $this->contentService->getPaginatedPosts(),
             'headerText' => $user ? "Posts by $user->name" : 'Posts',
-            'type' => 'posts',
-            'user' => $user ?? null
         ]);
     }
 
