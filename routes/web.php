@@ -7,16 +7,16 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UpdateUserAvatarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/dashboard', function (\App\Services\ContentService $contentService) {
-/*    dd(gettype(auth()->user()->id));*/
-    return Inertia::render('Dashboard', [
+Route::get('/dashboard', function () {
+
+     return Inertia::render('Dashboard', [
         'permissions' => auth()->user()->getAllPermissions()->toArray(),
         'user' => auth()->user(),
-        'posts' =>   $contentService->getPaginatedPosts(auth()->user()->id),//TODO: изпозлвай userPaginatedVideos и userPaginatedPosts
-        'videos' =>   $contentService->getPaginatedVideos(auth()->user()->id),
+        'categories' => Category::all(),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

@@ -20,23 +20,9 @@ class CategorySeeder extends Seeder
                 'slug' => strtolower(str_replace(" ","_",$category)),
                 'status_id' => 1,
                 'created_by' => fake()->numberBetween(1, 20),
-                'require_subscription' => fake()->boolean,
-                'is_controversial' => fake()->boolean,
                 'is_active' => fake()->boolean,
 
             ]);
-          //  dd($subCategory);
-            foreach ($subCategory as $subCat) {
-                SubCategory::create([
-                    'name' => $subCat,
-                    'slug' => strtolower(str_replace(" ","_",$subCat)),
-                    'status_id' => 1,
-                    'created_by' => fake()->numberBetween(1, 20),
-                    'require_subscription' => fake()->boolean,
-                    'is_controversial' => fake()->boolean,
-                    'is_active' => fake()->boolean,
-                ]);
-            }
         }
         Category::factory()
             ->count(20)

@@ -19,7 +19,7 @@ import {red} from "@mui/material/colors";
 import {lightBlue} from "@mui/material/colors";
  import MainLayout from "@/Layouts/MainLayout.jsx";
 //export default function CreateVideo() {
-const CreateVideo = ({categories, subCategories}) => {
+const CreateVideo = ({categories }) => {
     const {t, i18n} = useTranslation();
 
     const {errors} = usePage().props;
@@ -136,47 +136,7 @@ const CreateVideo = ({categories, subCategories}) => {
 
                     >
 
-                        <CustomizedDialog
-                            title={"Preview"}
-                            toggleButtonLabel={"Preview"}
-                            closeButtonLabel={"Close Preview"}
 
-                        >
-                            <Paper elevation={4}
-                                   sx={{
-                                       maxWidth: 445,
-                                       m: 6,
-                                   }}>
-                                <CardActionArea>
-                                    <Paper underline="none"
-                                           sx={{color: 'text.primary'}}>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            src={thumbnailPreview}
-
-                                            alt="green iguana"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div"
-                                                        sx={{
-                                                            overflow: "hidden",
-                                                            textOverflow: "ellipsis",
-                                                            display: "-webkit-box",
-                                                            WebkitLineClamp: "2",
-                                                            WebkitBoxOrient: "vertical",
-                                                        }}>
-
-                                                {data.title}
-                                            </Typography>
-                                            <Typography variant="body2" sx={{color: 'text.secondary'}}>
-                                                {user.name}
-                                            </Typography>
-                                        </CardContent>
-                                    </Paper>
-                                </CardActionArea>
-                            </Paper>
-                        </CustomizedDialog>
                         <Button variant="contained" color="error"
                                 disabled={processing}
 
@@ -282,16 +242,7 @@ const CreateVideo = ({categories, subCategories}) => {
                               display="flex">
 
 
-                            <MultipleSelectChip
-                                label="Add Sub Category (optional)"
-                                categories={subCategories.map((category) => {
-                                    return (
-                                        <a>
-                                            {category.name}
-                                        </a>
-                                    )
-                                })}
-                            />
+
                         </Grid>
                         <Grid size={12}>
 

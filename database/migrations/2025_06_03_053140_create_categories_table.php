@@ -17,8 +17,6 @@ return new class extends Migration {
             $table->boolean('is_published')->nullable();
             $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-            $table->boolean('require_subscription')->nullable();
-            $table->boolean('is_controversial')->default(false)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -5,8 +5,10 @@ import Box from '@mui/material/Box';
  import MainLayout from "@/Layouts/MainLayout.jsx";
 import Button from "@mui/material/Button";
 import ContentGrid from "@/Pages/ContentGrid.jsx";
+import CreatePost from "@/Pages/Posts/CreatePost.jsx";
+import CreateVideo from "@/Pages/Videos/CreateVideo.jsx";
 
-const Dashboard = ({posts: posts, videos:videos}) => {
+const Dashboard = ({user:user, categories: categories}) => {
 
 
     function CustomTabPanel(props) {
@@ -46,20 +48,19 @@ const Dashboard = ({posts: posts, videos:videos}) => {
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                            <Tab label="See Your Content" {...a11yProps(0)} />
-                            <Tab label="Create Post" {...a11yProps(1)} />
-                            <Tab label="Create Video" {...a11yProps(2)} />
+                             <Tab label="Create Post" {...a11yProps(0)} />
+                            <Tab label="Create Video" {...a11yProps(1   )} />
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
-                        <ContentGrid content={posts} headerText="Your Posts"/>
-                        <ContentGrid content={videos} headerText="Your Videos"/>
+                        <CreatePost user={user} categories={categories}/>
+
+
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={1}>
-                        Item Two
-                    </CustomTabPanel>
-                    <CustomTabPanel value={value} index={2}>
-                        Item Three
+                        <CreateVideo categories={categories} />
+
+
                     </CustomTabPanel>
                 </Box>
             </Box>
