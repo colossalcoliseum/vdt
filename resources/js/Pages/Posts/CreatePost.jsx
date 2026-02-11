@@ -11,8 +11,7 @@ import FormLabel from '@mui/material/FormLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 import Typography from "@mui/material/Typography";
-import {useTheme} from '@mui/material/styles';
-import MenuItem from '@mui/material/MenuItem';
+ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from "@mui/material/Button";
@@ -25,7 +24,7 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-
+import {Form} from '@inertiajs/react'
 
 const FormGrid = styled(Grid)(() => ({
     display: 'flex',
@@ -39,12 +38,12 @@ const CreatePost = ({user: user, categories: categories}) => {
     const [visibility, setVisibility] = useState();
     const [selectedCategory, setSelectedCategory] = useState();
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
-    const [mainImagePreview, setMainImagePreview] = useState(null);
 
     categories = Array.from(categories);
     console.log(categories.name);
     const [personName, setPersonName] = React.useState([]);
     const VisuallyHiddenInput = styled('input')`
+
         clip: rect(0 0 0 0);
         clip-path: inset(50%);
         height: 1px;
@@ -55,8 +54,8 @@ const CreatePost = ({user: user, categories: categories}) => {
         white-space: nowrap;
         width: 1px;
     `;
-    const handleChange = (event) => {
-        setData('category', event.target.value);
+    const handleChange = (e) => {
+        setData('category_id', e.target.value);
     };
     const handleThumbnailChange = (e) => {
         const file = e.target.files[0];
@@ -71,9 +70,6 @@ const CreatePost = ({user: user, categories: categories}) => {
         const file = e.target.files[0];
         if (file) {
             setData('main_image', file);
-
-            const imageUrl = URL.createObjectURL(file);
-            setMainImagePreview(imageUrl);
         }
     };
     const handleChangeVisibility = (e) => {
@@ -97,19 +93,28 @@ const CreatePost = ({user: user, categories: categories}) => {
     const {data, setData, post, progress} = useForm({
         title: '',
         description: '',
-        visibility: 'public',
+        visibility_id: 2,
         thumbnail: '',
         main_image: '',
-        category: '',
-    })
+        category_id: 1,
+        status_id: 1,
+        creator_id: usePage().props.auth.user,
+        is_published: true
+     })
 
 
     user = usePage().props.auth.user;
     const submit = (e) => {
         e.preventDefault()
-        post(route('posts.store'), {
-            _token: props.csrf_token,
-        })
+
+        router.post(route('posts.store'), data,{
+                forceFormData: true,
+
+                onError: (errors) => {
+                    console.log('Грешки при качването:', errors);
+                },
+        }
+        )
     }
 
 
@@ -174,7 +179,7 @@ const CreatePost = ({user: user, categories: categories}) => {
                         <VisuallyHiddenInput
                             type="file"
                             onChange={handleThumbnailChange}
-                            multiple
+
                         />
                     </Button>
                 </FormGrid>
@@ -203,7 +208,8 @@ const CreatePost = ({user: user, categories: categories}) => {
                         <Select
                             labelId="demo-simple-select-autowidth-label"
                             id="demo-simple-select-autowidth"
-                            value={data.category}
+                            value={data.category_id}
+                            name="category_id"
                             onChange={handleChange}
                             autoWidth
                             label="Category"
@@ -215,7 +221,7 @@ const CreatePost = ({user: user, categories: categories}) => {
                             </MenuItem>
                             {categories.map((category)=>{
                                 return(
-                                    <MenuItem key={category.id} value={category.slug}>{category.name}</MenuItem>
+                                    <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
                                 )
                             })}
                          </Select>
@@ -240,7 +246,7 @@ const CreatePost = ({user: user, categories: categories}) => {
                         <VisuallyHiddenInput
                             type="file"
                             onChange={handleMainImageChange}
-                            required
+
                         />
                     </Button>
                 </FormGrid>

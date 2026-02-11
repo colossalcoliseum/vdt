@@ -2,24 +2,19 @@
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {useState} from "react";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
+ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import {CloudUploadIcon} from "lucide-react";
 import {styled} from '@mui/material/styles';
 import MultipleSelectChip from "@/Components/MultipleSelectChip.jsx";
-import CustomizedDialog from "@/Components/CustomizedDialog.jsx";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
 import * as React from "react";
-import {red} from "@mui/material/colors";
 import {lightBlue} from "@mui/material/colors";
  import MainLayout from "@/Layouts/MainLayout.jsx";
-//export default function CreateVideo() {
-const CreateVideo = ({categories }) => {
+ import { Form } from '@inertiajs/react'
+
+ const CreateVideo = ({categories }) => {
     const {t, i18n} = useTranslation();
 
     const {errors} = usePage().props;
@@ -73,7 +68,7 @@ const CreateVideo = ({categories }) => {
         visibility_id: 1,
         thumbnail: '',
         video: null,
-        user_id: usePage().props.auth.user
+        creator_id: usePage().props.auth.user
     })
 
 
@@ -139,12 +134,7 @@ const CreateVideo = ({categories }) => {
 
                         <Button variant="contained" color="error"
                                 disabled={processing}
-
-                                sx={{
-                                    ml: 2,
-                                }}
-                        >
-                            X
+                                sx={{ ml: 2}}> X
                         </Button>
 
                     </Grid>
@@ -154,15 +144,8 @@ const CreateVideo = ({categories }) => {
                      alignItems="center"
                 >
                     <Head title="Create New Video"/>
-
-
-                    <Grid container columns={12} spacing={2}
-
-                    >
-
-                        <Grid size={12}
-
-                        >
+                    <Grid container columns={12} spacing={2}>
+                        <Grid size={12}>
                             <TextField
                                 id="title"
                                 name="title"
@@ -177,13 +160,9 @@ const CreateVideo = ({categories }) => {
                                     setData('title', e.target.value);
                                 }}
                             />
-
+                            {errors.title&& <p>{errors.title}</p>}
                         </Grid>
-                        <Grid size={6}
-
-                        >
-
-
+                        <Grid size={6}>
                             <Button
                                 component="label"
                                 role='button'
@@ -257,7 +236,11 @@ const CreateVideo = ({categories }) => {
                                 variant="standard"
                             />
                         </Grid>
-
+                        {progress && (
+                            <progress value={progress.percentage} max="100">
+                                {progress.percentage}%
+                            </progress>
+                        )}
                         <Grid size={12}
                               justifyContent="right"
                               display="flex"

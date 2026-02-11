@@ -64,12 +64,14 @@ class PostController extends Controller
                 'title' => $validated['title'],
                 'is_published' => $validated['is_published'],
                 'category_id' => $validated['category_id'],
+                'slug' => str_replace(" ","",strtolower($validated['title'])),
                 'status_id' => $validated['status_id'],
                 'visibility_id' => $validated['visibility_id'],
                 'description' => $validated['description'],
                 'main_image' => $mainImage,
                 'creator_id' => auth()->user()->id,
-                'visibility' => $validated['visibility'],
+                'updated_by' => auth()->user()->id,
+                'type_id' => 2,
                 'thumbnail' => $thumbnailPath
             ]);
             $post->save();

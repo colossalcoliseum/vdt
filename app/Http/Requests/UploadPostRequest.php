@@ -24,14 +24,13 @@ class UploadPostRequest extends FormRequest
         return [
             'title' => 'required|max:255|string|min:3',
             'description' => 'required|max:255|string|min:3',
-            'visibility' => 'required',
-            'is_published' => 'required',
+             'is_published' => 'required',
             'category_id' => 'required',
             'status_id' => 'required',
             'visibility_id' => 'required',
             'creator_id' => 'required',
-            'thumbnail' => 'file|mimes:jpeg,image,png,jpg|max:1024',
-            'main_image' => 'file|mimes:jpeg,image,png,jpg|max:5120'
+            'thumbnail' => 'file|mimes:jpeg,image,png,jpg,webp|max:5120',
+            'main_image' => 'file|mimes:jpeg,image,png,jpg,webp|max:5120'
         ];
     }
 }
