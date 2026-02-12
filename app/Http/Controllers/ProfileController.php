@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Services\ContentService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +15,9 @@ use Stevebauman\Location\Facades\Location;
 
 class ProfileController extends Controller
 {
+    public function __construct(
+        public ContentService $contentService
+    ){}
     /**
      * Display the user's profile form.
      */
@@ -24,6 +28,8 @@ class ProfileController extends Controller
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'permissions' => $request->user()->getAllPermissions()->toArray(),
+            'posts' => $this->contentService->getUserPaginatedPosts($request->user()->id),
+            'videos' => $this->contentService->getUserPaginatedVideos($request->user()->id),
 
         ]);
     }

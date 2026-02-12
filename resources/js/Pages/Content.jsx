@@ -84,14 +84,13 @@ const Content = ({content: content}) => {
                         }}>{content.category.name} </Typography>
                     </Box>
                 </Box>
-                {console.log(content.type)}
                 {content.type.slug === "posts" && <Box sx={{
                     width: '50%',
                     mx: 'auto',
                     borderRadius: '0.5rem',
                     height: '35rem',
                     px: '0 auto',
-                    backgroundImage: `url('${content.thumbnail}')`,
+                    backgroundImage: `url('/storage/${content.main_image}')`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover'
                 }}>
@@ -143,6 +142,6 @@ const Content = ({content: content}) => {
         </ >
     );
 }
-Content.layout = page => <MainLayout user={page.props.auth.user} children={page} />;
+Content.layout = page => <MainLayout user={page.props.auth.user} children={page}/>;
 
 export default Content;

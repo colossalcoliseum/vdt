@@ -11,14 +11,14 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/dashboard', function () {
+Route::get('/create', function () {
 
      return Inertia::render('Dashboard', [
         'permissions' => auth()->user()->getAllPermissions()->toArray(),
         'user' => auth()->user(),
         'categories' => Category::all(),
     ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified','admin'])->name('dashboard');
 
 Route::inertia('/about', 'About')->name('about');
 Route::inertia('/faq', 'FAQ')->name('faq');
@@ -38,8 +38,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 /*  Users Layout    */
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class,'home'])->name('home');
-    Route::resource('videos', VideoController::class)->names('videos');
-    Route::resource('posts', PostController::class)->names('posts');
+    Route::resource('videos', VideoController::class)->names('videos')->only(['index', 'show']);
+    Route::resource('posts', PostController::class)->names('posts')->only(['index', 'show']);
      Route::resource('users', UserController::class)->names('user')->only(['index', 'show']);
 
     Route::prefix('profile')->name('profile.')->group(function () {
@@ -51,8 +51,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth'])->group(function () {
     Route::prefix('{user}')->group(function () {
-        Route::resource('videos', VideoController::class)->names('manage.videos');
-        Route::resource('posts', PostController::class)->names('manage.posts');
+        Route::resource('videos', VideoController::class)->names('user.videos')->only(['index', 'show']);
+        Route::resource('posts', PostController::class)->names('user.posts')->only(['index', 'show']);
     });
 });
 

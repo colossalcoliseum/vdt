@@ -33,7 +33,7 @@ class ContentService
     {
         try {
             $videos = Video::where('creator_id', $userId)
-                ->with(['creator', 'categories'])->paginate(20)->onEachSide(0);
+                ->with('creator')->paginate(20)->onEachSide(0);
             return $videos;
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -63,6 +63,7 @@ class ContentService
         try {
             $posts = Post::where('creator_id', $userId)
                 ->with('creator')->paginate(20)->onEachSide(0);
+
             return $posts;
         } catch (\Exception $exception) {
             return $exception->getMessage();

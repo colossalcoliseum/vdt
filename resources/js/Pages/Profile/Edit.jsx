@@ -7,21 +7,23 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Divider from "@mui/material/Divider";
 import ImageUploadForm from "@/Pages/Profile/Partials/ImageUploadForm.jsx";
+import ContentGrid from "@/Pages/ContentGrid.jsx";
+import ContentCard from "@/Pages/ContentCard.jsx";
 
-export default function Edit({mustVerifyEmail, status, user, permissions}) {
+ function Edit({mustVerifyEmail, status, user:user, permissions, posts:posts, videos:videos}) {
 
 
     const props = usePage().props
     user = usePage().props.auth.user
-    console.log(permissions)
-
+    console.log(posts)
+    console.log(videos)
     const asset = () => {
         //TODO: добави валидиране
         return `${user.avatar}`;
     }
     return (
-        <MainLayout>
-            <Head title="Edit Profile"/>
+        <>
+             <Head title="Edit Profile"/>
             <Divider>
                 <Typography level="h1" variant="h4">
                     Your Profile
@@ -56,9 +58,17 @@ export default function Edit({mustVerifyEmail, status, user, permissions}) {
                         }</p></div>
                 </div>
 
+                    {videos.data.map((item)=>{
+                return(
+                  <ContentCard content={item} type="videos"/>
+                    )}
+                )}
+
             </div>
+        </>
 
-
-        </MainLayout>
-    );
+     );
 }
+Edit.layout = (page) => <MainLayout children={page} title="Edit Profile"/>
+
+export default Edit

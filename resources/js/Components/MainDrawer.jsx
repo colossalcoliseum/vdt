@@ -137,14 +137,17 @@ export default function MainDrawer() {
 
                 <Divider sx={{bgcolor: 'text.secondary'}}/>
                 <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <SettingsIcon sx={{color: 'text.secondary'}}/>
-                        </ListItemIcon>
-                        <ListItemText sx={{color: 'text.secondary'}}>
-                            Settings
-                        </ListItemText>
-                    </ListItemButton>
+                    <Link href={route('profile.edit')} as="button" className="w-full">
+
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <CreateIcon sx={{color: 'text.secondary'}}/>
+                            </ListItemIcon>
+                            <Typography sx={{color: 'text.secondary'}}>
+                                Settings
+                            </Typography>
+                        </ListItemButton> </Link>
+
                 </ListItem>
                 <Divider sx={{bgcolor: 'text.secondary'}}/>
                 <ListItem>
