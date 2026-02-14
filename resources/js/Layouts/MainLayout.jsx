@@ -50,7 +50,7 @@ export default function MainLayout({children}) {
                             placeholder="Search Content ..."
                             sx={{flex: 1}}
                         />
-                        <Button type="submit">
+                        <Button type="submit" variant='outlined' sx={{mx:'1rem'}}>
                             <SearchIcon/>
                         </Button>
                     </Box>

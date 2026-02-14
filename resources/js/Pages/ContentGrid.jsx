@@ -15,7 +15,7 @@ const ContentGrid = ({content: content, headerText: headerText}) => {
                display: 'flex', justifyContent: 'center',  pb: '2rem',
             }}>
                 <Divider variant="fullWidth" sx={{width: '80%'}}>
-                     <Typography variant="h4" color='text.primary' >
+                     <Typography variant="h4" color='primary.main' >
                         {headerText}
                     </Typography>
                 </Divider>

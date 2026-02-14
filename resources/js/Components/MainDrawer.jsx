@@ -21,8 +21,10 @@ import CreateIcon from '@mui/icons-material/Create';
 import ArticleIcon from '@mui/icons-material/Article';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import SettingsIcon from '@mui/icons-material/Settings';
+import InfoSharpIcon from '@mui/icons-material/InfoSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Typography from "@mui/material/Typography";
+import user from "@/Pages/Users/User.jsx";
 
 export default function MainDrawer() {
     const {url, component} = usePage()
@@ -32,6 +34,7 @@ export default function MainDrawer() {
     if (!mode) {
         return null;
     }
+    console.log(user.role)
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
@@ -43,8 +46,8 @@ export default function MainDrawer() {
                 <svg width="125.879" height="55.957" viewBox="0 0 126.879 56.957"
                      xmlns="http://www.w3.org/2000/svg">
                     <g id="svgGroup" strokeLinecap="round"
-                       fillRule="evenodd" fontSize="9pt" stroke={theme.palette.text.primary} strokeWidth="0mm"
-                       fill={theme.palette.text.primary}>
+                       fillRule="evenodd" fontSize="9pt" stroke={theme.palette.primary.main} strokeWidth="0mm"
+                       fill={theme.palette.primary.main}>
                         <path
 
                             d="M 26.172 0 L 36.035 0 L 25.977 55.957 L 9.961 55.957 L 0 0 L 9.375 0 L 16.406 47.949 L 19.238 47.949 L 26.172 0 Z M 114.355 7.129 L 114.355 55.957 L 106.934 55.957 L 106.934 7.129 L 94.824 7.129 L 94.824 0 L 125.879 0 L 125.879 7.129 L 114.355 7.129 Z M 68.945 55.957 L 47.949 55.957 L 47.949 0 L 69.922 0 L 78.906 12.988 L 78.906 43.945 L 68.945 55.957 Z M 55.371 7.031 L 55.371 48.34 L 68.164 48.34 L 70.117 45.996 L 70.117 9.961 L 68.164 7.031 L 55.371 7.031 Z"
@@ -52,17 +55,19 @@ export default function MainDrawer() {
                     </g>
                 </svg>
             </Box>
-            <Divider sx={{bgcolor: 'text.secondary'}}/>
+            <Divider sx={{bgcolor: 'primary.main'}}/>
 
             <List>
                 <ListItem disablePadding>
                     <Link href='/' className="w-full">
                     <ListItemButton>
                         <ListItemIcon>
-                            <HomeFilledIcon sx={{color: 'text.secondary'}}/>
-                        </ListItemIcon>
+                            <HomeFilledIcon sx={{color: 'primary.main', mx:'auto'}}/>
 
-                            <ListItemText sx={{color: 'text.secondary'}}>
+                                               </ListItemIcon>
+
+                            <ListItemText sx={{color: 'primary.main'}}>
+
                                 Home
                             </ListItemText>
 
@@ -74,10 +79,10 @@ export default function MainDrawer() {
                     <Link href={route('videos.index')} className="w-full">
                     <ListItemButton>
                         <ListItemIcon>
-                            <SlideshowIcon sx={{color: 'text.secondary'}}/>
+                            <SlideshowIcon sx={{color: 'primary.main', mx:'auto'}}/>
                         </ListItemIcon>
 
-                            <ListItemText sx={{color: 'text.secondary'}}>
+                            <ListItemText sx={{color: 'primary.main', mx:'auto'}}>
                                 Videos
                             </ListItemText>
 
@@ -88,10 +93,10 @@ export default function MainDrawer() {
                     <Link href={route('posts.index')} className="w-full">
                     <ListItemButton>
                         <ListItemIcon>
-                            <ArticleIcon sx={{color: 'text.secondary'}}/>
+                            <ArticleIcon sx={{color: 'primary.main', mx:'auto'}}/>
                         </ListItemIcon>
 
-                            <ListItemText sx={{color: 'text.secondary'}}>
+                            <ListItemText sx={{color: 'primary.main'}}>
                                 Posts
                             </ListItemText>
 
@@ -103,20 +108,20 @@ export default function MainDrawer() {
 
                 <ListItemButton>
                         <ListItemIcon>
-                            <CreateIcon sx={{color: 'text.secondary'}}/>
+                            <CreateIcon sx={{color: 'primary.main', mx:'auto'}}/>
                         </ListItemIcon>
-                            <Typography sx={{color: 'text.secondary'}}>
+                            <Typography sx={{color: 'primary.main'}}>
                                 Create
                             </Typography>
                         </ListItemButton> </Link>
 
                 </ListItem>
             </List>
-            <Divider sx={{bgcolor: 'text.secondary'}}/>
+            <Divider sx={{bgcolor: 'primary.main'}}/>
             <List>
                 <ListItem>
                     <FormControl>
-                        <FormLabel id="theme-toggle" sx={{margin: '0 auto', color: 'text.secondary'}}>Theme</FormLabel>
+                        <FormLabel id="theme-toggle" sx={{margin: '0 auto', color: 'primary.main'}}>Theme</FormLabel>
                         <RadioGroup
                             aria-labelledby="theme-toggle"
                             name="theme-toggle"
@@ -124,70 +129,83 @@ export default function MainDrawer() {
                             value={mode}
                             onChange={(event) => setMode(event.target.value)}>
                             <ol>
-                                <li><FormControlLabel sx={{color: 'text.secondary'}} value="system" control={<Radio />}
+                                <li><FormControlLabel sx={{color: 'primary.main', mx:'auto'}} value="system" control={<Radio />}
                                                       label="System"/></li>
-                                <li><FormControlLabel sx={{color: 'text.secondary'}} value="light" control={<Radio/>}
+                                <li><FormControlLabel sx={{color: 'primary.main', mx:'auto'}} value="light" control={<Radio/>}
                                                       label="Light"/></li>
-                                <li><FormControlLabel sx={{color: 'text.secondary'}} value="dark" control={<Radio/>}
+                                <li><FormControlLabel sx={{color: 'primary.main', mx:'auto'}} value="dark" control={<Radio/>}
                                                       label="Dark"/></li>
                             </ol>
                         </RadioGroup>
                     </FormControl>
                 </ListItem>
 
-                <Divider sx={{bgcolor: 'text.secondary'}}/>
+                <Divider sx={{bgcolor: 'primary.main'}}/>
                 <ListItem disablePadding>
                     <Link href={route('profile.edit')} as="button" className="w-full">
 
                         <ListItemButton>
                             <ListItemIcon>
-                                <CreateIcon sx={{color: 'text.secondary'}}/>
+                                <SettingsIcon sx={{color: 'primary.main', mx:'auto'}}/>
                             </ListItemIcon>
-                            <Typography sx={{color: 'text.secondary'}}>
+                            <Typography sx={{color: 'primary.main'}}>
                                 Settings
                             </Typography>
                         </ListItemButton> </Link>
 
                 </ListItem>
-                <Divider sx={{bgcolor: 'text.secondary'}}/>
-                <ListItem>
-
-
-                    <ListItemIcon>
-                        <LogoutIcon sx={{color: 'text.secondary'}}/>
-                    </ListItemIcon>
+                <Divider sx={{bgcolor: 'primary.main'}}/>
+                <ListItem disablePadding>
                     <Link
                         method="post"
                         href={route('logout')}
-                        as="button">
-                        <span style={{bgcolor: 'text.primary'}}>
-                            Log Out
-                        </span>
-                    </Link>
+                        as="button"
+                        className="w-full">
+
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <LogoutIcon sx={{color: 'primary.main', mx:'auto'}}/>
+                            </ListItemIcon>
+                            <Typography sx={{color: 'primary.main'}}>
+                                Log Out
+                            </Typography>
+                        </ListItemButton> </Link>
 
                 </ListItem>
+
+                <Divider sx={{bgcolor: 'primary.main'}}/>
+
                 <Box sx={{display: 'flex', placeItems: 'center', color: 'white'}}>
 
 
-                    <ListItem>
-                        <Link
-                            sx={{color: 'text.secondary'}}
-                            href={route('faq')}
-                        >
-                            FAQ's
-                        </Link>
+
+                    <ListItem disablePadding>
+                        <Link  href={route('faq')} as="button" className="w-full">
+
+                            <ListItemButton>
+
+                                <Typography sx={{color: 'primary.main'}}>
+                                    FAQ
+                                </Typography>
+                            </ListItemButton> </Link>
+
                     </ListItem>
 
-                    <Divider orientation="vertical" variant="middle" flexItem sx={{bgcolor: 'text.secondary'}}/>
-                    <ListItem>
-                        <Link
-                            sx={{color: 'text.secondary'}}
-                            href={route('about')}
-                        >
-                            About
-                        </Link>
+                    <Divider orientation="vertical"  flexItem sx={{bgcolor: 'primary.main'}}/>
+                    <ListItem disablePadding>
+                        <Link  href={route('about')} as="button" className="w-full">
+
+                            <ListItemButton>
+                               
+                                <Typography sx={{color: 'primary.main'}}>
+                                    About
+                                </Typography>
+                            </ListItemButton> </Link>
+
                     </ListItem>
+
                 </Box>
+                <Divider sx={{bgcolor: 'primary.main'}}/>
 
             </List>
         </Box>
@@ -195,12 +213,12 @@ export default function MainDrawer() {
 
     return (
         <div>
-            <Button onClick={toggleDrawer(true)}><MenuIcon/></Button>
+            <Button onClick={toggleDrawer(true)} variant='outlined'><MenuIcon/></Button>
             <Drawer open={open} onClose={toggleDrawer(false)} slotProps={{
                 paper: {
                     elevation: 0,
                     sx: {
-                        backgroundColor: "primary.light",
+                        backgroundColor: "dark",
                     }
                 }
             }}>

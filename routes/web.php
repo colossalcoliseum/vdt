@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 Route::get('/create', function () {
 
-     return Inertia::render('Dashboard', [
+     return Inertia::render('ContentCreationDashboard', [
         'permissions' => auth()->user()->getAllPermissions()->toArray(),
         'user' => auth()->user(),
         'categories' => Category::all(),

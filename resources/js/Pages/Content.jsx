@@ -7,10 +7,23 @@ import Box from "@mui/material/Grid";
 import dateFormat, {masks} from "dateformat";
 import * as React from "react";
 import Divider from "@mui/joy/Divider";
+import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
+import Button from "@mui/material/Button";
+import CreateSharpIcon from '@mui/icons-material/CreateSharp';
+import Chip from "@mui/material/Chip";
+import PermIdentitySharpIcon from '@mui/icons-material/PermIdentitySharp';
 
 const Content = ({content: content}) => {
     const user = usePage().props.auth.user;
-
+    const getImageUrl = (image) => {
+        if (image.startsWith('http') || image.startsWith('https')) {
+            return image;
+        }
+        if (!image) {
+            return ''
+        }
+        return `/storage/${image}`;
+    }
     const sanitizedHTML = DOMPurify.sanitize(content.description, {
         WHOLE_DOCUMENT: false,
         RETURN_DOM: false,
@@ -26,41 +39,61 @@ const Content = ({content: content}) => {
     return (
         < >
             <Grid container columns={12} spacing={2}>
+
+
+
                 <Box sx={{
+                    width: '90%',
                     display: 'flex',
-                    gap: '1rem',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    width: '100%',
-                    height: 'relative',
-                    pt: '1rem',
-                    overflow: 'none',
-                    justifyContent: 'center',
+                    justifyContent: 'end'
                 }}>
-                    <Grid size={12} sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        width: '50%',
+                    {content.creator_id === user.id &&
+                        <>
+                    <Button variant='contained' startIcon={<CreateSharpIcon/>} color="info" sx={{ borderRadius:'0.5rem'}}>Edit</Button>
+                    <Button variant='contained' startIcon={<DeleteOutlineSharpIcon/>} color="error" sx={{mx:1, borderRadius:'0.5rem'}}>Delete</Button>
+                </>
+                }
+                    <Button variant="outlined" onClick={() => window.history.back()}
+                            sx={{":hover": {bgcolor: 'red', color: 'white'}}}>X</Button>
+                </Box><Box sx={{
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
+                flexDirection: 'row',
+                width: '100%',
+                height: 'relative',
+                pt: '1rem',
+                overflow: 'none',
+                justifyContent: 'center',
 
-                        py: '1rem',
+            }}>
+
+                <Grid size={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '50%',
+
+                    py: '1rem',
+                }}>
+
+                    <Typography level="h1" sx={{
+
+                        letterSpacing: 1,
+                        height: '100%',
+                        fontSize: '2.3rem',
                     }}>
-                        <Typography level="h1" sx={{
-
-                            letterSpacing: 1,
-                            height: '100%',
-                            fontSize: '2.3rem',
-                        }}>
-                            {content.title}
-                        </Typography>
-                    </Grid>
-                </Box>
+                        {content.title}
+                    </Typography>
+                </Grid>
+            </Box>
 
                 <Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     width: '100%',
-                    gap: '0.8rem'
+                    gap: '0.8rem',
+
                 }}>
                     <Box>
                         <Typography level="h5" sx={{
@@ -74,7 +107,9 @@ const Content = ({content: content}) => {
                         <Typography level="h5" sx={{
                             letterSpacing: 1,
                             width: '100%',
-                        }}>{content.creator.name}</Typography>
+                        }}>
+                            <Chip icon={<PermIdentitySharpIcon/>} label={content.creator.name} variant="outlined"/>
+                        </Typography>
                     </Box>
                     <Divider orientation="vertical" flexItem sx={{height: '100%', width: '1px',}}/>
                     <Box>
@@ -84,17 +119,26 @@ const Content = ({content: content}) => {
                         }}>{content.category.name} </Typography>
                     </Box>
                 </Box>
-                {content.type.slug === "posts" && <Box sx={{
-                    width: '50%',
-                    mx: 'auto',
-                    borderRadius: '0.5rem',
-                    height: '35rem',
-                    px: '0 auto',
-                    backgroundImage: `url('/storage/${content.main_image}')`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover'
-                }}>
-                </Box>
+                {content.type.slug === "posts" &&
+                    <>
+                        <Box sx={{
+                            width: '50%',
+                            mx: 'auto',
+
+                        }}>
+                            <img src={getImageUrl(content.main_image)} alt={content.title}
+                                 style={{
+                                     borderRadius: '0.5rem',
+                                     height: '35rem',
+                                     minHeight: '25rem',
+                                     maxHeight: '45rem',
+                                     maxWidth: '80rem',
+                                     minWidth: '10rem',
+                                 }}
+
+                            />
+                        </Box>
+                    </>
                 }
                 {content.type.slug === "videos" &&
                     <Box sx={{
@@ -119,12 +163,16 @@ const Content = ({content: content}) => {
                 <Box sx={{
                     width: '50%',
                     mx: 'auto',
-                    borderRadius: '0.5rem',
                     height: 'relative',
-                    px: '0 auto',
-                    pb: '10rem'
-                }}>
-                    <Divider sx={{mb: '1rem', mt: '0.1rem'}}>
+                    pb: '10rem',
+                    my: '1rem',
+                    px: '5rem',
+                    border: '0.1rem solid',
+                    borderColor: 'primary.main',
+                    borderTop:'none',
+                    borderBottom:'none',
+                 }}>
+                    <Divider sx={{mb: '1rem', mt: '0.1rem', color: 'primary.main'}}>
                         {content.type.slug === "posts" &&
                             <Typography variant="h6">
                                 More on the story

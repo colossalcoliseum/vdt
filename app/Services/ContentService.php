@@ -33,7 +33,7 @@ class ContentService
     {
         try {
             $videos = Video::where('creator_id', $userId)
-                ->with('creator')->paginate(20)->onEachSide(0);
+                ->with(['creator','type'])->paginate(20)->onEachSide(0);
             return $videos;
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -62,7 +62,7 @@ class ContentService
     {
         try {
             $posts = Post::where('creator_id', $userId)
-                ->with('creator')->paginate(20)->onEachSide(0);
+                ->with(['creator','type'])->paginate(20)->onEachSide(0);
 
             return $posts;
         } catch (\Exception $exception) {
@@ -88,15 +88,13 @@ class ContentService
     public function getAllUserContent(User $user)
     {
         try {
-            $videos = Video::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
-                ->where('creator_id', "like", $user->id)
-                ->addSelect(DB::raw("'videos' as type"));
-            $posts = Post::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id'])
-                ->where('creator_id', "like", $user->id)
-                ->addSelect(DB::raw("'posts' as type"));
-            $result = $videos
+            $videos = Video::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id', 'type_id'])
+                ->where('creator_id', "like", $user->id);
+             $posts = Post::select(['id', 'title', 'description', 'thumbnail', 'slug', 'creator_id', 'type_id'])
+                ->where('creator_id', "like", $user->id);
+             $result = $videos
                 ->union($posts)
-                 ->with('creator')
+                 ->with(['creator','type'])
                 ->paginate(20)
                 ->onEachSide(0);
             return $result;

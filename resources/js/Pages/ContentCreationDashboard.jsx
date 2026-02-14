@@ -8,7 +8,7 @@ import ContentGrid from "@/Pages/ContentGrid.jsx";
 import CreatePost from "@/Pages/Posts/CreatePost.jsx";
 import CreateVideo from "@/Pages/Videos/CreateVideo.jsx";
 
-const Dashboard = ({user:user, categories: categories}) => {
+const ContentCreationDashboard = ({user:user, categories: categories}) => {
 
 
     function CustomTabPanel(props) {
@@ -67,5 +67,5 @@ const Dashboard = ({user:user, categories: categories}) => {
         </>
     )
 }
-Dashboard.layout = (page) => <MainLayout children={page} title="Home" />
-export default Dashboard;
+ContentCreationDashboard.layout = (page) => <MainLayout children={page} title="Home" />
+export default ContentCreationDashboard;

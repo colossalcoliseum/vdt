@@ -6,7 +6,13 @@ import CardActionArea from '@mui/material/CardActionArea';
 import {Link} from '@inertiajs/react'
 
 function ContentCard({content: content, type:type}) {
-
+    const getImageUrl = (image) => {
+        if (image.startsWith('http')||image.startsWith('https')) {
+            return image;
+        }
+        if (!image){return''}
+        return `/storage/${image}`;
+    }
     return (
     <Card sx={{ maxWidth: 345, borderRadius: theme => theme.shape.borderRadius  }} elevation={3}>
         <Link
@@ -19,7 +25,7 @@ function ContentCard({content: content, type:type}) {
                 component="img"
                 height="140"
 
-                image={content.thumbnail}
+                image={getImageUrl(content.thumbnail)}
                 alt={content.title}
                 sx={{ height: '15rem' }}
             />

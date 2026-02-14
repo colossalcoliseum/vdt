@@ -30,6 +30,7 @@ class ProfileController extends Controller
             'permissions' => $request->user()->getAllPermissions()->toArray(),
             'posts' => $this->contentService->getUserPaginatedPosts($request->user()->id),
             'videos' => $this->contentService->getUserPaginatedVideos($request->user()->id),
+            'content' => $this->contentService->getAllUserContent($request->user()),
 
         ]);
     }

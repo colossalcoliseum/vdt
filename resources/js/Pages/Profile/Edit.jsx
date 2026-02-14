@@ -9,14 +9,17 @@ import Divider from "@mui/material/Divider";
 import ImageUploadForm from "@/Pages/Profile/Partials/ImageUploadForm.jsx";
 import ContentGrid from "@/Pages/ContentGrid.jsx";
 import ContentCard from "@/Pages/ContentCard.jsx";
+import Box from "@mui/material/Box";
+import Pagination from "@/Components/MainPagination.jsx";
 
- function Edit({mustVerifyEmail, status, user:user, permissions, posts:posts, videos:videos}) {
+ function Edit({mustVerifyEmail, status, user:user, permissions, posts:posts, videos:videos, content:content}) {
 
 
     const props = usePage().props
     user = usePage().props.auth.user
     console.log(posts)
     console.log(videos)
+    console.log(content)
     const asset = () => {
         //TODO: добави валидиране
         return `${user.avatar}`;
@@ -58,13 +61,34 @@ import ContentCard from "@/Pages/ContentCard.jsx";
                         }</p></div>
                 </div>
 
-                    {videos.data.map((item)=>{
-                return(
-                  <ContentCard content={item} type="videos"/>
+            </div>  <>
+            <Box sx={{
+                display: 'flex', justifyContent: 'center',  pb: '2rem',
+            }}>
+                <Divider variant="fullWidth" sx={{width: '80%'}}>
+                    <Typography variant="h4" color='text.primary' >
+                        Your Content
+                    </Typography>
+                </Divider>
+            </Box>
+            <Box sx={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                placeItems: 'center',
+                justifyContent: 'center',
+                gap: '4rem',
+                mx: 'auto',
+            }}>
+                {content.data.map((item)=>{
+                    return(
+                        <ContentCard content={item} type={item.type.slug}/>
                     )}
                 )}
+            </Box>
+            <Divider sx={{mt: '3rem', width: '80%', mx: 'auto'}}/>
 
-            </div>
+        </>
+
         </>
 
      );
